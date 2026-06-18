@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard — DentScale Portal</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <script src="assets/js/store.js"></script>
+    <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        body { padding-top:0; }
+        .db-nav-badge { background:var(--color-primary); color:#fff; font-size:0.65rem; font-weight:700; padding:0.15rem 0.4rem; border-radius:var(--radius-full); margin-left:auto; }
+    </style>
+</head>
+<body>
+<div class="db-wrapper">
+    <!-- Sidebar -->
+    <aside class="db-sidebar" id="db-sidebar">
+        <div class="db-sidebar-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+            Dent<span style="color:var(--color-primary);">Scale</span>
+        </div>
+        <ul class="db-menu">
+            <li><a href="#overview" class="db-menu-link active" data-tab="overview">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+                Overview
+            </a></li>
+            <li><a href="#leads" class="db-menu-link" data-tab="leads">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Leads <span class="db-nav-badge" id="new-leads-badge">2</span>
+            </a></li>
+            <li><a href="#creatives" class="db-menu-link" data-tab="creatives">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                Creatives <span class="db-nav-badge" id="pending-badge">1</span>
+            </a></li>
+            <li><a href="#invoices" class="db-menu-link" data-tab="invoices">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                Invoices
+            </a></li>
+            <li><a href="#chat" class="db-menu-link" data-tab="chat">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Agency Chat
+            </a></li>
+        </ul>
+        <div class="db-logout">
+            <div class="theme-rtl-controls" style="margin-bottom:1rem;"></div>
+            <a href="login.html" class="db-menu-link" style="color:var(--color-danger);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Sign Out
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="db-main">
+        <!-- Top Header -->
+        <div class="db-header">
+            <div>
+                <h1 style="font-size:1.5rem;margin-bottom:0.25rem;">Welcome back, Dr. Vance</h1>
+                <p style="color:var(--text-muted);font-size:0.875rem;">Here's your practice growth performance for June 2026</p>
+            </div>
+            <div class="db-profile">
+                <a href="index.html" style="font-size:0.875rem;color:var(--color-primary);font-weight:600;">← Agency Site</a>
+                <div class="db-avatar">EV</div>
+            </div>
+        </div>
+
+        <!-- ========== OVERVIEW TAB ========== -->
+        <div id="tab-overview" class="tab-content">
+            <!-- Metrics Grid -->
+            <div class="metrics-grid" id="metrics-grid"></div>
+
+            <!-- Charts Row -->
+            <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Lead Volume & Revenue Trend (Last 6 Months)</h3>
+                        <div style="display:flex;gap:1rem;font-size:0.8rem;">
+                            <span style="display:flex;align-items:center;gap:0.4rem;"><span style="width:12px;height:3px;background:var(--color-primary);display:inline-block;border-radius:2px;"></span>Leads</span>
+                            <span style="display:flex;align-items:center;gap:0.4rem;"><span style="width:12px;height:3px;background:var(--color-accent);display:inline-block;border-radius:2px;"></span>Revenue ($K)</span>
+                        </div>
+                    </div>
+                    <svg class="chart-svg" id="main-chart" viewBox="0 0 700 220" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="chart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Grid lines -->
+                        <line x1="60" y1="20" x2="680" y2="20" class="chart-grid-line"/>
+                        <line x1="60" y1="65" x2="680" y2="65" class="chart-grid-line"/>
+                        <line x1="60" y1="110" x2="680" y2="110" class="chart-grid-line"/>
+                        <line x1="60" y1="155" x2="680" y2="155" class="chart-grid-line"/>
+                        <line x1="60" y1="200" x2="680" y2="200" class="chart-grid-line"/>
+                        <!-- Y labels -->
+                        <text x="50" y="24" text-anchor="end" font-size="10" fill="var(--text-muted)">100</text>
+                        <text x="50" y="69" text-anchor="end" font-size="10" fill="var(--text-muted)">75</text>
+                        <text x="50" y="114" text-anchor="end" font-size="10" fill="var(--text-muted)">50</text>
+                        <text x="50" y="159" text-anchor="end" font-size="10" fill="var(--text-muted)">25</text>
+                        <text x="50" y="204" text-anchor="end" font-size="10" fill="var(--text-muted)">0</text>
+                        <!-- X labels -->
+                        <text x="163" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Jan</text>
+                        <text x="275" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Feb</text>
+                        <text x="387" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Mar</text>
+                        <text x="499" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Apr</text>
+                        <text x="611" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">May</text>
+                        <!-- Lead line (0-100 scale → 200-20 px) -->
+                        <path d="M163,182 L275,155 L387,137 L499,92 L611,65" class="chart-line"/>
+                        <path d="M163,182 L275,155 L387,137 L499,92 L611,65 L611,200 L163,200 Z" class="chart-area"/>
+                        <!-- Revenue line -->
+                        <path d="M163,175 L275,162 L387,128 L499,88 L611,55" class="chart-line-secondary"/>
+                        <!-- Dots -->
+                        <circle cx="611" cy="65" r="5" fill="var(--color-primary)"/>
+                        <circle cx="611" cy="55" r="5" fill="var(--color-accent)"/>
+                    </svg>
+                </div>
+                <div class="chart-container" style="display:flex;flex-direction:column;">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Lead Source Mix</h3>
+                    </div>
+                    <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+                        <svg viewBox="0 0 200 200" width="180" height="180">
+                            <!-- Simple donut chart via stroke-dasharray -->
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--border-color)" stroke-width="28"/>
+                            <!-- Google 42% -->
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--color-primary)" stroke-width="28" stroke-dasharray="184.9 254" stroke-dashoffset="62" transform="rotate(-90 100 100)"/>
+                            <!-- Facebook 34% -->
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--color-accent)" stroke-width="28" stroke-dasharray="149.5 289.4" stroke-dashoffset="-122.9" transform="rotate(-90 100 100)"/>
+                            <!-- SEO 24% -->
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#3b82f6" stroke-width="28" stroke-dasharray="105.6 333.3" stroke-dashoffset="-272.4" transform="rotate(-90 100 100)"/>
+                            <text x="100" y="96" text-anchor="middle" font-size="20" font-weight="700" fill="var(--text-primary)">104</text>
+                            <text x="100" y="113" text-anchor="middle" font-size="10" fill="var(--text-muted)">total leads</text>
+                        </svg>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;padding:0 1rem 1rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;"><span style="display:flex;align-items:center;gap:0.5rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--color-primary);display:inline-block;"></span>Google Ads</span><strong>42%</strong></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;"><span style="display:flex;align-items:center;gap:0.5rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--color-accent);display:inline-block;"></span>Facebook Ads</span><strong>34%</strong></div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;"><span style="display:flex;align-items:center;gap:0.5rem;"><span style="width:10px;height:10px;border-radius:50%;background:#3b82f6;display:inline-block;"></span>Organic SEO</span><strong>24%</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campaign Table -->
+            <div class="table-container">
+                <div class="table-header"><h3 class="chart-title">Campaign Performance</h3><span style="font-size:0.8rem;color:var(--text-muted);">June 2026</span></div>
+                <div class="db-table-wrapper">
+                    <table class="db-table">
+                        <thead><tr><th>Channel</th><th>Spend</th><th>Leads</th><th>CPL</th><th>Revenue</th><th>ROI</th></tr></thead>
+                        <tbody id="campaign-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== LEADS TAB ========== -->
+        <div id="tab-leads" class="tab-content" style="display:none;">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 class="chart-title">Patient Lead Pipeline</h3>
+                    <div style="display:flex;gap:0.75rem;">
+                        <select id="lead-filter" style="padding:0.5rem 0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);font-size:0.875rem;" onchange="renderLeads()">
+                            <option value="">All Statuses</option>
+                            <option value="New">New</option>
+                            <option value="Contacted">Contacted</option>
+                            <option value="Booked">Booked</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="db-table-wrapper">
+                    <table class="db-table">
+                        <thead><tr><th>Name</th><th>Treatment</th><th>Source</th><th>Date</th><th>Status</th><th>Revenue</th><th>Actions</th></tr></thead>
+                        <tbody id="leads-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== CREATIVES TAB ========== -->
+        <div id="tab-creatives" class="tab-content" style="display:none;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h2 style="font-size:1.25rem;">Ad Creative Approval Board</h2>
+                <span style="color:var(--text-muted);font-size:0.875rem;">Review and approve assets before they go live</span>
+            </div>
+            <div class="creative-grid" id="creatives-grid"></div>
+        </div>
+
+        <!-- ========== INVOICES TAB ========== -->
+        <div id="tab-invoices" class="tab-content" style="display:none;">
+            <div class="table-container">
+                <div class="table-header"><h3 class="chart-title">Invoice History</h3></div>
+                <div class="db-table-wrapper">
+                    <table class="db-table">
+                        <thead><tr><th>Invoice</th><th>Description</th><th>Amount</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead>
+                        <tbody id="invoices-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== CHAT TAB ========== -->
+        <div id="tab-chat" class="tab-content" style="display:none;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h2 style="font-size:1.25rem;">Agency Communication Channel</h2>
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--color-primary);"><span style="width:8px;height:8px;background:var(--color-primary);border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>Agency Online</div>
+            </div>
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" class="chat-input" placeholder="Type a message to your agency team..." onkeydown="if(event.key==='Enter')sendMessage()">
+                    <button class="btn btn-primary" onclick="sendMessage()" style="padding:0.75rem 1.25rem;">Send</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Creative Feedback Modal -->
+<div class="modal-overlay" id="feedback-modal" style="display:none;align-items:center;justify-content:center;">
+    <div class="modal-content">
+        <h3 style="margin-bottom:1rem;">Request Revision</h3>
+        <div class="form-group">
+            <label>Feedback Notes</label>
+            <textarea id="feedback-text" rows="4" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-primary);color:var(--text-primary);width:100%;" placeholder="Describe the changes you need..."></textarea>
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+            <button class="btn btn-secondary" style="flex:1;" onclick="closeFeedbackModal()">Cancel</button>
+            <button class="btn btn-primary" style="flex:1;" onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+</style>
+
+<script>
+// ---- Tab Navigation ----
+document.querySelectorAll('.db-menu-link[data-tab]').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const tab = link.getAttribute('data-tab');
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.getElementById('tab-'+tab).style.display = 'block';
+        document.querySelectorAll('.db-menu-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
+
+// ---- Metrics ----
+function renderMetrics() {
+    const c = DentalStore.getCampaigns();
+    const leads = DentalStore.getLeads();
+    const totalSpend = c.googleSpend + c.fbSpend + c.seoSpend;
+    const totalLeads = leads.length;
+    const totalRev = leads.reduce((s,l) => s + (l.revenue||0), 0);
+    const cpl = totalLeads ? (totalSpend / totalLeads).toFixed(0) : 0;
+    const metrics = [
+        { label:'Total Leads', val: totalLeads, change:'+18%', dir:'up', icon:'👥' },
+        { label:'Marketing Spend', val: `$${totalSpend.toLocaleString()}`, change:'+5%', dir:'up', icon:'💰' },
+        { label:'Cost Per Lead', val: `$${cpl}`, change:'-8%', dir:'up', icon:'📊' },
+        { label:'Revenue Attributed', val: `$${totalRev.toLocaleString()}`, change:'+27%', dir:'up', icon:'📈' }
+    ];
+    const grid = document.getElementById('metrics-grid');
+    grid.innerHTML = metrics.map(m => `
+        <div class="metric-card">
+            <div class="metric-card-header"><span>${m.label}</span><span>${m.icon}</span></div>
+            <div class="metric-value">${m.val}</div>
+            <div class="metric-change ${m.dir}">▲ ${m.change} vs last month</div>
+        </div>
+    `).join('');
+}
+
+// ---- Campaign Table ----
+function renderCampaigns() {
+    const c = DentalStore.getCampaigns();
+    const rows = [
+        { ch:'Google Ads', spend:c.googleSpend, leads:c.googleLeads, rev:c.googleRevenue },
+        { ch:'Facebook & Instagram', spend:c.fbSpend, leads:c.fbLeads, rev:c.fbRevenue },
+        { ch:'Organic SEO', spend:c.seoSpend, leads:c.seoLeads, rev:c.seoRevenue },
+    ];
+    document.getElementById('campaign-table-body').innerHTML = rows.map(r => {
+        const cpl = (r.spend/r.leads).toFixed(0);
+        const roi = (((r.rev - r.spend) / r.spend)*100).toFixed(0);
+        return `<tr>
+            <td><strong>${r.ch}</strong></td>
+            <td>$${r.spend.toLocaleString()}</td>
+            <td>${r.leads}</td>
+            <td>$${cpl}</td>
+            <td style="color:var(--color-primary);font-weight:600;">$${r.rev.toLocaleString()}</td>
+            <td><span class="status-badge booked">${roi}% ROI</span></td>
+        </tr>`;
+    }).join('');
+}
+
+// ---- Leads Table ----
+function renderLeads() {
+    const filter = document.getElementById('lead-filter')?.value || '';
+    let leads = DentalStore.getLeads();
+    if (filter) leads = leads.filter(l => l.status === filter);
+    document.getElementById('new-leads-badge').textContent = leads.filter(l=>l.status==='New').length;
+    document.getElementById('leads-table-body').innerHTML = leads.map(l => `
+        <tr>
+            <td><strong>${l.name}</strong><br><span style="font-size:0.8rem;color:var(--text-muted);">${l.email}</span></td>
+            <td>${l.treatment}</td>
+            <td>${l.source}</td>
+            <td>${l.date}</td>
+            <td><span class="status-badge ${l.status.toLowerCase()}">${l.status}</span></td>
+            <td style="color:var(--color-primary);font-weight:600;">$${(l.revenue||0).toLocaleString()}</td>
+            <td>
+                <select onchange="updateLeadStatus('${l.id}',this.value)" style="padding:0.35rem 0.5rem;border:1px solid var(--border-color);border-radius:var(--radius-sm);background:var(--bg-secondary);color:var(--text-primary);font-size:0.8rem;">
+                    <option ${l.status==='New'?'selected':''}>New</option>
+                    <option ${l.status==='Contacted'?'selected':''}>Contacted</option>
+                    <option ${l.status==='Booked'?'selected':''}>Booked</option>
+                    <option ${l.status==='Completed'?'selected':''}>Completed</option>
+                </select>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function updateLeadStatus(id, status) {
+    DentalStore.updateLeadStatus(id, status);
+    renderLeads();
+    renderMetrics();
+}
+
+// ---- Creatives ----
+let pendingCreativeId = null;
+function renderCreatives() {
+    const creatives = DentalStore.getCreatives();
+    document.getElementById('pending-badge').textContent = creatives.filter(c=>c.status==='pending').length;
+    document.getElementById('creatives-grid').innerHTML = creatives.map(c => `
+        <div class="creative-card">
+            <img src="${c.preview}" alt="${c.title}" class="creative-img" onerror="this.style.display='none'">
+            <div style="background:linear-gradient(135deg,rgba(var(--color-primary-rgb),0.1),rgba(var(--color-accent-rgb),0.08));height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;${c.preview?'display:none;':''}">🎨</div>
+            <div class="creative-content">
+                <span class="creative-tag">${c.type}</span>
+                <h4 style="font-size:1rem;font-weight:700;margin-bottom:0.5rem;">${c.title}</h4>
+                <p class="creative-desc">${c.notes}</p>
+                ${c.feedback ? `<div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-sm);padding:0.75rem;font-size:0.8rem;color:var(--color-danger);margin-bottom:1rem;"><strong>Feedback:</strong> ${c.feedback}</div>` : ''}
+                <div style="margin-bottom:1rem;"><span class="status-badge ${c.status}">${c.status.charAt(0).toUpperCase()+c.status.slice(1)}</span></div>
+                <div class="creative-actions">
+                    <button class="btn btn-primary" style="flex:1;padding:0.5rem;font-size:0.8rem;" onclick="approveCreative('${c.id}')">✓ Approve</button>
+                    <button class="btn btn-outline" style="flex:1;padding:0.5rem;font-size:0.8rem;" onclick="openFeedback('${c.id}')">✎ Revise</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function approveCreative(id) {
+    DentalStore.updateCreativeStatus(id, 'approved');
+    renderCreatives();
+}
+
+function openFeedback(id) {
+    pendingCreativeId = id;
+    document.getElementById('feedback-modal').style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedback-modal').style.display = 'none';
+    pendingCreativeId = null;
+}
+
+function submitFeedback() {
+    const text = document.getElementById('feedback-text').value;
+    if (text && pendingCreativeId) {
+        DentalStore.updateCreativeStatus(pendingCreativeId, 'rejected', text);
+        renderCreatives();
+        closeFeedbackModal();
+    }
+}
+
+// ---- Invoices ----
+function renderInvoices() {
+    const invoices = DentalStore.getInvoices();
+    document.getElementById('invoices-table-body').innerHTML = invoices.map(inv => `
+        <tr>
+            <td><strong>${inv.id}</strong></td>
+            <td style="max-width:250px;">${inv.description}</td>
+            <td style="font-weight:700;">$${inv.amount.toLocaleString()}</td>
+            <td>${inv.due}</td>
+            <td><span class="status-badge ${inv.status}">${inv.status.charAt(0).toUpperCase()+inv.status.slice(1)}</span></td>
+            <td>
+                ${inv.status === 'pending' 
+                    ? `<button class="btn btn-primary" style="padding:0.4rem 0.9rem;font-size:0.8rem;" onclick="payInvoice('${inv.id}')">Pay Now</button>`
+                    : `<button class="btn btn-secondary" style="padding:0.4rem 0.9rem;font-size:0.8rem;">Download</button>`
+                }
+            </td>
+        </tr>
+    `).join('');
+}
+
+function payInvoice(id) {
+    DentalStore.updateInvoiceStatus(id, 'paid');
+    renderInvoices();
+}
+
+// ---- Chat ----
+function renderChat() {
+    const messages = DentalStore.getMessages();
+    const container = document.getElementById('chat-messages');
+    container.innerHTML = messages.map(m => `
+        <div class="chat-bubble ${m.sender}">
+            ${m.text}
+            <div class="chat-bubble-time">${m.time}</div>
+        </div>
+    `).join('');
+    container.scrollTop = container.scrollHeight;
+}
+
+function sendMessage() {
+    const input = document.getElementById('chat-input');
+    if (!input.value.trim()) return;
+    DentalStore.addMessage('client', input.value.trim());
+    input.value = '';
+    renderChat();
+    // Simulate agency reply
+    setTimeout(() => {
+        DentalStore.addMessage('agency', 'Thanks for your message! Your account manager will respond shortly. Average response time is under 2 hours.');
+        renderChat();
+    }, 1500);
+}
+
+// ---- Init ----
+renderMetrics();
+renderCampaigns();
+renderLeads();
+renderCreatives();
+renderInvoices();
+renderChat();
+</script>
+</body>
+</html>

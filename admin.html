@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Admin Panel — DentScale</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <script src="assets/js/store.js"></script>
+    <script src="assets/js/theme-rtl.js" defer></script>
+    <style>body{padding-top:0;} .admin-section{display:none;} .admin-section.active{display:block;}</style>
+</head>
+<body>
+<div class="db-wrapper">
+    <aside class="db-sidebar">
+        <div class="db-sidebar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>Admin Panel</div>
+        <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);padding:0.5rem 0.75rem;font-size:0.75rem;font-weight:700;color:var(--color-danger);margin-bottom:1.5rem;">🔒 AGENCY ONLY — INTERNAL</div>
+        <ul class="db-menu">
+            <li><a href="#" class="db-menu-link active" data-admin="campaigns" onclick="switchAdmin('campaigns',this)">📊 Campaign Controls</a></li>
+            <li><a href="#" class="db-menu-link" data-admin="leads" onclick="switchAdmin('leads',this)">👥 Lead Manager</a></li>
+            <li><a href="#" class="db-menu-link" data-admin="creatives" onclick="switchAdmin('creatives',this)">🎨 Creative Uploader</a></li>
+            <li><a href="#" class="db-menu-link" data-admin="invoices" onclick="switchAdmin('invoices',this)">📄 Invoice Generator</a></li>
+            <li><a href="#" class="db-menu-link" data-admin="chat" onclick="switchAdmin('chat',this)">💬 Client Chat</a></li>
+        </ul>
+        <div class="db-logout">
+            <div class="theme-rtl-controls" style="margin-bottom:1rem;"></div>
+            <a href="login.html" class="db-menu-link" style="color:var(--color-danger);">← Exit Admin</a>
+        </div>
+    </aside>
+
+    <main class="db-main">
+        <div class="db-header">
+            <div><h1 style="font-size:1.5rem;margin-bottom:0.25rem;">Agency Admin Dashboard</h1><p style="color:var(--text-muted);font-size:0.875rem;">Manage Dr. Vance Cosmetic Center account — Vance Cosmetic Center</p></div>
+            <div class="db-profile"><a href="dashboard.html" style="font-size:0.875rem;color:var(--color-primary);font-weight:600;">View Client Portal →</a><div class="db-avatar" style="background:#ef4444;">AG</div></div>
+        </div>
+
+        <!-- Campaign Controls -->
+        <div class="admin-section active" id="admin-campaigns">
+            <h2 style="font-size:1.25rem;margin-bottom:1.5rem;">Campaign Performance Editor</h2>
+            <div class="grid-3" style="margin-bottom:2rem;">
+                <div class="card" style="padding:1.5rem;">
+                    <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--color-primary);">Google Ads</h3>
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                        <div class="form-group"><label style="font-size:0.8rem;">Monthly Spend ($)</label><input type="number" id="a-g-spend" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="1200"></div>
+                        <div class="form-group"><label style="font-size:0.8rem;">Total Leads</label><input type="number" id="a-g-leads" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="28"></div>
+                        <div class="form-group"><label style="font-size:0.8rem;">Revenue Attributed ($)</label><input type="number" id="a-g-rev" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="11000"></div>
+                    </div>
+                </div>
+                <div class="card" style="padding:1.5rem;">
+                    <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--color-accent);">Facebook & Instagram</h3>
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                        <div class="form-group"><label style="font-size:0.8rem;">Monthly Spend ($)</label><input type="number" id="a-f-spend" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="850"></div>
+                        <div class="form-group"><label style="font-size:0.8rem;">Total Leads</label><input type="number" id="a-f-leads" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="34"></div>
+                        <div class="form-group"><label style="font-size:0.8rem;">Revenue Attributed ($)</label><input type="number" id="a-f-rev" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="8700"></div>
+                    </div>
+                </div>
+                <div class="card" style="padding:1.5rem;">
+                    <h3 style="font-size:1rem;margin-bottom:1rem;color:#3b82f6;">Organic SEO</h3>
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                        <div class="form-group"><label style="font-size:0.8rem;">Retainer ($)</label><input type="number" id="a-s-spend" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="1500"></div>
+                        <div class="form-group"><label style="font-size:0.8rem;">Organic Leads</label><input type="number" id="a-s-leads" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="42"></div>
+                        <div class="form-group"><label style="font-size:0.8rem;">Revenue Attributed ($)</label><input type="number" id="a-s-rev" style="padding:0.6rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);" value="18500"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveCampaigns()">Save & Push to Client Dashboard</button>
+            <span id="camp-saved" style="display:none;margin-left:1rem;color:var(--color-primary);font-weight:600;">✓ Saved! Client dashboard updated.</span>
+        </div>
+
+        <!-- Lead Manager -->
+        <div class="admin-section" id="admin-leads">
+            <h2 style="font-size:1.25rem;margin-bottom:1.5rem;">Add New Lead</h2>
+            <div class="card" style="padding:2rem;max-width:600px;margin-bottom:2rem;">
+                <div style="display:flex;flex-direction:column;gap:1.25rem;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div class="form-group"><label style="font-size:0.875rem;">Patient Name *</label><input type="text" id="al-name" placeholder="Michael Wang" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                        <div class="form-group"><label style="font-size:0.875rem;">Email</label><input type="email" id="al-email" placeholder="mwang@gmail.com" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div class="form-group"><label style="font-size:0.875rem;">Treatment Interest</label>
+                            <select id="al-treatment" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);">
+                                <option>Dental Implants</option><option>Veneers</option><option>Invisalign</option><option>Teeth Whitening</option><option>Cosmetic Bonding</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label style="font-size:0.875rem;">Lead Source</label>
+                            <select id="al-source" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);">
+                                <option>Google Ads</option><option>Facebook Ads</option><option>SEO Search</option><option>Instagram</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label style="font-size:0.875rem;">Estimated Revenue Value ($)</label><input type="number" id="al-rev" placeholder="5000" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                    <button class="btn btn-primary" onclick="addNewLead()">Add Lead to Client Pipeline</button>
+                    <div id="lead-saved" style="display:none;color:var(--color-primary);font-weight:600;">✓ Lead added! Visible in client dashboard leads tab.</div>
+                </div>
+            </div>
+            <div class="table-container">
+                <div class="table-header"><h3 class="chart-title">All Leads</h3></div>
+                <div class="db-table-wrapper">
+                    <table class="db-table">
+                        <thead><tr><th>Name</th><th>Treatment</th><th>Source</th><th>Status</th><th>Revenue</th></tr></thead>
+                        <tbody id="admin-leads-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Creative Uploader -->
+        <div class="admin-section" id="admin-creatives">
+            <h2 style="font-size:1.25rem;margin-bottom:1.5rem;">Upload Creative for Client Approval</h2>
+            <div class="card" style="padding:2rem;max-width:600px;margin-bottom:2rem;">
+                <div style="display:flex;flex-direction:column;gap:1.25rem;">
+                    <div class="form-group"><label>Creative Title *</label><input type="text" id="ac-title" placeholder="July Implants Facebook Video" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                    <div class="form-group"><label>Ad Type</label>
+                        <select id="ac-type" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);">
+                            <option>Facebook Video</option><option>Instagram Carousel</option><option>Google Landing Page</option><option>Display Banner</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Description / Notes</label><textarea id="ac-notes" rows="3" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);width:100%;" placeholder="Describe the creative content, targeting, and placement..."></textarea></div>
+                    <div class="form-group"><label>Preview Image URL</label><input type="text" id="ac-preview" placeholder="https://images.unsplash.com/..." style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                    <button class="btn btn-primary" onclick="uploadCreative()">Upload for Client Review</button>
+                    <div id="creative-saved" style="display:none;color:var(--color-primary);font-weight:600;">✓ Creative uploaded! Client can approve or request revisions.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Generator -->
+        <div class="admin-section" id="admin-invoices">
+            <h2 style="font-size:1.25rem;margin-bottom:1.5rem;">Generate New Invoice</h2>
+            <div class="card" style="padding:2rem;max-width:600px;margin-bottom:2rem;">
+                <div style="display:flex;flex-direction:column;gap:1.25rem;">
+                    <div class="form-group"><label>Service Description *</label><input type="text" id="ai-desc" placeholder="Monthly Google Ads Campaign Management" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div class="form-group"><label>Amount ($) *</label><input type="number" id="ai-amount" placeholder="2500" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                        <div class="form-group"><label>Due Date *</label><input type="date" id="ai-due" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);"></div>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateInvoice()">Send Invoice to Client Portal</button>
+                    <div id="invoice-saved" style="display:none;color:var(--color-primary);font-weight:600;">✓ Invoice generated! Visible in client dashboard.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agency Chat (Admin) -->
+        <div class="admin-section" id="admin-chat">
+            <h2 style="font-size:1.25rem;margin-bottom:1.5rem;">Client Communication — Dr. Evelyn Vance</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="admin-chat-messages"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="admin-chat-input" class="chat-input" placeholder="Send a message to Dr. Vance..." onkeydown="if(event.key==='Enter')sendAdminMessage()">
+                    <button class="btn btn-primary" onclick="sendAdminMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+function switchAdmin(section, el) {
+    event.preventDefault();
+    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('admin-'+section).classList.add('active');
+    document.querySelectorAll('.db-menu-link').forEach(l => l.classList.remove('active'));
+    el.classList.add('active');
+    if (section === 'leads') renderAdminLeads();
+    if (section === 'chat') renderAdminChat();
+}
+
+function saveCampaigns() {
+    DentalStore.updateCampaigns({
+        googleSpend: +document.getElementById('a-g-spend').value,
+        googleLeads: +document.getElementById('a-g-leads').value,
+        googleRevenue: +document.getElementById('a-g-rev').value,
+        fbSpend: +document.getElementById('a-f-spend').value,
+        fbLeads: +document.getElementById('a-f-leads').value,
+        fbRevenue: +document.getElementById('a-f-rev').value,
+        seoSpend: +document.getElementById('a-s-spend').value,
+        seoLeads: +document.getElementById('a-s-leads').value,
+        seoRevenue: +document.getElementById('a-s-rev').value,
+    });
+    const msg = document.getElementById('camp-saved');
+    msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 3000);
+}
+
+function addNewLead() {
+    const name = document.getElementById('al-name').value.trim();
+    if (!name) return;
+    DentalStore.addLead({ name, email:document.getElementById('al-email').value, treatment:document.getElementById('al-treatment').value, source:document.getElementById('al-source').value, revenue:+document.getElementById('al-rev').value||0, status:'New', phone:'' });
+    document.getElementById('lead-saved').style.display = 'block';
+    setTimeout(() => document.getElementById('lead-saved').style.display = 'none', 3000);
+    document.getElementById('al-name').value = '';
+    renderAdminLeads();
+}
+
+function renderAdminLeads() {
+    document.getElementById('admin-leads-body').innerHTML = DentalStore.getLeads().map(l => `
+        <tr><td><strong>${l.name}</strong></td><td>${l.treatment}</td><td>${l.source}</td>
+        <td><span class="status-badge ${l.status.toLowerCase()}">${l.status}</span></td>
+        <td>$${(l.revenue||0).toLocaleString()}</td></tr>
+    `).join('');
+}
+
+function uploadCreative() {
+    const title = document.getElementById('ac-title').value.trim();
+    if (!title) return;
+    const creatives = DentalStore.getCreatives();
+    creatives.push({ id:'creative-'+Date.now(), title, type:document.getElementById('ac-type').value, preview:document.getElementById('ac-preview').value, notes:document.getElementById('ac-notes').value, status:'pending', feedback:'' });
+    localStorage.setItem('dentscale_creatives', JSON.stringify(creatives));
+    document.getElementById('creative-saved').style.display = 'block';
+    setTimeout(() => document.getElementById('creative-saved').style.display = 'none', 3000);
+    document.getElementById('ac-title').value = '';
+    document.getElementById('ac-notes').value = '';
+    document.getElementById('ac-preview').value = '';
+}
+
+function generateInvoice() {
+    const desc = document.getElementById('ai-desc').value.trim();
+    const amount = +document.getElementById('ai-amount').value;
+    const due = document.getElementById('ai-due').value;
+    if (!desc || !amount || !due) return;
+    DentalStore.addInvoice({ description:desc, amount, due, status:'pending' });
+    document.getElementById('invoice-saved').style.display = 'block';
+    setTimeout(() => document.getElementById('invoice-saved').style.display = 'none', 3000);
+    document.getElementById('ai-desc').value = '';
+    document.getElementById('ai-amount').value = '';
+}
+
+function renderAdminChat() {
+    const messages = DentalStore.getMessages();
+    const container = document.getElementById('admin-chat-messages');
+    container.innerHTML = messages.map(m => `
+        <div class="chat-bubble ${m.sender === 'agency' ? 'client' : 'agency'}">
+            ${m.text}<div class="chat-bubble-time">${m.time}</div>
+        </div>
+    `).join('');
+    container.scrollTop = container.scrollHeight;
+}
+
+function sendAdminMessage() {
+    const input = document.getElementById('admin-chat-input');
+    if (!input.value.trim()) return;
+    DentalStore.addMessage('agency', input.value.trim());
+    input.value = '';
+    renderAdminChat();
+}
+</script>
+</body>
+</html>

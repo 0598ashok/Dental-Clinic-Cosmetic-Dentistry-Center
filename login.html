@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Portal Login — DentScale</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="assets/js/store.js" defer></script>
+    <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        body { display:flex; min-height:100vh; align-items:stretch; padding-top:0; }
+        .login-left { flex:1; display:flex; flex-direction:column; justify-content:center; padding:4rem 5vw; background:var(--bg-primary); }
+        .login-right { width:45%; background:linear-gradient(135deg, var(--color-secondary) 0%, #1e3a5f 50%, #0d2741 100%); display:flex; flex-direction:column; justify-content:center; align-items:center; padding:4rem; position:relative; overflow:hidden; }
+        .login-right::before { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:radial-gradient(circle, rgba(16,185,129,0.2), transparent 70%); border-radius:50%; }
+        .login-right::after { content:''; position:absolute; bottom:-80px; left:-80px; width:300px; height:300px; background:radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%); border-radius:50%; }
+        .login-form { max-width:400px; width:100%; }
+        .tab-row { display:flex; border:1px solid var(--border-color); border-radius:var(--radius-md); overflow:hidden; margin-bottom:2rem; }
+        .tab-btn { flex:1; padding:0.75rem; font-weight:600; cursor:pointer; text-align:center; transition:all 0.2s; background:transparent; color:var(--text-secondary); }
+        .tab-btn.active { background:var(--color-primary); color:#fff; }
+        @media(max-width:768px){ .login-right{display:none;} body{display:block;} .login-left{min-height:100vh;padding:2rem;display:flex;} }
+    </style>
+</head>
+<body>
+    <div class="login-left">
+        <div class="login-form">
+            <div style="margin-bottom:2.5rem;">
+                <a href="index.html" class="logo" style="display:inline-flex;margin-bottom:2rem;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>Dent<span>Scale</span></a>
+                <h1 style="font-size:1.75rem;margin-bottom:0.5rem;">Welcome back</h1>
+                <p style="color:var(--text-secondary);">Sign in to your DentScale client portal</p>
+            </div>
+
+            <div class="tab-row">
+                <button class="tab-btn active" id="tab-client" onclick="switchTab('client')">Client Login</button>
+                <button class="tab-btn" id="tab-admin" onclick="switchTab('admin')">Admin Login</button>
+            </div>
+
+            <form style="display:flex;flex-direction:column;gap:1.5rem;" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" value="dr.vance@clinic.com" placeholder="your@email.com" required style="padding:0.875rem 1rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);">
+                </div>
+                <div class="form-group">
+                    <label style="display:flex;justify-content:space-between;"><span>Password</span><a href="#" style="color:var(--color-primary);font-size:0.875rem;">Forgot password?</a></label>
+                    <input type="password" id="login-pass" value="demo1234" placeholder="••••••••" required style="padding:0.875rem 1rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);">
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;">
+                    <input type="checkbox" id="remember" style="width:16px;height:16px;accent-color:var(--color-primary);">
+                    <label for="remember" style="font-size:0.875rem;color:var(--text-secondary);">Remember me for 30 days</label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;padding:1rem;">Sign In to Portal</button>
+                <div id="login-err" style="display:none;background:rgba(239,68,68,0.1);border:1px solid var(--color-danger);border-radius:var(--radius-md);padding:0.75rem;color:var(--color-danger);font-size:0.875rem;text-align:center;">Incorrect credentials. Use demo credentials shown.</div>
+            </form>
+
+            <div style="margin-top:2rem;padding:1rem;background:var(--bg-secondary);border-radius:var(--radius-md);border:1px solid var(--border-color);font-size:0.8rem;">
+                <strong>🔑 Demo Credentials:</strong><br>
+                Client: dr.vance@clinic.com / demo1234<br>
+                Admin: admin@dentscale.io / admin2026
+            </div>
+
+            <p style="margin-top:1.5rem;text-align:center;font-size:0.875rem;color:var(--text-muted);">Not a client yet? <a href="booking.html" style="color:var(--color-primary);font-weight:600;">Book a consultation</a></p>
+            <div class="theme-rtl-controls" style="justify-content:center;margin-top:1.5rem;"></div>
+        </div>
+    </div>
+
+    <div class="login-right">
+        <div style="position:relative;z-index:1;text-align:center;color:#fff;">
+            <div style="font-size:4rem;margin-bottom:1.5rem;">📊</div>
+            <h2 style="font-size:1.75rem;margin-bottom:1rem;">Your Practice Growth, Live</h2>
+            <p style="opacity:0.8;margin-bottom:2rem;line-height:1.7;">Access real-time campaign ROI, lead pipelines, creative reviews, and invoice management — all in one premium client dashboard.</p>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+                <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:1rem;text-align:left;display:flex;gap:1rem;align-items:center;">
+                    <span style="font-size:1.5rem;">📈</span>
+                    <div><div style="font-weight:600;font-size:0.9rem;">Live Lead Tracking</div><div style="font-size:0.8rem;opacity:0.7;">See every lead as it comes in</div></div>
+                </div>
+                <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:1rem;text-align:left;display:flex;gap:1rem;align-items:center;">
+                    <span style="font-size:1.5rem;">✅</span>
+                    <div><div style="font-weight:600;font-size:0.9rem;">Creative Approval Board</div><div style="font-size:0.8rem;opacity:0.7;">Review & approve ads before they go live</div></div>
+                </div>
+                <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:1rem;text-align:left;display:flex;gap:1rem;align-items:center;">
+                    <span style="font-size:1.5rem;">💬</span>
+                    <div><div style="font-weight:600;font-size:0.9rem;">Direct Agency Chat</div><div style="font-size:0.8rem;opacity:0.7;">Message your growth team instantly</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'client';
+        function switchTab(t) {
+            currentTab = t;
+            document.getElementById('tab-client').classList.toggle('active', t==='client');
+            document.getElementById('tab-admin').classList.toggle('active', t==='admin');
+            document.getElementById('login-email').value = t==='client' ? 'dr.vance@clinic.com' : 'admin@dentscale.io';
+            document.getElementById('login-pass').value = t==='client' ? 'demo1234' : 'admin2026';
+        }
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
+            const err = document.getElementById('login-err');
+            if ((email === 'dr.vance@clinic.com' && pass === 'demo1234') || 
+                (currentTab === 'client' && pass === 'demo1234')) {
+                window.location.href = 'dashboard.html';
+            } else if (email === 'admin@dentscale.io' && pass === 'admin2026') {
+                window.location.href = 'admin.html';
+            } else {
+                err.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

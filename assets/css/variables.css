@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Fonts */
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+
+    /* Base Colors (Agency: Emerald & Midnight Slate) */
+    --color-primary: #10b981;
+    --color-primary-rgb: 16, 185, 129;
+    --color-primary-hover: #059669;
+    --color-secondary: #0f172a;
+    --color-secondary-rgb: 15, 23, 42;
+    --color-accent: #6366f1;
+    --color-accent-rgb: 99, 102, 241;
+    
+    /* Semantic Colors */
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    --color-info: #3b82f6;
+
+    /* Light Theme Palette */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-glass: rgba(255, 255, 255, 0.7);
+    --border-color: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.2);
+
+    /* Spacing & Borders */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s ease;
+
+    /* RTL Layout Directional Helpers */
+    --dir-start: left;
+    --dir-end: right;
+    --flex-start: flex-start;
+    --flex-end: flex-end;
+    --degree-dir: 0deg;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+    --bg-primary: #090d16;
+    --bg-secondary: #0f172a;
+    --bg-card: #1e293b;
+    --bg-glass: rgba(30, 41, 59, 0.7);
+    --border-color: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+/* RTL Layout Mode Overrides */
+[dir="rtl"] {
+    --dir-start: right;
+    --dir-end: left;
+    --flex-start: flex-end;
+    --flex-end: flex-start;
+    --degree-dir: 180deg;
+}
+
+/* Specific Clinic Palette Settings (Swapped on clinic pages) */
+.clinic-theme {
+    --color-primary: #0d9488; /* Teal */
+    --color-primary-rgb: 13, 148, 136;
+    --color-primary-hover: #0f766e;
+    --color-secondary: #1e1b4b; /* Navy Indigo */
+    --color-secondary-rgb: 30, 27, 75;
+    --color-accent: #d97706; /* Dental Gold / Amber */
+    --color-accent-rgb: 217, 119, 6;
+    --shadow-glow: 0 0 20px rgba(13, 148, 136, 0.2);
+}
+
+.clinic-theme[data-theme="dark"] {
+    --bg-primary: #080c14;
+    --bg-secondary: #0f1c24;
+    --bg-card: #132731;
+    --bg-glass: rgba(19, 39, 49, 0.7);
+    --border-color: #1f3d4a;
+    --shadow-glow: 0 0 20px rgba(13, 148, 136, 0.1);
+}
