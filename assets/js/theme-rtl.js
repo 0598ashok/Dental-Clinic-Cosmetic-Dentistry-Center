@@ -1,8 +1,8 @@
 // Theme & RTL Controller for DentScale platform
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialise State from LocalStorage
-    const currentTheme = localStorage.getItem('dentscale_theme') || 'light';
+    // 1. Initialise State from LocalStorage (Astro-Clinical Default is Dark)
+    const currentTheme = localStorage.getItem('dentscale_theme') || 'dark';
     const currentDir = localStorage.getItem('dentscale_dir') || 'ltr';
 
     // Apply states

@@ -1,439 +1,1928 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" dir="ltr">
+<html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Dashboard — DentScale Portal</title>
+    <title>Patient Portal — Vance Cosmetic Dentistry</title>
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
-    <script src="assets/js/store.js"></script>
+    <link rel="stylesheet" href="assets/css/clinic.css">
+    <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
-    <style>
-        body { padding-top:0; }
-        .db-nav-badge { background:var(--color-primary); color:#fff; font-size:0.65rem; font-weight:700; padding:0.15rem 0.4rem; border-radius:var(--radius-full); margin-left:auto; }
-    </style>
 </head>
-<body>
-<div class="db-wrapper">
-    <!-- Sidebar -->
-    <aside class="db-sidebar" id="db-sidebar">
-        <div class="db-sidebar-brand">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
-            Dent<span style="color:var(--color-primary);">Scale</span>
-        </div>
-        <ul class="db-menu">
-            <li><a href="#overview" class="db-menu-link active" data-tab="overview">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
-                Overview
-            </a></li>
-            <li><a href="#leads" class="db-menu-link" data-tab="leads">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                Leads <span class="db-nav-badge" id="new-leads-badge">2</span>
-            </a></li>
-            <li><a href="#creatives" class="db-menu-link" data-tab="creatives">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                Creatives <span class="db-nav-badge" id="pending-badge">1</span>
-            </a></li>
-            <li><a href="#invoices" class="db-menu-link" data-tab="invoices">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                Invoices
-            </a></li>
-            <li><a href="#chat" class="db-menu-link" data-tab="chat">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                Agency Chat
-            </a></li>
-        </ul>
-        <div class="db-logout">
-            <div class="theme-rtl-controls" style="margin-bottom:1rem;"></div>
-            <a href="login.html" class="db-menu-link" style="color:var(--color-danger);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                Sign Out
+
+<body class="clinic-theme">
+
+    <div class="db-wrapper">
+        <!-- Sidebar Toggle for Mobile -->
+        <button class="sidebar-toggle-btn" aria-label="Toggle Sidebar" onclick="toggleSidebar()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Sidebar Navigation -->
+        <aside class="db-sidebar" id="sidebar">
+            <a href="index.html" class="db-sidebar-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
             </a>
-        </div>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="db-main">
-        <!-- Top Header -->
-        <div class="db-header">
-            <div>
-                <h1 style="font-size:1.5rem;margin-bottom:0.25rem;">Welcome back, Dr. Vance</h1>
-                <p style="color:var(--text-muted);font-size:0.875rem;">Here's your practice growth performance for June 2026</p>
-            </div>
-            <div class="db-profile">
-                <a href="index.html" style="font-size:0.875rem;color:var(--color-primary);font-weight:600;">← Agency Site</a>
-                <div class="db-avatar">EV</div>
-            </div>
-        </div>
+            <ul class="db-menu">
+                <li><a href="#" class="db-menu-link active" onclick="switchDbTab(event, 'tab-overview')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+                            <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+                            <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+                        </svg>
+                        Overview
+                    </a></li>
+                <li><a href="#" class="db-menu-link" onclick="switchDbTab(event, 'tab-plan')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Treatment Steps
+                    </a></li>
+                <li><a href="#" class="db-menu-link" onclick="switchDbTab(event, 'tab-messages')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        Messaging
+                    </a></li>
+                <li><a href="#" class="db-menu-link" onclick="switchDbTab(event, 'tab-billing')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        Procedural Billing
+                    </a></li>
+                <li><a href="index.html" class="db-menu-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        Return Home
+                    </a></li>
+                <li class="db-logout"><a href="login.html" class="db-menu-link" style="color:var(--color-danger);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Logout
+                    </a></li>
+            </ul>
+        </aside>
 
-        <!-- ========== OVERVIEW TAB ========== -->
-        <div id="tab-overview" class="tab-content">
-            <!-- Metrics Grid -->
-            <div class="metrics-grid" id="metrics-grid"></div>
-
-            <!-- Charts Row -->
-            <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:2rem;">
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3 class="chart-title">Lead Volume & Revenue Trend (Last 6 Months)</h3>
-                        <div style="display:flex;gap:1rem;font-size:0.8rem;">
-                            <span style="display:flex;align-items:center;gap:0.4rem;"><span style="width:12px;height:3px;background:var(--color-primary);display:inline-block;border-radius:2px;"></span>Leads</span>
-                            <span style="display:flex;align-items:center;gap:0.4rem;"><span style="width:12px;height:3px;background:var(--color-accent);display:inline-block;border-radius:2px;"></span>Revenue ($K)</span>
+        <!-- Main Dashboard Body -->
+        <main class="db-main">
+            <div class="db-content-container">
+                <!-- Top Dashboard Header -->
+                <header class="db-header">
+                    <div class="db-header-title">
+                        <h1 id="db-welcome-title">Welcome back, Jane</h1>
+                        <p>Track your smile alignment stages and view clinical logs</p>
+                    </div>
+                    <div class="db-profile">
+                        <div class="theme-rtl-controls"></div>
+                        <div class="db-avatar">JD</div>
+                        <div>
+                            <strong style="display:block; font-size: 0.9rem;">Jane Doe</strong>
+                            <span style="font-size: 0.75rem; color: var(--text-secondary);">Patient ID: #PAT-4402</span>
                         </div>
                     </div>
-                    <svg class="chart-svg" id="main-chart" viewBox="0 0 700 220" preserveAspectRatio="none">
-                        <defs>
-                            <linearGradient id="chart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.3"/>
-                                <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Grid lines -->
-                        <line x1="60" y1="20" x2="680" y2="20" class="chart-grid-line"/>
-                        <line x1="60" y1="65" x2="680" y2="65" class="chart-grid-line"/>
-                        <line x1="60" y1="110" x2="680" y2="110" class="chart-grid-line"/>
-                        <line x1="60" y1="155" x2="680" y2="155" class="chart-grid-line"/>
-                        <line x1="60" y1="200" x2="680" y2="200" class="chart-grid-line"/>
-                        <!-- Y labels -->
-                        <text x="50" y="24" text-anchor="end" font-size="10" fill="var(--text-muted)">100</text>
-                        <text x="50" y="69" text-anchor="end" font-size="10" fill="var(--text-muted)">75</text>
-                        <text x="50" y="114" text-anchor="end" font-size="10" fill="var(--text-muted)">50</text>
-                        <text x="50" y="159" text-anchor="end" font-size="10" fill="var(--text-muted)">25</text>
-                        <text x="50" y="204" text-anchor="end" font-size="10" fill="var(--text-muted)">0</text>
-                        <!-- X labels -->
-                        <text x="163" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Jan</text>
-                        <text x="275" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Feb</text>
-                        <text x="387" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Mar</text>
-                        <text x="499" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">Apr</text>
-                        <text x="611" y="218" text-anchor="middle" font-size="10" fill="var(--text-muted)">May</text>
-                        <!-- Lead line (0-100 scale → 200-20 px) -->
-                        <path d="M163,182 L275,155 L387,137 L499,92 L611,65" class="chart-line"/>
-                        <path d="M163,182 L275,155 L387,137 L499,92 L611,65 L611,200 L163,200 Z" class="chart-area"/>
-                        <!-- Revenue line -->
-                        <path d="M163,175 L275,162 L387,128 L499,88 L611,55" class="chart-line-secondary"/>
-                        <!-- Dots -->
-                        <circle cx="611" cy="65" r="5" fill="var(--color-primary)"/>
-                        <circle cx="611" cy="55" r="5" fill="var(--color-accent)"/>
-                    </svg>
-                </div>
-                <div class="chart-container" style="display:flex;flex-direction:column;">
-                    <div class="chart-header">
-                        <h3 class="chart-title">Lead Source Mix</h3>
+                </header>
+
+                <!-- Dashboard Content Containers -->
+
+                <!-- Tab 1: Overview -->
+                <div id="tab-overview" class="db-tab-content">
+                    <!-- Metrics Bar -->
+                    <!-- Metrics Bar -->
+                    <div class="metrics-grid">
+                        <!-- Card 1: Upcoming Appointment Pass -->
+                        <div class="metric-card premium-metric-card" id="card-appt">
+                            <div class="metric-card-bg-glow"></div>
+                            <div class="metric-card-header">
+                                <span class="metric-card-title">Upcoming Appt</span>
+                                <span class="metric-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="appointment-pass-content">
+                                <div class="metric-value premium-value"
+                                    style="font-size: 1.15rem; font-weight: 700; margin: 0.5rem 0;"
+                                    id="metric-next-appt">June 19, 10:00 AM</div>
+                                <div class="appointment-pass-footer">
+                                    <span class="appointment-doctor" id="metric-doctor">Dr. Evelyn Vance</span>
+                                    <button class="appt-action-link" id="metric-reschedule-btn"
+                                        style="display:none;">Reschedule</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Active Plan Step -->
+                        <div class="metric-card premium-metric-card" id="card-plan">
+                            <div class="metric-card-bg-glow"></div>
+                            <div class="metric-card-header">
+                                <span class="metric-card-title">Active Plan Step</span>
+                                <span class="metric-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="plan-step-content">
+                                <div class="metric-value premium-value"
+                                    style="font-size: 1.15rem; font-weight: 700; margin: 0.5rem 0 0.35rem 0;"
+                                    id="metric-active-step">Veneers Preparation</div>
+                                <div class="progress-container">
+                                    <div class="progress-bar-wrapper">
+                                        <div class="progress-bar-fill" style="width: 60%;"></div>
+                                    </div>
+                                    <div class="progress-text-row">
+                                        <span class="progress-status-badge">STEP 3 OF 5</span>
+                                        <span class="progress-pct">60%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Total Due Billing -->
+                        <div class="metric-card premium-metric-card" id="card-billing">
+                            <div class="metric-card-bg-glow"></div>
+                            <div class="metric-card-header">
+                                <span class="metric-card-title">Total Due Billing</span>
+                                <span class="metric-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="billing-content">
+                                <div class="metric-value premium-value" style="font-size: 1.6rem;"
+                                    id="metric-due-billing">$3,800</div>
+                                <div class="billing-footer">
+                                    <span class="billing-due-date">Due on July 01, 2026</span>
+                                    <button class="billing-pay-btn" onclick="switchDbTab(event, 'tab-billing')">Pay
+                                        Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Clinic Messaging -->
+                        <div class="metric-card premium-metric-card" id="card-messaging">
+                            <div class="metric-card-bg-glow"></div>
+                            <div class="metric-card-header">
+                                <span class="metric-card-title">Clinic Messaging</span>
+                                <span class="metric-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="messaging-content">
+                                <div class="metric-value premium-value" style="font-size: 1.6rem;">Active</div>
+                                <div class="messaging-footer">
+                                    <span class="messaging-status">
+                                        <span class="status-pulse-dot"></span>
+                                        Dr. Vance Online
+                                    </span>
+                                    <button class="messaging-chat-btn" onclick="switchDbTab(event, 'tab-messages')">Open
+                                        Chat</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="flex:1;display:flex;align-items:center;justify-content:center;">
-                        <svg viewBox="0 0 200 200" width="180" height="180">
-                            <!-- Simple donut chart via stroke-dasharray -->
-                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--border-color)" stroke-width="28"/>
-                            <!-- Google 42% -->
-                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--color-primary)" stroke-width="28" stroke-dasharray="184.9 254" stroke-dashoffset="62" transform="rotate(-90 100 100)"/>
-                            <!-- Facebook 34% -->
-                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--color-accent)" stroke-width="28" stroke-dasharray="149.5 289.4" stroke-dashoffset="-122.9" transform="rotate(-90 100 100)"/>
-                            <!-- SEO 24% -->
-                            <circle cx="100" cy="100" r="70" fill="none" stroke="#3b82f6" stroke-width="28" stroke-dasharray="105.6 333.3" stroke-dashoffset="-272.4" transform="rotate(-90 100 100)"/>
-                            <text x="100" y="96" text-anchor="middle" font-size="20" font-weight="700" fill="var(--text-primary)">104</text>
-                            <text x="100" y="113" text-anchor="middle" font-size="10" fill="var(--text-muted)">total leads</text>
-                        </svg>
+
+                    <div style="margin-bottom:2.5rem;">
+                        <!-- Appointments List (Full Width Card) -->
+                        <div class="card"
+                            style="padding: 0; overflow: hidden; display: flex; flex-direction: column; margin: 0;">
+                            <div class="table-header"
+                                style="border-bottom: 1px solid var(--border-color); padding: 1.5rem 2rem;">
+                                <h3 class="table-title">My Appointments Calendar</h3>
+                                <a href="booking.html" class="btn btn-primary"
+                                    style="padding: 0.5rem 1rem; font-size: 0.8rem;">Book New Session</a>
+                            </div>
+                            <div class="agenda-list" id="table-appointments-body">
+                                <!-- Dynamic agenda cards -->
+                            </div>
+                        </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:0.75rem;padding:0 1rem 1rem;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;"><span style="display:flex;align-items:center;gap:0.5rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--color-primary);display:inline-block;"></span>Google Ads</span><strong>42%</strong></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;"><span style="display:flex;align-items:center;gap:0.5rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--color-accent);display:inline-block;"></span>Facebook Ads</span><strong>34%</strong></div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.8rem;"><span style="display:flex;align-items:center;gap:0.5rem;"><span style="width:10px;height:10px;border-radius:50%;background:#3b82f6;display:inline-block;"></span>Organic SEO</span><strong>24%</strong></div>
+
+                    <!-- Section Break / New Grid: Care Team & FAQs -->
+                    <div class="grid-2" style="gap:2rem; margin-top:2.5rem;">
+                        <!-- New Section A: Care Team Directory -->
+                        <div class="card premium-overview-section" id="overview-care-team" style="margin: 0;">
+                            <div class="table-header" style="padding:0; border:none; margin-bottom:1.5rem;">
+                                <h3 class="table-title">My Dental Care Specialist Team</h3>
+                                <span style="font-size:0.75rem; color:var(--color-primary); font-weight:700;">3
+                                    Specialists Assigned</span>
+                            </div>
+                            <div class="specialist-list-wrapper"
+                                style="display:flex; flex-direction:column; gap:1.25rem;">
+                                <!-- Specialist 1 -->
+                                <div class="specialist-team-card"
+                                    style="display:flex; align-items:center; justify-content:space-between; padding:1rem; background:rgba(var(--bg-secondary-rgb), 0.4); border:1px solid var(--border-color); border-radius:var(--radius-md); transition:all var(--transition-fast);">
+                                    <div style="display:flex; align-items:center; gap:1rem;">
+                                        <div class="db-avatar"
+                                            style="border-color:var(--color-primary); background:rgba(var(--color-primary-rgb), 0.1); margin:0;">
+                                            EV</div>
+                                        <div>
+                                            <strong style="display:block; font-size:0.9rem;">Dr. Evelyn Vance,
+                                                DDS</strong>
+                                            <span style="font-size:0.75rem; color:var(--text-secondary);">Prosthodontist
+                                                & Chief Surgeon</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                                        <span class="status-badge approved" style="font-size:0.65rem;">● Online</span>
+                                        <button class="btn btn-secondary" onclick="switchDbTab(event, 'tab-messages')"
+                                            style="padding:0.4rem 0.8rem; font-size:0.75rem;">Message</button>
+                                    </div>
+                                </div>
+
+                                <!-- Specialist 2 -->
+                                <div class="specialist-team-card"
+                                    style="display:flex; align-items:center; justify-content:space-between; padding:1rem; background:rgba(var(--bg-secondary-rgb), 0.4); border:1px solid var(--border-color); border-radius:var(--radius-md); transition:all var(--transition-fast);">
+                                    <div style="display:flex; align-items:center; gap:1rem;">
+                                        <div class="db-avatar"
+                                            style="border-color:var(--color-accent); background:rgba(var(--color-accent-rgb), 0.1); margin:0;">
+                                            MS</div>
+                                        <div>
+                                            <strong style="display:block; font-size:0.9rem;">Dr. Marcus
+                                                Sterling</strong>
+                                            <span style="font-size:0.75rem; color:var(--text-secondary);">Dental Implant
+                                                Specialist</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                                        <span class="status-badge contacted" style="font-size:0.65rem;">Available
+                                            Tomorrow</span>
+                                        <button class="btn btn-secondary" onclick="switchDbTab(event, 'tab-messages')"
+                                            style="padding:0.4rem 0.8rem; font-size:0.75rem;">Message</button>
+                                    </div>
+                                </div>
+
+                                <!-- Specialist 3 -->
+                                <div class="specialist-team-card"
+                                    style="display:flex; align-items:center; justify-content:space-between; padding:1rem; background:rgba(var(--bg-secondary-rgb), 0.4); border:1px solid var(--border-color); border-radius:var(--radius-md); transition:all var(--transition-fast);">
+                                    <div style="display:flex; align-items:center; gap:1rem;">
+                                        <div class="db-avatar"
+                                            style="border-color:var(--color-success); background:rgba(16, 185, 129, 0.1); margin:0;">
+                                            SL</div>
+                                        <div>
+                                            <strong style="display:block; font-size:0.9rem;">Sarah Lin, RDH</strong>
+                                            <span style="font-size:0.75rem; color:var(--text-secondary);">Senior Dental
+                                                Hygienist</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                                        <span class="status-badge completed" style="font-size:0.65rem;">In-Clinic</span>
+                                        <button class="btn btn-secondary" onclick="switchDbTab(event, 'tab-messages')"
+                                            style="padding:0.4rem 0.8rem; font-size:0.75rem;">Message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- New Section B: Clinical Care FAQ Tips -->
+                        <div class="card premium-overview-section" id="overview-clinical-tips" style="margin: 0;">
+                            <div class="table-header" style="padding:0; border:none; margin-bottom:1.5rem;">
+                                <h3 class="table-title">Oral Care Guide & Veneers FAQ</h3>
+                                <a href="blog.html" class="btn btn-secondary"
+                                    style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">All Articles</a>
+                            </div>
+                            <div class="clinical-tips-wrapper" style="display:flex; flex-direction:column; gap:1rem;">
+                                <div class="tip-card-item"
+                                    style="padding:1rem; border-left:3px solid var(--color-primary); background:rgba(var(--color-primary-rgb), 0.03); border-radius:0 var(--radius-md) var(--radius-md) 0;">
+                                    <strong
+                                        style="font-size:0.9rem; display:block; color:var(--color-primary-hover); font-family:var(--font-heading);">Care
+                                        for Temporary Shells</strong>
+                                    <span
+                                        style="font-size:0.8rem; color:var(--text-secondary); display:block; margin-top:0.25rem;">Avoid
+                                        hard foods, and clean gently with a soft toothbrush. Do not floss directly
+                                        upwards at the temp veneer boundary.</span>
+                                </div>
+                                <div class="tip-card-item"
+                                    style="padding:1rem; border-left:3px solid var(--color-accent); background:rgba(var(--color-accent-rgb), 0.03); border-radius:0 var(--radius-md) var(--radius-md) 0;">
+                                    <strong
+                                        style="font-size:0.9rem; display:block; color:var(--color-accent-hover); font-family:var(--font-heading);">Managing
+                                        Post-Prep Sensitivity</strong>
+                                    <span
+                                        style="font-size:0.8rem; color:var(--text-secondary); display:block; margin-top:0.25rem;">Mild
+                                        sensitivity to hot or cold is common. We recommend using a desensitizing
+                                        toothpaste like Sensodyne during active plan steps.</span>
+                                </div>
+                                <div class="tip-card-item"
+                                    style="padding:1rem; border-left:3px solid var(--color-success); background:rgba(16, 185, 129, 0.03); border-radius:0 var(--radius-md) var(--radius-md) 0;">
+                                    <strong
+                                        style="font-size:0.9rem; display:block; color:var(--color-success); font-family:var(--font-heading);">Bite
+                                        Alignment Check</strong>
+                                    <span
+                                        style="font-size:0.8rem; color:var(--text-secondary); display:block; margin-top:0.25rem;">After
+                                        final porcelain bonding on June 25, your bite should feel balanced. Avoid
+                                        testing bite limits for the first 24 hours.</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Campaign Table -->
-            <div class="table-container">
-                <div class="table-header"><h3 class="chart-title">Campaign Performance</h3><span style="font-size:0.8rem;color:var(--text-muted);">June 2026</span></div>
-                <div class="db-table-wrapper">
-                    <table class="db-table">
-                        <thead><tr><th>Channel</th><th>Spend</th><th>Leads</th><th>CPL</th><th>Revenue</th><th>ROI</th></tr></thead>
-                        <tbody id="campaign-table-body"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                <!-- Tab 2: Full Plan Steps -->
+                <div id="tab-plan" class="db-tab-content" style="display:none;">
+                    <!-- Overall Progress Tracker Card -->
+                    <div class="card" style="margin-bottom: 1.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div>
+                                <h2
+                                    style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem; font-family: var(--font-heading);">
+                                    Smile Makeover Pathway</h2>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">Overall progress
+                                    tracking for your clinical treatments.</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <span id="pathway-pct-text"
+                                    style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary); font-family: var(--font-heading); display: block; line-height: 1;">0%</span>
+                                <span id="pathway-pct-sub"
+                                    style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">0
+                                    of 0 Steps Completed</span>
+                            </div>
+                        </div>
 
-        <!-- ========== LEADS TAB ========== -->
-        <div id="tab-leads" class="tab-content" style="display:none;">
-            <div class="table-container">
-                <div class="table-header">
-                    <h3 class="chart-title">Patient Lead Pipeline</h3>
-                    <div style="display:flex;gap:0.75rem;">
-                        <select id="lead-filter" style="padding:0.5rem 0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);font-size:0.875rem;" onchange="renderLeads()">
-                            <option value="">All Statuses</option>
-                            <option value="New">New</option>
-                            <option value="Contacted">Contacted</option>
-                            <option value="Booked">Booked</option>
-                            <option value="Completed">Completed</option>
-                        </select>
+                        <!-- Progress Bar -->
+                        <div class="progress-bar-container"
+                            style="height: 8px; background: rgba(var(--bg-secondary-rgb), 0.6); border-radius: var(--radius-full); margin-bottom: 2.5rem; overflow: hidden; position: relative; border: 1px solid var(--border-color);">
+                            <div class="progress-bar-fill-glow" id="pathway-progress-fill"
+                                style="height: 100%; width: 0%; background: linear-gradient(to right, var(--color-success), var(--color-primary)); border-radius: var(--radius-full); transition: width var(--transition-slow);">
+                            </div>
+                        </div>
+
+                        <!-- Horizontal Stepper Milestone Tracker -->
+                        <div class="horizontal-stepper-container">
+                            <div class="horizontal-stepper-track">
+                                <div class="horizontal-stepper-track-fill" id="pathway-track-fill" style="width: 0%;">
+                                </div>
+                            </div>
+                            <div class="horizontal-stepper-nodes" id="pathway-nodes">
+                                <!-- Dynamic horizontal nodes -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Clinical Treatment Logs Card -->
+                    <div class="card">
+                        <div
+                            style="margin-bottom: 2rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 1rem;">
+                            <h3
+                                style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📋</span> Detailed Clinical Treatment Logs
+                            </h3>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">Comprehensive
+                                breakdown of diagnostic, clinical, and laboratory milestones.</p>
+                        </div>
+
+                        <div class="vertical-timeline" id="clinical-logs-timeline">
+                            <!-- Dynamic vertical list -->
+                        </div>
                     </div>
                 </div>
-                <div class="db-table-wrapper">
-                    <table class="db-table">
-                        <thead><tr><th>Name</th><th>Treatment</th><th>Source</th><th>Date</th><th>Status</th><th>Revenue</th><th>Actions</th></tr></thead>
-                        <tbody id="leads-table-body"></tbody>
-                    </table>
+
+                <!-- Tab 3: Messaging Chat -->
+                <div id="tab-messages" class="db-tab-content" style="display:none;">
+                    <div class="chat-layout">
+                        <!-- Chat Contacts Sidebar -->
+                        <div class="chat-sidebar">
+                            <!-- Sidebar Search -->
+                            <div style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                                <div style="position: relative; display: flex; align-items: center;">
+                                    <span
+                                        style="position: absolute; left: 12px; color: var(--text-muted); font-size: 0.9rem;">🔍</span>
+                                    <input type="text" placeholder="Search contacts..."
+                                        style="width: 100%; padding: 0.6rem 1rem 0.6rem 2.25rem; background: rgba(var(--bg-primary-rgb), 0.5); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); font-size: 0.85rem;"
+                                        onkeyup="searchChatContacts(this)">
+                                </div>
+                            </div>
+                            <!-- Contacts List -->
+                            <div class="chat-contacts-list" id="chat-contacts-list">
+                                <!-- Dr. Evelyn Vance (Dynamic Messages) -->
+                                <div class="contact-item active" onclick="selectChatContact('doctor')"
+                                    id="contact-doctor">
+                                    <div style="position: relative; flex-shrink: 0;">
+                                        <div class="db-avatar"
+                                            style="background: var(--color-primary); color: #060913; font-weight: 700; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            EV</div>
+                                        <span class="status-dot online"
+                                            style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background-color: var(--color-success); border: 2px solid var(--bg-card); box-shadow: 0 0 8px var(--color-success);"></span>
+                                    </div>
+                                    <div style="flex-grow: 1; min-width: 0; margin-left: 0.75rem;">
+                                        <div
+                                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.15rem;">
+                                            <strong
+                                                style="font-size: 0.9rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-heading);">Dr.
+                                                Evelyn Vance</strong>
+                                            <span class="last-msg-time" id="doctor-last-time"
+                                                style="font-size: 0.7rem; color: var(--text-muted);">11:15 AM</span>
+                                        </div>
+                                        <span
+                                            style="font-size: 0.75rem; color: var(--color-primary); font-weight: 600; display: block; margin-bottom: 0.15rem;">Cosmetic
+                                            Dentist Specialist</span>
+                                        <p class="last-msg-preview" id="doctor-last-preview"
+                                            style="font-size: 0.75rem; color: var(--text-secondary); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            See you on Friday!</p>
+                                    </div>
+                                </div>
+
+                                <!-- Clinic Front Desk -->
+                                <div class="contact-item" onclick="selectChatContact('reception')"
+                                    id="contact-reception">
+                                    <div style="position: relative; flex-shrink: 0;">
+                                        <div class="db-avatar"
+                                            style="background: rgba(var(--color-primary-rgb), 0.15); color: var(--color-primary); font-weight: 700; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            FD</div>
+                                        <span class="status-dot away"
+                                            style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background-color: var(--color-accent); border: 2px solid var(--bg-card); box-shadow: 0 0 8px var(--color-accent);"></span>
+                                    </div>
+                                    <div style="flex-grow: 1; min-width: 0; margin-left: 0.75rem;">
+                                        <div
+                                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.15rem;">
+                                            <strong
+                                                style="font-size: 0.9rem; color: var(--text-primary); font-family: var(--font-heading);">Clinic
+                                                Front Desk</strong>
+                                            <span class="last-msg-time"
+                                                style="font-size: 0.7rem; color: var(--text-muted);">Yesterday</span>
+                                        </div>
+                                        <span
+                                            style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500; display: block; margin-bottom: 0.15rem;">Appointment
+                                            Coordinator</span>
+                                        <p class="last-msg-preview"
+                                            style="font-size: 0.75rem; color: var(--text-muted); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            Great, I've moved your whitening followup to June 25.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Billing Desk -->
+                                <div class="contact-item" onclick="selectChatContact('billing')" id="contact-billing">
+                                    <div style="position: relative; flex-shrink: 0;">
+                                        <div class="db-avatar"
+                                            style="background: rgba(var(--color-success-rgb, 16, 185, 129), 0.15); color: var(--color-success); font-weight: 700; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            BD</div>
+                                        <span class="status-dot offline"
+                                            style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background-color: var(--text-muted); border: 2px solid var(--bg-card);"></span>
+                                    </div>
+                                    <div style="flex-grow: 1; min-width: 0; margin-left: 0.75rem;">
+                                        <div
+                                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.15rem;">
+                                            <strong
+                                                style="font-size: 0.9rem; color: var(--text-primary); font-family: var(--font-heading);">Care
+                                                Billing Desk</strong>
+                                            <span class="last-msg-time"
+                                                style="font-size: 0.7rem; color: var(--text-muted);">June 16</span>
+                                        </div>
+                                        <span
+                                            style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500; display: block; margin-bottom: 0.15rem;">Accounts
+                                            Department</span>
+                                        <p class="last-msg-preview"
+                                            style="font-size: 0.75rem; color: var(--text-muted); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            Invoice INV-2026-002 payment processed. Thank you!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Active Conversation Area -->
+                        <div class="chat-main">
+                            <!-- Active Chat Header -->
+                            <div class="chat-main-header">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div style="position: relative;" id="active-chat-avatar-container">
+                                        <div class="db-avatar" id="active-chat-avatar"
+                                            style="background: var(--color-primary); color: #060913; font-weight: 700; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            EV</div>
+                                        <span class="status-dot online" id="active-chat-status-dot"
+                                            style="position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; border-radius: 50%; background-color: var(--color-success); border: 2px solid var(--bg-card);"></span>
+                                    </div>
+                                    <div>
+                                        <strong id="active-chat-name"
+                                            style="display:block; font-size: 0.95rem; font-family: var(--font-heading);">Dr.
+                                            Evelyn Vance, DDS</strong>
+                                        <span id="active-chat-status-text"
+                                            style="font-size: 0.75rem; color: var(--color-success); font-weight: 700; display: flex; align-items: center; gap: 0.25rem;">
+                                            <span class="pulse-dot-green">●</span> Online & active
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- Call and Actions shortcuts -->
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <button type="button" class="chat-header-action-btn"
+                                        onclick="triggerMockCall('voice')"
+                                        title="Start Secure Voice consultation">📞</button>
+                                    <button type="button" class="chat-header-action-btn"
+                                        onclick="triggerMockCall('video')"
+                                        title="Start Secure Video consultation">🎥</button>
+                                    <button type="button" class="chat-header-action-btn"
+                                        onclick="openClinicHoursModal()" title="Clinic Info & Hours">ℹ️</button>
+                                </div>
+                            </div>
+
+                            <!-- Chat Messages Panel -->
+                            <div class="chat-messages" id="chat-box">
+                                <!-- Dynamic chat text -->
+                            </div>
+
+                            <!-- Typing Indicator -->
+                            <div id="chat-typing-indicator"
+                                style="display: none; padding: 0.5rem 1.5rem; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
+                                <span id="typing-doctor-name">Dr. Evelyn Vance</span> is compiling clinical review...
+                                <div class="typing-indicator-dots">
+                                    <span>•</span><span>•</span><span>•</span>
+                                </div>
+                            </div>
+
+                            <!-- Visual Quick Reply Chips -->
+                            <div class="chat-quick-replies" id="chat-quick-replies-container">
+                                <!-- Populated dynamically -->
+                            </div>
+
+                            <!-- Chat Input Form -->
+                            <form class="chat-input-area" onsubmit="handleSendChat(event)">
+                                <button type="button" class="chat-attachment-btn" onclick="triggerMockUpload()"
+                                    title="Attach Clinical Photos or Records">📎</button>
+                                <input type="text" class="chat-input" id="chat-text-input"
+                                    placeholder="Type a message to Dr. Vance..." required>
+                                <button type="submit" class="btn btn-primary"
+                                    style="padding:0 1.5rem; height: 42px; font-weight: 700; border-radius: var(--radius-md); flex-shrink: 0; display: flex; align-items: center; gap: 0.35rem;">
+                                    Transmit <span>🛩️</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- ========== CREATIVES TAB ========== -->
-        <div id="tab-creatives" class="tab-content" style="display:none;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-                <h2 style="font-size:1.25rem;">Ad Creative Approval Board</h2>
-                <span style="color:var(--text-muted);font-size:0.875rem;">Review and approve assets before they go live</span>
-            </div>
-            <div class="creative-grid" id="creatives-grid"></div>
-        </div>
+                <!-- Secure Telehealth Call Modal -->
+                <div id="modal-telehealth" class="db-modal"
+                    style="display: none; align-items: center; justify-content: center; background: rgba(6, 9, 19, 0.85); backdrop-filter: blur(12px); z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+                    <div class="modal-content"
+                        style="background: var(--bg-card); border: 2px solid var(--color-primary); box-shadow: var(--shadow-glow); border-radius: var(--radius-lg); width: 100%; max-width: 420px; padding: 2.5rem 2rem; text-align: center; position: relative;">
+                        <div class="calling-visual-ring"
+                            style="width: 100px; height: 100px; margin: 0 auto 2rem auto; position: relative; display: flex; align-items: center; justify-content: center;">
+                            <div class="pulse-ring-outer"></div>
+                            <div class="db-avatar" id="call-avatar"
+                                style="background: var(--color-primary); color: #060913; font-weight: 700; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; position: relative; z-index: 2;">
+                                EV</div>
+                        </div>
+                        <h3 id="call-title"
+                            style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">
+                            Establishing secure connection...</h3>
+                        <p id="call-subtitle"
+                            style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 2rem;">Dr. Evelyn
+                            Vance Sec-Consultation</p>
 
-        <!-- ========== INVOICES TAB ========== -->
-        <div id="tab-invoices" class="tab-content" style="display:none;">
-            <div class="table-container">
-                <div class="table-header"><h3 class="chart-title">Invoice History</h3></div>
-                <div class="db-table-wrapper">
-                    <table class="db-table">
-                        <thead><tr><th>Invoice</th><th>Description</th><th>Amount</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead>
-                        <tbody id="invoices-table-body"></tbody>
-                    </table>
+                        <div style="display:flex; justify-content:center; gap:1.5rem;">
+                            <button onclick="endTelehealthCall()" class="btn"
+                                style="background: var(--color-danger); color: #ffffff; border-color: var(--color-danger); padding: 0.75rem 2rem; border-radius: var(--radius-md); font-weight: 700; font-family: var(--font-heading); display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                                <span>🛑</span> Terminate Call
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- ========== CHAT TAB ========== -->
-        <div id="tab-chat" class="tab-content" style="display:none;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-                <h2 style="font-size:1.25rem;">Agency Communication Channel</h2>
-                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--color-primary);"><span style="width:8px;height:8px;background:var(--color-primary);border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>Agency Online</div>
-            </div>
-            <div class="chat-container">
-                <div class="chat-messages" id="chat-messages"></div>
-                <div class="chat-input-area">
-                    <input type="text" id="chat-input" class="chat-input" placeholder="Type a message to your agency team..." onkeydown="if(event.key==='Enter')sendMessage()">
-                    <button class="btn btn-primary" onclick="sendMessage()" style="padding:0.75rem 1.25rem;">Send</button>
+                <!-- Clinic Info Modal -->
+                <div id="modal-clinic-info" class="db-modal"
+                    style="display: none; align-items: center; justify-content: center; background: rgba(6, 9, 19, 0.8); backdrop-filter: blur(8px); z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+                    <div class="modal-content"
+                        style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); width: 100%; max-width: 460px; padding: 2rem; position: relative;">
+                        <span onclick="closeClinicHoursModal()"
+                            style="position: absolute; top: 1rem; right: 1.25rem; font-size: 1.25rem; color: var(--text-muted); cursor: pointer; transition: color var(--transition-fast);"
+                            class="modal-close-hover">✕</span>
+                        <h3
+                            style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-primary); border-bottom: 1px dashed var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🏢</span> Clinic Contact & Hours
+                        </h3>
+                        <div
+                            style="display:flex; flex-direction:column; gap:1rem; font-size:0.9rem; color:var(--text-secondary);">
+                            <div>
+                                <strong style="color:var(--text-primary); display:block; margin-bottom:0.25rem;">Vance
+                                    Cosmetic Dentistry Center</strong>
+                                <span>452 Ocean Avenue, Suite 302, San Francisco, CA</span>
+                            </div>
+                            <div>
+                                <strong style="color:var(--text-primary); display:block; margin-bottom:0.25rem;">Contact
+                                    Secured Lines</strong>
+                                <span>📞 Phone: (415) 555-0190</span><br>
+                                <span>✉️ Email: care@vancecosmetic.com</span>
+                            </div>
+                            <div>
+                                <strong style="color:var(--text-primary); display:block; margin-bottom:0.25rem;">Active
+                                    Specialist Hours</strong>
+                                <span style="display:flex; justify-content:space-between; margin-bottom:0.25rem;"><span>Mon
+                                        - Thu:</span> <strong style="color:var(--text-primary);">8:00 AM - 5:00
+                                        PM</strong></span>
+                                <span
+                                    style="display:flex; justify-content:space-between; margin-bottom:0.25rem;"><span>Friday:</span>
+                                    <strong style="color:var(--text-primary);">8:00 AM - 3:00 PM</strong></span>
+                                <span style="display:flex; justify-content:space-between;"><span>Sat - Sun:</span> <span
+                                        style="color:var(--color-danger); font-weight:700;">Emergency Only</span></span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1.75rem; text-align: right;">
+                            <button onclick="closeClinicHoursModal()" class="btn btn-primary"
+                                style="padding:0.6rem 1.5rem; border-radius:var(--radius-md);">Acknowledge</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </main>
-</div>
 
-<!-- Creative Feedback Modal -->
-<div class="modal-overlay" id="feedback-modal" style="display:none;align-items:center;justify-content:center;">
-    <div class="modal-content">
-        <h3 style="margin-bottom:1rem;">Request Revision</h3>
-        <div class="form-group">
-            <label>Feedback Notes</label>
-            <textarea id="feedback-text" rows="4" style="padding:0.75rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-primary);color:var(--text-primary);width:100%;" placeholder="Describe the changes you need..."></textarea>
-        </div>
-        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
-            <button class="btn btn-secondary" style="flex:1;" onclick="closeFeedbackModal()">Cancel</button>
-            <button class="btn btn-primary" style="flex:1;" onclick="submitFeedback()">Submit Feedback</button>
+                <!-- Tab 4: Billing -->
+                <div id="tab-billing" class="db-tab-content" style="display:none;">
+                    <!-- Top Row: Financial Cards Grid -->
+                    <div class="billing-cards-grid"
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <!-- Card 1: Statement Account Summary -->
+                        <div class="card billing-metric-card"
+                            style="margin: 0; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                                    <span
+                                        style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">Outstanding
+                                        Co-Pay</span>
+                                    <span style="font-size:1.2rem;">💳</span>
+                                </div>
+                                <span id="billing-outstanding-balance"
+                                    style="font-size: 2.2rem; font-weight: 800; color: var(--color-primary); font-family: var(--font-heading); display: block; line-height: 1; margin-bottom: 0.5rem;">$0</span>
+                                <span style="font-size:0.75rem; color:var(--text-secondary);">Statement balance subject
+                                    to insurance co-sharing.</span>
+                            </div>
+                            <div
+                                style="display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem; border-top:1px dashed var(--border-color); padding-top:1rem;">
+                                <span
+                                    style="font-size:0.8rem; color:var(--text-primary); font-weight:600; display:flex; align-items:center; gap:0.25rem;">
+                                    <span style="color:var(--color-success);">●</span> Auto-Debit Active
+                                </span>
+                                <!-- Custom Auto-Pay Switch Toggler -->
+                                <label class="billing-switch"
+                                    style="position: relative; display: inline-block; width: 44px; height: 24px; cursor: pointer;">
+                                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;"
+                                        id="billing-autopay-toggle">
+                                    <span class="billing-slider"
+                                        style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border-color); border-radius: 34px; transition: .4s;"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Insurance Coverage Tracker -->
+                        <div class="card billing-metric-card" style="margin: 0; padding: 1.5rem;">
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                                <span
+                                    style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">Insurance
+                                    Benefit Audit</span>
+                                <span style="font-size:1.2rem; color:var(--color-success);">🛡️</span>
+                            </div>
+                            <strong
+                                style="font-family:var(--font-heading); font-size:1.15rem; color:var(--text-primary); display:block; margin-bottom:0.25rem;">Delta
+                                Dental Premier</strong>
+                            <span
+                                style="font-size:0.75rem; color:var(--text-muted); display:block; margin-bottom:1rem;">Group
+                                ID: D-94821 | Co-Pay Plan</span>
+
+                            <!-- Coverage Bar -->
+                            <div style="margin-bottom:0.5rem;">
+                                <div
+                                    style="display:flex; justify-content:space-between; font-size:0.7rem; font-weight:700; margin-bottom:0.25rem;">
+                                    <span style="color:var(--color-success);">INSURANCE PORTION (40%)</span>
+                                    <span style="color:var(--color-primary);">PATIENT CO-PAY (60%)</span>
+                                </div>
+                                <div
+                                    style="height: 6px; background: rgba(var(--color-primary-rgb), 0.1); border-radius: var(--radius-full); overflow: hidden; display:flex;">
+                                    <div style="width: 40%; background: var(--color-success); height: 100%;"></div>
+                                    <div style="width: 60%; background: var(--color-primary); height: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Payment Profile Vault -->
+                        <div class="card billing-metric-card"
+                            style="margin: 0; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                                    <span
+                                        style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">SEC
+                                        Vault Profile</span>
+                                    <span
+                                        style="font-size:0.75rem; font-weight:700; padding:0.15rem 0.4rem; background:rgba(16, 185, 129, 0.08); border:1px solid rgba(16, 185, 129, 0.2); color:var(--color-success); border-radius:var(--radius-sm); text-transform:uppercase;">PCI-DSS</span>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+                                    <span style="font-size:1.8rem;">💳</span>
+                                    <div>
+                                        <strong
+                                            style="font-family:var(--font-heading); font-size:0.95rem; color:var(--text-primary); display:block;">Visa
+                                            ending in 4821</strong>
+                                        <span style="font-size:0.75rem; color:var(--text-secondary);">Expires: 08/2028 |
+                                            Cardholder: Jane Doe</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: right; margin-top: 1rem;">
+                                <button class="btn"
+                                    onclick="alert('Card updates are securely handled via our billing integration partner vault.')"
+                                    style="padding:0.4rem 0.85rem; font-size:0.75rem; border-color:var(--border-color); background:transparent; font-weight:600; color:var(--color-primary);">Update
+                                    Vault Card</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Statements Details Card -->
+                    <div class="table-container card" style="margin: 0; padding: 1.5rem;">
+                        <div
+                            style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--border-color); padding-bottom: 1rem;">
+                            <div>
+                                <h3
+                                    style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; font-family: var(--font-heading);">
+                                    Dental Statements & Invoices</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">Review
+                                    individual procedure statement details, insurance coverages, and billing history
+                                    logs.</p>
+                            </div>
+                        </div>
+                        <div class="db-table-wrapper"
+                            style="margin: 0; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden;">
+                            <table class="db-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background: rgba(var(--bg-secondary-rgb), 0.5);">
+                                        <th
+                                            style="padding: 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase;">
+                                            Statement ID / Code</th>
+                                        <th
+                                            style="padding: 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase;">
+                                            Procedure Description</th>
+                                        <th
+                                            style="padding: 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase;">
+                                            Due Date</th>
+                                        <th
+                                            style="padding: 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase;">
+                                            Co-Pay Breakdown</th>
+                                        <th
+                                            style="padding: 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase;">
+                                            Billing Status</th>
+                                        <th
+                                            style="padding: 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase;">
+                                            Patient Co-Pay</th>
+                                        <th
+                                            style="padding: 1rem; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase;">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-billing-body">
+                                    <!-- Dynamic invoices -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secured Checkout Modal Overlay -->
+                <div id="modal-checkout" class="db-modal"
+                    style="display: none; align-items: center; justify-content: center; background: rgba(6, 9, 19, 0.85); backdrop-filter: blur(12px); z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+                    <div class="modal-content"
+                        style="background: var(--bg-card); border: 2px solid var(--color-primary); box-shadow: var(--shadow-glow); border-radius: var(--radius-lg); width: 100%; max-width: 480px; padding: 2rem; position: relative;">
+                        <span onclick="closeCheckoutModal()"
+                            style="position: absolute; top: 1rem; right: 1.25rem; font-size: 1.25rem; color: var(--text-muted); cursor: pointer; transition: color var(--transition-fast);"
+                            class="modal-close-hover">✕</span>
+
+                        <h3
+                            style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-primary); border-bottom: 1px dashed var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🔒</span> Secured Balance Settlement
+                        </h3>
+
+                        <!-- Itemized Invoice Breakdown -->
+                        <div
+                            style="background: rgba(var(--bg-secondary-rgb), 0.5); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                            <span
+                                style="font-size:0.7rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:0.25rem;"
+                                id="checkout-invoice-id">STATEMENT ID: INV-2026-003</span>
+                            <strong
+                                style="font-size:0.9rem; color:var(--text-primary); display:block; margin-bottom:0.75rem;"
+                                id="checkout-invoice-desc">Porcelain Veneers - Arch Prep</strong>
+
+                            <div
+                                style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.35rem; color:var(--text-secondary);">
+                                <span>Procedural Base Cost:</span>
+                                <span id="checkout-base-cost">$0.00</span>
+                            </div>
+                            <div
+                                style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.5rem; color:var(--color-success); font-weight:600;">
+                                <span>Delta Dental Share (40%):</span>
+                                <span id="checkout-insurance-share">-$0.00</span>
+                            </div>
+                            <div
+                                style="display:flex; justify-content:space-between; font-size:0.95rem; font-weight:800; color:var(--color-primary); border-top:1px dashed var(--border-color); padding-top:0.5rem;">
+                                <span>Net Patient Co-Pay Due:</span>
+                                <span id="checkout-patient-due">$0.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Payment Form -->
+                        <form onsubmit="handleCheckoutSubmit(event)">
+                            <input type="hidden" id="checkout-invoice-id-val">
+
+                            <div style="margin-bottom: 1rem;">
+                                <label
+                                    style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-secondary); text-transform:uppercase; margin-bottom:0.35rem;">Cardholder
+                                    Name</label>
+                                <input type="text" value="Jane Doe" required
+                                    style="width:100%; padding:0.6rem 0.85rem; background:rgba(var(--bg-primary-rgb), 0.5); border:1px solid var(--border-color); border-radius:var(--radius-sm); color:var(--text-primary); font-size:0.85rem;">
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <label
+                                    style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-secondary); text-transform:uppercase; margin-bottom:0.35rem;">Credit
+                                    Card Number</label>
+                                <div style="position:relative; display:flex; align-items:center;">
+                                    <span style="position:absolute; left:10px; font-size:1.1rem;">💳</span>
+                                    <input type="text" value="4821 9900 1254 4821" required placeholder="Card Number"
+                                        style="width:100%; padding:0.6rem 0.85rem 0.6rem 2.25rem; background:rgba(var(--bg-primary-rgb), 0.5); border:1px solid var(--border-color); border-radius:var(--radius-sm); color:var(--text-primary); font-size:0.85rem;">
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
+                                <div>
+                                    <label
+                                        style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-secondary); text-transform:uppercase; margin-bottom:0.35rem;">Expiration</label>
+                                    <input type="text" value="08/2028" required placeholder="MM/YYYY"
+                                        style="width:100%; padding:0.6rem 0.85rem; background:rgba(var(--bg-primary-rgb), 0.5); border:1px solid var(--border-color); border-radius:var(--radius-sm); color:var(--text-primary); font-size:0.85rem; text-align:center;">
+                                </div>
+                                <div>
+                                    <label
+                                        style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-secondary); text-transform:uppercase; margin-bottom:0.35rem;">CVV
+                                        Code</label>
+                                    <input type="text" value="382" required placeholder="CVV"
+                                        style="width:100%; padding:0.6rem 0.85rem; background:rgba(var(--bg-primary-rgb), 0.5); border:1px solid var(--border-color); border-radius:var(--radius-sm); color:var(--text-primary); font-size:0.85rem; text-align:center;">
+                                </div>
+                            </div>
+
+                            <!-- Secure Badges -->
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; font-size:0.7rem; color:var(--text-muted); margin-bottom:1.5rem; border-top:1px solid var(--border-color); padding-top:0.75rem;">
+                                <span>🔐 SSL Secure 256-bit Connection</span>
+                                <span>🛡️ HIPAA Medical Vault</span>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div style="display:flex; justify-content:flex-end; gap:0.75rem;">
+                                <button type="button" onclick="closeCheckoutModal()" class="btn"
+                                    style="border-color:var(--border-color); background:transparent; color:var(--text-secondary); padding:0.6rem 1.25rem;">Cancel</button>
+                                <button type="submit" id="checkout-submit-btn" class="btn btn-primary"
+                                    style="padding:0.6rem 1.75rem; font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+                                    Authorize Payment <span>💸</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div> <!-- .db-content-container -->
+        </main>
+    </div>
+
+    <!-- Reschedule Modal Overlay -->
+    <div class="modal-overlay" id="modal-reschedule">
+        <div class="modal-content">
+            <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem; font-family: var(--font-heading);">
+                Reschedule Appointment</h3>
+            <form onsubmit="handleRescheduleSubmit(event)">
+                <input type="hidden" id="resch-appt-id">
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="resch-date">Pick New Date</label>
+                    <input type="date" id="resch-date" required style="width: 100%;">
+                </div>
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label for="resch-time">Pick New Time</label>
+                    <select id="resch-time" required
+                        style="width: 100%; padding:0.85rem 1.25rem; background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); color:var(--text-primary);">
+                        <option value="09:00 AM">09:00 AM</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="01:00 PM">01:00 PM</option>
+                        <option value="02:00 PM">02:00 PM</option>
+                        <option value="03:00 PM">03:00 PM</option>
+                        <option value="04:00 PM">04:00 PM</option>
+                    </select>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:0.75rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeRescheduleModal()">Abort</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 
-<style>
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-</style>
+    <script>
+        let staticReceptionMessages = [
+            { sender: 'reception', text: 'Hello Jane! Welcome to our clinic scheduler portal. How can we help you with your visits today?', time: '09:00 AM' },
+            { sender: 'client', text: 'Hi, I need to reschedule my followup whitening session on June 25 if possible.', time: '09:30 AM' },
+            { sender: 'reception', text: 'Certainly! I have a slot available at 2:00 PM on the same day. Would that suit your schedule?', time: '09:45 AM' },
+            { sender: 'client', text: 'Yes, that works perfectly. Thank you!', time: '10:02 AM' },
+            { sender: 'reception', text: 'Great, I\'ve updated the calendar files. You should see it in your appointments overview card.', time: '10:15 AM' }
+        ];
 
-<script>
-// ---- Tab Navigation ----
-document.querySelectorAll('.db-menu-link[data-tab]').forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const tab = link.getAttribute('data-tab');
-        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-        document.getElementById('tab-'+tab).style.display = 'block';
-        document.querySelectorAll('.db-menu-link').forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-    });
-});
+        let staticBillingMessages = [
+            { sender: 'billing', text: 'Hello Jane, this is the clinical accounts department. We have processed your insurance claim approval files for INV-2026-002.', time: '02:00 PM' },
+            { sender: 'client', text: 'Wonderful, thank you! What was the final co-pay amount?', time: '02:30 PM' },
+            { sender: 'billing', text: 'The co-pay was $2,400, which you have successfully settled. Your balance for that procedure is now $0.', time: '03:00 PM' }
+        ];
 
-// ---- Metrics ----
-function renderMetrics() {
-    const c = DentalStore.getCampaigns();
-    const leads = DentalStore.getLeads();
-    const totalSpend = c.googleSpend + c.fbSpend + c.seoSpend;
-    const totalLeads = leads.length;
-    const totalRev = leads.reduce((s,l) => s + (l.revenue||0), 0);
-    const cpl = totalLeads ? (totalSpend / totalLeads).toFixed(0) : 0;
-    const metrics = [
-        { label:'Total Leads', val: totalLeads, change:'+18%', dir:'up', icon:'👥' },
-        { label:'Marketing Spend', val: `$${totalSpend.toLocaleString()}`, change:'+5%', dir:'up', icon:'💰' },
-        { label:'Cost Per Lead', val: `$${cpl}`, change:'-8%', dir:'up', icon:'📊' },
-        { label:'Revenue Attributed', val: `$${totalRev.toLocaleString()}`, change:'+27%', dir:'up', icon:'📈' }
-    ];
-    const grid = document.getElementById('metrics-grid');
-    grid.innerHTML = metrics.map(m => `
-        <div class="metric-card">
-            <div class="metric-card-header"><span>${m.label}</span><span>${m.icon}</span></div>
-            <div class="metric-value">${m.val}</div>
-            <div class="metric-change ${m.dir}">▲ ${m.change} vs last month</div>
-        </div>
-    `).join('');
-}
+        let activeChatContact = 'doctor';
 
-// ---- Campaign Table ----
-function renderCampaigns() {
-    const c = DentalStore.getCampaigns();
-    const rows = [
-        { ch:'Google Ads', spend:c.googleSpend, leads:c.googleLeads, rev:c.googleRevenue },
-        { ch:'Facebook & Instagram', spend:c.fbSpend, leads:c.fbLeads, rev:c.fbRevenue },
-        { ch:'Organic SEO', spend:c.seoSpend, leads:c.seoLeads, rev:c.seoRevenue },
-    ];
-    document.getElementById('campaign-table-body').innerHTML = rows.map(r => {
-        const cpl = (r.spend/r.leads).toFixed(0);
-        const roi = (((r.rev - r.spend) / r.spend)*100).toFixed(0);
-        return `<tr>
-            <td><strong>${r.ch}</strong></td>
-            <td>$${r.spend.toLocaleString()}</td>
-            <td>${r.leads}</td>
-            <td>$${cpl}</td>
-            <td style="color:var(--color-primary);font-weight:600;">$${r.rev.toLocaleString()}</td>
-            <td><span class="status-badge booked">${roi}% ROI</span></td>
-        </tr>`;
-    }).join('');
-}
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
 
-// ---- Leads Table ----
-function renderLeads() {
-    const filter = document.getElementById('lead-filter')?.value || '';
-    let leads = DentalStore.getLeads();
-    if (filter) leads = leads.filter(l => l.status === filter);
-    document.getElementById('new-leads-badge').textContent = leads.filter(l=>l.status==='New').length;
-    document.getElementById('leads-table-body').innerHTML = leads.map(l => `
-        <tr>
-            <td><strong>${l.name}</strong><br><span style="font-size:0.8rem;color:var(--text-muted);">${l.email}</span></td>
-            <td>${l.treatment}</td>
-            <td>${l.source}</td>
-            <td>${l.date}</td>
-            <td><span class="status-badge ${l.status.toLowerCase()}">${l.status}</span></td>
-            <td style="color:var(--color-primary);font-weight:600;">$${(l.revenue||0).toLocaleString()}</td>
-            <td>
-                <select onchange="updateLeadStatus('${l.id}',this.value)" style="padding:0.35rem 0.5rem;border:1px solid var(--border-color);border-radius:var(--radius-sm);background:var(--bg-secondary);color:var(--text-primary);font-size:0.8rem;">
-                    <option ${l.status==='New'?'selected':''}>New</option>
-                    <option ${l.status==='Contacted'?'selected':''}>Contacted</option>
-                    <option ${l.status==='Booked'?'selected':''}>Booked</option>
-                    <option ${l.status==='Completed'?'selected':''}>Completed</option>
-                </select>
-            </td>
-        </tr>
-    `).join('');
-}
+        function switchDbTab(event, tabId) {
+            event.preventDefault();
 
-function updateLeadStatus(id, status) {
-    DentalStore.updateLeadStatus(id, status);
-    renderLeads();
-    renderMetrics();
-}
+            // Toggle sidebar active class
+            document.querySelectorAll('.db-menu-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
 
-// ---- Creatives ----
-let pendingCreativeId = null;
-function renderCreatives() {
-    const creatives = DentalStore.getCreatives();
-    document.getElementById('pending-badge').textContent = creatives.filter(c=>c.status==='pending').length;
-    document.getElementById('creatives-grid').innerHTML = creatives.map(c => `
-        <div class="creative-card">
-            <img src="${c.preview}" alt="${c.title}" class="creative-img" onerror="this.style.display='none'">
-            <div style="background:linear-gradient(135deg,rgba(var(--color-primary-rgb),0.1),rgba(var(--color-accent-rgb),0.08));height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;${c.preview?'display:none;':''}">🎨</div>
-            <div class="creative-content">
-                <span class="creative-tag">${c.type}</span>
-                <h4 style="font-size:1rem;font-weight:700;margin-bottom:0.5rem;">${c.title}</h4>
-                <p class="creative-desc">${c.notes}</p>
-                ${c.feedback ? `<div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-sm);padding:0.75rem;font-size:0.8rem;color:var(--color-danger);margin-bottom:1rem;"><strong>Feedback:</strong> ${c.feedback}</div>` : ''}
-                <div style="margin-bottom:1rem;"><span class="status-badge ${c.status}">${c.status.charAt(0).toUpperCase()+c.status.slice(1)}</span></div>
-                <div class="creative-actions">
-                    <button class="btn btn-primary" style="flex:1;padding:0.5rem;font-size:0.8rem;" onclick="approveCreative('${c.id}')">✓ Approve</button>
-                    <button class="btn btn-outline" style="flex:1;padding:0.5rem;font-size:0.8rem;" onclick="openFeedback('${c.id}')">✎ Revise</button>
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
+            // Show active tab div
+            document.querySelectorAll('.db-tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.getElementById(tabId).style.display = 'block';
 
-function approveCreative(id) {
-    DentalStore.updateCreativeStatus(id, 'approved');
-    renderCreatives();
-}
+            // Close mobile sidebar
+            document.getElementById('sidebar').classList.remove('open');
 
-function openFeedback(id) {
-    pendingCreativeId = id;
-    document.getElementById('feedback-modal').style.display = 'flex';
-}
+            // Scroll chat to bottom if switching to messages
+            if (tabId === 'tab-messages') {
+                const box = document.getElementById('chat-box');
+                box.scrollTop = box.scrollHeight;
+            }
+        }
 
-function closeFeedbackModal() {
-    document.getElementById('feedback-modal').style.display = 'none';
-    pendingCreativeId = null;
-}
+        // Load dynamic databases
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboardData();
+        });
 
-function submitFeedback() {
-    const text = document.getElementById('feedback-text').value;
-    if (text && pendingCreativeId) {
-        DentalStore.updateCreativeStatus(pendingCreativeId, 'rejected', text);
-        renderCreatives();
-        closeFeedbackModal();
-    }
-}
+        function loadDashboardData() {
+            if (!window.DentalStore) return;
+            const store = window.DentalStore;
 
-// ---- Invoices ----
-function renderInvoices() {
-    const invoices = DentalStore.getInvoices();
-    document.getElementById('invoices-table-body').innerHTML = invoices.map(inv => `
-        <tr>
-            <td><strong>${inv.id}</strong></td>
-            <td style="max-width:250px;">${inv.description}</td>
-            <td style="font-weight:700;">$${inv.amount.toLocaleString()}</td>
-            <td>${inv.due}</td>
-            <td><span class="status-badge ${inv.status}">${inv.status.charAt(0).toUpperCase()+inv.status.slice(1)}</span></td>
-            <td>
-                ${inv.status === 'pending' 
-                    ? `<button class="btn btn-primary" style="padding:0.4rem 0.9rem;font-size:0.8rem;" onclick="payInvoice('${inv.id}')">Pay Now</button>`
-                    : `<button class="btn btn-secondary" style="padding:0.4rem 0.9rem;font-size:0.8rem;">Download</button>`
+            // 1. Appointments list (Tactile Agenda List)
+            const appts = store.getAppointments();
+            const apptBody = document.getElementById('table-appointments-body');
+            apptBody.innerHTML = '';
+
+            let nextAppt = null;
+
+            appts.forEach(apt => {
+                if (apt.patientName === 'Jane Doe') {
+                    const item = document.createElement('div');
+                    item.className = 'agenda-item';
+
+                    let cancelBtn = '';
+                    let reschBtn = '';
+                    let statusLabel = `<span class="status-badge booked">Scheduled</span>`;
+
+                    if (apt.status === 'Scheduled') {
+                        cancelBtn = `<button onclick="cancelAppt('${apt.id}')" class="db-table-action-btn cancel">Cancel</button>`;
+                        reschBtn = `<button onclick="openRescheduleModal('${apt.id}')" class="db-table-action-btn reschedule">Reschedule</button>`;
+                        if (!nextAppt) nextAppt = apt; // Get the closest scheduled appt
+                    } else if (apt.status === 'Completed') {
+                        statusLabel = `<span class="status-badge completed">Completed</span>`;
+                    } else {
+                        statusLabel = `<span class="status-badge rejected">Cancelled</span>`;
+                    }
+
+                    // Format date (e.g. "2026-06-19" to Month abbreviation & Day number)
+                    const dateParts = apt.date.split('-');
+                    let monthText = 'DATE';
+                    let dayText = '??';
+                    if (dateParts.length === 3) {
+                        const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+                        const monthIndex = parseInt(dateParts[1], 10) - 1;
+                        if (monthIndex >= 0 && monthIndex < 12) {
+                            monthText = months[monthIndex];
+                        }
+                        dayText = parseInt(dateParts[2], 10);
+                    }
+
+                    // Map room locations and notes based on procedure
+                    let roomText = 'Room 101';
+                    let notesText = 'Standard diagnostic and care session.';
+                    if (apt.treatment.includes('Veneers')) {
+                        roomText = 'Suite 405 (Prosthodontics)';
+                        notesText = 'Preparation of teeth surface, enamel contouring, dental impression scans, and temporary shell bonding.';
+                    } else if (apt.treatment.includes('Whitening')) {
+                        roomText = 'Room 204 (Cosmetic Wing)';
+                        notesText = 'Post-op whitening evaluation, shade index mapping, laser whitening adjustments, and desensitizing treatment.';
+                    } else if (apt.treatment.includes('Implant')) {
+                        roomText = 'Suite 302 (Oral Surgery)';
+                        notesText = 'Surgical root extraction, bone grafting site preservation, clinical suture placements, and post-op instructions.';
+                    }
+
+                    let attachmentLink = '';
+                    if (apt.status === 'Completed' && apt.records) {
+                        attachmentLink = `
+                            <div class="agenda-attachment" style="margin-top: 0.65rem;">
+                                <a href="#" onclick="mockDownload('${apt.id}')" class="agenda-attachment-link" style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; display: inline-flex; align-items: center; gap: 0.35rem; transition: color var(--transition-fast);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:-1px;"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                                    Clinical attachment: ${apt.records}
+                                </a>
+                            </div>
+                        `;
+                    }
+
+                    item.innerHTML = `
+                        <div class="agenda-date-pill">
+                            <span class="agenda-month">${monthText}</span>
+                            <span class="agenda-day">${dayText}</span>
+                        </div>
+                        <div class="agenda-details">
+                            <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom: 0.3rem;">
+                                <h4 class="agenda-treatment" style="margin:0;">${apt.treatment}</h4>
+                                <span style="font-size:0.65rem; padding:0.15rem 0.45rem; background:rgba(var(--color-primary-rgb),0.08); border:1px solid rgba(var(--color-primary-rgb),0.15); border-radius:var(--radius-sm); color:var(--color-primary); font-weight:700; text-transform:uppercase;">${roomText}</span>
+                            </div>
+                            <p class="agenda-notes" style="font-size:0.8rem; color:var(--text-secondary); margin:0.35rem 0 0.5rem 0; line-height:1.4; max-width:850px;">${notesText}</p>
+                            <div class="agenda-meta">
+                                <span class="agenda-doctor">🧑‍⚕️ ${apt.doctorName}</span>
+                                <span class="agenda-time">⏰ ${apt.time}</span>
+                            </div>
+                            ${attachmentLink}
+                        </div>
+                        <div class="agenda-status-actions">
+                            ${statusLabel}
+                            <div class="agenda-actions-wrapper">
+                                ${reschBtn}
+                                ${cancelBtn}
+                            </div>
+                        </div>
+                    `;
+                    apptBody.appendChild(item);
                 }
-            </td>
-        </tr>
-    `).join('');
-}
+            });
 
-function payInvoice(id) {
-    DentalStore.updateInvoiceStatus(id, 'paid');
-    renderInvoices();
-}
+            // Update Next Appt metric indicators
+            const reschBtn = document.getElementById('metric-reschedule-btn');
+            if (nextAppt) {
+                document.getElementById('metric-next-appt').textContent = `${nextAppt.date}, ${nextAppt.time}`;
+                document.getElementById('metric-doctor').textContent = nextAppt.doctorName;
+                if (reschBtn) {
+                    reschBtn.style.display = 'inline-block';
+                    reschBtn.setAttribute('onclick', `openRescheduleModal('${nextAppt.id}')`);
+                }
+            } else {
+                document.getElementById('metric-next-appt').textContent = 'None Scheduled';
+                document.getElementById('metric-doctor').textContent = 'Book a session';
+                if (reschBtn) {
+                    reschBtn.style.display = 'none';
+                }
+            }
 
-// ---- Chat ----
-function renderChat() {
-    const messages = DentalStore.getMessages();
-    const container = document.getElementById('chat-messages');
-    container.innerHTML = messages.map(m => `
-        <div class="chat-bubble ${m.sender}">
-            ${m.text}
-            <div class="chat-bubble-time">${m.time}</div>
-        </div>
-    `).join('');
-    container.scrollTop = container.scrollHeight;
-}
+            // 2. Treatment plan steps progress lists
+            const steps = store.getTreatmentPlans();
+            const overviewStepsList = document.getElementById('overview-steps-list');
+            const pathwayNodes = document.getElementById('pathway-nodes');
+            const pathwayProgressFill = document.getElementById('pathway-progress-fill');
+            const pathwayTrackFill = document.getElementById('pathway-track-fill');
+            const pathwayPctText = document.getElementById('pathway-pct-text');
+            const pathwayPctSub = document.getElementById('pathway-pct-sub');
+            const clinicalLogsTimeline = document.getElementById('clinical-logs-timeline');
 
-function sendMessage() {
-    const input = document.getElementById('chat-input');
-    if (!input.value.trim()) return;
-    DentalStore.addMessage('client', input.value.trim());
-    input.value = '';
-    renderChat();
-    // Simulate agency reply
-    setTimeout(() => {
-        DentalStore.addMessage('agency', 'Thanks for your message! Your account manager will respond shortly. Average response time is under 2 hours.');
-        renderChat();
-    }, 1500);
-}
+            if (overviewStepsList) overviewStepsList.innerHTML = '';
 
-// ---- Init ----
-renderMetrics();
-renderCampaigns();
-renderLeads();
-renderCreatives();
-renderInvoices();
-renderChat();
-</script>
+            let completedCount = 0;
+            let activeStep = null;
+            let activeIndex = -1;
+
+            steps.forEach((step, index) => {
+                if (step.status === 'completed') {
+                    completedCount++;
+                } else if (step.status === 'active') {
+                    activeStep = step;
+                    activeIndex = index;
+                }
+            });
+
+            // Update Active Step Card dynamically
+            const activeStepEl = document.getElementById('metric-active-step');
+            const progressFillEl = document.querySelector('.progress-bar-fill');
+            const progressBadgeEl = document.querySelector('.progress-status-badge');
+            const progressPctEl = document.querySelector('.progress-pct');
+
+            if (activeStepEl) {
+                if (activeStep) {
+                    activeStepEl.textContent = activeStep.title;
+                    const stepNum = activeIndex + 1;
+                    const pct = Math.round((stepNum / steps.length) * 100);
+                    if (progressFillEl) progressFillEl.style.width = `${pct}%`;
+                    if (progressBadgeEl) progressBadgeEl.textContent = `STEP ${stepNum} OF ${steps.length}`;
+                    if (progressPctEl) progressPctEl.textContent = `${pct}%`;
+                } else {
+                    activeStepEl.textContent = 'None Active';
+                    if (progressFillEl) progressFillEl.style.width = '0%';
+                    if (progressBadgeEl) progressBadgeEl.textContent = 'NO ACTIVE PLAN';
+                    if (progressPctEl) progressPctEl.textContent = '0%';
+                }
+            }
+
+            // Populate Overview Stepper List (defensive support)
+            steps.forEach(step => {
+                let statusClass = '';
+                let badge = '';
+                if (step.status === 'completed') {
+                    statusClass = 'completed';
+                    badge = `<span class="step-status-tag completed">Done</span>`;
+                } else if (step.status === 'active') {
+                    statusClass = 'active';
+                    badge = `<span class="step-status-tag active">Current</span>`;
+                } else {
+                    badge = `<span class="step-status-tag pending">Next</span>`;
+                }
+
+                if (overviewStepsList) {
+                    const overviewItem = document.createElement('div');
+                    overviewItem.className = `plan-step-item ${statusClass}`;
+                    overviewItem.innerHTML = `
+                        <div class="plan-step-title" style="display:flex; justify-content:space-between; align-items:center;">
+                            <span>${step.title}</span>
+                            ${badge}
+                        </div>
+                        <div class="plan-step-desc">${step.desc}</div>
+                    `;
+                    overviewStepsList.appendChild(overviewItem);
+                }
+            });
+
+            // Render Pathways elements on Tab 2
+            if (steps && steps.length > 0) {
+                const totalSteps = steps.length;
+                let progressPercent = 0;
+                if (completedCount === totalSteps) {
+                    progressPercent = 100;
+                } else if (activeIndex !== -1) {
+                    progressPercent = Math.round((activeIndex / (totalSteps - 1)) * 100);
+                } else {
+                    progressPercent = Math.round((completedCount / totalSteps) * 100);
+                }
+
+                if (pathwayProgressFill) pathwayProgressFill.style.width = `${progressPercent}%`;
+                if (pathwayTrackFill) pathwayTrackFill.style.width = `${progressPercent}%`;
+                if (pathwayPctText) pathwayPctText.textContent = `${progressPercent}%`;
+                if (pathwayPctSub) pathwayPctSub.textContent = `${completedCount} of ${totalSteps} Steps Completed`;
+
+                // Render horizontal stepper nodes
+                if (pathwayNodes) {
+                    pathwayNodes.innerHTML = '';
+                    const shortTitles = {
+                        'Intraoral 3D Imaging Scan': '3D Scan',
+                        'Smile Design Approval': 'Design Approval',
+                        'Preparation & Temp Veneers': 'Teeth Prep',
+                        'Porcelain Veneers Bonding': 'Veneer Bonding',
+                        'Final Smile Follow-up Check': 'Follow-Up'
+                    };
+
+                    steps.forEach((step, idx) => {
+                        const nodeWrapper = document.createElement('div');
+                        nodeWrapper.className = `horizontal-step-node-wrapper ${step.status}`;
+
+                        let displayContent = idx + 1;
+                        if (step.status === 'completed') {
+                            displayContent = '✓';
+                        }
+
+                        const labelText = shortTitles[step.title] || step.title;
+                        nodeWrapper.innerHTML = `
+                            <div class="horizontal-step-circle">
+                                <span>${displayContent}</span>
+                            </div>
+                            <div class="horizontal-step-label">${labelText}</div>
+                        `;
+                        pathwayNodes.appendChild(nodeWrapper);
+                    });
+                }
+
+                // Render vertical timeline detailed logs
+                if (clinicalLogsTimeline) {
+                    clinicalLogsTimeline.innerHTML = '';
+
+                    const clinicalMetadata = {
+                        'step-1': {
+                            doctor: 'Dr. Evelyn Vance, DDS',
+                            specialty: 'Cosmetic Dentist Specialist',
+                            room: 'Suite 204',
+                            duration: '45 mins',
+                            date: 'June 10, 2026',
+                            category: 'Diagnostics',
+                            verification: 'Digital Scan Certified',
+                            notes: 'High-resolution intraoral scan performed using iTero Element 5D. 3D digital impressions successfully sent to cosmetic laboratory. Patient bite parameters and tooth shade mapping (A1-VITA) verified.',
+                            action: { text: 'Download Scan Report (PDF)', file: 'iTero_3DScan_JaneDoe.pdf' }
+                        },
+                        'step-2': {
+                            doctor: 'Dr. Evelyn Vance, DDS',
+                            specialty: 'Cosmetic Dentist Specialist',
+                            room: 'Suite 204',
+                            duration: '30 mins',
+                            date: 'June 15, 2026',
+                            category: 'Consultation',
+                            verification: 'Co-Signed with Laboratory',
+                            notes: '3D facial mockup and dental wax-up model approved by client. Custom smile parameters finalized: natural margin contours, moderate translucency, and customized lateral incisor dominance.',
+                            action: { text: 'View Approved Smile Design (PDF)', file: 'Approved_SmileDesign_JaneDoe.pdf' }
+                        },
+                        'step-3': {
+                            doctor: 'Dr. Evelyn Vance, DDS',
+                            specialty: 'Cosmetic Dentist Specialist',
+                            room: 'Suite 302',
+                            duration: '120 mins',
+                            date: 'June 19, 2026',
+                            category: 'Clinical Procedure',
+                            verification: 'Verified by Dr. Vance',
+                            notes: 'Preparation of 8 upper teeth for custom porcelain veneers under local anesthesia. High-precision enamel reduction. Temp acrylic veneers fabricated and bonded temporarily. Mild post-prep sensitivity expected.',
+                            action: { text: 'Veneer Temporary Care Guide', tab: 'faq' }
+                        },
+                        'step-4': {
+                            doctor: 'Dr. Evelyn Vance, DDS',
+                            specialty: 'Cosmetic Dentist Specialist',
+                            room: 'Suite 302',
+                            duration: '90 mins',
+                            date: 'June 25, 2026',
+                            category: 'Bonding Placement',
+                            verification: 'Pending Completion',
+                            notes: 'Removal of temporaries, dental cleaning, try-in paste shade check (Translucent), and final porcelain bonding. High-intensity light curing and margin polishing. Bite alignment audit.',
+                            action: { text: 'View Pre-Op Preparation Check', tab: 'faq' }
+                        },
+                        'step-5': {
+                            doctor: 'Dr. Evelyn Vance, DDS',
+                            specialty: 'Cosmetic Dentist Specialist',
+                            room: 'Suite 204',
+                            duration: '30 mins',
+                            date: 'July 5, 2026',
+                            category: 'Follow-up Audit',
+                            verification: 'Pending Completion',
+                            notes: 'Bite adjustment, margin health audit, and post-treatment photography. Long-term care overview and custom nightguard fitting.',
+                            action: null
+                        }
+                    };
+
+                    steps.forEach((step, idx) => {
+                        const itemWrapper = document.createElement('div');
+                        itemWrapper.className = `timeline-item-wrapper ${step.status}`;
+
+                        const meta = clinicalMetadata[step.id] || {
+                            doctor: 'Dr. Evelyn Vance, DDS',
+                            specialty: 'Cosmetic Dentist Specialist',
+                            room: 'Suite 204',
+                            duration: '30 mins',
+                            date: 'Scheduled',
+                            category: 'Clinical Step',
+                            verification: 'Pending Signature',
+                            notes: step.desc,
+                            action: null
+                        };
+
+                        let statusBadgeClass = 'pending';
+                        let statusText = 'Next';
+                        if (step.status === 'completed') {
+                            statusBadgeClass = 'completed';
+                            statusText = 'Completed';
+                        } else if (step.status === 'active') {
+                            statusBadgeClass = 'active';
+                            statusText = 'Active';
+                        }
+
+                        let sigMarkup = '';
+                        if (step.status === 'completed') {
+                            sigMarkup = `
+                                <div class="timeline-signature verified">
+                                    <span>🛡️</span> ${meta.verification}
+                                </div>
+                            `;
+                        } else {
+                            sigMarkup = `
+                                <div class="timeline-signature">
+                                    <span>⏳</span> ${meta.verification}
+                                </div>
+                            `;
+                        }
+
+                        let actionMarkup = '';
+                        if (meta.action) {
+                            if (meta.action.file) {
+                                actionMarkup = `
+                                    <a href="#" onclick="mockDownload('${meta.action.file}')" class="timeline-action-btn">
+                                        <span>📥</span> ${meta.action.text}
+                                    </a>
+                                `;
+                            } else if (meta.action.tab === 'faq') {
+                                actionMarkup = `
+                                    <button onclick="switchDbTab(event, 'tab-overview')" class="timeline-action-btn">
+                                        <span>💡</span> ${meta.action.text}
+                                    </button>
+                                `;
+                            }
+                        }
+
+                        itemWrapper.innerHTML = `
+                            <div class="timeline-node-dot">
+                                <span>✓</span>
+                            </div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <h4 class="timeline-card-title">${step.title}</h4>
+                                    <span class="timeline-status-badge ${statusBadgeClass}">${statusText}</span>
+                                </div>
+                                <div class="timeline-card-meta">
+                                    <span>📅 ${meta.date}</span>
+                                    <span>🏥 ${meta.room}</span>
+                                    <span>⏱️ ${meta.duration}</span>
+                                    <span>🏷️ ${meta.category}</span>
+                                </div>
+                                <p class="timeline-card-description">${meta.notes}</p>
+                                <div class="timeline-card-footer">
+                                    <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.8rem; color:var(--text-secondary);">
+                                        <span>🧑‍⚕️</span>
+                                        <div>
+                                            <strong style="display:block; line-height:1.2; color:var(--text-primary);">${meta.doctor}</strong>
+                                            <span style="font-size:0.7rem; color:var(--text-muted);">${meta.specialty}</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                                        ${sigMarkup}
+                                        ${actionMarkup}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        clinicalLogsTimeline.appendChild(itemWrapper);
+                    });
+                }
+            }
+
+            // 3. Billing Statements Invoices
+            const bills = store.getInvoices();
+            const billingBody = document.getElementById('table-billing-body');
+            const outstandingBalanceEl = document.getElementById('billing-outstanding-balance');
+
+            if (billingBody) billingBody.innerHTML = '';
+
+            let totalDue = 0;
+
+            const adaCodes = {
+                'INV-2026-003': 'ADA D2962',
+                'INV-2026-002': 'ADA D6010',
+                'INV-2026-001': 'ADA D0150'
+            };
+
+            bills.forEach(bill => {
+                const row = document.createElement('tr');
+                let statusLabel = `<span class="status-badge pending">Pending</span>`;
+                let actionMarkup = `<a href="#" onclick="mockDownload('${bill.id}')" class="billing-action-link">Receipt PDF</a>`;
+
+                // Calculate breakdowns
+                const insuranceShare = Math.round(bill.amount * 0.40);
+                const patientShare = bill.amount - insuranceShare;
+                const code = adaCodes[bill.id] || 'ADA D9999';
+
+                if (bill.status === 'paid') {
+                    statusLabel = `<span class="status-badge paid" style="font-weight:700;">✓ Paid</span>`;
+                    actionMarkup = `
+                        <div style="display:flex; gap:0.5rem; justify-content:flex-end;">
+                            <a href="#" onclick="mockDownload('${bill.id}')" class="billing-action-link" style="padding: 0.35rem 0.6rem; font-size: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: rgba(var(--color-primary-rgb),0.05); color:var(--color-primary); text-decoration:none; font-weight:700; transition:all var(--transition-fast);">Receipt PDF</a>
+                        </div>
+                    `;
+                } else {
+                    totalDue += bill.amount;
+                    statusLabel = `<span class="status-badge pending" style="font-weight:700; color:var(--color-accent); border:1px solid rgba(var(--color-accent-rgb),0.3); background:rgba(var(--color-accent-rgb),0.08);">● Pending</span>`;
+                    actionMarkup = `
+                        <div style="display:flex; gap:0.5rem; justify-content:flex-end; align-items:center;">
+                            <button onclick="openCheckoutModal('${bill.id}', ${bill.amount}, '${bill.description.replace(/'/g, "\\'")}')" style="padding: 0.35rem 0.85rem; font-size: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--color-primary); background: var(--color-primary); color: #060913; font-weight: 800; cursor:pointer; transition:all var(--transition-fast);">Settle Balance</button>
+                            <a href="#" onclick="mockDownload('${bill.id}')" style="font-size:0.75rem; color:var(--text-secondary); text-decoration:underline; margin-left:0.25rem;">Statement</a>
+                        </div>
+                    `;
+                }
+
+                row.innerHTML = `
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--text-primary); font-family: var(--font-heading);">
+                        ${bill.id}
+                        <span style="display:block; font-size:0.65rem; color:var(--text-muted); font-family:var(--font-primary); font-weight:600; margin-top:0.15rem;">${code}</span>
+                    </td>
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-primary); text-align: left;">
+                        ${bill.description}
+                    </td>
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-secondary);">
+                        ${bill.due}
+                    </td>
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-secondary); line-height:1.4;">
+                        <span style="display:block;"><span style="color:var(--color-success); font-weight:600;">$${insuranceShare.toLocaleString()}</span> (INS 40%)</span>
+                        <span style="display:block;"><span style="color:var(--color-primary); font-weight:600;">$${patientShare.toLocaleString()}</span> (PAT 60%)</span>
+                    </td>
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                        ${statusLabel}
+                    </td>
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 800; color: var(--color-primary); font-family: var(--font-heading); font-size:1.05rem;">
+                        $${bill.amount.toLocaleString()}
+                    </td>
+                    <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); text-align: right;">
+                        ${actionMarkup}
+                    </td>
+                `;
+                if (billingBody) billingBody.appendChild(row);
+            });
+
+            if (outstandingBalanceEl) outstandingBalanceEl.textContent = `$${totalDue.toLocaleString()}`;
+            document.getElementById('metric-due-billing').textContent = `$${totalDue.toLocaleString()}`;
+
+            // 4. Chat Messages Widget & Sidebar Snippets
+            const chatBox = document.getElementById('chat-box');
+            if (chatBox) {
+                chatBox.innerHTML = '';
+                let currentThread = [];
+
+                if (activeChatContact === 'doctor') {
+                    currentThread = store.getMessages();
+                } else if (activeChatContact === 'reception') {
+                    currentThread = staticReceptionMessages;
+                } else if (activeChatContact === 'billing') {
+                    currentThread = staticBillingMessages;
+                }
+
+                currentThread.forEach(msg => {
+                    const bubble = document.createElement('div');
+                    bubble.className = `chat-bubble ${msg.sender === 'client' ? 'client' : 'agency'}`;
+
+                    let attachmentHTML = '';
+                    if (msg.attachment) {
+                        attachmentHTML = `
+                            <div class="chat-bubble-attachment" style="margin-top:0.5rem; padding:0.5rem; background:rgba(255,255,255,0.06); border-radius:var(--radius-sm); border:1px solid rgba(var(--color-primary-rgb), 0.2); display:flex; align-items:center; gap:0.5rem;">
+                                <span style="font-size:1.2rem;">📄</span>
+                                <div style="min-width: 0; flex-grow: 1; text-align:left;">
+                                    <span style="font-size:0.75rem; font-weight:600; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-primary);">${msg.attachment.name}</span>
+                                    <span style="font-size:0.65rem; color:var(--text-muted); display:block;">${msg.attachment.size}</span>
+                                </div>
+                                <span style="color:var(--color-success); font-size:0.8rem; font-weight:700;">✓ Ready</span>
+                            </div>
+                        `;
+                    }
+
+                    bubble.innerHTML = `
+                        <div>${msg.text}</div>
+                        ${attachmentHTML}
+                        <div class="chat-bubble-time">${msg.time} <span style="margin-left:2px; opacity:0.8; color:var(--color-primary);">✓✓</span></div>
+                    `;
+                    chatBox.appendChild(bubble);
+                });
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            // Sync sidebar last messages snippet
+            const drMsgs = store.getMessages();
+            const doctorLastMsg = drMsgs[drMsgs.length - 1];
+            const doctorLastPreview = document.getElementById('doctor-last-preview');
+            const doctorLastTime = document.getElementById('doctor-last-time');
+            if (doctorLastPreview && doctorLastMsg) doctorLastPreview.textContent = doctorLastMsg.text;
+            if (doctorLastTime && doctorLastMsg) doctorLastTime.textContent = doctorLastMsg.time;
+
+            // Render quick replies chips
+            renderQuickReplies();
+        }
+
+        // Cancel Appointment Trigger
+        function cancelAppt(id) {
+            if (confirm("Are you sure you want to cancel this appointment session?")) {
+                window.DentalStore.updateAppointmentStatus(id, 'Cancelled');
+                loadDashboardData();
+            }
+        }
+
+        // Reschedule modal actions
+        function openRescheduleModal(id) {
+            document.getElementById('resch-appt-id').value = id;
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('resch-date').value = tomorrow.toISOString().split('T')[0];
+            document.getElementById('modal-reschedule').style.display = 'flex';
+        }
+
+        function closeRescheduleModal() {
+            document.getElementById('modal-reschedule').style.display = 'none';
+        }
+
+        function handleRescheduleSubmit(event) {
+            event.preventDefault();
+            const id = document.getElementById('resch-appt-id').value;
+            const newDate = document.getElementById('resch-date').value;
+            const newTime = document.getElementById('resch-time').value;
+
+            if (window.DentalStore) {
+                const appts = window.DentalStore.getAppointments();
+                const index = appts.findIndex(a => a.id === id);
+                if (index !== -1) {
+                    appts[index].date = newDate;
+                    appts[index].time = newTime;
+                    localStorage.setItem('dentscale_appointments', JSON.stringify(appts));
+                }
+            }
+
+            closeRescheduleModal();
+            loadDashboardData();
+        }
+
+        // Billing Checkout Actions
+        function openCheckoutModal(id, amount, description) {
+            document.getElementById('checkout-invoice-id').textContent = `STATEMENT ID: ${id}`;
+            document.getElementById('checkout-invoice-id-val').value = id;
+            document.getElementById('checkout-invoice-desc').textContent = description;
+
+            const baseCost = Math.round(amount / 0.6); // since amount is patient portion (60%)
+            const insuranceShare = baseCost - amount;
+
+            document.getElementById('checkout-base-cost').textContent = `$${baseCost.toLocaleString()}`;
+            document.getElementById('checkout-insurance-share').textContent = `-$${insuranceShare.toLocaleString()}`;
+            document.getElementById('checkout-patient-due').textContent = `$${amount.toLocaleString()}`;
+
+            document.getElementById('modal-checkout').style.display = 'flex';
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('modal-checkout').style.display = 'none';
+        }
+
+        function handleCheckoutSubmit(event) {
+            event.preventDefault();
+            const id = document.getElementById('checkout-invoice-id-val').value;
+            const submitBtn = document.getElementById('checkout-submit-btn');
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `Processing Secure Auth... <span class="spinner" style="display:inline-block; width:12px; height:12px; border:2px solid #060913; border-top-color:transparent; border-radius:50%; animation:checkout-spin 0.6s infinite linear;"></span>`;
+            }
+
+            // Simulate secure auth delay
+            setTimeout(() => {
+                if (window.DentalStore) {
+                    window.DentalStore.updateInvoiceStatus(id, 'paid');
+                }
+
+                closeCheckoutModal();
+                loadDashboardData();
+
+                // Re-enable button
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `Authorize Payment <span>💸</span>`;
+                }
+
+                alert("Authorization Successful! Co-Pay Settle Completed. Thank you, Jane.");
+            }, 1800);
+        }
+
+        // --- NEW CHAT SYSTEM HELPERS ---
+
+        // Contact selection
+        function selectChatContact(contactId) {
+            activeChatContact = contactId;
+
+            // Toggle sidebar active highlights
+            document.querySelectorAll('#chat-contacts-list .contact-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            const selectedItem = document.getElementById(`contact-${contactId}`);
+            if (selectedItem) selectedItem.classList.add('active');
+
+            // Header state updates
+            const avatar = document.getElementById('active-chat-avatar');
+            const avatarContainer = document.getElementById('active-chat-avatar-container');
+            const nameEl = document.getElementById('active-chat-name');
+            const statusDot = document.getElementById('active-chat-status-dot');
+            const statusText = document.getElementById('active-chat-status-text');
+            const textInput = document.getElementById('chat-text-input');
+
+            if (contactId === 'doctor') {
+                if (avatar) {
+                    avatar.textContent = 'EV';
+                    avatar.style.background = 'var(--color-primary)';
+                    avatar.style.color = '#060913';
+                }
+                if (statusDot) {
+                    statusDot.className = 'status-dot online';
+                    statusDot.style.backgroundColor = 'var(--color-success)';
+                }
+                if (nameEl) nameEl.textContent = 'Dr. Evelyn Vance, DDS';
+                if (statusText) statusText.innerHTML = '<span class="pulse-dot-green">●</span> Online & active';
+                if (textInput) textInput.placeholder = 'Type a message to Dr. Vance...';
+            } else if (contactId === 'reception') {
+                if (avatar) {
+                    avatar.textContent = 'FD';
+                    avatar.style.background = 'rgba(var(--color-primary-rgb), 0.15)';
+                    avatar.style.color = 'var(--color-primary)';
+                }
+                if (statusDot) {
+                    statusDot.className = 'status-dot away';
+                    statusDot.style.backgroundColor = 'var(--color-accent)';
+                }
+                if (nameEl) nameEl.textContent = 'Clinic Front Desk';
+                if (statusText) statusText.innerHTML = '● Away (Replies in 15m)';
+                if (textInput) textInput.placeholder = 'Type a message to Clinic Front Desk...';
+            } else if (contactId === 'billing') {
+                if (avatar) {
+                    avatar.textContent = 'BD';
+                    avatar.style.background = 'rgba(var(--color-success-rgb, 16, 185, 129), 0.15)';
+                    avatar.style.color = 'var(--color-success)';
+                }
+                if (statusDot) {
+                    statusDot.className = 'status-dot offline';
+                    statusDot.style.backgroundColor = 'var(--text-muted)';
+                }
+                if (nameEl) nameEl.textContent = 'Care Billing Desk';
+                if (statusText) statusText.innerHTML = '● Offline (Active 8am - 5pm)';
+                if (textInput) textInput.placeholder = 'Type a message to Care Billing Desk...';
+            }
+
+            loadDashboardData();
+        }
+
+        // Quick replies chips rendering
+        function renderQuickReplies() {
+            const repliesContainer = document.getElementById('chat-quick-replies-container');
+            if (!repliesContainer) return;
+            repliesContainer.innerHTML = '';
+
+            const quickReplies = {
+                'doctor': [
+                    'Confirming appointment',
+                    'Temporary veneer bite issue',
+                    'Tooth shade feedback',
+                    'Prep soreness advice'
+                ],
+                'reception': [
+                    'Request to reschedule followup',
+                    'Confirm suite room number',
+                    'Specialist list consultation',
+                    'Clinic emergency hours'
+                ],
+                'billing': [
+                    'INV-2026-003 status query',
+                    'Request itemized invoice PDF',
+                    'Insurance claims verification',
+                    'How to update credit card'
+                ]
+            };
+
+            const chips = quickReplies[activeChatContact] || [];
+            chips.forEach(text => {
+                const chip = document.createElement('div');
+                chip.className = 'quick-reply-chip';
+                chip.textContent = text;
+                chip.setAttribute('onclick', `useQuickReply('${text.replace(/'/g, "\\'")}')`);
+                repliesContainer.appendChild(chip);
+            });
+        }
+
+        function useQuickReply(text) {
+            const input = document.getElementById('chat-text-input');
+            if (input) {
+                input.value = text;
+                input.focus();
+            }
+        }
+
+        // Sidebar filtering
+        function searchChatContacts(inputEl) {
+            const query = inputEl.value.toLowerCase().trim();
+            const contacts = document.querySelectorAll('#chat-contacts-list .contact-item');
+            contacts.forEach(contact => {
+                const name = contact.querySelector('strong').textContent.toLowerCase();
+                const role = contact.querySelector('span').textContent.toLowerCase();
+                if (name.includes(query) || role.includes(query)) {
+                    contact.style.display = 'flex';
+                } else {
+                    contact.style.display = 'none';
+                }
+            });
+        }
+
+        // Mock upload attachment
+        function triggerMockUpload() {
+            const fileName = prompt("Enter file name to upload clinical record / photo:", "Veneers_Bite_Photo.jpg");
+            if (!fileName) return;
+
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const mockFile = {
+                name: fileName,
+                size: "2.4 MB"
+            };
+
+            if (activeChatContact === 'doctor') {
+                if (window.DentalStore) {
+                    const messages = store.getMessages();
+                    messages.push({
+                        id: `msg-${Date.now()}`,
+                        sender: 'client',
+                        text: `Attached clinical upload: ${fileName}`,
+                        attachment: mockFile,
+                        time: time
+                    });
+                    localStorage.setItem('dentscale_messages', JSON.stringify(messages));
+                }
+            } else if (activeChatContact === 'reception') {
+                staticReceptionMessages.push({
+                    sender: 'client',
+                    text: `Attached clinical upload: ${fileName}`,
+                    attachment: mockFile,
+                    time: time
+                });
+            } else if (activeChatContact === 'billing') {
+                staticBillingMessages.push({
+                    sender: 'client',
+                    text: `Attached billing document: ${fileName}`,
+                    attachment: mockFile,
+                    time: time
+                });
+            }
+
+            loadDashboardData();
+        }
+
+        // Secure Telehealth Calling Simulator
+        function triggerMockCall(type) {
+            const modal = document.getElementById('modal-telehealth');
+            const title = document.getElementById('call-title');
+            const subtitle = document.getElementById('call-subtitle');
+            const avatar = document.getElementById('call-avatar');
+
+            if (!modal) return;
+
+            // Set content based on active contact
+            let name = 'Dr. Evelyn Vance, DDS';
+            let role = 'Cosmetic Secure Line';
+            let initials = 'EV';
+
+            if (activeChatContact === 'reception') {
+                name = 'Clinic Front Desk';
+                role = 'Administration SEC Line';
+                initials = 'FD';
+            } else if (activeChatContact === 'billing') {
+                name = 'Care Billing Desk';
+                role = 'Finance SEC Line';
+                initials = 'BD';
+            }
+
+            if (avatar) avatar.textContent = initials;
+            if (subtitle) subtitle.textContent = role;
+            if (title) title.textContent = `Dialing secure ${type} consultation...`;
+
+            modal.style.display = 'flex';
+
+            // Simulate pickup connection check
+            setTimeout(() => {
+                if (modal.style.display === 'flex') {
+                    if (title) title.textContent = `Securing Line to ${name}...`;
+                    setTimeout(() => {
+                        if (modal.style.display === 'flex') {
+                            if (title) title.textContent = `Consultation Live (00:01)`;
+                            // Start a mock timer
+                            let seconds = 1;
+                            window.callTimerInterval = setInterval(() => {
+                                seconds++;
+                                const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+                                const secs = (seconds % 60).toString().padStart(2, '0');
+                                if (title && modal.style.display === 'flex') {
+                                    title.textContent = `Consultation Live (${mins}:${secs})`;
+                                }
+                            }, 1000);
+                        }
+                    }, 1500);
+                }
+            }, 2000);
+        }
+
+        function endTelehealthCall() {
+            const modal = document.getElementById('modal-telehealth');
+            if (modal) modal.style.display = 'none';
+            if (window.callTimerInterval) {
+                clearInterval(window.callTimerInterval);
+            }
+        }
+
+        // Clinic Info Modal helpers
+        function openClinicHoursModal() {
+            const modal = document.getElementById('modal-clinic-info');
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closeClinicHoursModal() {
+            const modal = document.getElementById('modal-clinic-info');
+            if (modal) modal.style.display = 'none';
+        }
+
+        // Chat Message Submission
+        function handleSendChat(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-text-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            if (activeChatContact === 'doctor') {
+                if (window.DentalStore) {
+                    window.DentalStore.addMessage('client', text);
+
+                    const indicator = document.getElementById('chat-typing-indicator');
+                    const typingName = document.getElementById('typing-doctor-name');
+                    if (typingName) typingName.textContent = 'Dr. Evelyn Vance';
+                    if (indicator) indicator.style.display = 'flex';
+
+                    setTimeout(() => {
+                        window.DentalStore.addMessage('agency', "Thank you, Jane. I have reviewed your treatment files. We are on schedule for your placement session this Friday.");
+                        if (indicator) indicator.style.display = 'none';
+                        loadDashboardData();
+                    }, 2000);
+                }
+            } else if (activeChatContact === 'reception') {
+                staticReceptionMessages.push({ sender: 'client', text: text, time: time });
+
+                const indicator = document.getElementById('chat-typing-indicator');
+                const typingName = document.getElementById('typing-doctor-name');
+                if (typingName) typingName.textContent = 'Clinic Reception';
+                if (indicator) indicator.style.display = 'flex';
+
+                setTimeout(() => {
+                    staticReceptionMessages.push({
+                        sender: 'reception',
+                        text: "Thank you, Jane. I have logged this request in our scheduling calendar files. An assistant will confirm shortly.",
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    });
+                    if (indicator) indicator.style.display = 'none';
+                    loadDashboardData();
+                }, 2000);
+            } else if (activeChatContact === 'billing') {
+                staticBillingMessages.push({ sender: 'client', text: text, time: time });
+
+                const indicator = document.getElementById('chat-typing-indicator');
+                const typingName = document.getElementById('typing-doctor-name');
+                if (typingName) typingName.textContent = 'Accounts Specialist';
+                if (indicator) indicator.style.display = 'flex';
+
+                setTimeout(() => {
+                    staticBillingMessages.push({
+                        sender: 'billing',
+                        text: "Thank you for reaching out. We have noted your request and forwarded it to our medical billing coordinators. We will follow up shortly.",
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    });
+                    if (indicator) indicator.style.display = 'none';
+                    loadDashboardData();
+                }, 2000);
+            }
+
+            input.value = '';
+            loadDashboardData();
+        }
+
+        function mockDownload(id) {
+            alert(`Initiating download for Dental Statement ${id}... PDF download complete!`);
+        }
+    </script>
 </body>
+
 </html>

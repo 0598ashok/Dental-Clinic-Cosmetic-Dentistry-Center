@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vance Cosmetic Dentistry — Split Smile Transform Design</title>
+    <meta name="description"
+        content="Chicago's premier cosmetic dentistry center. Expert porcelain veneers, dental implants, Invisalign aligners, and dental makeovers with Dr. Evelyn Vance, DDS.">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+    <script src="assets/js/store.js" defer></script>
+    <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        body {
+            overflow-x: hidden;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* 1. Cinematic Hero */
+        .glass-hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--bg-primary);
+            overflow: hidden;
+            padding: 90px 20px 40px;
+        }
+
+        .glass-hero-content {
+            z-index: 10;
+            position: relative;
+            max-width: 800px;
+        }
+
+        .glass-hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .glass-hero h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text-primary);
+            display: block;
+        }
+
+        .glass-orb {
+            position: absolute;
+            width: clamp(150px, 30vw, 400px);
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(50px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            top: -5%;
+            left: -5%;
+            background: linear-gradient(135deg, var(--color-primary), transparent);
+            animation: floatOrb 20s infinite alternate;
+        }
+
+        .orb-2 {
+            bottom: -5%;
+            right: -5%;
+            background: linear-gradient(135deg, var(--color-accent), transparent);
+            animation: floatOrb 25s infinite alternate-reverse;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(30px) scale(1.05);
+            }
+        }
+
+        /* 2. Horizontal Marquee */
+        .editorial-marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 1.25rem 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .marquee-inner {
+            display: inline-flex;
+            animation: scrollMarquee 25s linear infinite;
+        }
+
+        .marquee-txt {
+            padding: 0 2rem;
+            display: inline-block;
+        }
+
+        @keyframes scrollMarquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* 3. Asymmetric Mosaic */
+        .mosaic-section {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .mosaic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-auto-rows: 280px;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .mosaic-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .mosaic-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all var(--transition-slow);
+            filter: grayscale(40%);
+        }
+
+        .mosaic-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .mosaic-caption {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            background: rgba(var(--bg-primary-rgb), 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 5;
+            color: var(--text-primary);
+        }
+
+        [dir="rtl"] .mosaic-caption {
+            left: auto;
+            right: 1.5rem;
+        }
+
+        .mosaic-item.tall {
+            grid-row: span 2;
+        }
+
+        .mosaic-item.wide {
+            grid-column: span 2;
+        }
+
+        /* 4. Sticky Scroll Process */
+        .process-wall {
+            display: flex;
+            align-items: flex-start;
+            gap: 4rem;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .process-text {
+            flex: 1;
+            position: sticky;
+            top: 120px;
+        }
+
+        .process-visuals {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .pv-card {
+            height: 320px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .pv-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .pv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 70%);
+            z-index: 1;
+        }
+
+        .pv-card-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+        }
+
+        /* 5. List-Style Interactive Menu */
+        .list-menu-section {
+            padding: 6rem 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .list-menu-section-title {
+            font-size: clamp(2rem, 3.8vw, 2.5rem);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            line-height: 1.15;
+            font-family: var(--font-heading);
+            font-weight: 800;
+        }
+
+        .list-menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+        }
+
+        .list-menu-item:hover {
+            padding-left: 2rem;
+            background: rgba(var(--color-primary-rgb), 0.03);
+            border-bottom-color: var(--color-primary);
+        }
+
+        [dir="rtl"] .list-menu-item:hover {
+            padding-left: 1rem;
+            padding-right: 2rem;
+        }
+
+        .list-menu-item h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.25rem;
+            line-height: 1.3;
+            color: var(--text-primary);
+            transition: color var(--transition-fast);
+        }
+
+        .list-menu-item:hover h3 {
+            color: var(--color-primary);
+        }
+
+        .list-menu-item p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .list-menu-item .price-tag {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--color-accent);
+            font-family: var(--font-heading);
+        }
+
+        /* 6. Giant Pulse Stats */
+        .giant-stats {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: space-around;
+            background: var(--bg-primary);
+        }
+
+        .giant-num {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1;
+            font-family: var(--font-heading);
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text-primary);
+            opacity: 0.3;
+            transition: all var(--transition-normal);
+            cursor: default;
+        }
+
+        .giant-num:hover {
+            -webkit-text-stroke: 1.5px var(--color-primary);
+            color: var(--color-primary);
+            opacity: 1;
+            text-shadow: var(--shadow-glow);
+        }
+
+        .giant-num-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-weight: 700;
+        }
+
+        /* 7. Singular Voice */
+        .singular-voice {
+            padding: 8rem 2rem;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .voice-text {
+            font-size: clamp(1.25rem, 2.8vw, 2rem);
+            line-height: 1.5;
+            text-align: center;
+            max-width: 850px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .voice-author {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-primary);
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            display: block;
+            text-align: center;
+        }
+
+        /* 8. Booking Portal card */
+        .booking-portal-card {
+            background: rgba(var(--bg-card-rgb), 0.75);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
+        }
+
+        .booking-portal-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        @media (max-width: 1024px) {
+            .mosaic-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 240px;
+            }
+
+            .mosaic-item.tall,
+            .mosaic-item.wide {
+                grid-row: span 1;
+                grid-column: span 1;
+            }
+
+            .mosaic-caption {
+                left: 1rem;
+                bottom: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .process-wall {
+                flex-direction: column;
+                padding: 4rem 1.5rem;
+                gap: 2.5rem;
+            }
+
+            .process-text {
+                position: relative;
+                top: 0;
+                text-align: left;
+            }
+
+            .giant-stats {
+                flex-direction: column;
+                gap: 2.5rem;
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .list-menu-item {
+                padding: 1.25rem 0.5rem;
+            }
+
+            .list-menu-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .list-menu-item .price-tag {
+                font-size: 1.15rem;
+            }
+
+            .booking-portal-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="clinic-theme">
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
+            </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav>
+                <ul class="nav-menu">
+
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link active">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link active">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="theme-rtl-controls"></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 1. Cinematic Hero Section -->
+    <section class="glass-hero">
+        <div class="glass-orb orb-1"></div>
+        <div class="glass-orb orb-2"></div>
+        <div class="glass-hero-content container reveal">
+            <h1>Beyond <span>Dentistry.</span></h1>
+            <p
+                style="font-size: 1.25rem; max-width: 600px; margin: 1.5rem auto 2.5rem; font-weight: 300; color: var(--text-secondary);">
+                A study in facial harmony, computer-guided implantology, and natural veneer aesthetics.</p>
+            <a href="#booking" class="btn btn-primary"
+                style="padding: 1rem 3rem; border-radius: var(--radius-sm); text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Explore
+                Vance Makeovers</a>
+        </div>
+    </section>
+
+    <!-- 2. Horizontal Marquee Section -->
+    <section class="editorial-marquee">
+        <div class="marquee-inner">
+            <span class="marquee-txt">AACD ACCREDITED COSMETIC SURGEONS</span> +
+            <span class="marquee-txt">SAME-DAY CEREC CERAMIC MILLING</span> +
+            <span class="marquee-txt">iTERO 3D DIGITAL IMPRESSIONS</span> +
+            <span class="marquee-txt">BIOMIMETIC LITHIUM DISILICATE VENEERS</span> +
+            <span class="marquee-txt">CLINICAL PRECISION AT MICROMETER SCALE</span> +
+            <span class="marquee-txt">AACD ACCREDITED COSMETIC SURGEONS</span> +
+            <span class="marquee-txt">SAME-DAY CEREC CERAMIC MILLING</span> +
+            <span class="marquee-txt">iTERO 3D DIGITAL IMPRESSIONS</span> +
+            <span class="marquee-txt">BIOMIMETIC LITHIUM DISILICATE VENEERS</span> +
+            <span class="marquee-txt">CLINICAL PRECISION AT MICROMETER SCALE</span> +
+        </div>
+    </section>
+
+    <!-- 3. Asymmetric Mosaic Portfolio -->
+    <section class="mosaic-section" id="portfolio">
+        <div class="container">
+            <span
+                style="color: var(--color-primary); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">The
+                Archive</span>
+            <h2 class="reveal"
+                style="font-size: 2.8rem; margin-bottom: 3rem; font-family: var(--font-heading); font-weight: 800;">
+                Clinical Portfolio.</h2>
+            <div class="mosaic-grid">
+                <div class="mosaic-item tall reveal">
+                    <img src="https://images.openai.com/static-rsc-4/JxrU3KPiojfNMC_TPIKUywOY4dPRTVylOoShPA4ZANgnLMVux4gyuF3iQLhPPMwZCr9bOTvyC8CG-LL2wFIMKxu59UbJWmMIYxiZ18tHTBKRzgL1Ajo8WQxHP8JwYNgMChk7rgOJMay3lCjJs754z1yQR_WFUNZEZ93OVVjMNGyst4PVPQf_LUCp_Aml03DQ?purpose=fullsize"
+                        alt="Porcelain Veneers Makeover">
+                    <div class="mosaic-caption">01. Porcelain Veneers</div>
+                </div>
+                <div class="mosaic-item wide reveal delay-1">
+                    <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=800&q=80"
+                        alt="Invisalign Aligners Straightening">
+                    <div class="mosaic-caption">02. Invisalign Orthodontics</div>
+                </div>
+                <div class="mosaic-item reveal delay-2">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80"
+                        alt="3D CBCT Scans">
+                    <div class="mosaic-caption">03. Guided CBCT Scans</div>
+                </div>
+                <div class="mosaic-item reveal delay-3">
+                    <img src="https://images.unsplash.com/photo-1522845015757-50bce044e5da?auto=format&fit=crop&w=800&q=80"
+                        alt="Epic Laser Gum Spa">
+                    <div class="mosaic-caption">04. Laser Gum Spa</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Sticky Scroll Process (The Vance Protocol) -->
+    <section class="container process-wall" id="protocol">
+        <div class="process-text reveal">
+            <span
+                style="color: var(--color-primary); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">The
+                Vance Protocol</span>
+            <h2
+                style="font-size: 3rem; line-height: 1.1; margin: 1rem 0 1.5rem; font-family: var(--font-heading); font-weight: 800;">
+                How We Execute.</h2>
+            <p
+                style="font-size: 1.1rem; opacity: 0.8; max-width: 420px; line-height: 1.6; margin-bottom: 2.5rem; color: var(--text-secondary);">
+                Restorative dentistry is a science of micrometers. We do not just adjust teeth; we design permanent
+                visual confidence.</p>
+
+            <div style="display: flex; flex-direction: column; gap: 1.75rem; max-width: 420px;">
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <span
+                        style="color: var(--color-primary); font-weight: 800; font-size: 1.25rem; font-family: var(--font-heading);">01</span>
+                    <div>
+                        <h4
+                            style="margin: 0 0 0.5rem; font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">
+                            Computer-Guided Mapping</h4>
+                        <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">iTero
+                            3D intraoral scanners capture 6,000 frames per second to construct a detailed digital map of
+                            your dental occlusion.</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <span
+                        style="color: var(--color-primary); font-weight: 800; font-size: 1.25rem; font-family: var(--font-heading);">02</span>
+                    <div>
+                        <h4
+                            style="margin: 0 0 0.5rem; font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">
+                            Ceramic Diamond Milling</h4>
+                        <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
+                            CAD/CAM Primemill milling diamonds carve custom monolithic restorations from solid ceramic
+                            blocks in under 40 minutes.</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <span
+                        style="color: var(--color-primary); font-weight: 800; font-size: 1.25rem; font-family: var(--font-heading);">03</span>
+                    <div>
+                        <h4
+                            style="margin: 0 0 0.5rem; font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">
+                            Bio-Integrative Bonding</h4>
+                        <p style="margin: 0; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
+                            Premium lithium disilicate veneer shells are bonded to natural enamel structure, creating a
+                            permanent, organic seal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="process-visuals">
+            <div class="pv-card reveal delay-1"
+                style="background-image: url('https://images.openai.com/static-rsc-4/1g35VmYCn6N0kOe-7_lk13Xmijo11qlbhwbxOYY3X7L31GsyyDkc8ewf5l4j0ixU5WtrcGjjDDNQ83tSjiZnIpKGjTfWaKFX-oyIJvQZcGyP0oem7FjW2hucLvr8Kz3bQQ22nDqTLyipGUXkY8dhvPH7yzdKZgniPUcDw9bc9QQmcwYCIs7uQE8VBjKmH0Iz?purpose=fullsize'); background-size: cover; background-position: center;">
+                <div class="pv-card-content">
+                    <h3
+                        style="margin-bottom: 0.3rem; font-size: 1.35rem; font-weight: 700; font-family: var(--font-heading);">
+                        I. Diagnostics</h3>
+                    <p style="opacity: 0.8; font-size: 0.95rem; margin:0;">Zero radiation digital impressions.</p>
+                </div>
+            </div>
+            <div class="pv-card reveal delay-2"
+                style="background-image: url('https://images.openai.com/static-rsc-4/eN13NjDpjSEhhMr0hsqYJXCZEi4u1hV5aCDTjJp1VMXc18ALFn9yN6th2rfHAwAObxUmIjxU4B99XTNorqh3cr1LuRDgtryjH-ye0oT4e00l78cg4pvCtod443zalvC8mQUz6IrryPA3KwTt5pnwWyOvubiE1-Ncu3mGohWB4gUVnR7B9LiAfyPM6DXmGhaT?purpose=fullsize'); background-size: cover; background-position: center;">
+                <div class="pv-card-content">
+                    <h3
+                        style="margin-bottom: 0.3rem; font-size: 1.35rem; font-weight: 700; font-family: var(--font-heading);">
+                        II. Fabrication</h3>
+                    <p style="opacity: 0.8; font-size: 0.95rem; margin:0;">CEREC same-day restorations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Interactive Treatment Catalog Section -->
+    <section class="container list-menu-section" id="catalog">
+        <h2 class="reveal list-menu-section-title">Curated Restorations</h2>
+        <div class="list-menu-item reveal"
+            onclick="document.getElementById('book-treatment').value='Porcelain Veneers'; window.location.hash='#booking';">
+            <div>
+                <h3>Lithium Disilicate Veneers</h3>
+                <p>Accredited AACD Design / Custom Ceramist Hand-Glazed Finish</p>
+            </div>
+            <span class="price-tag">$850+</span>
+        </div>
+        <div class="list-menu-item reveal"
+            onclick="document.getElementById('book-treatment').value='Dental Implants'; window.location.hash='#booking';">
+            <div>
+                <h3>Zirconia Dental Implant</h3>
+                <p>Guided Surgical Plate Template / Bio-Integrative Titanium Root</p>
+            </div>
+            <span class="price-tag">$2,400+</span>
+        </div>
+        <div class="list-menu-item reveal"
+            onclick="document.getElementById('book-treatment').value='Invisalign Aligners'; window.location.hash='#booking';">
+            <div>
+                <h3>Invisalign Clear Aligners</h3>
+                <p>Clear Orthodontic Straightening Course / Digital Stage Tracking</p>
+            </div>
+            <span class="price-tag">$3,200+</span>
+        </div>
+        <div class="list-menu-item reveal"
+            onclick="document.getElementById('book-treatment').value='Teeth Whitening'; window.location.hash='#booking';">
+            <div>
+                <h3>Laser Teeth Whitening</h3>
+                <p>Epic Diode Clinical Whitening / 14 Shades Lightening in 1 Visit</p>
+            </div>
+            <span class="price-tag">$350+</span>
+        </div>
+    </section>
+
+    <!-- 6. High-Impact Pulse Stats Section -->
+    <section class="giant-stats container reveal">
+        <div>
+            <div class="giant-num">18+ YRS</div>
+            <div class="giant-num-label">Accredited Experience</div>
+        </div>
+        <div>
+            <div class="giant-num">15K+</div>
+            <div class="giant-num-label">Smiles Perfected</div>
+        </div>
+        <div>
+            <div class="giant-num">4.9 RAT</div>
+            <div class="giant-num-label">Google Patient Reviews</div>
+        </div>
+    </section>
+
+    <!-- 7. Singular Voice Section -->
+    <section class="singular-voice container reveal">
+        <p class="voice-text">"When you design a smile, you are editing a person's visual signature. We strive for a
+            balance of organic translucency and structural longevity."</p>
+        <span class="voice-author">&mdash; Dr. Evelyn Vance, Founding Surgeon</span>
+    </section>
+
+    <!-- 8. Booking Portal Section -->
+    <section class="section" id="booking" style="background-color: var(--bg-primary); padding: 6rem 0;">
+        <div class="container">
+            <div class="booking-portal-card reveal">
+                <form style="display: flex; flex-direction: column; gap: 1.5rem;" onsubmit="handleQuickBooking(event)">
+                    <h3
+                        style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; gap: 0.75rem; align-items: center; font-family: var(--font-heading); color: var(--text-primary);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Secure Makeover Consultation
+                    </h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Select your
+                        preferred smile transformation pathway and secure your custom diagnostic appointment slot.</p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <label for="book-treatment"
+                                style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Treatment
+                                Required</label>
+                            <select id="book-treatment" required
+                                style="padding: 0.85rem 1.25rem; background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); font-size: 0.95rem; outline: none; transition: border-color var(--transition-fast); cursor: pointer;">
+                                <option value="Porcelain Veneers">Porcelain Veneers</option>
+                                <option value="Dental Implants">Dental Implants</option>
+                                <option value="Invisalign Aligners">Invisalign Aligners</option>
+                                <option value="Teeth Whitening">Teeth Whitening</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <label for="book-date"
+                                style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Preferred
+                                Date</label>
+                            <input type="date" id="book-date" required
+                                style="padding: 0.85rem 1.25rem; background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); font-size: 0.95rem; outline: none; transition: border-color var(--transition-fast);">
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label for="book-email"
+                            style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Email
+                            Address</label>
+                        <input type="email" id="book-email" placeholder="your@email.com" required
+                            style="padding: 0.85rem 1.25rem; background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary); font-size: 0.95rem; outline: none; transition: border-color var(--transition-fast);">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; padding: 1rem; font-size: 1rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; margin-top: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-glow);">Initialize
+                        Makeover &rarr;</button>
+
+                    <div id="booking-success"
+                        style="display: none; background-color: rgba(16, 185, 129, 0.15); color: var(--color-success); border: 1px solid var(--color-success); padding: 0.75rem; border-radius: var(--radius-md); text-align: center; font-size: 0.875rem;">
+                        Appointment requested successfully! Redirecting to dashboard...
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
+                </a>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Smile Treatments</h3>
+                <ul class="footer-links">
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Patient Portal</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Clinic Layouts</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleQuickBooking(event) {
+            event.preventDefault();
+            const treatment = document.getElementById('book-treatment').value;
+            const date = document.getElementById('book-date').value;
+            const email = document.getElementById('book-email').value;
+            const successMsg = document.getElementById('booking-success');
+
+            if (window.DentalStore) {
+                window.DentalStore.addAppointment({
+                    patientName: 'Jane Doe',
+                    doctorName: 'Dr. Evelyn Vance',
+                    treatment: treatment,
+                    date: date,
+                    time: '11:00 AM',
+                    amount: treatment === 'Porcelain Veneers' ? 3800 : (treatment === 'Dental Implants' ? 2400 : (treatment === 'Invisalign Aligners' ? 3200 : 350))
+                });
+
+                successMsg.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }
+        }
+
+        // Pre-fill date to tomorrow's date
+        document.addEventListener('DOMContentLoaded', () => {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const dateStr = tomorrow.toISOString().split('T')[0];
+            document.getElementById('book-date').value = dateStr;
+
+            // IntersectionObserver reveal system
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>

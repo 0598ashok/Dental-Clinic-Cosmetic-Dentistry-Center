@@ -1,16 +1,21 @@
-/* DentScale Dental Clinic Demo Stylesheet */
+/* Vance Cosmetic Dentistry Clinic Custom Components */
 
 /* Before & After Interactive Slider */
 .gallery-slider {
     position: relative;
     width: 100%;
     max-width: 800px;
-    height: 450px;
+    height: 480px;
     margin: 0 auto;
     overflow: hidden;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-    border: 3px solid var(--border-color);
+    border: 1px solid var(--border-color);
+}
+
+.gallery-slider:hover {
+    box-shadow: var(--shadow-glow);
+    border-color: var(--color-primary);
 }
 
 .gallery-img {
@@ -25,11 +30,15 @@
 }
 
 .gallery-before {
-    z-index: 10;
+    z-index: 5;
+    /* Apply subtle darkening and yellowing to show the "before" look */
+    filter: saturate(0.85) sepia(0.2) brightness(0.9);
 }
 
 .gallery-after {
-    z-index: 5;
+    z-index: 10;
+    /* Bright white clinical look for "after" */
+    filter: brightness(1.1) saturate(1.05) contrast(1.05);
 }
 
 .gallery-resize {
@@ -40,18 +49,19 @@
     height: 100%;
     overflow: hidden;
     z-index: 15;
-    border-right: 2px solid var(--color-accent);
+    border-right: 2px solid var(--color-primary);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
 }
 
 [dir="rtl"] .gallery-resize {
     border-right: none;
-    border-left: 2px solid var(--color-accent);
+    border-left: 2px solid var(--color-primary);
     left: auto;
     right: 0;
 }
 
 .gallery-resize .gallery-img {
-    width: 800px; /* Force original width to prevent distorting image scaling */
+    width: 800px; /* Lock scale width to prevent image compression during drag */
     max-width: none;
 }
 
@@ -62,7 +72,7 @@
     left: 50%;
     width: 4px;
     height: 100%;
-    background-color: var(--color-accent);
+    background-color: var(--color-primary);
     cursor: ew-resize;
     z-index: 20;
     transform: translateX(-50%);
@@ -79,17 +89,61 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-full);
-    background-color: var(--color-accent);
-    color: #ffffff;
+    background-color: var(--color-primary);
+    color: #060913;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
     pointer-events: none;
+}
+
+[data-theme="light"] .gallery-handle-button {
+    color: #ffffff;
+}
+
+/* Slider Labels */
+.slider-label {
+    position: absolute;
+    bottom: 20px;
+    background-color: rgba(6, 9, 19, 0.85);
+    color: #ffffff;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.label-before {
+    left: 20px;
+    z-index: 8;
+}
+
+.label-after {
+    right: 20px;
+    z-index: 18;
+}
+
+[dir="rtl"] .label-before {
+    left: auto;
+    right: 20px;
+}
+
+[dir="rtl"] .label-after {
+    right: auto;
+    left: 20px;
+}
+
+@media(max-width: 768px) {
+    .gallery-slider { height: 320px; }
 }
 
 /* Treatment Cost Calculator */
@@ -112,8 +166,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1rem;
-    background-color: var(--bg-secondary);
+    padding: 1rem 1.25rem;
+    background-color: rgba(var(--bg-secondary-rgb), 0.5);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     cursor: pointer;
@@ -122,40 +176,50 @@
 
 .proc-item:hover {
     border-color: var(--color-primary);
+    background-color: rgba(var(--color-primary-rgb), 0.03);
 }
 
-.proc-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--color-primary);
-    cursor: pointer;
+.proc-item.selected {
+    border-color: var(--color-primary);
+    background-color: rgba(var(--color-primary-rgb), 0.05);
 }
 
 .proc-info {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
-/* Patient Treatments List styling */
-.treatment-card-badge {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background-color: rgba(var(--color-primary-rgb), 0.1);
-    color: var(--color-primary);
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
+.proc-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.proc-price {
     font-weight: 700;
-    border-radius: var(--radius-full);
+    color: var(--color-primary);
+    font-size: 1.1rem;
 }
 
-[dir="rtl"] .treatment-card-badge {
-    right: auto;
-    left: 1.5rem;
+.calc-total {
+    background-color: rgba(var(--bg-secondary-rgb), 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Doctors Card Grid details */
+.total-price {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-accent);
+}
+
+/* Doctor Card Grids */
 .doctor-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -167,12 +231,12 @@
 
 .doctor-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-glow);
     border-color: var(--color-primary);
 }
 
 .doctor-photo-wrapper {
-    height: 280px;
+    height: 320px;
     overflow: hidden;
     position: relative;
     background-color: var(--bg-secondary);
@@ -190,24 +254,50 @@
 }
 
 .doctor-details-box {
-    padding: 1.5rem;
+    padding: 1.75rem;
 }
 
 .doctor-spec {
-    color: var(--color-accent);
+    color: var(--color-primary);
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.1em;
+}
+
+.doctor-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
 }
 
 .doctor-bio-short {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     margin-top: 0.5rem;
 }
 
-/* Treatment Plan Tracking Steps */
+/* Patient Treatments List badges */
+.treatment-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+}
+
+[dir="rtl"] .treatment-badge {
+    right: auto;
+    left: 1.5rem;
+}
+
+/* Steps tracking inside treatment plans */
 .treatment-plan-steps {
     display: flex;
     flex-direction: column;
@@ -223,10 +313,10 @@
 .treatment-plan-steps::before {
     content: '';
     position: absolute;
-    top: 5px;
+    top: 8px;
     left: 7px;
     width: 2px;
-    height: calc(100% - 20px);
+    height: calc(100% - 24px);
     background-color: var(--border-color);
 }
 
@@ -240,18 +330,22 @@
     margin-bottom: 2rem;
 }
 
+.plan-step-item:last-child {
+    margin-bottom: 0;
+}
+
 .plan-step-item::before {
     content: '';
     position: absolute;
-    top: 4px;
+    top: 6px;
     left: -21px;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border-radius: var(--radius-full);
-    background-color: var(--bg-card);
-    border: 3px solid var(--border-color);
+    background-color: var(--bg-primary);
+    border: 2px solid var(--border-color);
     z-index: 5;
-    transition: border var(--transition-fast);
+    transition: all var(--transition-fast);
 }
 
 [dir="rtl"] .plan-step-item::before {
@@ -262,19 +356,710 @@
 .plan-step-item.completed::before {
     border-color: var(--color-primary);
     background-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.5);
 }
 
 .plan-step-item.active::before {
     border-color: var(--color-accent);
+    background-color: var(--bg-primary);
+    box-shadow: 0 0 8px rgba(var(--color-accent-rgb), 0.5);
 }
 
 .plan-step-title {
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin-bottom: 0.25rem;
 }
 
 .plan-step-desc {
     font-size: 0.875rem;
     color: var(--text-secondary);
+}
+
+/* Custom Horizontal Scrolling Layouts */
+
+/* Scroll 1: Case Studies Snap Scroll (Teal Neon Glass design) */
+.scroll-container-1 {
+    display: flex;
+    gap: 1.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0.5rem 2rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) rgba(255,255,255,0.03);
+}
+
+.scroll-container-1::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container-1::-webkit-scrollbar-track {
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-1::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-1::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.scroll-item-1 {
+    flex: 0 0 380px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.scroll-item-1:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+@media(max-width: 600px) {
+    .scroll-item-1 {
+        flex: 0 0 290px;
+        padding: 1.5rem;
+    }
+}
+
+/* Scroll 2: Technology Carousel (Amber Gold circular/offset design) */
+.scroll-container-2 {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0.5rem 2rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) rgba(255,255,255,0.03);
+}
+
+.scroll-container-2::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container-2::-webkit-scrollbar-track {
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-2::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-2::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent-hover);
+}
+
+.scroll-item-2 {
+    flex: 0 0 285px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.scroll-item-2:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow-accent);
+}
+
+.scroll-icon-wrapper-2 {
+    width: 90px;
+    height: 90px;
+    border-radius: var(--radius-full);
+    background: rgba(var(--color-accent-rgb), 0.08);
+    border: 2px solid rgba(var(--color-accent-rgb), 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    transition: all var(--transition-normal);
+    box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.05);
+}
+
+.scroll-item-2:hover .scroll-icon-wrapper-2 {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow-accent);
+    transform: scale(1.08) rotate(15deg);
+}
+
+@media(max-width: 600px) {
+    .scroll-item-2 {
+        flex: 0 0 240px;
+        padding: 2rem 1rem;
+    }
+}
+
+/* Scroll 3: Doctors Carousel (Cyan Accent with Top Photo) */
+.scroll-container-3 {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0.5rem 2rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) rgba(255,255,255,0.03);
+}
+
+.scroll-container-3::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container-3::-webkit-scrollbar-track {
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-3::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: var(--radius-full);
+}
+
+.scroll-item-3 {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.scroll-item-3:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+.scroll-img-wrapper-3 {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+}
+
+.scroll-img-3 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.scroll-item-3:hover .scroll-img-3 {
+    transform: scale(1.06);
+}
+
+.scroll-content-3 {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.scroll-tag-3 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+@media(max-width: 600px) {
+    .scroll-item-3 {
+        flex: 0 0 260px;
+    }
+    .scroll-img-wrapper-3 {
+        height: 180px;
+    }
+}
+
+/* Scroll 4: Patient Reviews Carousel (Glassmorphic Speech Bubble) */
+.scroll-container-4 {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0.5rem 2rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) rgba(255,255,255,0.03);
+}
+
+.scroll-container-4::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container-4::-webkit-scrollbar-track {
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-4::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: var(--radius-full);
+}
+
+.scroll-item-4 {
+    flex: 0 0 350px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+}
+
+.scroll-item-4::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 5rem;
+    color: rgba(var(--color-accent-rgb), 0.08);
+    font-family: var(--font-heading);
+    line-height: 1;
+    font-weight: 900;
+}
+
+[data-theme="light"] .scroll-item-4::before {
+    color: rgba(var(--color-accent-rgb), 0.04);
+}
+
+.scroll-item-4:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow-accent);
+}
+
+.scroll-quote-4 {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.scroll-rating-4 {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.scroll-profile-4 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.scroll-avatar-4 {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05);
+}
+
+@media(max-width: 600px) {
+    .scroll-item-4 {
+        flex: 0 0 280px;
+        padding: 1.5rem;
+    }
+}
+
+/* Scroll 5: Smile Case Studies (Transformation Split-View with Neon Magenta outline) */
+.scroll-container-5 {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0.5rem 2rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #ec4899 rgba(255,255,255,0.03);
+}
+
+.scroll-container-5::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container-5::-webkit-scrollbar-track {
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-5::-webkit-scrollbar-thumb {
+    background-color: #ec4899;
+    border-radius: var(--radius-full);
+}
+
+.scroll-item-5 {
+    flex: 0 0 380px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid rgba(236, 72, 153, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.scroll-item-5:hover {
+    transform: translateY(-5px);
+    border-color: #ec4899;
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.2);
+}
+
+.scroll-thumb-grid-5 {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    height: 120px;
+}
+
+.scroll-thumb-5 {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.scroll-thumb-before-5 {
+    filter: saturate(0.85) sepia(0.2) brightness(0.9);
+}
+
+.scroll-thumb-after-5 {
+    filter: brightness(1.1) saturate(1.05) contrast(1.05);
+}
+
+.scroll-badge-5 {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    font-size: 0.6rem;
+    padding: 0.15rem 0.35rem;
+    font-weight: 700;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+}
+
+.scroll-badge-after-5 {
+    background: rgba(236, 72, 153, 0.85);
+    color: #ffffff;
+}
+
+@media(max-width: 600px) {
+    .scroll-item-5 {
+        flex: 0 0 300px;
+        padding: 1.5rem;
+    }
+}
+
+/* Scroll 6: Premium Membership Tier Cards (Indigo/Violet theme) */
+.scroll-container-6 {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 0.5rem 2rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #6366f1 rgba(255,255,255,0.03);
+}
+
+.scroll-container-6::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container-6::-webkit-scrollbar-track {
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    border-radius: var(--radius-full);
+}
+
+.scroll-container-6::-webkit-scrollbar-thumb {
+    background-color: #6366f1;
+    border-radius: var(--radius-full);
+}
+
+.scroll-item-6 {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem 1.75rem;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.scroll-item-6:hover {
+    transform: translateY(-8px);
+    border-color: #6366f1;
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.25);
+}
+
+.scroll-header-6 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.scroll-title-6 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.scroll-price-6 {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #818cf8;
+    margin: 0.5rem 0;
+}
+
+[data-theme="light"] .scroll-price-6 {
+    color: #4f46e5;
+}
+
+.scroll-price-6 span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.scroll-list-6 {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.75rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.scroll-list-6 li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+.scroll-list-6 li::before {
+    content: '✦';
+    color: #818cf8;
+    font-weight: 700;
+}
+
+[data-theme="light"] .scroll-list-6 li::before {
+    color: #4f46e5;
+}
+
+@media(max-width: 600px) {
+    .scroll-item-6 {
+        flex: 0 0 250px;
+        padding: 1.75rem 1.25rem;
+    }
+}
+
+/* Minimalist Typographic Scroll Style */
+.minimalist-scroll-container {
+    display: flex;
+    gap: 3.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2.25rem 0.5rem 3.5rem;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Hide scrollbars for a clean typographic look */
+}
+
+.minimalist-scroll-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.minimalist-scroll-item {
+    flex: 0 0 340px;
+    scroll-snap-align: start;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Large numbers styling */
+.minimalist-number {
+    font-family: var(--font-heading);
+    font-size: 5.5rem;
+    font-weight: 800;
+    line-height: 0.9;
+    color: rgba(var(--color-primary-rgb), 0.12);
+    margin-bottom: 1.25rem;
+    transition: all var(--transition-normal);
+    user-select: none;
+}
+
+.minimalist-scroll-item:hover .minimalist-number {
+    color: var(--color-primary);
+    transform: translateY(-5px);
+    text-shadow: var(--shadow-glow);
+}
+
+/* Specific theme color shifts for numbers depending on index */
+.minimalist-scroll-item.accent-gold .minimalist-number {
+    color: rgba(var(--color-accent-rgb), 0.12);
+}
+.minimalist-scroll-item.accent-gold:hover .minimalist-number {
+    color: var(--color-accent);
+    text-shadow: var(--shadow-glow-accent);
+}
+
+.minimalist-scroll-item.accent-magenta .minimalist-number {
+    color: rgba(236, 72, 153, 0.12);
+}
+.minimalist-scroll-item.accent-magenta:hover .minimalist-number {
+    color: #ec4899;
+    text-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+}
+
+.minimalist-scroll-item.accent-indigo .minimalist-number {
+    color: rgba(99, 102, 241, 0.12);
+}
+.minimalist-scroll-item.accent-indigo:hover .minimalist-number {
+    color: #6366f1;
+    text-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.minimalist-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.minimalist-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--border-color);
+    transition: all var(--transition-normal);
+}
+
+.minimalist-scroll-item:hover .minimalist-title::after {
+    width: 60px;
+    background-color: var(--color-primary);
+}
+
+.minimalist-scroll-item.accent-gold:hover .minimalist-title::after {
+    background-color: var(--color-accent);
+}
+.minimalist-scroll-item.accent-magenta:hover .minimalist-title::after {
+    background-color: #ec4899;
+}
+.minimalist-scroll-item.accent-indigo:hover .minimalist-title::after {
+    background-color: #6366f1;
+}
+
+.minimalist-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.minimalist-meta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+    margin-top: auto;
+}
+
+[data-theme="light"] .minimalist-meta {
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+@media(max-width: 600px) {
+    .minimalist-scroll-container {
+        gap: 2.25rem;
+        padding-bottom: 2rem;
+    }
+    .minimalist-scroll-item {
+        flex: 0 0 280px;
+    }
+    .minimalist-number {
+        font-size: 4rem;
+    }
 }

@@ -1,175 +1,705 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" dir="ltr">
+<html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DentScale — Elite Dental & Cosmetic Dentistry Growth Agency</title>
-    <meta name="description" content="DentScale is a premium performance marketing agency helping cosmetic dentists and clinics acquire high-value patients, increase revenue, and scale ARR.">
+    <title>Vance Cosmetic Dentistry — Premium Smile Transformations in Chicago</title>
+    <meta name="description"
+        content="Chicago's premier cosmetic dentistry center. Expert porcelain veneers, dental implants, Invisalign aligners, and dental makeovers with Dr. Evelyn Vance, DDS.">
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        /* Premium Layout Styling (No Carousels) */
+
+        /* 1. Patient Transformations Grid */
+        .transformations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .transformation-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transformation-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .comparison-container {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            height: 140px;
+            position: relative;
+        }
+
+        .comparison-before,
+        .comparison-after {
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .comparison-before {
+            filter: saturate(0.7) sepia(0.15) brightness(0.85);
+        }
+
+        .comparison-after {
+            filter: brightness(1.1) saturate(1.05) contrast(1.05);
+        }
+
+        .comparison-label {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-after .comparison-label {
+            background: rgba(var(--color-primary-rgb), 0.85);
+            color: #060913;
+        }
+
+        .transformation-card:hover .comparison-before {
+            transform: scale(1.03);
+        }
+
+        .transformation-card:hover .comparison-after {
+            transform: scale(1.03);
+        }
+
+        /* 2. Advanced Technology Bento Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 260px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-accent);
+            opacity: 0.7;
+            transition: all var(--transition-normal);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-glow-accent);
+        }
+
+        .tech-card:hover::before {
+            height: 6px;
+            opacity: 1;
+        }
+
+        .tech-card.wide {
+            grid-column: span 2;
+        }
+
+        .tech-card.square {
+            grid-column: span 1;
+        }
+
+        .tech-icon-box {
+            font-size: 2.25rem;
+            margin-bottom: 1.25rem;
+            display: inline-block;
+            transition: transform var(--transition-normal);
+        }
+
+        .tech-card:hover .tech-icon-box {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .tech-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Grid Adjustments */
+        @media (max-width: 900px) {
+            .transformations-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-card.wide {
+                grid-column: span 1;
+            }
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
+
+<body class="clinic-theme">
 
     <!-- Header Navigation -->
     <header class="header">
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
-                Dent<span>Scale</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
             </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
+
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link active">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
                     <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li><a href="pricing.html" class="nav-link">Pricing & ROI</a></li>
-                    <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
-                    <li><a href="blog.html" class="nav-link">Resources</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                     <li class="theme-rtl-controls"></li>
-                    <li><a href="login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Client Portal</a></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container grid-2" style="align-items: center;">
+    <section class="hero"
+        style="position: relative; padding: 6rem 0; overflow: hidden; background: radial-gradient(circle at 80% 20%, rgba(var(--color-primary-rgb), 0.1), transparent 50%), radial-gradient(circle at 20% 80%, rgba(var(--color-accent-rgb), 0.08), transparent 50%);">
+        <div class="glow-bg glow-primary"></div>
+        <div class="glow-bg glow-accent"></div>
+        <div class="container grid-2" style="align-items: center; gap: 4rem;">
             <div class="hero-content">
-                <span class="hero-tag">Performance Dental Marketing</span>
-                <h1 class="hero-title">We Scale Dental Clinics to $3M+ ARR via High-Value Patients</h1>
-                <p class="hero-desc">Data-driven search engine optimization, premium paid acquisition, and custom patient conversion pipelines. No empty promises—just trackable dental implants, Invisalign, and veneers appointments.</p>
-                <div class="hero-btns">
-                    <a href="booking.html" class="btn btn-primary">Book Growth Consultation</a>
-                    <a href="pricing.html" class="btn btn-secondary">Calculate Your ROI Potential</a>
+                <span class="hero-tag">Cosmetic Dentistry Excellence</span>
+                <h1 class="hero-title"
+                    style="font-size: 3.25rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.15;">Transform
+                    Your Smile, Transform Your Life</h1>
+                <p class="hero-desc" style="font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 2.5rem;">
+                    Chicago's premier dental studio combining surgical precision with cosmetic artistry. We craft
+                    stunning veneers, precision implants, and invisible aligner treatments that elevate your confidence.
+                </p>
+                <div class="hero-btns" style="display: flex; gap: 1rem;">
+                    <a href="booking.html" class="btn btn-primary pulse-primary">Book Consultation</a>
+                    <a href="treatments.html" class="btn btn-secondary">Treatment Cost Calc</a>
                 </div>
             </div>
+            <!-- Showcase Widget Card -->
             <div class="hero-visual" style="position: relative;">
-                <svg viewBox="0 0 500 400" width="100%" height="auto" style="filter: drop-shadow(var(--shadow-lg));">
-                    <defs>
-                        <linearGradient id="hero-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="var(--color-primary)" />
-                            <stop offset="100%" stop-color="var(--color-accent)" />
-                        </linearGradient>
-                    </defs>
-                    <!-- Background Glow -->
-                    <rect x="20" y="20" width="460" height="360" rx="20" fill="var(--bg-card)" stroke="var(--border-color)" stroke-width="2"/>
-                    <!-- Dashboard Widget Representation -->
-                    <rect x="50" y="60" width="160" height="90" rx="10" fill="var(--bg-secondary)" />
-                    <text x="70" y="90" font-family="var(--font-heading)" font-size="12" fill="var(--text-muted)" font-weight="600">MONTHLY LEADS</text>
-                    <text x="70" y="125" font-family="var(--font-heading)" font-size="28" fill="var(--color-primary)" font-weight="700">+142</text>
-                    
-                    <rect x="290" y="60" width="160" height="90" rx="10" fill="var(--bg-secondary)" />
-                    <text x="310" y="90" font-family="var(--font-heading)" font-size="12" fill="var(--text-muted)" font-weight="600">ROI MULTIPLIER</text>
-                    <text x="310" y="125" font-family="var(--font-heading)" font-size="28" fill="var(--color-accent)" font-weight="700">4.8x</text>
-
-                    <!-- Large Graphic Chart -->
-                    <rect x="50" y="180" width="400" height="170" rx="10" fill="var(--bg-secondary)" />
-                    <path d="M 70 310 L 130 270 L 190 290 L 250 240 L 310 260 L 370 210 L 430 200" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" />
-                    <circle cx="430" cy="200" r="6" fill="var(--color-primary)" />
-                </svg>
+                <div class="card"
+                    style="box-shadow: var(--shadow-lg); border-color: var(--color-primary); padding: 0; overflow: hidden;">
+                    <div
+                        style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center; height: 280px;">
+                    </div>
+                    <div style="padding: 1.75rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700;">State-of-the-Art Clinical Suite</h3>
+                                <span style="font-size: 0.85rem; color: var(--text-secondary);">444 N Michigan Ave,
+                                    Chicago IL</span>
+                            </div>
+                            <span
+                                style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid var(--border-color); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700;">OPEN
+                                NOW</span>
+                        </div>
+                        <a href="booking.html" class="btn btn-outline" style="width: 100%; font-size: 0.9rem;">Schedule
+                            Your Visit</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Stats Bar -->
-    <section class="stats-bar">
+    <section class="stats-bar"
+        style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 3rem 0;">
         <div class="container grid-4">
-            <div class="stat-item">
-                <div class="stat-num">$24M+</div>
-                <div class="stat-label">Client Revenue Generated</div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-num"
+                    style="font-size: 2.75rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.5rem;">
+                    4,800+</div>
+                <div class="stat-label" style="font-weight: 600; color: var(--text-secondary);">Smiles Transformed</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-num">18,400+</div>
-                <div class="stat-label">High-Value Leads Delivered</div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-num"
+                    style="font-size: 2.75rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.5rem;">18
+                    Yrs</div>
+                <div class="stat-label" style="font-weight: 600; color: var(--text-secondary);">Clinical Experience
+                </div>
             </div>
-            <div class="stat-item">
-                <div class="stat-num">4.7x</div>
-                <div class="stat-label">Average Ads ROI</div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-num"
+                    style="font-size: 2.75rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.5rem;">★
+                    4.9</div>
+                <div class="stat-label" style="font-weight: 600; color: var(--text-secondary);">Google Rating</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-num">98%</div>
-                <div class="stat-label">Client Retention Rate</div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-num"
+                    style="font-size: 2.75rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.5rem;">
+                    99%</div>
+                <div class="stat-label" style="font-weight: 600; color: var(--text-secondary);">Patient Satisfaction
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Overview -->
+    <!-- Three Feature Grid -->
     <section class="section">
         <div class="container">
             <div class="section-header text-center">
-                <span class="section-tag">How We Grow Your Practice</span>
-                <h2 class="section-title">Specialised Growth Systems for Elite Dentists</h2>
-                <p class="section-desc">We combine high-performance organic SEO rankings with targeted PPC campaigns to capture patients at their exact point of intent.</p>
+                <span class="section-tag">Our Clinical Philosophy</span>
+                <h2 class="section-title">A Higher Standard of Cosmetic Dentistry</h2>
+                <p class="section-desc">We combine cutting-edge technology with artistic cosmetic restoration to build
+                    custom patient conversion paths for your perfect smile.</p>
             </div>
             <div class="grid-3">
                 <div class="card">
                     <div class="card-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line>
+                            <line x1="19.07" y1="4.93" x2="14.83" y2="9.17"></line>
+                            <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line>
+                            <line x1="9.17" y1="14.83" x2="4.93" y2="19.07"></line>
+                        </svg>
                     </div>
-                    <h3 class="card-title">Dental Practice SEO</h3>
-                    <p>Dominating local organic searches for terms like "Invisalign treatment", "dental implants cost", and "cosmetic dentist near me" to capture intent-based bookings.</p>
-                    <a href="services.html" class="card-link">Explore SEO Services &rarr;</a>
+                    <h3 class="card-title">State-of-the-Art Tech</h3>
+                    <p class="card-desc">Immersive 3D intraoral imaging, digital smile mockups, and computerized bite
+                        alignments map your treatment precisely before we start.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
                     </div>
-                    <h3 class="card-title">High-ROI Paid Ads</h3>
-                    <p>Highly optimized Google & Meta campaigns laser-focused on cosmetic dentistry leads. We pre-qualify every single click to reduce wasted ad spend.</p>
-                    <a href="services.html" class="card-link">Explore Ads Management &rarr;</a>
+                    <h3 class="card-title">Masterful Restorations</h3>
+                    <p class="card-desc">Every porcelain veneer and crown is hand-finished by master laboratory
+                        ceramists to perfectly complement your skin tone and facial structure.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
                     </div>
-                    <h3 class="card-title">Transparent SaaS Portal</h3>
-                    <p>Real-time campaign insights, lead recording reviews, ad creative approvals, and digital invoice management. Every dollar spent mapped directly to ROI.</p>
-                    <a href="login.html" class="card-link">Explore Client Portal &rarr;</a>
+                    <h3 class="card-title">Science Meets Aesthetics</h3>
+                    <p class="card-desc">We prioritize oral health integrity. Every makeover maintains structural bone
+                        support and gums health for a lifetime solution.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive ROI Preview Section -->
+    <!-- Showcase Section (Treatments) -->
     <section class="section" style="background-color: var(--bg-secondary);">
-        <div class="container grid-2" style="align-items: center;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Signature Restorations</span>
+                <h2 class="section-title">World-Class Dentistry Services</h2>
+                <p class="section-desc">Choose from our specialized treatments designed to resolve misalignment,
+                    discoloration, or structural dental issues.</p>
+            </div>
+            <div class="grid-4">
+                <div class="card text-center" style="padding: 2.5rem 1.5rem;">
+                    <div style="font-size: 2.75rem; margin-bottom: 1.25rem;">✨</div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Porcelain Veneers</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">Wafer-thin medical
+                        shells shaped to transform alignment and color.</p>
+                    <div style="margin-top: 1.25rem; font-weight: 700; color: var(--color-accent);">From $850 / tooth
+                    </div>
+                    <a href="treatments.html" class="card-link" style="margin-top: 1rem;">Details &rarr;</a>
+                </div>
+                <div class="card text-center" style="padding: 2.5rem 1.5rem;">
+                    <div style="font-size: 2.75rem; margin-bottom: 1.25rem;">🔩</div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Dental Implants</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">Titanium
+                        restorations replacement mimicking biological roots.</p>
+                    <div style="margin-top: 1.25rem; font-weight: 700; color: var(--color-accent);">From $2,400 / tooth
+                    </div>
+                    <a href="treatments.html" class="card-link" style="margin-top: 1rem;">Details &rarr;</a>
+                </div>
+                <div class="card text-center" style="padding: 2.5rem 1.5rem;">
+                    <div style="font-size: 2.75rem; margin-bottom: 1.25rem;">😁</div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Invisalign Aligners</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">Clear, removable
+                        alignment systems for orthodontic straightening.</p>
+                    <div style="margin-top: 1.25rem; font-weight: 700; color: var(--color-accent);">From $3,200 / course
+                    </div>
+                    <a href="treatments.html" class="card-link" style="margin-top: 1rem;">Details &rarr;</a>
+                </div>
+                <div class="card text-center" style="padding: 2.5rem 1.5rem;">
+                    <div style="font-size: 2.75rem; margin-bottom: 1.25rem;">💎</div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Laser Whitening</h3>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">Advanced clinical
+                        dental whitening lightening teeth up to 14 shades.</p>
+                    <div style="margin-top: 1.25rem; font-weight: 700; color: var(--color-accent);">From $350 / visit
+                    </div>
+                    <a href="treatments.html" class="card-link" style="margin-top: 1rem;">Details &rarr;</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3.5rem;">
+                <a href="treatments.html" class="btn btn-outline">Explore Treatment Calculator &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Large Feature Section / Before-After Slider -->
+    <section class="section">
+        <div class="container grid-2" style="align-items: center; gap: 4rem;">
             <div>
-                <span class="section-tag" style="text-align: left;">Calculate Value</span>
-                <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">See Your Exact Growth Trajectory Before You Spend a Dollar</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Stop guessing if marketing works. Plug in your current numbers to estimate how many high-value veneer, implant, and aligner appointments we can book for you, and your net return on investment.</p>
-                <a href="pricing.html" class="btn btn-primary">Try ROI Calculator</a>
+                <span class="section-tag" style="text-align: left;">Proven Transformations</span>
+                <h2
+                    style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; text-align: left; line-height: 1.2;">
+                    Venture Into Vance Smile Labs</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.05rem;">Experience smile
+                    redesign before you book. Drag the interactive simulator slider to see real cosmetic porcelain
+                    veneers whitening and alignment transformations.</p>
+
+                <div
+                    style="border-top: 1px solid var(--border-color); padding-top: 2rem; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                    <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: var(--color-primary); font-weight: 700;">✓</span>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">Digital Smile Mapping matches
+                            treatment to your unique lip line.</span>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="color: var(--color-primary); font-weight: 700;">✓</span>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">Advanced stain-resistant dental
+                            ceramics ensure long-term whiteness.</span>
+                    </div>
+                </div>
+
+                <a href="treatments.html" class="btn btn-primary">Explore Smile Treatments</a>
             </div>
             <div>
-                <div class="card" style="box-shadow: var(--shadow-lg);">
-                    <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Interactive ROI Snapshot</h3>
-                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                        <div class="form-group">
-                            <label style="display:flex; justify-content:space-between;">
-                                <span>Monthly Ad Budget</span>
-                                <span id="val-budget">$2,500</span>
-                            </label>
-                            <input type="range" class="range-slider" id="inp-budget" min="1000" max="10000" step="500" value="2500">
+                <img src="https://www.fmsdental.com/wp-content/uploads/2023/01/DENTAL-LABORATORY-TECHNICIAN.webp" />
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Patient Smile Transformations -->
+    <section class="section"
+        style="background-color: var(--bg-primary); border-top: 1px solid var(--border-color); padding: 5rem 0 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Transformation Chronicles</span>
+                <h2 class="section-title">Patient Smile Transformations</h2>
+                <p class="section-desc">Observe before-and-after smile alignments and veneer design makeovers crafted by
+                    our cosmetic specialists.</p>
+            </div>
+
+            <div class="transformations-grid reveal">
+                <!-- Card 1 -->
+                <div class="transformation-card">
+                    <div>
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+                            <span
+                                style="font-size:0.75rem; color:var(--color-primary); font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">CASE
+                                STUDY #01</span>
+                            <span
+                                style="background-color:rgba(var(--color-primary-rgb),0.1); border:1px solid var(--border-color); color:var(--color-primary); padding:0.2rem 0.6rem; font-size:0.7rem; font-weight:700; border-radius:var(--radius-full);">Veneers
+                                Makeover</span>
                         </div>
-                        <div class="form-group">
-                            <label style="display:flex; justify-content:space-between;">
-                                <span>Avg Patient Treatment Value</span>
-                                <span id="val-patient">$5,000</span>
-                            </label>
-                            <input type="range" class="range-slider" id="inp-patient" min="1000" max="15000" step="500" value="5000">
+                        <div class="comparison-container">
+                            <div class="comparison-before"
+                                style="background-image:url('https://images.openai.com/static-rsc-4/ss_1P6FOEe36KzuxytbqX8dsJBxnL1_JNwSIrF6kHqZdXP6iCCiFYDGHbbgHUzUr8l9DuHZ_4iMht0P5DLtwULdBbei2_3rDUAo271P8xwI8ZNQZVUvtUOOmDTACmtrCmfw85s0KxalYZ-d4sAMrmhxNJ3B4JTON8uE3WliNzrPKwCPS3SY-Qru91iHgzW0p?purpose=fullsize');">
+                                <span class="comparison-label">BEFORE</span>
+                            </div>
+                            <div class="comparison-after"
+                                style="background-image:url('https://images.openai.com/static-rsc-4/MeiG_PwgTudRhyoFt3BSGU-C63JH2j-etVsBXd5fA60eOC3c_lP9k9DHlCRM0m5Y4IsNRaarmP1IWsayQpraLW61qFj5aJFx4QddE985LzWsAuFrq7XErEj1WjQOx1v2g7vVgB9qipRskc7P4fFYNzHV6YpUNB7T7A121TNfc57YRYZrmaUBaHtYcvqOhG58?purpose=fullsize');">
+                                <span class="comparison-label">AFTER</span>
+                            </div>
                         </div>
-                        <div style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                            <div>
-                                <span style="font-size: 0.875rem; color: var(--text-muted); font-weight: 600;">EST. MONTHLY LEADS</span>
-                                <div id="calc-leads" style="font-size: 1.75rem; font-weight: 700; color: var(--color-primary);">55</div>
+                        <h3
+                            style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem; font-family:var(--font-heading);">
+                            Sarah J. — Veneers Redesign</h3>
+                        <p
+                            style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.5rem;">
+                            Patient resolved incisor gaps and tooth wear. Restored with 8 custom lithium disilicate
+                            porcelain veneers.</p>
+                    </div>
+                    <div
+                        style="border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted);">
+                        <span>⏱ 2 Visits</span>
+                        <span>⭐ AACD Award Winner</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="transformation-card">
+                    <div>
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+                            <span
+                                style="font-size:0.75rem; color:var(--color-primary); font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">CASE
+                                STUDY #02</span>
+                            <span
+                                style="background-color:rgba(var(--color-primary-rgb),0.1); border:1px solid var(--border-color); color:var(--color-primary); padding:0.2rem 0.6rem; font-size:0.7rem; font-weight:700; border-radius:var(--radius-full);">Dental
+                                Implants</span>
+                        </div>
+                        <div class="comparison-container">
+                            <div class="comparison-before"
+                                style="background-image:url('https://images.unsplash.com/photo-1522845015757-50bce044e5da?auto=format&fit=crop&w=400&q=80');">
+                                <span class="comparison-label">BEFORE</span>
                             </div>
-                            <div>
-                                <span style="font-size: 0.875rem; color: var(--text-muted); font-weight: 600;">EST. EXTRA REVENUE</span>
-                                <div id="calc-rev" style="font-size: 1.75rem; font-weight: 700; color: var(--color-accent);">$13,750</div>
+                            <div class="comparison-after"
+                                style="background-image:url('https://images.unsplash.com/photo-1522845015757-50bce044e5da?auto=format&fit=crop&w=400&q=80');">
+                                <span class="comparison-label">AFTER</span>
                             </div>
+                        </div>
+                        <h3
+                            style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem; font-family:var(--font-heading);">
+                            Michael C. — Implant Reconstruction</h3>
+                        <p
+                            style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.5rem;">
+                            Replaced missing lower left molars with biocompatible titanium posts capped with custom
+                            zirconia crowns.</p>
+                    </div>
+                    <div
+                        style="border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted);">
+                        <span>⏱ 3 Months</span>
+                        <span>⭐ Bio-Compatible Foundation</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="transformation-card">
+                    <div>
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+                            <span
+                                style="font-size:0.75rem; color:var(--color-primary); font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">CASE
+                                STUDY #03</span>
+                            <span
+                                style="background-color:rgba(var(--color-primary-rgb),0.1); border:1px solid var(--border-color); color:var(--color-primary); padding:0.2rem 0.6rem; font-size:0.7rem; font-weight:700; border-radius:var(--radius-full);">Clear
+                                Alignment</span>
+                        </div>
+                        <div class="comparison-container">
+                            <div class="comparison-before"
+                                style="background-image:url('https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=400&q=80');">
+                                <span class="comparison-label">BEFORE</span>
+                            </div>
+                            <div class="comparison-after"
+                                style="background-image:url('https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=400&q=80');">
+                                <span class="comparison-label">AFTER</span>
+                            </div>
+                        </div>
+                        <h3
+                            style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem; font-family:var(--font-heading);">
+                            Emily T. — Invisalign Course</h3>
+                        <p
+                            style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.5rem;">
+                            Straightened severe dental crowding and corrected deep bite overbite. Patient used 24
+                            alignment steps.</p>
+                    </div>
+                    <div
+                        style="border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted);">
+                        <span>⏱ 14 Months</span>
+                        <span>⭐ Gold Aligner Course</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="transformation-card">
+                    <div>
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+                            <span
+                                style="font-size:0.75rem; color:var(--color-primary); font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">CASE
+                                STUDY #04</span>
+                            <span
+                                style="background-color:rgba(var(--color-primary-rgb),0.1); border:1px solid var(--border-color); color:var(--color-primary); padding:0.2rem 0.6rem; font-size:0.7rem; font-weight:700; border-radius:var(--radius-full);">Full
+                                Smile Reconstruction</span>
+                        </div>
+                        <div class="comparison-container">
+                            <div class="comparison-before"
+                                style="background-image:url('https://images.openai.com/static-rsc-4/m1OOybFpqRZQvuMEMifpmq8GCnnknyL_l2X6qhlNiqFZr9kbXcyLQR46oHzKtBWl0_kJqT6BeyucWU_dlddWIlQFxCL1pkUOAOBzrNc9_IlsWuzJVIU3CP1xnneGlNtgLR0K0ULp-w_GiFmqUns7noMuA9aZl4KniE7YUW0c3LMqosmkcvdSwuJP4yEXLdDR?purpose=fullsize');">
+                                <span class="comparison-label">BEFORE</span>
+                            </div>
+                            <div class="comparison-after"
+                                style="background-image:url('https://images.openai.com/static-rsc-4/HR94vEdx9VX-IFPv9dX82V5omg41D1TggA0ROepaa_6Gk4AUUT2sSGOp-cDMkNb0JulOjHhBCyd977kyBQSCJ-Z-hL13_76a-eWnYpIiVSF21ltJ_sx5ovaLRfLwvpa6ygI3ksAljVdeUp0lIp8sl8iLKUgaA3m_6Wz9vkyAFKFaTRTGA1dI2c9yc7WX1OyP?purpose=fullsize');">
+                                <span class="comparison-label">AFTER</span>
+                            </div>
+                        </div>
+                        <h3
+                            style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem; font-family:var(--font-heading);">
+                            David R. — Full Arch Whiteness</h3>
+                        <p
+                            style="font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.5rem;">
+                            Comprehensive orthodontic alignment followed by porcelain veneers to restore extensive
+                            dental wear.</p>
+                    </div>
+                    <div
+                        style="border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted);">
+                        <span>⏱ 6 Visits</span>
+                        <span>⭐ Lifetime Restorations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sub-clinics Specialty list -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+        <div class="container grid-2" style="align-items: center; gap: 4rem;">
+            <!-- Clinic Setup Photo -->
+            <div>
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80"
+                    alt="Advanced Clinical Studio"
+                    style="border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);" />
+            </div>
+            <div>
+                <span class="section-tag" style="text-align: left;">High-Tech Facilities</span>
+                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; text-align: left;">Three
+                    Specialty Dental Clinics</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Our multi-functional layout provides
+                    dental suites tailored to specialized treatment streams.</p>
+
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div
+                        style="display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.25rem; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; line-height: 1;">🎨</div>
+                        <div>
+                            <h4 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem;">Smile Design Suite
+                            </h4>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary);">The Artistic Forge — digital
+                                layout blueprints and teeth contour designs.</p>
+                        </div>
+                    </div>
+                    <div
+                        style="display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.25rem; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; line-height: 1;">🔩</div>
+                        <div>
+                            <h4 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem;">Implant Center</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary);">The Structural Foundation —
+                                high-fidelity computer-guided titanium implant surgical roots.</p>
+                        </div>
+                    </div>
+                    <div
+                        style="display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.25rem; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; line-height: 1;">📏</div>
+                        <div>
+                            <h4 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem;">Alignment Studio
+                            </h4>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary);">The Alignment Lab — custom
+                                Invisalign course mapping and transparent aligner tracking.</p>
                         </div>
                     </div>
                 </div>
@@ -177,52 +707,277 @@
         </div>
     </section>
 
-    <!-- Testimonials / Success Stories -->
+    <!-- Section 2: Advanced Dental Technology Suite -->
+    <section class="section"
+        style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 5rem 0 4.5rem;">
+        <div class="glow-bg glow-accent"></div>
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag" style="color:var(--color-accent);">Future Tech Laboratory</span>
+                <h2 class="section-title">Advanced Dental Technology Suite</h2>
+                <p class="section-desc">Our treatment suites leverage state-of-the-art computer-aided diagnostic systems
+                    for pain-free restorations.</p>
+            </div>
+
+            <div class="tech-grid reveal">
+                <!-- Card 1 (Wide) -->
+                <div class="tech-card wide">
+                    <div>
+                        <div class="tech-icon-box">📡</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            3D Intraoral Digital Scanners</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Captures 6,000
+                            frames per second to construct an interactive, precise 3D topology model of your dental
+                            arches, completely replacing uncomfortable plaster molds.</p>
+                    </div>
+                    <span class="tech-badge">iTero Element 5D</span>
+                </div>
+
+                <!-- Card 2 (Square) -->
+                <div class="tech-card square">
+                    <div>
+                        <div class="tech-icon-box">⚙️</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            CAD/CAM Ceramic Mill</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Computer-guided
+                            diamond milling unit that carves custom porcelain crowns and veneers in under 40 minutes.
+                        </p>
+                    </div>
+                    <span class="tech-badge">CEREC Primemill</span>
+                </div>
+
+                <!-- Card 3 (Square) -->
+                <div class="tech-card square">
+                    <div>
+                        <div class="tech-icon-box">☢️</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            CBCT Bone Scanners</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Low-dose cone beam
+                            computed tomography that maps jawbone thickness, nerve pathways, and implant sites.</p>
+                    </div>
+                    <span class="tech-badge">Orthophos SL 3D</span>
+                </div>
+
+                <!-- Card 4 (Square) -->
+                <div class="tech-card square">
+                    <div>
+                        <div class="tech-icon-box">⚡</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Biolase Laser Therapy</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Advanced soft-tissue
+                            laser system permitting pain-free laser cleanings and gentle periodontal contouring.</p>
+                    </div>
+                    <span class="tech-badge">Epic X Diode Laser</span>
+                </div>
+
+                <!-- Card 5 (Square) -->
+                <div class="tech-card square">
+                    <div>
+                        <div class="tech-icon-box">📊</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            T-Scan Occlusion</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Sensory bite plate
+                            mapping that reports force distribution to ensure perfect aligner and crown placement
+                            pathways.</p>
+                    </div>
+                    <span class="tech-badge">T-Scan Novus System</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor's Log resources section -->
     <section class="section">
         <div class="container">
             <div class="section-header text-center">
-                <span class="section-tag">Case Studies & Testimonials</span>
-                <h2 class="section-title">Established Practices Experiencing 300% Growth</h2>
-                <p class="section-desc">Read how cosmetic dental centers across the country transitioned from word-of-mouth patients to high-efficiency digital patient acquisitions.</p>
+                <span class="section-tag">Education & Insights</span>
+                <h2 class="section-title">Inside the Doctor's Log</h2>
+                <p class="section-desc">Stay updated with digital smile design breakthroughs, veneer guides, and oral
+                    health tutorials written by Dr. Evelyn Vance, DDS.</p>
             </div>
             <div class="grid-3">
-                <div class="card" style="padding: 2rem;">
-                    <div style="display: flex; gap: 0.25rem; margin-bottom: 1rem; color: var(--color-warning);">
-                        ★★★★★
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="https://images.openai.com/static-rsc-4/ePXeRMXT0YQ0tPWg008zh-n90A1aP3uL_3YPfiUnxMPUkQ4Crv2BEnI2b_RlsZ_FjMIjR3zYLjSPatbrePUWRoLsI6R_4Qtff1rYO0hd3wNUpbU2HVcXUrcz8rAXBF8A118iDoiuEzU1YTAFrK7crJ-NPVwbyAPz-KGSAK9RrXoqn1FKptN65je155Pll_wi?purpose=fullsize"
+                        alt="Veneer prep analysis" style="height: 200px; object-fit: cover;" />
+                    <div style="padding: 1.75rem; flex: 1; display: flex; flex-direction: column;">
+                        <span
+                            style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Porcelain
+                            Veneers</span>
+                        <h3 style="font-size: 1.2rem; margin: 0.5rem 0; font-weight: 700;">The Origins of Smile Design
+                        </h3>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem; flex: 1;">
+                            Diving deep into how we analyze facial bone symmetry to craft perfect porcelain cosmetic
+                            shells.</p>
+                        <a href="blog-details.html" class="card-link" style="margin-top: auto; padding-top: 1rem;">Read
+                            Article &rarr;</a>
                     </div>
-                    <p style="font-style: italic; color: var(--text-secondary);">"Before DentScale, our Google Ads budget was generating clicks but very few implant bookings. Their tracking set-up and pre-qualification landing pages got us 24 booked implants in the first 60 days."</p>
-                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                        <div class="db-avatar" style="width: 40px; height: 40px;">EV</div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=400&q=80"
+                        alt="Implant surgery tech" style="height: 200px; object-fit: cover;" />
+                    <div style="padding: 1.75rem; flex: 1; display: flex; flex-direction: column;">
+                        <span
+                            style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Dental
+                            Implants</span>
+                        <h3 style="font-size: 1.2rem; margin: 0.5rem 0; font-weight: 700;">Drafting the Full Arch
+                            Restoration</h3>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem; flex: 1;">
+                            Why computer-guided titanium implant surgical roots are the safest permanent solution for
+                            tooth loss.</p>
+                        <a href="blog-details.html" class="card-link" style="margin-top: auto; padding-top: 1rem;">Read
+                            Article &rarr;</a>
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=400&q=80"
+                        alt="Invisalign technology mapping" style="height: 200px; object-fit: cover;" />
+                    <div style="padding: 1.75rem; flex: 1; display: flex; flex-direction: column;">
+                        <span
+                            style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Orthodontics</span>
+                        <h3 style="font-size: 1.2rem; margin: 0.5rem 0; font-weight: 700;">Visualizing Invisalign Clear
+                            Pathways</h3>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem; flex: 1;">
+                            Understanding how smart 3D tracking software moves teeth into alignment step by step.</p>
+                        <a href="blog-details.html" class="card-link" style="margin-top: auto; padding-top: 1rem;">Read
+                            Article &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Patient Acclaim</span>
+                <h2 class="section-title">Real Smiles. Real Confidence.</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card" style="padding: 2.25rem;">
+                    <div
+                        style="color: var(--color-accent); font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: 2px;">
+                        ★★★★★</div>
+                    <p style="font-style: italic; color: var(--text-secondary); font-size: 0.95rem;">"I was
+                        self-conscious about my smile alignment for decades. Dr. Evelyn Vance mapped out a veneer design
+                        that looks and feels completely natural. The confidence boost is unmatched!"</p>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-top: 2rem;">
+                        <div class="db-avatar"
+                            style="width: 40px; height: 40px; font-size: 0.8rem; background-color: var(--color-primary);display: flex;align-items: center;justify-content: center;">
+                            SJ</div>
                         <div>
-                            <h4 style="font-size: 0.95rem; font-weight: 700;">Dr. Evelyn Vance, DDS</h4>
-                            <span style="font-size: 0.75rem; color: var(--text-muted);">Vance Cosmetic Center, Chicago</span>
+                            <h4 style="font-size: 0.95rem; font-weight: 700;">Sarah Jenkins</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Veneers Patient</span>
                         </div>
                     </div>
                 </div>
-                <div class="card" style="padding: 2rem;">
-                    <div style="display: flex; gap: 0.25rem; margin-bottom: 1rem; color: var(--color-warning);">
-                        ★★★★★
-                    </div>
-                    <p style="font-style: italic; color: var(--text-secondary);">"Our dental clinic ranked on page 2 for veneers searches for years. DentScale redesigned our local landing pages and did a surgical SEO optimization. We now hold three of the top organic positions in our city."</p>
-                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                        <div class="db-avatar" style="width: 40px; height: 40px;">MS</div>
+                <div class="card" style="padding: 2.25rem;">
+                    <div
+                        style="color: var(--color-accent); font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: 2px;">
+                        ★★★★★</div>
+                    <p style="font-style: italic; color: var(--text-secondary); font-size: 0.95rem;">"My dental implant
+                        extraction and placement surgery was entirely pain-free. The post-operative support and
+                        interactive healing guides on the Patient Portal were amazing."</p>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-top: 2rem;">
+                        <div class="db-avatar"
+                            style="width: 40px; height: 40px; font-size: 0.8rem; background-color: var(--color-accent); display: flex;align-items: center;justify-content: center;">
+                            MC</div>
                         <div>
-                            <h4 style="font-size: 0.95rem; font-weight: 700;">Dr. Marcus Sterling</h4>
-                            <span style="font-size: 0.75rem; color: var(--text-muted);">Sterling Dental Hub, Houston</span>
+                            <h4 style="font-size: 0.95rem; font-weight: 700;">Michael Chang</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Implants Patient</span>
                         </div>
                     </div>
                 </div>
-                <div class="card" style="padding: 2rem;">
-                    <div style="display: flex; gap: 0.25rem; margin-bottom: 1rem; color: var(--color-warning);">
-                        ★★★★★
-                    </div>
-                    <p style="font-style: italic; color: var(--text-secondary);">"The DentScale client dashboard is a game-changer. I can view lead recordings, approve upcoming ad creatives, and download Google campaign spends directly from my phone. Incredible transparency."</p>
-                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                        <div class="db-avatar" style="width: 40px; height: 40px;">JL</div>
+                <div class="card" style="padding: 2.25rem;">
+                    <div
+                        style="color: var(--color-accent); font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: 2px;">
+                        ★★★★★</div>
+                    <p style="font-style: italic; color: var(--text-secondary); font-size: 0.95rem;">"My Invisalign
+                        course completed three months faster than projected. The 3D scan visualization of alignment
+                        stages was incredible. Highly recommend Vance Cosmetic!"</p>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-top: 2rem;">
+                        <div class="db-avatar"
+                            style="width: 40px; height: 40px; font-size: 0.8rem; background-color: #6366f1; display: flex;align-items: center;justify-content: center;">
+                            ET</div>
                         <div>
-                            <h4 style="font-size: 0.95rem; font-weight: 700;">Dr. Jeremy Lawson</h4>
-                            <span style="font-size: 0.75rem; color: var(--text-muted);">Apex Smile Clinic, Los Angeles</span>
+                            <h4 style="font-size: 0.95rem; font-weight: 700;">Emily Taylor</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Invisalign Patient</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="glow-bg glow-primary" style="top: 30%;"></div>
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Frequently Answered</span>
+                <h2 class="section-title">Cosmetic Smile FAQ</h2>
+                <p class="section-desc">Got questions about Veneer placement, aligner pricing, or portal access? Find
+                    clear clinical answers below.</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item active">
+                    <button class="faq-question">
+                        <span>Where should I start my smile transformation journey?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        We recommend booking an initial dental cosmetic consultation. During this session, Dr. Vance
+                        uses intraoral scanners to model your current smile structure and drafts a 3D digital mockup
+                        matching your aesthetic preferences.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long do porcelain veneers typically last?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        With premium dental care, medical porcelain veneers are highly durable and last between 15 to 20
+                        years. They are stain-resistant and function similarly to your natural teeth.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is Invisalign teeth straightening painful?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        Most patients experience brief pressure discomfort when moving to a new aligner course. This
+                        indicates structural teeth alignment shifting is working correctly and subsides within 48 hours.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Are financing structures or monthly payment plans available?</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        Yes! We offer flexible, interest-free payment installments and dental cosmetic financing
+                        options. You can review payment breakdowns and statements directly from the Patient Portal
+                        dashboard.
                     </div>
                 </div>
             </div>
@@ -233,89 +988,74 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-column">
-                <a href="index.html" class="logo" style="margin-bottom: 1rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
-                    Dent<span>Scale</span>
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
                 </a>
-                <p>Data-driven dental marketing and local patient growth algorithms for cosmetic dentistry clinics worldwide.</p>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
+                <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                    📍 444 N Michigan Ave, Chicago IL<br>
+                    📞 (312) 555-8000<br>
+                    🕐 Mon–Sat 8AM–6PM
+                </p>
             </div>
             <div class="footer-column">
-                <h3>Growth Solutions</h3>
+                <h3>Smile Treatments</h3>
                 <ul class="footer-links">
-                    <li><a href="services.html" class="footer-link">Dental SEO Solutions</a></li>
-                    <li><a href="services.html" class="footer-link">Paid Ads Management</a></li>
-                    <li><a href="services.html" class="footer-link">High-Converting Funnels</a></li>
-                    <li><a href="pricing.html" class="footer-link">ROI Modeller System</a></li>
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Our Platform</h3>
+                <h3>Patient Portal</h3>
                 <ul class="footer-links">
-                    <li><a href="login.html" class="footer-link">Client Portal (SaaS)</a></li>
-                    <li><a href="admin.html" class="footer-link">Agency Admin Panel</a></li>
-                    <li><a href="booking.html" class="footer-link">Schedule Consultation</a></li>
-                    <li><a href="coming-soon.html" class="footer-link">Upcoming Features</a></li>
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Clinic Demo</h3>
+                <h3>Clinic Layouts</h3>
                 <ul class="footer-links">
-                    <li><a href="clinic-home.html" class="footer-link">Clinic Live Demo</a></li>
-                    <li><a href="clinic-treatments.html" class="footer-link">Treatment Cost Calc</a></li>
-                    <li><a href="clinic-gallery.html" class="footer-link">Before/After Slider</a></li>
-                    <li><a href="clinic-booking.html" class="footer-link">Patient Booking System</a></li>
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
                 </ul>
             </div>
         </div>
         <div class="container footer-bottom">
-            <p>&copy; 2026 DentScale Performance Agency. All rights reserved.</p>
-            <div style="display:flex; gap:1.5rem;">
-                <a href="404.html" class="footer-link">Privacy Policy</a>
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="404.html" class="footer-link">Privacy Protocol</a>
                 <a href="404.html" class="footer-link">Terms of Service</a>
             </div>
         </div>
     </footer>
 
-    <!-- Demo Toggle Sticky Banner -->
-    <div class="demo-switch-banner">
-        <span>Demo View: <strong>Growth Agency</strong></span>
-        <a href="clinic-home.html" class="demo-switch-btn">Switch to Clinic Demo</a>
-    </div>
-
-    <!-- Quick Slider JS Script for ROI Preview -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const budgetSlider = document.getElementById('inp-budget');
-            const patientSlider = document.getElementById('inp-patient');
-            
-            const budgetVal = document.getElementById('val-budget');
-            const patientVal = document.getElementById('val-patient');
-            
-            const leadsResult = document.getElementById('calc-leads');
-            const revResult = document.getElementById('calc-rev');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
 
-            function reCalc() {
-                const budget = parseInt(budgetSlider.value);
-                const patientLTV = parseInt(patientSlider.value);
-
-                budgetVal.textContent = `$${budget.toLocaleString()}`;
-                patientVal.textContent = `$${patientLTV.toLocaleString()}`;
-
-                // Assume $45 cost per lead
-                const leads = Math.floor(budget / 45);
-                leadsResult.textContent = leads.toString();
-
-                // Assume a conservative 5% close rate on leads
-                const bookings = Math.floor(leads * 0.05);
-                const extraRevenue = bookings * patientLTV;
-                
-                revResult.textContent = `$${extraRevenue.toLocaleString()}`;
-            }
-
-            budgetSlider.addEventListener('input', reCalc);
-            patientSlider.addEventListener('input', reCalc);
-            reCalc();
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
     </script>
 </body>
+
 </html>

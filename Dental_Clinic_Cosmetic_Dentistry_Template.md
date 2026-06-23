@@ -14,7 +14,6 @@ Premium, modern, responsive Dental Clinic & Cosmetic Dentistry Center website wi
 - Treatment Details
 - Doctors
 - Doctor Details
-- Gallery
 - Testimonials
 - Blog
 - Blog Details
@@ -51,7 +50,6 @@ Premium, modern, responsive Dental Clinic & Cosmetic Dentistry Center website wi
 
 ## Special Features
 - Online Appointment Booking
-- Before & After Gallery
 - Doctor Profiles
 - Treatment Cost Calculator
 - Insurance Information

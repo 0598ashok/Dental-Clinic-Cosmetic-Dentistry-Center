@@ -1,72 +1,432 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" dir="ltr">
+<html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us — DentScale Dental Marketing</title>
+    <title>About Us — Vance Cosmetic Dentistry</title>
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        /* Premium Layout Styling (No Carousels) */
+
+        /* 1. Alternating Vertical Timeline */
+        .vertical-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 3rem auto 0;
+            padding: 2rem 0;
+        }
+
+        .timeline-spine {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(var(--color-primary-rgb), 0.3) 10%, rgba(var(--color-primary-rgb), 0.3) 90%, transparent);
+            z-index: 1;
+            transform: translateX(-50%);
+        }
+
+        .timeline-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 3.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-card {
+            width: 44%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem;
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .timeline-year {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .timeline-node {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--color-primary);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            transition: all var(--transition-fast);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline-row:hover .timeline-node {
+            background: var(--color-primary);
+            transform: translate(-50%, -50%) scale(1.35);
+            box-shadow: 0 0 12px var(--color-primary);
+        }
+
+        .timeline-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* 2. Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 250px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-accent);
+            opacity: 0.7;
+            transition: all var(--transition-normal);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-glow-accent);
+        }
+
+        .bento-card:hover::before {
+            height: 6px;
+            opacity: 1;
+        }
+
+        .bento-card.wide {
+            grid-column: span 2;
+        }
+
+        .bento-card.square {
+            grid-column: span 1;
+        }
+
+        .bento-num {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 0.9;
+            color: rgba(var(--color-accent-rgb), 0.12);
+            margin-bottom: 1.25rem;
+            transition: all var(--transition-normal);
+        }
+
+        .bento-card:hover .bento-num {
+            color: var(--color-accent);
+            transform: scale(1.05);
+        }
+
+        /* 3. Masonry Testimonials Collage */
+        .collage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+        }
+
+        .collage-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(236, 72, 153, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem;
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .collage-card::before {
+            content: '“';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 5rem;
+            color: rgba(236, 72, 153, 0.08);
+            font-family: var(--font-heading);
+            line-height: 1;
+            font-weight: 900;
+        }
+
+        [dir="rtl"] .collage-card::before {
+            right: auto;
+            left: 20px;
+        }
+
+        .collage-card:hover {
+            transform: translateY(-8px);
+            border-color: #ec4899;
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.2);
+        }
+
+        .collage-card:nth-child(1) {
+            transform: translateY(-10px);
+        }
+
+        .collage-card:nth-child(2) {
+            transform: translateY(15px);
+        }
+
+        .collage-card:nth-child(3) {
+            transform: translateY(-5px);
+        }
+
+        .collage-card:hover:nth-child(n) {
+            transform: translateY(-15px);
+        }
+
+        .collage-quote {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .collage-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .collage-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+            border: 2px solid rgba(236, 72, 153, 0.25);
+            transition: all var(--transition-fast);
+        }
+
+        .collage-card:hover .collage-avatar {
+            border-color: #ec4899;
+            transform: scale(1.08);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .timeline-spine {
+                left: 20px;
+            }
+
+            .timeline-row {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 45px;
+            }
+
+            .timeline-card {
+                width: 100%;
+            }
+
+            .timeline-node {
+                left: 20px;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-card.wide {
+                grid-column: span 1;
+            }
+
+            .collage-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .collage-card:nth-child(n) {
+                transform: none !important;
+            }
+
+            .collage-card:hover:nth-child(n) {
+                transform: translateY(-5px) !important;
+            }
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
+
+<body class="clinic-theme">
 
     <!-- Header Navigation -->
     <header class="header">
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
-                Dent<span>Scale</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
             </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
+
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
                     <li><a href="about.html" class="nav-link active">About</a></li>
                     <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li><a href="pricing.html" class="nav-link">Pricing & ROI</a></li>
-                    <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
-                    <li><a href="blog.html" class="nav-link">Resources</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                     <li class="theme-rtl-controls"></li>
-                    <li><a href="login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Client Portal</a></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Subpage Hero -->
-    <section class="section" style="background-color: var(--bg-secondary); padding: 4rem 0;">
-        <div class="container text-center">
+    <section class="subpage-hero">
+        <div class="container">
             <span class="section-tag">Who We Are</span>
-            <h1 class="section-title">The Dental Growth Architects</h1>
-            <p class="section-desc">We bridge the gap between dental science and data-driven marketing. DentScale is composed of dental business experts, SEO engineers, and paid ad specialists.</p>
+            <h1 class="section-title">The Art & Science of Smiling</h1>
+            <p class="section-desc">At Vance Cosmetic Dentistry, we believe a smile transformation requires both
+                clinical excellence and detailed visual artistry.</p>
         </div>
     </section>
 
-    <!-- Mission and Vision -->
+    <!-- Mission & Pillars -->
     <section class="section">
-        <div class="container grid-2" style="align-items: center;">
+        <div class="container grid-2" style="align-items: center; gap: 4rem;">
             <div>
                 <span class="section-tag" style="text-align:left;">Our Mission</span>
-                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align:left;">Helping Dentists Maximize Patient Lifetime Value</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Most agencies don't understand the difference between an emergency extraction lead and an Invisalign treatment candidate. We do. We target patients seeking high-value treatments to ensure your clinical chairs are filled with cases that generate long-term equity for your practice.</p>
-                <p style="color: var(--text-secondary);">By designing high-performance local funnels and providing transparent client analytics portals, we make campaign tracking simple and results undeniable.</p>
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align:left; line-height: 1.2;">Advanced Facial
+                    Aesthetics & Medical Quality</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Most dental practices focus on quick
+                    fixes. We look at the larger picture. We evaluate your unique jaw proportions, smile curvature, lip
+                    support, and tooth structure to design a custom dental makeover plan that matches your facial
+                    characteristics.</p>
+                <p style="color: var(--text-secondary);">By combining computer-guided 3D scans and premium hand-finished
+                    dental materials, we provide results that feel completely natural and last a lifetime.</p>
             </div>
             <div>
-                <div class="card" style="background-color: rgba(var(--color-primary-rgb), 0.03); border-color: var(--color-primary);">
-                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Core Pillars of DentScale</h3>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+                <div class="card"
+                    style="background-color: rgba(var(--color-primary-rgb), 0.03); border-color: var(--color-primary);">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem; font-weight: 700;">Three Technology Pillars
+                    </h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 1.25rem;">
                         <li style="display:flex; gap: 0.75rem; align-items: flex-start;">
                             <span style="color: var(--color-primary); font-weight:700;">✓</span>
-                            <span><strong>Total Transparency:</strong> View lead status trackers and creative audits inside your client SaaS dashboard in real time.</span>
+                            <span><strong>Digital Scan Precision:</strong> We use state-of-the-art intraoral digital
+                                scanner mapping to model teeth structures without messy dental molds.</span>
                         </li>
                         <li style="display:flex; gap: 0.75rem; align-items: flex-start;">
                             <span style="color: var(--color-primary); font-weight:700;">✓</span>
-                            <span><strong>Prequalified patient Leads:</strong> Standardized lead screening forms to prevent cold or empty bookings.</span>
+                            <span><strong>Masterful Ceramics:</strong> Our veneers and crowns are fabricated from pure
+                                bio-compatible lithium disilicate crystal for outstanding strength and life-like
+                                translucency.</span>
                         </li>
                         <li style="display:flex; gap: 0.75rem; align-items: flex-start;">
                             <span style="color: var(--color-primary); font-weight:700;">✓</span>
-                            <span><strong>Dental SEO Authority:</strong> Strategic indexing that puts your practice name on page one for high-value treatment searches.</span>
+                            <span><strong>Interactive Patient Care:</strong> View procedure reports, treatment logs, and
+                                direct appointments messaging via our Patient Portal SaaS.</span>
                         </li>
                     </ul>
                 </div>
@@ -74,32 +434,278 @@
         </div>
     </section>
 
-    <!-- The Team -->
+    <!-- Doctors Preview Section -->
     <section class="section" style="background-color: var(--bg-secondary);">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag">Meet the Specialists</span>
-                <h2 class="section-title">The People Driving Your Growth</h2>
-                <p class="section-desc">Our experts have years of combined experience in local SEO, medical landing page engineering, and social campaign scaling.</p>
+                <h2 class="section-title">The Hands Behind the Transformations</h2>
+                <p class="section-desc">Our clinic brings together award-winning prosthodontists, cosmetic surgeons, and
+                    clear alignment orthos.</p>
             </div>
             <div class="grid-3">
-                <div class="card text-center" style="padding: 2rem;">
-                    <div class="db-avatar" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1.5rem;">AH</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Alex Harrison</h3>
-                    <span style="color: var(--color-primary); font-weight: 600; font-size: 0.875rem;">Founder & CEO</span>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 1rem;">Ex-director of growth at a dental franchise chain. Alex brings 12 years of patient acquisition strategy to the firm.</p>
+                <div class="doctor-card">
+                    <div class="doctor-photo-wrapper">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80"
+                            alt="Dr. Evelyn Vance" class="doctor-photo">
+                    </div>
+                    <div class="doctor-details-box">
+                        <span class="doctor-spec">Chief Cosmetic Surgeon</span>
+                        <h3 class="doctor-name">Dr. Evelyn Vance, DDS</h3>
+                        <p class="doctor-bio-short">Over 18 years experience in full mouth reconstruction and custom
+                            porcelain veneer designs. Graduate of Northwestern Dental School.</p>
+                    </div>
                 </div>
-                <div class="card text-center" style="padding: 2rem;">
-                    <div class="db-avatar" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1.5rem;">SC</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Sarah Chen</h3>
-                    <span style="color: var(--color-primary); font-weight: 600; font-size: 0.875rem;">Head of Search (SEO)</span>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 1rem;">Google Search console expert. Sarah specializes in ranking local dental clinics in hyper-competitive metropolitan areas.</p>
+                <div class="doctor-card">
+                    <div class="doctor-photo-wrapper">
+                        <img src="https://images.openai.com/static-rsc-4/Qi1eG5IV0DRFuf2NQVnmx7RSD777oB4BY70I_JF5hueTc1CGDTxPJK_jNmPZ1NkgGVS_5nT1o0s20-mVIAhBetrSsBX-SZWXwU32CvPxBleoToTATtFYU0JkHDrePWr42GGumnGVfyF0feQA4uG495U6SU0eFoi0r_fgZ6SBHgFZjofSe4Ko8ZrGldv5n6Au?purpose=fullsize"
+                            alt="Dr. Marcus Sterling" class="doctor-photo">
+                    </div>
+                    <div class="doctor-details-box">
+                        <span class="doctor-spec">Prosthodontics Specialist</span>
+                        <h3 class="doctor-name">Dr. Marcus Sterling</h3>
+                        <p class="doctor-bio-short">Expert in computer-guided surgical implant restorations, bone
+                            grafting, and structural crowns. Board certified prosthodontist.</p>
+                    </div>
                 </div>
-                <div class="card text-center" style="padding: 2rem;">
-                    <div class="db-avatar" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1.5rem;">MD</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Marcus Delgado</h3>
-                    <span style="color: var(--color-primary); font-weight: 600; font-size: 0.875rem;">Lead PPC Engineer</span>
-                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 1rem;">Managed over $8M in Google Ads. Marcus structures dental campaign funnels that capture high-intent buyers.</p>
+                <div class="doctor-card">
+                    <div class="doctor-photo-wrapper">
+                        <img src="https://images.openai.com/static-rsc-4/gVPXaMUY_9jyuo0m3_9Lytmh6U0PgRYbS1t86b5fppiJk3dh8DdBx6dWkghhn5jk5PRT5GDm8z6jLemScJXc6kh9N5hRTGXgprJunfIuHUUjNAJr8CCbydejjuzqVZXalajs51JSlfyx3kFS8TGVR914t9yrLELthkw1VzAsxhrMSg0V5Ptlb-yEvDPdBoJ8?purpose=fullsize"
+                            alt="Dr. Sarah Chen" class="doctor-photo">
+                    </div>
+                    <div class="doctor-details-box">
+                        <span class="doctor-spec">Orthodontics Architect</span>
+                        <h3 class="doctor-name">Dr. Sarah Chen</h3>
+                        <p class="doctor-bio-short">Specializes in advanced clear orthodontic aligners and smile path
+                            dynamics. Clear Aligner Preferred Gold Provider.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="doctors.html" class="btn btn-outline">Learn More About Our Team</a>
+            </div>
+        </div>
+    </section>
+    <!-- Section 1: Our Timeline Journey -->
+    <section class="section"
+        style="background-color: var(--bg-primary); border-top: 1px solid var(--border-color); padding: 5rem 0 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Vance Chronicles</span>
+                <h2 class="section-title">Our Timeline Journey</h2>
+                <p class="section-desc">From a single dental chair to virtual reality cosmetic mapping. Track our key
+                    milestones in clinical and digital aesthetic precision.</p>
+            </div>
+
+            <div class="vertical-timeline reveal">
+                <div class="timeline-spine"></div>
+
+                <!-- Row 1 -->
+                <div class="timeline-row">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2008</div>
+                        <h3
+                            style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                            Clinic Founded</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Dr. Evelyn Vance
+                            establishes the cosmetic dental center in Chicago with a focus on advanced custom veneers.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="timeline-row">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2013</div>
+                        <h3
+                            style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                            Goes Digital</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Integrates
+                            high-speed iTero digital scanners, eliminating chemical plaster molds completely for
+                            absolute clinical accuracy.</p>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="timeline-row">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2018</div>
+                        <h3
+                            style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                            AACD Gold Standard</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Granted gold
+                            cosmetic excellence recognition by the American Academy of Cosmetic Dentistry for
+                            restorative art.</p>
+                    </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="timeline-row">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2022</div>
+                        <h3
+                            style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                            Patient Portal Launch</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Introduces online
+                            treatment mapping, live chat integration, and automated progress logging via our digital
+                            store architecture.</p>
+                    </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="timeline-row">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-year">2026</div>
+                        <h3
+                            style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                            Smile VR Previews</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Launches virtual
+                            reality diagnostic previews, letting patients walk through their new smile makeover before
+                            ceramic fabrication.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Core Values -->
+    <section class="section"
+        style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 5rem 0 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Our Principles</span>
+                <h2 class="section-title">Our Core Values</h2>
+                <p class="section-desc">The beliefs that guide our clinical decisions, aesthetic standards, and
+                    interactive patient relations.</p>
+            </div>
+
+            <div class="bento-grid reveal">
+                <!-- Value 1 (Wide) -->
+                <div class="bento-card wide">
+                    <div class="bento-num">01</div>
+                    <h3
+                        style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; font-family: var(--font-heading);">
+                        Precision Aesthetics</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">We treat cosmetic
+                        dentistry as an exact science of proportions. A micrometer adjustment makes all the difference
+                        in realism, balancing shadow and light for the perfect profile.</p>
+                </div>
+                <!-- Value 2 (Square) -->
+                <div class="bento-card square">
+                    <div class="bento-num">02</div>
+                    <h3
+                        style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; font-family: var(--font-heading);">
+                        Bio-Integrity</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">We use only
+                        biocompatible lithium disilicate ceramics and medical grade titanium, protecting your overall
+                        systemic health.</p>
+                </div>
+                <!-- Value 3 (Square) -->
+                <div class="bento-card square">
+                    <div class="bento-num">03</div>
+                    <h3
+                        style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; font-family: var(--font-heading);">
+                        Patient Agency</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">We co-design with
+                        you. Your portal offers real-time stage approvals and clear digital records, ensuring you direct
+                        the journey.</p>
+                </div>
+                <!-- Value 4 (Wide) -->
+                <div class="bento-card wide">
+                    <div class="bento-num">04</div>
+                    <h3
+                        style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; font-family: var(--font-heading);">
+                        Tech Innovation</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">We stay at the
+                        absolute cutting edge, continuously upgrading our scan suites, mill blocks, and software
+                        framework solutions to provide painless and instant visualization results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Patient Milestones & Testimonials -->
+    <section class="section"
+        style="background-color: var(--bg-primary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 5rem 0 5rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Restored Confidence</span>
+                <h2 class="section-title">Patient Milestones</h2>
+                <p class="section-desc">Real stories of aesthetic transitions and structural restorations shared by our
+                    verified clinic patients.</p>
+            </div>
+
+            <div class="collage-grid reveal">
+                <!-- Milestone 1 -->
+                <div class="collage-card">
+                    <div>
+                        <div
+                            style="color: #ec4899; font-size: 0.95rem; margin-bottom: 0.75rem; font-weight: 700; letter-spacing: 2px;">
+                            ★★★★★</div>
+                        <p class="collage-quote">"Dr. Evelyn Vance designed my wedding smile. I had severe incisor
+                            alignment issues and chips. With 8 lithium disilicate veneers, my confidence is completely
+                            restored!"</p>
+                    </div>
+                    <div class="collage-profile">
+                        <img src="https://images.openai.com/static-rsc-4/swnK9NDOcH_ucsDxWbd5lxPi0AM4JA4QnbKdCs6kQepir9hThnqNlHNQ495uRhJ80mQWUcDuU5w5GuDz0yPO12SPcfpWFtquWin8byHAWP11IlyEo368nnGx-GagDI00LPUqKZjjLazW_URsT-4Rs6pxZKKtuZIMoK9aSVgenZRihBLcXlbYWJQP4Ocwt1R-?purpose=fullsize"
+                            alt="Sarah Jenkins avatar" class="collage-avatar">
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">Sarah Jenkins
+                            </h4>
+                            <span
+                                style="font-size: 0.75rem; color: #ec4899; font-weight: 700; text-transform: uppercase;">8
+                                Veneers Makeover</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="collage-card">
+                    <div>
+                        <div
+                            style="color: #ec4899; font-size: 0.95rem; margin-bottom: 0.75rem; font-weight: 700; letter-spacing: 2px;">
+                            ★★★★★</div>
+                        <p class="collage-quote">"I had missing molars and severe bone recession. Dr. Sterling placed
+                            titanium implants and custom crowns with ZERO pain. The guide tracking was incredible."</p>
+                    </div>
+                    <div class="collage-profile">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80"
+                            alt="Michael Chang avatar" class="collage-avatar">
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">Michael Chang
+                            </h4>
+                            <span
+                                style="font-size: 0.75rem; color: #ec4899; font-weight: 700; text-transform: uppercase;">Zirconia
+                                Implants</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="collage-card">
+                    <div>
+                        <div
+                            style="color: #ec4899; font-size: 0.95rem; margin-bottom: 0.75rem; font-weight: 700; letter-spacing: 2px;">
+                            ★★★★★</div>
+                        <p class="collage-quote">"My Invisalign process was planned digitally down to the week. Viewing
+                            progress checks on my portal calendar kept me motivated. Highly recommend!"</p>
+                    </div>
+                    <div class="collage-profile">
+                        <img src="https://images.openai.com/static-rsc-4/GcTJP-Yq5wSXf8z3HJHX2_5360lSzOILnzdoIo2OLxqkVrT8faQCFghH0tEGdMdTUKohVUprlgWutdlOXtiN_NoDr9i9PO6k1h0hs0P6WK4kNaOIVtpFGibZMQ59Ca9oEXOfWIY0GUjFbUXfRX4Of7mS2tSikmsQNZCwnXjGasTDCYbhvL0kn3QOu1PxquPv?purpose=fullsize"
+                            alt="Emily Taylor avatar" class="collage-avatar">
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">Emily Taylor
+                            </h4>
+                            <span
+                                style="font-size: 0.75rem; color: #ec4899; font-weight: 700; text-transform: uppercase;">Invisalign
+                                Course</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,54 +715,65 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-column">
-                <a href="index.html" class="logo" style="margin-bottom: 1rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
-                    Dent<span>Scale</span>
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
                 </a>
-                <p>Data-driven dental marketing and local patient growth algorithms for cosmetic dentistry clinics worldwide.</p>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
             </div>
             <div class="footer-column">
-                <h3>Growth Solutions</h3>
+                <h3>Smile Treatments</h3>
                 <ul class="footer-links">
-                    <li><a href="services.html" class="footer-link">Dental SEO Solutions</a></li>
-                    <li><a href="services.html" class="footer-link">Paid Ads Management</a></li>
-                    <li><a href="services.html" class="footer-link">High-Converting Funnels</a></li>
-                    <li><a href="pricing.html" class="footer-link">ROI Modeller System</a></li>
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Our Platform</h3>
+                <h3>Patient Portal</h3>
                 <ul class="footer-links">
-                    <li><a href="login.html" class="footer-link">Client Portal (SaaS)</a></li>
-                    <li><a href="admin.html" class="footer-link">Agency Admin Panel</a></li>
-                    <li><a href="booking.html" class="footer-link">Schedule Consultation</a></li>
-                    <li><a href="coming-soon.html" class="footer-link">Upcoming Features</a></li>
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Clinic Demo</h3>
+                <h3>Clinic Layouts</h3>
                 <ul class="footer-links">
-                    <li><a href="clinic-home.html" class="footer-link">Clinic Live Demo</a></li>
-                    <li><a href="clinic-treatments.html" class="footer-link">Treatment Cost Calc</a></li>
-                    <li><a href="clinic-gallery.html" class="footer-link">Before/After Slider</a></li>
-                    <li><a href="clinic-booking.html" class="footer-link">Patient Booking System</a></li>
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
                 </ul>
             </div>
         </div>
         <div class="container footer-bottom">
-            <p>&copy; 2026 DentScale Performance Agency. All rights reserved.</p>
-            <div style="display:flex; gap:1.5rem;">
-                <a href="404.html" class="footer-link">Privacy Policy</a>
-                <a href="404.html" class="footer-link">Terms of Service</a>
-            </div>
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Demo Toggle Sticky Banner -->
-    <div class="demo-switch-banner">
-        <span>Demo View: <strong>Growth Agency</strong></span>
-        <a href="clinic-home.html" class="demo-switch-btn">Switch to Clinic Demo</a>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
 
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
+
 </html>

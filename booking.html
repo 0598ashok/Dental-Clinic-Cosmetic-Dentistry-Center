@@ -1,194 +1,340 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" dir="ltr">
+<html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book a Strategy Consultation — DentScale Dental Marketing</title>
+    <title>Book an Appointment — Vance Cosmetic Dentistry</title>
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
     <style>
-        .step-indicator { display:flex; gap:0; margin-bottom:3rem; }
-        .step-bubble { flex:1; display:flex; flex-direction:column; align-items:center; position:relative; }
-        .step-bubble::before { content:''; position:absolute; top:18px; left:50%; width:100%; height:2px; background:var(--border-color); z-index:0; }
-        .step-bubble:last-child::before { display:none; }
-        .step-num { width:36px; height:36px; border-radius:50%; background:var(--border-color); color:var(--text-muted); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.875rem; position:relative; z-index:1; transition:all 0.3s; }
-        .step-bubble.active .step-num { background:var(--color-primary); color:#fff; }
-        .step-bubble.done .step-num { background:var(--color-primary); color:#fff; }
-        .step-label { font-size:0.75rem; color:var(--text-muted); margin-top:0.5rem; font-weight:600; text-align:center; }
-        .step-bubble.active .step-label { color:var(--color-primary); }
-        .booking-step { display:none; }
-        .booking-step.active { display:block; }
-        .time-slots { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; margin:1.5rem 0; }
-        .time-slot { border:2px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem; text-align:center; cursor:pointer; font-weight:600; font-size:0.875rem; transition:all 0.2s; }
-        .time-slot:hover,.time-slot.selected { border-color:var(--color-primary); background:rgba(var(--color-primary-rgb),0.08); color:var(--color-primary); }
-        .day-select { display:grid; grid-template-columns:repeat(7,1fr); gap:0.5rem; margin:1.5rem 0; }
-        .day-btn { border:2px solid var(--border-color); border-radius:var(--radius-md); padding:0.5rem; text-align:center; cursor:pointer; font-size:0.75rem; font-weight:600; transition:all 0.2s; }
-        .day-btn:hover,.day-btn.selected { border-color:var(--color-primary); background:rgba(var(--color-primary-rgb),0.08); color:var(--color-primary); }
-        .day-btn .day-num { font-size:1.1rem; font-weight:700; }
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .slot-btn {
+            padding: 0.6rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: rgba(var(--bg-secondary-rgb), 0.5);
+            transition: all var(--transition-fast);
+        }
+
+        .slot-btn:hover {
+            border-color: var(--color-primary);
+            background: rgba(var(--color-primary-rgb), 0.05);
+        }
+
+        .slot-btn.active {
+            background: var(--color-primary);
+            color: #060913;
+            border-color: var(--color-primary);
+        }
+
+        [data-theme="light"] .slot-btn.active {
+            color: #ffffff;
+        }
+
+        @media(max-width: 600px) {
+            .time-slots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
-<body>
+
+<body class="clinic-theme">
+
+    <!-- Header Navigation -->
     <header class="header">
         <div class="container nav-wrapper">
-            <a href="index.html" class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>Dent<span>Scale</span></a>
-            <nav><ul class="nav-menu"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="pricing.html" class="nav-link">Pricing & ROI</a></li><li><a href="contact.html" class="nav-link">Contact</a></li><li class="theme-rtl-controls"></li><li><a href="login.html" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.875rem;">Client Portal</a></li></ul></nav>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
+            </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav>
+                <ul class="nav-menu">
+                    <!-- <li><a href="index.html" class="nav-link">Home</a></li> -->
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="theme-rtl-controls"></li>
+                    <li><a href="login.html" class="btn btn-primary active"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <section class="section" style="background-color:var(--bg-secondary);padding:3rem 0;">
-        <div class="container text-center">
-            <span class="section-tag">Free Strategy Session</span>
-            <h1 class="section-title">Book Your 30-Minute Growth Consultation</h1>
-            <p class="section-desc">No sales pressure. We analyse your clinic's current performance and identify your #1 patient acquisition opportunity.</p>
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="container">
+            <span class="section-tag">Direct Scheduling</span>
+            <h1 class="section-title">Book Smile Consultation</h1>
+            <p class="section-desc">Choose your dentist specialist, schedule a calendar slot, and coordinate your visit.
+            </p>
         </div>
     </section>
 
+    <!-- Appointment Scheduling form section -->
     <section class="section">
-        <div class="container" style="max-width:700px;">
-            <!-- Step Indicator -->
-            <div class="step-indicator" id="step-indicator">
-                <div class="step-bubble active" id="bubble-1"><div class="step-num">1</div><div class="step-label">Your Info</div></div>
-                <div class="step-bubble" id="bubble-2"><div class="step-num">2</div><div class="step-label">Pick Date</div></div>
-                <div class="step-bubble" id="bubble-3"><div class="step-num">3</div><div class="step-label">Pick Time</div></div>
-                <div class="step-bubble" id="bubble-4"><div class="step-num">4</div><div class="step-label">Confirm</div></div>
-            </div>
+        <div class="container" style="max-width: 700px;">
+            <form class="card"
+                style="box-shadow: var(--shadow-lg); padding: 3rem; display:flex; flex-direction:column; gap:1.75rem;"
+                onsubmit="handleBookingForm(event)">
+                <h2
+                    style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; gap: 0.5rem; align-items:center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Clinical Calendar Scheduler
+                </h2>
 
-            <!-- Step 1: Practitioner Info -->
-            <div class="booking-step active card" id="step-1" style="padding:2.5rem;">
-                <h2 style="font-size:1.5rem;margin-bottom:2rem;">Tell us about your practice</h2>
-                <div style="display:flex;flex-direction:column;gap:1.25rem;">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-                        <div class="form-group"><label>First Name *</label><input type="text" id="b-fname" placeholder="Dr. Evelyn"></div>
-                        <div class="form-group"><label>Last Name *</label><input type="text" id="b-lname" placeholder="Vance"></div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label for="appt-name">Full Patient Name</label>
+                        <input type="text" id="appt-name" placeholder="Jane Doe" required value="Jane Doe">
                     </div>
-                    <div class="form-group"><label>Email *</label><input type="email" id="b-email" placeholder="evelyn@vancecosmetic.com"></div>
-                    <div class="form-group"><label>Phone</label><input type="tel" id="b-phone" placeholder="+1 (555) 000-0000"></div>
-                    <div class="form-group"><label>Practice Name *</label><input type="text" id="b-practice" placeholder="Vance Cosmetic Center"></div>
-                    <div class="form-group"><label>Monthly Marketing Budget</label>
-                        <select id="b-budget">
-                            <option>Under $1,000</option>
-                            <option>$1,000 – $2,500</option>
-                            <option selected>$2,500 – $5,000</option>
-                            <option>$5,000 – $10,000</option>
-                            <option>$10,000+</option>
+                    <div class="form-group">
+                        <label for="appt-phone">Contact Phone</label>
+                        <input type="tel" id="appt-phone" placeholder="+1 (555) 000-0000" required
+                            value="+1 (555) 123-4567">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="appt-email">Email Address</label>
+                    <input type="email" id="appt-email" placeholder="jane.doe@example.com" required
+                        value="jane.doe@example.com">
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label for="appt-treatment">Select Treatment</label>
+                        <select id="appt-treatment" required>
+                            <option value="Porcelain Veneers Prep">Porcelain Veneers Consultation</option>
+                            <option value="Dental Implant Extraction">Dental Implant Reconstruction</option>
+                            <option value="Invisalign Aligners Prep">Invisalign clear alignment</option>
+                            <option value="Teeth Whitening Followup">Laser Teeth Whitening</option>
+                            <option value="Periodontal Deep Cleaning">Periodontal Deep Cleaning</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Primary Goal</label>
-                        <select id="b-goal">
-                            <option>More cosmetic/implant patients</option>
-                            <option>Reduce cost per lead</option>
-                            <option>Improve Google Maps ranking</option>
-                            <option>Build a predictable lead pipeline</option>
+                    <div class="form-group">
+                        <label for="appt-doctor">Select Dentist Specialist</label>
+                        <select id="appt-doctor" required>
+                            <option value="Dr. Evelyn Vance">Dr. Evelyn Vance, DDS (Cosmetic)</option>
+                            <option value="Dr. Marcus Sterling">Dr. Marcus Sterling (Implants)</option>
+                            <option value="Dr. Sarah Chen">Dr. Sarah Chen (Orthodontic)</option>
                         </select>
                     </div>
-                    <button class="btn btn-primary" style="width:100%;margin-top:0.5rem;" onclick="goToStep(2)">Continue — Pick a Date →</button>
                 </div>
-            </div>
 
-            <!-- Step 2: Date Selector -->
-            <div class="booking-step card" id="step-2" style="padding:2.5rem;">
-                <h2 style="font-size:1.5rem;margin-bottom:0.5rem;">Select a Date</h2>
-                <p style="color:var(--text-secondary);margin-bottom:1rem;">Available slots for June–July 2026 (Mon–Fri).</p>
-                <div class="day-select" id="day-picker"></div>
-                <div style="display:flex;gap:1rem;margin-top:1.5rem;">
-                    <button class="btn btn-secondary" style="flex:1;" onclick="goToStep(1)">← Back</button>
-                    <button class="btn btn-primary" style="flex:1;" onclick="goToStep(3)">Continue — Pick a Time →</button>
+                <div class="form-group">
+                    <label for="appt-date">Preferred Session Date</label>
+                    <input type="date" id="appt-date" required>
                 </div>
-            </div>
 
-            <!-- Step 3: Time Selector -->
-            <div class="booking-step card" id="step-3" style="padding:2.5rem;">
-                <h2 style="font-size:1.5rem;margin-bottom:0.5rem;">Select a Time</h2>
-                <p style="color:var(--text-secondary);margin-bottom:0.5rem;">All times are in CST (UTC-6). Session duration: 30 minutes.</p>
-                <div class="time-slots">
-                    <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
-                    <div class="time-slot" onclick="selectTime(this)">9:30 AM</div>
-                    <div class="time-slot" onclick="selectTime(this)">10:00 AM</div>
-                    <div class="time-slot" onclick="selectTime(this)">10:30 AM</div>
-                    <div class="time-slot" onclick="selectTime(this)">11:00 AM</div>
-                    <div class="time-slot selected" onclick="selectTime(this)">11:30 AM</div>
-                    <div class="time-slot" onclick="selectTime(this)">1:00 PM</div>
-                    <div class="time-slot" onclick="selectTime(this)">2:00 PM</div>
-                    <div class="time-slot" onclick="selectTime(this)">3:00 PM</div>
-                    <div class="time-slot" onclick="selectTime(this)">3:30 PM</div>
-                    <div class="time-slot" onclick="selectTime(this)">4:00 PM</div>
-                    <div class="time-slot" onclick="selectTime(this)">4:30 PM</div>
-                </div>
-                <div style="display:flex;gap:1rem;margin-top:0.5rem;">
-                    <button class="btn btn-secondary" style="flex:1;" onclick="goToStep(2)">← Back</button>
-                    <button class="btn btn-primary" style="flex:1;" onclick="goToStep(4)">Review Booking →</button>
-                </div>
-            </div>
-
-            <!-- Step 4: Confirmation -->
-            <div class="booking-step card" id="step-4" style="padding:2.5rem;">
-                <div id="booking-summary">
-                    <h2 style="font-size:1.5rem;margin-bottom:2rem;">Confirm Your Booking</h2>
-                    <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:2rem;display:flex;flex-direction:column;gap:1rem;">
-                        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-muted);">Name</span><strong id="confirm-name">—</strong></div>
-                        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-muted);">Practice</span><strong id="confirm-practice">—</strong></div>
-                        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-muted);">Date</span><strong id="confirm-date">—</strong></div>
-                        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-muted);">Time</span><strong id="confirm-time">11:30 AM CST</strong></div>
-                        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-muted);">Duration</span><strong>30 minutes (via Google Meet)</strong></div>
+                <!-- Custom time slot grid -->
+                <div class="form-group">
+                    <label>Select Available Time Slot</label>
+                    <div class="time-slots-grid">
+                        <div class="slot-btn active" onclick="selectTimeSlot(this, '09:00 AM')">09:00 AM</div>
+                        <div class="slot-btn" onclick="selectTimeSlot(this, '10:00 AM')">10:00 AM</div>
+                        <div class="slot-btn" onclick="selectTimeSlot(this, '11:00 AM')">11:00 AM</div>
+                        <div class="slot-btn" onclick="selectTimeSlot(this, '01:00 PM')">01:00 PM</div>
+                        <div class="slot-btn" onclick="selectTimeSlot(this, '02:00 PM')">02:00 PM</div>
+                        <div class="slot-btn" onclick="selectTimeSlot(this, '03:00 PM')">03:00 PM</div>
+                        <div class="slot-btn" onclick="selectTimeSlot(this, '04:00 PM')">04:00 PM</div>
+                        <div class="slot-btn" onclick="selectTimeSlot(this, '05:00 PM')">05:00 PM</div>
                     </div>
-                    <div style="display:flex;gap:1rem;">
-                        <button class="btn btn-secondary" style="flex:1;" onclick="goToStep(3)">← Back</button>
-                        <button class="btn btn-primary" style="flex:1;" onclick="confirmBooking()">Confirm Booking ✓</button>
-                    </div>
+                    <input type="hidden" id="appt-time" value="09:00 AM">
                 </div>
-                <div id="booking-confirmed" style="display:none;text-align:center;padding:2rem 0;">
-                    <div style="font-size:4rem;margin-bottom:1rem;">🎉</div>
-                    <h2 style="margin-bottom:1rem;color:var(--color-primary);">You're Booked!</h2>
-                    <p style="color:var(--text-secondary);margin-bottom:2rem;">A calendar invite has been sent to your email. We look forward to mapping out your dental practice growth strategy!</p>
-                    <a href="index.html" class="btn btn-primary">Back to Home</a>
+
+                <div class="form-group">
+                    <label for="appt-notes">Procedural Comments</label>
+                    <textarea id="appt-notes" rows="3" placeholder="Tell us about any specific tooth concerns..."
+                        style="resize:none; padding: 0.85rem 1.25rem; background-color: rgba(var(--bg-secondary-rgb), 0.8); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: var(--text-primary);"></textarea>
                 </div>
-            </div>
+
+                <button type="submit" class="btn btn-primary"
+                    style="width:100%; padding: 1.15rem; font-size:1.05rem;">Request Slot Booking &rarr;</button>
+
+                <div id="appt-success-msg"
+                    style="display:none; background-color:rgba(16,185,129,0.15); color:var(--color-success); border:1px solid var(--color-success); padding: 1rem; border-radius:var(--radius-md); text-align:center; font-size:0.95rem; font-weight:600;">
+                    Your smile consultation is successfully requested! Redirecting to Patient Portal...
+                </div>
+            </form>
         </div>
     </section>
 
-    <div class="demo-switch-banner"><span>Demo View: <strong>Growth Agency</strong></span><a href="clinic-home.html" class="demo-switch-btn">Switch to Clinic Demo</a></div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
+                </a>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Smile Treatments</h3>
+                <ul class="footer-links">
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Patient Portal</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Clinic Layouts</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        let selectedDay = null, selectedTime = '11:30 AM';
-        const days = ['Mon','Tue','Wed','Thu','Fri'];
-        const dates = [18,19,20,23,24,25,26,27,30]; // Sample June dates
-        const picker = document.getElementById('day-picker');
-        dates.forEach((d, i) => {
-            const btn = document.createElement('div');
-            btn.className = 'day-btn' + (i === 0 ? ' selected' : '');
-            btn.innerHTML = `<div>${days[i % 5]}</div><div class="day-num">${d}</div><div style="font-size:0.65rem;color:var(--text-muted);">Jun</div>`;
-            btn.onclick = () => { document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); selectedDay = `${days[i%5]} Jun ${d}`; };
-            picker.appendChild(btn);
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set date value default to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const dateStr = tomorrow.toISOString().split('T')[0];
+            const dateInput = document.getElementById('appt-date');
+            dateInput.value = dateStr;
+            dateInput.min = dateStr; // Cannot book past dates
         });
-        selectedDay = 'Mon Jun 18';
 
-        function goToStep(n) {
-            [1,2,3,4].forEach(i => {
-                document.getElementById(`step-${i}`).classList.toggle('active', i === n);
-                const b = document.getElementById(`bubble-${i}`);
-                b.classList.toggle('active', i === n);
-                b.classList.toggle('done', i < n);
-            });
-            if (n === 4) {
-                document.getElementById('confirm-name').textContent = `${document.getElementById('b-fname').value} ${document.getElementById('b-lname').value}`;
-                document.getElementById('confirm-practice').textContent = document.getElementById('b-practice').value;
-                document.getElementById('confirm-date').textContent = selectedDay || 'Mon Jun 18';
-                document.getElementById('confirm-time').textContent = selectedTime + ' CST';
+        function selectTimeSlot(btn, time) {
+            document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('appt-time').value = time;
+        }
+
+        function handleBookingForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('appt-name').value;
+            const phone = document.getElementById('appt-phone').value;
+            const email = document.getElementById('appt-email').value;
+            const treatment = document.getElementById('appt-treatment').value;
+            const doctor = document.getElementById('appt-doctor').value;
+            const date = document.getElementById('appt-date').value;
+            const time = document.getElementById('appt-time').value;
+            const notes = document.getElementById('appt-notes').value;
+            const success = document.getElementById('appt-success-msg');
+
+            // Calculate cost based on treatment selection
+            let amount = 350;
+            if (treatment.includes('Veneers')) amount = 3800;
+            else if (treatment.includes('Implant')) amount = 240 post - op ? 450 : 2400;
+            else if (treatment.includes('Invisalign')) amount = 3200;
+            else if (treatment.includes('Cleaning')) amount = 180;
+
+            if (window.DentalStore) {
+                // 1. Add appointment to DB
+                window.DentalStore.addAppointment({
+                    patientName: name,
+                    doctorName: doctor,
+                    treatment: treatment,
+                    date: date,
+                    time: time,
+                    amount: amount
+                });
+
+                // 2. Add lead record for admin to track
+                window.DentalStore.addLead({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    treatment: treatment.split(' ')[0],
+                    source: 'Booking System'
+                });
             }
-        }
 
-        function selectTime(el) {
-            document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedTime = el.textContent;
-        }
-
-        function confirmBooking() {
-            document.getElementById('booking-summary').style.display = 'none';
-            document.getElementById('booking-confirmed').style.display = 'block';
+            success.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
         }
     </script>
 </body>
+
 </html>

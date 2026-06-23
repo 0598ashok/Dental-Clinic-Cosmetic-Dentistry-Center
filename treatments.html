@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treatments & Pricing Calculator — Vance Cosmetic Dentistry</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+    <script src="assets/js/store.js" defer></script>
+    <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        /* Premium Layout Styling (No Carousels) */
+
+        /* 1. Materials Grid Section */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .material-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .material-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-primary);
+            opacity: 0.7;
+            transition: all var(--transition-normal);
+        }
+
+        .material-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .material-card:hover::before {
+            height: 6px;
+            opacity: 1;
+        }
+
+        .material-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform var(--transition-normal);
+        }
+
+        .material-card:hover .material-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .material-properties {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* 2. Restorative Workflow Rows */
+        .workflow-row {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .workflow-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .workflow-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .workflow-img-wrapper {
+            flex: 1;
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            height: 300px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .workflow-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .workflow-img-wrapper:hover .workflow-img {
+            transform: scale(1.05);
+        }
+
+        .workflow-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .workflow-index {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: rgba(var(--color-accent-rgb), 0.15);
+            line-height: 1;
+            margin-bottom: 1rem;
+            transition: all var(--transition-normal);
+        }
+
+        .workflow-row:hover .workflow-index {
+            color: var(--color-accent);
+            transform: translate(5px, 0);
+        }
+
+        /* 3. Cosmetic Membership Plans */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            align-items: stretch;
+        }
+
+        .plan-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.25rem;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .plan-card.featured {
+            border-color: #ec4899;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-12px);
+        }
+
+        .plan-card.featured:hover {
+            box-shadow: 0 0 35px rgba(236, 72, 153, 0.25);
+            transform: translateY(-12px);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ec4899;
+            color: #fff;
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+        }
+
+        .plan-name {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .plan-price span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .plan-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .plan-feature-item {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            align-items: center;
+        }
+
+        .plan-feature-item svg {
+            color: #ec4899;
+            flex-shrink: 0;
+        }
+
+        /* Responsive Grid & Layouts */
+        @media (max-width: 992px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .plan-card.featured {
+                transform: none;
+            }
+
+            .plan-card:hover {
+                transform: translateY(-6px);
+            }
+
+            .plan-card.featured:hover {
+                transform: translateY(-6px);
+            }
+
+            .workflow-row {
+                flex-direction: column !important;
+                gap: 2rem;
+                margin-bottom: 3.5rem;
+            }
+
+            .workflow-img-wrapper {
+                width: 100%;
+                height: 240px;
+            }
+
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Reveal Animation styling */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="clinic-theme">
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
+            </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav>
+                <ul class="nav-menu">
+
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="treatments.html" class="nav-link active">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link ">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="theme-rtl-controls"></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="container">
+            <span class="section-tag">Restoration Suite</span>
+            <h1 class="section-title">Signature Smile Treatments</h1>
+            <p class="section-desc">Explore our premium cosmetic treatments and estimate your restoration layout pricing
+                below.</p>
+        </div>
+    </section>
+
+    <!-- Detailed Services Grid -->
+    <section class="section">
+        <div class="container grid-2" style="gap: 4rem;">
+            <!-- Left Column: Treatments Detailed Cards -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                <div class="card" style="padding: 2rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h3 style="font-size: 1.35rem; font-weight: 700;">Porcelain Veneers</h3>
+                        <span style="color: var(--color-primary); font-weight: 800; font-size: 1.15rem;">$850 /
+                            tooth</span>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">Wafer-thin shells
+                        made from premium grade lithium disilicate ceramics bonded to the front of teeth. Ideal for
+                        masking discoloration, correcting chips, closing gaps, and aligning teeth shape.</p>
+                    <div style="display: flex; gap: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>⏱ Treatment: 2 Visits</span>
+                        <span>🛡 Durability: 15-20 Yrs</span>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 2rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h3 style="font-size: 1.35rem; font-weight: 700;">Dental Implants</h3>
+                        <span style="color: var(--color-primary); font-weight: 800; font-size: 1.15rem;">$2,400 /
+                            tooth</span>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">Biological
+                        replacement for tooth loss. We surgically place a biocompatible titanium root post directly in
+                        the jaw structure, capped with a custom hand-crafted porcelain crown matching adjacent teeth.
+                    </p>
+                    <div style="display: flex; gap: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>⏱ Treatment: 3-6 Mos</span>
+                        <span>🛡 Durability: Lifetime</span>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 2rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h3 style="font-size: 1.35rem; font-weight: 700;">Invisalign Clear Aligners</h3>
+                        <span style="color: var(--color-primary); font-weight: 800; font-size: 1.15rem;">$3,200 /
+                            course</span>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">Invisible clear
+                        orthodontics clear aligners mapping progression stages. Straighten teeth comfortably without
+                        metallic brackets or wiring. Tracks progression charts inside the patient portal.</p>
+                    <div style="display: flex; gap: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>⏱ Treatment: 6-18 Mos</span>
+                        <span>🛡 Durability: Permanent</span>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 2rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h3 style="font-size: 1.35rem; font-weight: 700;">Laser Teeth Whitening</h3>
+                        <span style="color: var(--color-primary); font-weight: 800; font-size: 1.15rem;">$350 /
+                            visit</span>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">Clinical teeth
+                        whitening using light-activated whitening gels. Instantly removes deep tobacco, coffee, or
+                        age-based stains in a single 60-minute visit.</p>
+                    <div style="display: flex; gap: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                        <span>⏱ Treatment: 1 Hour</span>
+                        <span>🛡 Durability: 1-3 Yrs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Cost Calculator widget -->
+            <div>
+                <div class="cost-calculator" style="position: sticky; top: 100px;">
+                    <span class="section-tag" style="text-align: left;">Treatment Planner</span>
+                    <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem;">Treatment Cost Calculator
+                    </h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.95rem;">Pick multiple
+                        treatments to estimate procedural expenses. Check pricing breakdowns and monthly zero-interest
+                        payment structures instantly.</p>
+
+                    <div class="proc-list">
+                        <div class="proc-item" onclick="toggleCalcCheckbox('calc-veneers')">
+                            <div class="proc-info">
+                                <input type="checkbox" id="calc-veneers" value="850" onchange="runCostCalc()">
+                                <div>
+                                    <strong style="display:block;">Porcelain Veneer (Single Tooth)</strong>
+                                    <span style="font-size:0.75rem; color:var(--text-muted);">Custom design &
+                                        placement</span>
+                                </div>
+                            </div>
+                            <span class="proc-price">$850</span>
+                        </div>
+
+                        <div class="proc-item" onclick="toggleCalcCheckbox('calc-implants')">
+                            <div class="proc-info">
+                                <input type="checkbox" id="calc-implants" value="2400" onchange="runCostCalc()">
+                                <div>
+                                    <strong style="display:block;">Dental Implant (Titanium + Crown)</strong>
+                                    <span style="font-size:0.75rem; color:var(--text-muted);">Complete root
+                                        replacement</span>
+                                </div>
+                            </div>
+                            <span class="proc-price">$2,400</span>
+                        </div>
+
+                        <div class="proc-item" onclick="toggleCalcCheckbox('calc-invisalign')">
+                            <div class="proc-info">
+                                <input type="checkbox" id="calc-invisalign" value="3200" onchange="runCostCalc()">
+                                <div>
+                                    <strong style="display:block;">Invisalign Orthodontic Course</strong>
+                                    <span style="font-size:0.75rem; color:var(--text-muted);">Full alignment set</span>
+                                </div>
+                            </div>
+                            <span class="proc-price">$3,200</span>
+                        </div>
+
+                        <div class="proc-item" onclick="toggleCalcCheckbox('calc-whitening')">
+                            <div class="proc-info">
+                                <input type="checkbox" id="calc-whitening" value="350" onchange="runCostCalc()">
+                                <div>
+                                    <strong style="display:block;">Clinical Laser Whitening</strong>
+                                    <span style="font-size:0.75rem; color:var(--text-muted);">In-chair laser
+                                        brightening</span>
+                                </div>
+                            </div>
+                            <span class="proc-price">$350</span>
+                        </div>
+
+                        <div class="proc-item" onclick="toggleCalcCheckbox('calc-clean')">
+                            <div class="proc-info">
+                                <input type="checkbox" id="calc-clean" value="180" onchange="runCostCalc()">
+                                <div>
+                                    <strong style="display:block;">Periodontal Deep Cleaning</strong>
+                                    <span style="font-size:0.75rem; color:var(--text-muted);">Plaque scaling &
+                                        hygiene</span>
+                                </div>
+                            </div>
+                            <span class="proc-price">$180</span>
+                        </div>
+                    </div>
+
+                    <div class="calc-total" style="flex-direction: column; gap: 1rem; align-items: stretch;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:700;">ESTIMATED TOTAL:</span>
+                            <span class="total-price" id="calc-price-total">$0</span>
+                        </div>
+                        <div
+                            style="border-top:1px solid var(--border-color); padding-top:1rem; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <span
+                                    style="font-size:0.8rem; color:var(--text-muted); display:block; font-weight:600;">12
+                                    MO. INSTALMENTS</span>
+                                <span style="font-weight:700; color:var(--color-primary);" id="calc-price-monthly">$0 /
+                                    mo</span>
+                            </div>
+                            <a href="booking.html" class="btn btn-primary"
+                                style="padding: 0.5rem 1rem; font-size: 0.85rem;">Book Treatment</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Section 1: Materials & Craftsmanship (Bento Grid) -->
+    <section class="section"
+        style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 5rem 0 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Structural Bio-Integrity</span>
+                <h2 class="section-title">Restoration Materials Suite</h2>
+                <p class="section-desc">We use only the most premium, durable, and biocompatible materials,
+                    precision-machined and finished by hand for natural light reflections.</p>
+            </div>
+
+            <div class="materials-grid reveal">
+                <!-- Material 1 -->
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon">💎</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Lithium Disilicate (E.max)</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Wafer-thin
+                            glass-ceramic blocks milled for veneers and anterior crowns. Features incredible
+                            translucency that mimics biological enamel light refraction.</p>
+                    </div>
+                    <div class="material-properties">
+                        <span><strong>Flex Strength:</strong> 500 MPa (Excellent)</span>
+                        <span><strong>Refractive Index:</strong> High Light-Transmission</span>
+                        <span><strong>Best For:</strong> Custom Smile Makeovers</span>
+                    </div>
+                </div>
+
+                <!-- Material 2 -->
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon">🛡️</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Monolithic Zirconia</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Ultra-dense
+                            biocompatible ceramic block designed for molar crowns and full-arch restorations. Resists
+                            chipping, fractures, and severe occlusion wear.</p>
+                    </div>
+                    <div class="material-properties">
+                        <span><strong>Flex Strength:</strong> 1,200 MPa (Ultra High)</span>
+                        <span><strong>Color Stability:</strong> 100% Stain Resistant</span>
+                        <span><strong>Best For:</strong> High-Bite Posterior Crowns</span>
+                    </div>
+                </div>
+
+                <!-- Material 3 -->
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon">🔩</div>
+                        <h3
+                            style="font-size:1.35rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Medical Grade Titanium</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Surgical Grade-V
+                            bio-inert alloy used to fabricate dental implant screw roots. Naturally integrates with bone
+                            tissue structure via osseointegration.</p>
+                    </div>
+                    <div class="material-properties">
+                        <span><strong>Flex Strength:</strong> 950 MPa (Internal)</span>
+                        <span><strong>Allergen Rating:</strong> Completely Bio-inert</span>
+                        <span><strong>Best For:</strong> Implant Anchors & Abutments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Restorative Workflow (Alternating Rows) -->
+    <section class="section"
+        style="background-color: var(--bg-primary); border-top: 1px solid var(--border-color); padding: 5.5rem 0 4.5rem;">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom:4.5rem;">
+                <span class="section-tag" style="color:var(--color-accent);">The Vance Protocol</span>
+                <h2 class="section-title">Your Smile Design Pathway</h2>
+                <p class="section-desc">Understanding our detailed clinical and digital design stages helps you
+                    confidently co-design your custom smile transformation.</p>
+            </div>
+
+            <div class="reveal">
+                <!-- Step 1 -->
+                <div class="workflow-row">
+                    <div class="workflow-img-wrapper">
+                        <img src="https://images.openai.com/static-rsc-4/BD7w63oZV71SmxJZ99cT0TwVzpO1cl4VHv0saMSolMbiMNk7O3Z1KpG9Me64wCnWvZaYJS436s5lqKCOgLMtH95K96mD5sHzAp0Rhena0BBPR1H4p-eP6bAe_UTd8ync8GGv1z6rU4KXzjOJjGA77Ogb5PSEglEtUU5lCR6kEgQ29CJVc4eA4SoOXzADNY1N?purpose=fullsize"
+                            alt="Intraoral scanning procedure" class="workflow-img">
+                    </div>
+                    <div class="workflow-content">
+                        <div class="workflow-index">01</div>
+                        <h3
+                            style="font-size:1.4rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Comprehensive Digital Mapping</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">We start with
+                            high-speed digital scanners that capture thousands of frames/sec to construct an interactive
+                            3D teeth blueprint. There are no messy, plaster chemical molds, ensuring immediate comfort.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="workflow-row">
+                    <div class="workflow-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=80"
+                            alt="Digital smile modeling" class="workflow-img">
+                    </div>
+                    <div class="workflow-content">
+                        <div class="workflow-index">02</div>
+                        <h3
+                            style="font-size:1.4rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Aesthetic Architecture Design</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Dr. Vance reviews
+                            bone proportions and lip curvature mapping. We adjust teeth length, curvature, and alignment
+                            digitally to render a mock preview. You can approve or request changes before we mill.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="workflow-row">
+                    <div class="workflow-img-wrapper">
+                        <img src="https://images.openai.com/static-rsc-4/c5SMFu4AGX4aZa5wEc2XEJuQVTIzSUilGInZtL7QH7MJX9R_sypMiKwMJiU1Bj865zC10Ubn8VQ_nZ9aPJtXgzJBHuumKKf43_BEuCsMeP-NN0tRipKS_Ognk_Gnne52Fos-3--xisbalh8F5PHfZ4NugEZTuJf397fZqmvR4O6dxZfGZik31ZvTlcx4iVXJ?purpose=fullsize"
+                            alt="CEREC Primemill operation" class="workflow-img">
+                    </div>
+                    <div class="workflow-content">
+                        <div class="workflow-index">03</div>
+                        <h3
+                            style="font-size:1.4rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Computer-Guided Diamond Milling</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Once approved, the
+                            restoration models are sent to our CAD/CAM diamond milling machine. The machine carves
+                            veneers or crowns from pure crystalline disilicate blocks in less than 40 minutes for
+                            flawless fit.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="workflow-row">
+                    <div class="workflow-img-wrapper">
+                        <img src="https://images.openai.com/static-rsc-4/eFi-gz9YOoX_JQeNe6REgZ7bAxU8nVcz_OHSdQ3CVVzTuQuENy6LOY845U7-zNjkC5oLkLmHTJUHrLzaOhw7RSgVAVHCZ0tVO2DL695zRQqYgGaZXmxBjBrGKBp2nxIerYtQurZuOVcdQ5AnRt4qBuG6lkhIW5wyIhAI0Q8r6lZPa6v_wRe6uWqYy5WE6e_X?purpose=fullsize"
+                            alt="Cosmetic bonding veneers" class="workflow-img">
+                    </div>
+                    <div class="workflow-content">
+                        <div class="workflow-index">04</div>
+                        <h3
+                            style="font-size:1.4rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading);">
+                            Micro-Layering & Bonding</h3>
+                        <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.6;">Our ceramist
+                            hand-glazes veneer edges to mimic realistic enamel. We then use medical-grade adhesive
+                            composites and light curing to bond restorations to teeth structures for long-term
+                            durability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Cosmetic Membership Plans (Pricing Cards) -->
+    <section class="section"
+        style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 5.5rem 0 5.5rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag" style="color:#ec4899;">Smile Protection</span>
+                <h2 class="section-title">Dental Membership Tiers</h2>
+                <p class="section-desc">Select an interactive membership plan to secure routine cleanings, periodic
+                    cosmetic reviews, and exclusive restoration discount rates.</p>
+            </div>
+
+            <div class="plans-grid reveal">
+                <!-- Plan 1 -->
+                <div class="plan-card">
+                    <div>
+                        <div class="plan-name">Essential Care</div>
+                        <div class="plan-price">$45 <span>/ mo</span></div>
+                        <p
+                            style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:1.5rem; line-height:1.5;">
+                            Ideal for preserving clinical oral hygiene and tracking dental alignments annually.</p>
+
+                        <ul class="plan-features">
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>2 Professional Cleanings / Yr</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Annual 3D Scanning Mapping</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>10% Off Emergency Services</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Patient Portal Direct Messaging</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="booking.html" class="btn btn-outline" style="width:100%; text-align:center;">Subscribe
+                        Plan</a>
+                </div>
+
+                <!-- Plan 2 (Featured!) -->
+                <div class="plan-card featured">
+                    <div class="plan-badge">Most Popular</div>
+                    <div>
+                        <div class="plan-name" style="color:var(--text-primary);">Signature Smile</div>
+                        <div class="plan-price" style="color:#ec4899;">$95 <span>/ mo</span></div>
+                        <p
+                            style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:1.5rem; line-height:1.5;">
+                            Designed for veneer and implant cosmetic checkups, plus ongoing stain removal.</p>
+
+                        <ul class="plan-features">
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <strong>3 Professional Cleanings / Yr</strong>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <strong>Biannual Cosmetic Mapping</strong>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>20% Off Veneers & Whitening</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Priority Portal Support Chat</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Annual Laser Whitening Session</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="booking.html" class="btn btn-primary"
+                        style="width:100%; text-align:center; background:#ec4899; border-color:#ec4899; box-shadow:0 4px 12px rgba(236, 72, 153, 0.25);">Subscribe
+                        Plan</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="plan-card">
+                    <div>
+                        <div class="plan-name">Full Reconstructive</div>
+                        <div class="plan-price">$185 <span>/ mo</span></div>
+                        <p
+                            style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:1.5rem; line-height:1.5;">
+                            Ultimate protection plan for implant, veneer, and complete aligner restorations.</p>
+
+                        <ul class="plan-features">
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Unlimited Dental Cleanings / Yr</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Quarterly Cosmetic Reviews</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>25% Off Implants & Veneers</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Direct Surgeon Portal Hot-Line</span>
+                            </li>
+                            <li class="plan-feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                                <span>Complimentary Night Guards / Yr</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="booking.html" class="btn btn-outline" style="width:100%; text-align:center;">Subscribe
+                        Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
+                </a>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Smile Treatments</h3>
+                <ul class="footer-links">
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Patient Portal</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Clinic Layouts</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleCalcCheckbox(id) {
+            const cb = document.getElementById(id);
+            if (cb) {
+                // Clicking container toggles checkbox (but ignore if clicked checkbox itself directly)
+                // We let change handler do the math
+                cb.checked = !cb.checked;
+
+                // Toggle active class on item wrapper
+                cb.closest('.proc-item').classList.toggle('selected', cb.checked);
+                runCostCalc();
+            }
+        }
+
+        // Prevent click bubbling if user clicks checkbox element directly
+        document.querySelectorAll('.proc-item input[type="checkbox"]').forEach(cb => {
+            cb.addEventListener('click', (e) => {
+                e.stopPropagation();
+                cb.closest('.proc-item').classList.toggle('selected', cb.checked);
+                runCostCalc();
+            });
+        });
+
+        function runCostCalc() {
+            let total = 0;
+            const checkboxes = document.querySelectorAll('.proc-list input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    total += parseInt(cb.value);
+                }
+            });
+
+            const totalEl = document.getElementById('calc-price-total');
+            const monthlyEl = document.getElementById('calc-price-monthly');
+
+            totalEl.textContent = `$${total.toLocaleString()}`;
+
+            // Assume interest-free 12 month payment plan
+            const monthly = Math.round(total / 12);
+            monthlyEl.textContent = `$${monthly.toLocaleString()} / mo`;
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>

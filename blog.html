@@ -1,190 +1,991 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" dir="ltr">
+<html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources & Growth Guides — DentScale Dental Marketing</title>
-    <meta name="description" content="Read expert guides on dental SEO, Google Ads for dentists, patient acquisition, and cosmetic dentistry marketing strategies.">
-    <link rel="stylesheet" href="assets/css/variables.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <title>Doctor's Log — Vance Cosmetic Dentistry</title>
+    <link class="stylesheet" href="assets/css/variables.css" rel="stylesheet">
+    <link class="stylesheet" href="assets/css/main.css" rel="stylesheet">
+    <link class="stylesheet" href="assets/css/clinic.css" rel="stylesheet">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        /* Custom Blog Styles */
+        .blog-hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at top, rgba(var(--color-primary-rgb), 0.08) 0%, transparent 60%);
+        }
+
+        .blog-hero .section-tag {
+            background: rgba(var(--color-primary-rgb), 0.15);
+            color: var(--color-primary);
+            padding: 0.35rem 1.25rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(var(--color-primary-rgb), 0.25);
+        }
+
+        .blog-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-hero p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Featured Post styles */
+        .featured-post-container {
+            margin-bottom: 4rem;
+        }
+
+        .featured-card {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(var(--color-primary-rgb), 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(var(--color-primary-rgb), 0.1);
+        }
+
+        .featured-img-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            min-height: 380px;
+        }
+
+        .featured-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .featured-card:hover .featured-img {
+            transform: scale(1.04);
+        }
+
+        .featured-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 100%);
+            color: #060913;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-md);
+            text-transform: uppercase;
+            align-self: flex-start;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .featured-title {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+            transition: color var(--transition-fast);
+        }
+
+        .featured-card:hover .featured-title {
+            color: var(--color-primary);
+        }
+
+        .featured-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* Filter pill bar */
+        .filter-section {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1.5rem;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-pill {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-pill:hover {
+            background: rgba(var(--color-primary-rgb), 0.05);
+            border-color: rgba(var(--color-primary-rgb), 0.3);
+            color: var(--text-primary);
+        }
+
+        .filter-pill.active {
+            background: var(--color-primary);
+            color: #060913;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3);
+        }
+
+        /* Grid elements */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
+            opacity: 1;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(var(--color-primary-rgb), 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(var(--color-primary-rgb), 0.08);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .blog-card:hover .card-img-wrap img {
+            transform: scale(1.05);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.3rem 0.65rem;
+            border-radius: var(--radius-md);
+            letter-spacing: 0.05em;
+            color: #060913;
+        }
+
+        .badge-veneers {
+            background: #e0a96d;
+        }
+
+        .badge-implants {
+            background: #06b6d4;
+        }
+
+        .badge-orthodontics {
+            background: #2dd4bf;
+        }
+
+        .badge-whitening {
+            background: #a855f7;
+        }
+
+        .badge-hygiene {
+            background: #3b82f6;
+        }
+
+        .badge-technology {
+            background: #f59e0b;
+        }
+
+        .blog-card-body {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            transition: color var(--transition-fast);
+        }
+
+        .blog-card:hover .blog-card-title {
+            color: var(--color-primary);
+        }
+
+        .blog-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        /* Author and footer profile layout */
+        .author-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1.25rem;
+            margin-top: auto;
+        }
+
+        .author-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+            border: 1.5px solid rgba(var(--color-primary-rgb), 0.2);
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .read-time-pill {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Editorial board section */
+        .advisory-section {
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 5rem 0;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .advisory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .advisor-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all var(--transition-medium);
+        }
+
+        .advisor-card:hover {
+            border-color: rgba(var(--color-primary-rgb), 0.2);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .advisor-avatar-lg {
+            width: 90px;
+            height: 90px;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+            border: 3px solid rgba(var(--color-primary-rgb), 0.15);
+            margin: 0 auto 1.5rem;
+            transition: border-color var(--transition-fast);
+        }
+
+        .advisor-card:hover .advisor-avatar-lg {
+            border-color: var(--color-primary);
+        }
+
+        .advisor-name {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .advisor-role {
+            font-size: 0.8rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .advisor-bio {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Premium newsletter subscription block */
+        .newsletter-block {
+            background: radial-gradient(circle at center, rgba(var(--color-primary-rgb), 0.15) 0%, rgba(6, 9, 19, 0.5) 100%), rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .newsletter-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .newsletter-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 2.25rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.85rem 1.25rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.15);
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(135deg, var(--color-primary) 0%, rgba(var(--color-primary-rgb), 0.85) 100%);
+            color: #060913;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* Theme adjustments for Light Theme if applicable */
+        [data-theme="light"] .featured-card {
+            background: rgba(0, 0, 0, 0.015);
+            border-color: rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        [data-theme="light"] .featured-badge {
+            background: linear-gradient(135deg, #b8860b 0%, #d4af37 100%);
+            color: #ffffff;
+        }
+
+        [data-theme="light"] .filter-pill {
+            background: rgba(0, 0, 0, 0.01);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="light"] .filter-pill.active {
+            color: #ffffff;
+        }
+
+        [data-theme="light"] .blog-card {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="light"] .blog-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        [data-theme="light"] .advisor-card {
+            background: rgba(0, 0, 0, 0.01);
+            border-color: rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="light"] .newsletter-block {
+            background: radial-gradient(circle at center, rgba(var(--color-primary-rgb), 0.08) 0%, rgba(255, 255, 255, 0.9) 100%), rgba(0, 0, 0, 0.01);
+            border-color: rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        [data-theme="light"] .newsletter-input {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .newsletter-btn {
+            color: #ffffff;
+        }
+
+        /* Responsive Layout details */
+        @media (max-width: 992px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .advisory-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .advisory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-block {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-<body>
+
+<body class="clinic-theme">
+
+    <!-- Header Navigation -->
     <header class="header">
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
-                Dent<span>Scale</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
             </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
+
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
                     <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li><a href="pricing.html" class="nav-link">Pricing & ROI</a></li>
-                    <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
-                    <li><a href="blog.html" class="nav-link active">Resources</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                     <li class="theme-rtl-controls"></li>
-                    <li><a href="login.html" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.875rem;">Client Portal</a></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="background-color:var(--bg-secondary);padding:4rem 0;">
-        <div class="container text-center">
-            <span class="section-tag">Growth Intelligence</span>
-            <h1 class="section-title">Resources & Growth Guides</h1>
-            <p class="section-desc">Expert insights on patient acquisition, dental SEO, ad spend optimization, and running a high-value cosmetic practice.</p>
+    <!-- Subpage Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <span class="section-tag">Clinical Resources</span>
+            <h1>Inside the Doctor's Log</h1>
+            <p>Learn about advanced smile aesthetics technology, patient care guides, and dental laboratory research
+                directly from our clinical practitioners.</p>
         </div>
     </section>
 
-    <!-- Featured Article -->
-    <section class="section" style="padding-bottom:0;">
+    <!-- Main Content Section -->
+    <section class="section" style="padding-top: 2rem;">
         <div class="container">
-            <div class="card grid-2" style="align-items:center;padding:3rem;margin-bottom:3rem;border-color:var(--color-primary);background:linear-gradient(135deg,rgba(var(--color-primary-rgb),0.04),transparent);">
-                <div>
-                    <span style="background:rgba(var(--color-primary-rgb),0.1);color:var(--color-primary);padding:0.25rem 0.75rem;border-radius:var(--radius-full);font-size:0.75rem;font-weight:700;">FEATURED GUIDE</span>
-                    <h2 style="font-size:1.75rem;margin:1rem 0;">How to Generate 50+ Qualified Dental Implant Leads per Month with Google Ads</h2>
-                    <p style="color:var(--text-secondary);margin-bottom:1.5rem;">A practical breakdown of campaign architecture, negative keyword lists, pre-qualification landing page strategy, and bid management that dentists can follow without a marketing background.</p>
-                    <div style="display:flex;align-items:center;gap:1.5rem;font-size:0.875rem;color:var(--text-muted);">
-                        <span>By Marcus Delgado</span>
-                        <span>·</span>
-                        <span>June 10, 2026</span>
-                        <span>·</span>
-                        <span>12 min read</span>
+
+            <!-- Featured Post Hero -->
+            <div class="featured-post-container">
+                <div class="featured-card">
+                    <div class="featured-img-wrap">
+                        <img src="https://images.openai.com/static-rsc-4/K12zqfx5TJbo1L_HLJgeaL7ynGNLmd80hT69YHaneUmzAeytEWzmteukMiCmdxraXHKxuY2yo3vdlE9p4IJ0ZFsJ_yLcRiPCBxW0BCrRyw5cU8tKmMFNWtuwhnLp55OGLoiAADe3Tf5NAcEKMAu_0h7Idpu8KnVZW_Ogx_tZJ-1lRq-k-LjClxtRe2fLOmyS?purpose=fullsize"
+                            alt="The Origins of Smile Design" class="featured-img">
                     </div>
-                    <a href="blog-details.html" class="btn btn-primary" style="margin-top:1.5rem;">Read Full Guide</a>
+                    <div class="featured-content">
+                        <span class="featured-badge">★ Featured Article</span>
+                        <div class="featured-meta">
+                            <span>📅 June 15, 2026</span>
+                            <span>⏱ 6 Min Read</span>
+                        </div>
+                        <h2 class="featured-title">The Origins of Smile Design</h2>
+                        <p class="featured-desc">Diving deep into how we analyze facial bone symmetry, pupil alignment,
+                            and lip contours to craft perfect porcelain cosmetic shells that adapt dynamically to
+                            biological light.</p>
+                        <a href="blog-details.html" class="btn btn-primary"
+                            style="align-self: flex-start; padding: 0.75rem 1.75rem;">Read Log Entry &rarr;</a>
+                    </div>
                 </div>
-                <div style="background:var(--bg-secondary);border-radius:var(--radius-lg);padding:2rem;border:1px solid var(--border-color);">
-                    <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--text-muted);">ARTICLE HIGHLIGHTS</h3>
-                    <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;font-size:0.9rem;">
-                        <li>📌 The exact negative keyword list for implant campaigns</li>
-                        <li>📌 Pre-qualification form questions that filter out non-buyers</li>
-                        <li>📌 Landing page anatomy that converts at 18%+</li>
-                        <li>📌 Smart bidding vs. manual CPC for dentists</li>
-                        <li>📌 How to track offline conversions in Google Ads</li>
-                    </ul>
+            </div>
+
+            <!-- Categories Filter bar -->
+            <div class="filter-section">
+                <div class="filter-container">
+                    <button class="filter-pill active" onclick="filterCategory('all', this)">All Log Entries</button>
+                    <button class="filter-pill" onclick="filterCategory('veneers', this)">Porcelain Veneers</button>
+                    <button class="filter-pill" onclick="filterCategory('implants', this)">Dental Implants</button>
+                    <button class="filter-pill" onclick="filterCategory('orthodontics', this)">Orthodontics</button>
+                    <button class="filter-pill" onclick="filterCategory('whitening', this)">Laser Whitening</button>
+                    <button class="filter-pill" onclick="filterCategory('hygiene', this)">Dental Hygiene</button>
+                    <button class="filter-pill" onclick="filterCategory('technology', this)">Clinical Tech</button>
+                </div>
+            </div>
+
+            <!-- Blog Posts Grid -->
+            <div class="blog-grid">
+
+                <!-- Post 1 -->
+                <div class="blog-card" data-category="veneers">
+                    <div class="card-img-wrap">
+                        <span class="category-badge badge-veneers">Veneers</span>
+                        <img src="https://images.openai.com/static-rsc-4/5w2NHyWapM7jPbuad-cHJ2CuNCIUoUff7Gz3SFJg3seVeW1r0RzrE8jaVw1YK77Zsd8xnVwdmKjts8d2p_10732-D2Kj13LEiviPGUsQ4-4ZrRw5Tr_2DbDrOGXsgi0UtRGw6IL77rADrRlJptMOmZqiYj84V6S2dTeX68sa9DP65h_5R0hCmnnNX3iJU2Bu?purpose=fullsize"
+                            alt="Veneer design scan" />
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span>📅 June 15, 2026</span>
+                        </div>
+                        <h3 class="blog-card-title">The Origins of Smile Design</h3>
+                        <p class="blog-card-desc">Diving deep into how we analyze facial bone symmetry to craft perfect
+                            porcelain cosmetic shells.</p>
+                        <div class="author-footer">
+                            <img src="https://images.openai.com/static-rsc-4/WNVYgGe_nomPUM1ZhB3UHU_uh8GKEUHeSmU4pHaRvX1dsKiIsZC0XU9CKszpWJ443sQjw4WjZWbG8aQMCZiJQIFZSb9xUtCCMSC5VR5TEXVndvQu5V6irBmSsZg8Zx1JNl66xkGoZd9_ON1gUzFKehW7GAZ4yU2VPIEXfu8UuJJlRSRgXcjWw9rmWwJnrALU?purpose=fullsize"
+                                alt="Dr. Evelyn Vance" class="author-avatar" />
+                            <div class="author-info">
+                                <span class="author-name">Dr. Evelyn Vance, DDS</span>
+                                <span class="read-time-pill">6 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="blog-card" data-category="implants">
+                    <div class="card-img-wrap">
+                        <span class="category-badge badge-implants">Implants</span>
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80"
+                            alt="Implant surgery precision" />
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span>📅 June 12, 2026</span>
+                        </div>
+                        <h3 class="blog-card-title">Drafting the Full Arch Restoration</h3>
+                        <p class="blog-card-desc">Why computer-guided titanium implant surgical roots are the safest
+                            permanent solution for tooth loss.</p>
+                        <div class="author-footer">
+                            <img src="https://images.openai.com/static-rsc-4/CzBbaELAQLBDkhiUPgiHidKp15_Haw9kMegzW7LzOxp0yrLBsN7spTq7E1X6kB80ccVOm75Qzck3GS3a3Kw1BrAlCKmCuq5mDF-Ef9D795N0eQVlnj5xG_cMwqesKiKklqPb1JhACx8PWbjYRQTHMDK44x_KoP0HGSRZ3WAsSseNhPu8tTE4vMbc5L13WN9q?purpose=fullsize"
+                                alt="Dr. Marcus Sterling" class="author-avatar" />
+                            <div class="author-info">
+                                <span class="author-name">Dr. Marcus Sterling</span>
+                                <span class="read-time-pill">8 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div class="blog-card" data-category="orthodontics">
+                    <div class="card-img-wrap">
+                        <span class="category-badge badge-orthodontics">Orthodontics</span>
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=80"
+                            alt="Invisalign course mapping" />
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span>📅 June 08, 2026</span>
+                        </div>
+                        <h3 class="blog-card-title">Visualizing Invisalign Clear Pathways</h3>
+                        <p class="blog-card-desc">Understanding how smart 3D tracking software moves teeth into
+                            alignment step by step.</p>
+                        <div class="author-footer">
+                            <img src="https://images.openai.com/static-rsc-4/ORG3q31gf04vUPvSyedDCGhgnxVyZx-ihVjdm8axvKq1P_ZnHVU_b8b7nOErlmm4AlkXJ0sJDLL_E1m89u0Z67rUb_Ifr8fVFxTGSsP12eERiBuqAkbBwIs9hr_9TsnabLCrkaUOnW6NSr4PTJO4CuOvXy6bTuuYwCo047kUgClvgQY-VthIAiHQhLpIKsPP?purpose=fullsize"
+                                alt="Dr. Sarah Chen" class="author-avatar" />
+                            <div class="author-info">
+                                <span class="author-name">Dr. Sarah Chen</span>
+                                <span class="read-time-pill">5 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 4 -->
+                <div class="blog-card" data-category="whitening">
+                    <div class="card-img-wrap">
+                        <span class="category-badge badge-whitening">Whitening</span>
+                        <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=600&q=80"
+                            alt="Clinical laser whitening" />
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span>📅 June 03, 2026</span>
+                        </div>
+                        <h3 class="blog-card-title">Safety Protocols in In-Chair Brightening</h3>
+                        <p class="blog-card-desc">A breakdown of how clinical light activation filters bleach enamel
+                            without damaging root dentin.</p>
+                        <div class="author-footer">
+                            <img src="https://images.openai.com/static-rsc-4/WNVYgGe_nomPUM1ZhB3UHU_uh8GKEUHeSmU4pHaRvX1dsKiIsZC0XU9CKszpWJ443sQjw4WjZWbG8aQMCZiJQIFZSb9xUtCCMSC5VR5TEXVndvQu5V6irBmSsZg8Zx1JNl66xkGoZd9_ON1gUzFKehW7GAZ4yU2VPIEXfu8UuJJlRSRgXcjWw9rmWwJnrALU?purpose=fullsize"
+                                alt="Dr. Evelyn Vance" class="author-avatar" />
+                            <div class="author-info">
+                                <span class="author-name">Dr. Evelyn Vance, DDS</span>
+                                <span class="read-time-pill">4 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 5 -->
+                <div class="blog-card" data-category="hygiene">
+                    <div class="card-img-wrap">
+                        <span class="category-badge badge-hygiene">Hygiene</span>
+                        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80"
+                            alt="Periodontal dental hygiene" />
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span>📅 May 28, 2026</span>
+                        </div>
+                        <h3 class="blog-card-title">Maintaining Bio-Compatible Restorations</h3>
+                        <p class="blog-card-desc">How to clean, brush, and schedule scalings for porcelain veneers or
+                            dental implants to ensure longevity.</p>
+                        <div class="author-footer">
+                            <img src="https://images.openai.com/static-rsc-4/CzBbaELAQLBDkhiUPgiHidKp15_Haw9kMegzW7LzOxp0yrLBsN7spTq7E1X6kB80ccVOm75Qzck3GS3a3Kw1BrAlCKmCuq5mDF-Ef9D795N0eQVlnj5xG_cMwqesKiKklqPb1JhACx8PWbjYRQTHMDK44x_KoP0HGSRZ3WAsSseNhPu8tTE4vMbc5L13WN9q?purpose=fullsize"
+                                alt="Dr. Marcus Sterling" class="author-avatar" />
+                            <div class="author-info">
+                                <span class="author-name">Dr. Marcus Sterling</span>
+                                <span class="read-time-pill">5 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 6 -->
+                <div class="blog-card" data-category="technology">
+                    <div class="card-img-wrap">
+                        <span class="category-badge badge-technology">Technology</span>
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
+                            alt="Digital smile mockups" />
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span>📅 May 22, 2026</span>
+                        </div>
+                        <h3 class="blog-card-title">Virtual Reality Smile Modeling</h3>
+                        <p class="blog-card-desc">A sneak peek into upcoming 3D visual simulators mapping custom tooth
+                            layout projections.</p>
+                        <div class="author-footer">
+                            <img src="https://images.openai.com/static-rsc-4/ORG3q31gf04vUPvSyedDCGhgnxVyZx-ihVjdm8axvKq1P_ZnHVU_b8b7nOErlmm4AlkXJ0sJDLL_E1m89u0Z67rUb_Ifr8fVFxTGSsP12eERiBuqAkbBwIs9hr_9TsnabLCrkaUOnW6NSr4PTJO4CuOvXy6bTuuYwCo047kUgClvgQY-VthIAiHQhLpIKsPP?purpose=fullsize"
+                                alt="Dr. Sarah Chen" class="author-avatar" />
+                            <div class="author-info">
+                                <span class="author-name">Dr. Sarah Chen</span>
+                                <span class="read-time-pill">7 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Medical Advisory Editorial Board Section -->
+    <section class="advisory-section">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+                <span class="section-tag"
+                    style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); padding: 0.35rem 1rem; border-radius: var(--radius-full); border: 1px solid rgba(var(--color-primary-rgb), 0.25);">Editorial
+                    Standards</span>
+                <h2 style="font-size: 2.25rem; font-weight: 800; margin-top: 1rem; margin-bottom: 0.75rem;">Our Medical
+                    Advisory Board</h2>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">Every log entry is authored and medically
+                    reviewed by our certified dental practitioners to ensure scientific accuracy and safety protocols.
+                </p>
+            </div>
+
+            <div class="advisory-grid">
+                <!-- Advisor 1 -->
+                <div class="advisor-card">
+                    <img src="https://images.openai.com/static-rsc-4/WNVYgGe_nomPUM1ZhB3UHU_uh8GKEUHeSmU4pHaRvX1dsKiIsZC0XU9CKszpWJ443sQjw4WjZWbG8aQMCZiJQIFZSb9xUtCCMSC5VR5TEXVndvQu5V6irBmSsZg8Zx1JNl66xkGoZd9_ON1gUzFKehW7GAZ4yU2VPIEXfu8UuJJlRSRgXcjWw9rmWwJnrALU?purpose=fullsize"
+                        alt="Dr. Evelyn Vance" class="advisor-avatar-lg" />
+                    <h3 class="advisor-name">Dr. Evelyn Vance, DDS</h3>
+                    <span class="advisor-role">Aesthetic Dentistry</span>
+                    <p class="advisor-bio">Founder and board-certified cosmetic dental surgeon. Graduate of Northwestern
+                        University Dental School with 18+ years of aesthetic clinical experience.</p>
+                </div>
+
+                <!-- Advisor 2 -->
+                <div class="advisor-card">
+                    <img src="https://images.openai.com/static-rsc-4/CzBbaELAQLBDkhiUPgiHidKp15_Haw9kMegzW7LzOxp0yrLBsN7spTq7E1X6kB80ccVOm75Qzck3GS3a3Kw1BrAlCKmCuq5mDF-Ef9D795N0eQVlnj5xG_cMwqesKiKklqPb1JhACx8PWbjYRQTHMDK44x_KoP0HGSRZ3WAsSseNhPu8tTE4vMbc5L13WN9q?purpose=fullsize"
+                        alt="Dr. Marcus Sterling" class="advisor-avatar-lg" />
+                    <h3 class="advisor-name">Dr. Marcus Sterling, DDS</h3>
+                    <span class="advisor-role">Prosthodontics</span>
+                    <p class="advisor-bio">Implant reconstruction lead. Completed advanced specialist training at Boston
+                        University School of Dental Medicine. American Board of Prosthodontics member.</p>
+                </div>
+
+                <!-- Advisor 3 -->
+                <div class="advisor-card">
+                    <img src="https://images.openai.com/static-rsc-4/ORG3q31gf04vUPvSyedDCGhgnxVyZx-ihVjdm8axvKq1P_ZnHVU_b8b7nOErlmm4AlkXJ0sJDLL_E1m89u0Z67rUb_Ifr8fVFxTGSsP12eERiBuqAkbBwIs9hr_9TsnabLCrkaUOnW6NSr4PTJO4CuOvXy6bTuuYwCo047kUgClvgQY-VthIAiHQhLpIKsPP?purpose=fullsize"
+                        alt="Dr. Sarah Chen" class="advisor-avatar-lg" />
+                    <h3 class="advisor-name">Dr. Sarah Chen, DDS</h3>
+                    <span class="advisor-role">Orthodontics</span>
+                    <p class="advisor-bio">Orthodontic alignment specialist. Completed residency training at UC San
+                        Francisco (UCSF). Certified master provider of computer-guided Invisalign systems.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Grid -->
-    <section class="section">
+    <!-- Premium Newsletter Section -->
+    <section class="section" style="padding-top: 0; padding-bottom: 4rem;">
         <div class="container">
-            <div class="grid-3">
-                <div class="card" style="padding:0;overflow:hidden;">
-                    <div style="background:linear-gradient(135deg,rgba(var(--color-primary-rgb),0.15),rgba(var(--color-accent-rgb),0.1));height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;">🦷</div>
-                    <div style="padding:1.5rem;">
-                        <span style="font-size:0.75rem;font-weight:700;color:var(--color-primary);text-transform:uppercase;">SEO Strategy</span>
-                        <h3 style="font-size:1.1rem;margin:0.5rem 0 0.75rem;">How to Rank in the Google Map Pack for 'Cosmetic Dentist Near Me'</h3>
-                        <p style="font-size:0.875rem;color:var(--text-secondary);">Step-by-step local SEO authority building for dental practices in competitive metro areas.</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;font-size:0.8rem;color:var(--text-muted);">
-                            <span>Sarah Chen · June 5, 2026</span>
-                            <a href="blog-details.html" style="color:var(--color-primary);font-weight:600;">Read →</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="padding:0;overflow:hidden;">
-                    <div style="background:linear-gradient(135deg,rgba(var(--color-accent-rgb),0.15),rgba(var(--color-primary-rgb),0.1));height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;">📊</div>
-                    <div style="padding:1.5rem;">
-                        <span style="font-size:0.75rem;font-weight:700;color:var(--color-accent);text-transform:uppercase;">Analytics</span>
-                        <h3 style="font-size:1.1rem;margin:0.5rem 0 0.75rem;">The 7 Dental Practice KPIs That Actually Predict Revenue Growth</h3>
-                        <p style="font-size:0.875rem;color:var(--text-secondary);">Move beyond vanity metrics. Learn which numbers separate growing clinics from stagnant ones.</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;font-size:0.8rem;color:var(--text-muted);">
-                            <span>Alex Harrison · May 28, 2026</span>
-                            <a href="blog-details.html" style="color:var(--color-primary);font-weight:600;">Read →</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="padding:0;overflow:hidden;">
-                    <div style="background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(var(--color-primary-rgb),0.1));height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;">💬</div>
-                    <div style="padding:1.5rem;">
-                        <span style="font-size:0.75rem;font-weight:700;color:#6366f1;text-transform:uppercase;">Social Media</span>
-                        <h3 style="font-size:1.1rem;margin:0.5rem 0 0.75rem;">Facebook Video Ads: The Secret to Booking Veneers Consultations at Scale</h3>
-                        <p style="font-size:0.875rem;color:var(--text-secondary);">How to script, shoot, and target video ads that convert cosmetically-minded patients into booked appointments.</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;font-size:0.8rem;color:var(--text-muted);">
-                            <span>Marcus Delgado · May 20, 2026</span>
-                            <a href="blog-details.html" style="color:var(--color-primary);font-weight:600;">Read →</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="padding:0;overflow:hidden;">
-                    <div style="background:linear-gradient(135deg,rgba(var(--color-primary-rgb),0.1),rgba(59,130,246,0.1));height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;">💰</div>
-                    <div style="padding:1.5rem;">
-                        <span style="font-size:0.75rem;font-weight:700;color:#3b82f6;text-transform:uppercase;">Revenue Growth</span>
-                        <h3 style="font-size:1.1rem;margin:0.5rem 0 0.75rem;">Increasing Patient Lifetime Value: Upsells, Payment Plans & Retention</h3>
-                        <p style="font-size:0.875rem;color:var(--text-secondary);">Strategic frameworks to maximize the revenue per patient, not just volume.</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;font-size:0.8rem;color:var(--text-muted);">
-                            <span>Sarah Chen · May 14, 2026</span>
-                            <a href="blog-details.html" style="color:var(--color-primary);font-weight:600;">Read →</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="padding:0;overflow:hidden;">
-                    <div style="background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(var(--color-accent-rgb),0.1));height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;">🌐</div>
-                    <div style="padding:1.5rem;">
-                        <span style="font-size:0.75rem;font-weight:700;color:var(--color-primary);text-transform:uppercase;">Website Conversion</span>
-                        <h3 style="font-size:1.1rem;margin:0.5rem 0 0.75rem;">Why Most Dental Websites Lose 80% of Leads (And How to Fix It)</h3>
-                        <p style="font-size:0.875rem;color:var(--text-secondary);">A CRO audit checklist for dental practice websites that turns visitors into booked consultations.</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;font-size:0.8rem;color:var(--text-muted);">
-                            <span>Alex Harrison · May 8, 2026</span>
-                            <a href="blog-details.html" style="color:var(--color-primary);font-weight:600;">Read →</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="padding:0;overflow:hidden;">
-                    <div style="background:linear-gradient(135deg,rgba(239,68,68,0.1),rgba(var(--color-accent-rgb),0.1));height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;">⭐</div>
-                    <div style="padding:1.5rem;">
-                        <span style="font-size:0.75rem;font-weight:700;color:#ef4444;text-transform:uppercase;">Reputation</span>
-                        <h3 style="font-size:1.1rem;margin:0.5rem 0 0.75rem;">The 5-Star Dental Practice: Generating Reviews That Drive Appointments</h3>
-                        <p style="font-size:0.875rem;color:var(--text-secondary);">Automated review systems that ethically build social proof without violating Google's guidelines.</p>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;font-size:0.8rem;color:var(--text-muted);">
-                            <span>Marcus Delgado · May 2, 2026</span>
-                            <a href="blog-details.html" style="color:var(--color-primary);font-weight:600;">Read →</a>
-                        </div>
-                    </div>
+            <div class="newsletter-block">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Subscribe to the Doctor's Log</h2>
+                    <p class="newsletter-desc">Get modern smile aesthetics research, patient care guides, and dental
+                        science insights delivered directly to your inbox monthly.</p>
+                    <form class="newsletter-form"
+                        onsubmit="event.preventDefault(); alert('Thank you for subscribing to Vance Cosmetic clinical updates!'); this.reset();">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email address" required />
+                        <button type="submit" class="newsletter-btn">Subscribe &rarr;</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Newsletter CTA -->
-    <section class="section" style="background:linear-gradient(135deg,rgba(var(--color-primary-rgb),0.06),rgba(var(--color-accent-rgb),0.04));border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);">
-        <div class="container text-center" style="max-width:600px;">
-            <span class="section-tag">Weekly Growth Intelligence</span>
-            <h2 class="section-title">Get Dental Marketing Insights Every Thursday</h2>
-            <p class="section-desc" style="margin-bottom:2rem;">Join 1,200+ dental practice owners who read our evidence-based growth newsletter every week.</p>
-            <form style="display:flex;gap:1rem;max-width:480px;margin:0 auto;" onsubmit="handleNewsletterSubmit(event)">
-                <input type="email" id="newsletter-email" placeholder="Enter your email" required style="flex:1;padding:0.75rem 1rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-primary);color:var(--text-primary);">
-                <button type="submit" class="btn btn-primary">Subscribe</button>
-            </form>
-            <p id="newsletter-success" style="display:none;margin-top:1rem;color:var(--color-primary);font-weight:600;">✓ You're subscribed! Check your inbox for a confirmation.</p>
-        </div>
-    </section>
-
+    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-column">
-                <a href="index.html" class="logo" style="margin-bottom:1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>Dent<span>Scale</span></a>
-                <p>Data-driven dental marketing and local patient growth algorithms for cosmetic dentistry clinics worldwide.</p>
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
+                </a>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
             </div>
-            <div class="footer-column"><h3>Growth Solutions</h3><ul class="footer-links"><li><a href="services.html" class="footer-link">Dental SEO Solutions</a></li><li><a href="services.html" class="footer-link">Paid Ads Management</a></li><li><a href="pricing.html" class="footer-link">ROI Modeller System</a></li></ul></div>
-            <div class="footer-column"><h3>Our Platform</h3><ul class="footer-links"><li><a href="login.html" class="footer-link">Client Portal (SaaS)</a></li><li><a href="admin.html" class="footer-link">Agency Admin Panel</a></li><li><a href="booking.html" class="footer-link">Schedule Consultation</a></li></ul></div>
-            <div class="footer-column"><h3>Clinic Demo</h3><ul class="footer-links"><li><a href="clinic-home.html" class="footer-link">Clinic Live Demo</a></li><li><a href="clinic-treatments.html" class="footer-link">Treatment Cost Calc</a></li><li><a href="clinic-gallery.html" class="footer-link">Before/After Slider</a></li></ul></div>
+            <div class="footer-column">
+                <h3>Smile Treatments</h3>
+                <ul class="footer-links">
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Patient Portal</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Clinic Layouts</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="container footer-bottom"><p>&copy; 2026 DentScale Performance Agency. All rights reserved.</p><div style="display:flex;gap:1.5rem;"><a href="404.html" class="footer-link">Privacy Policy</a><a href="404.html" class="footer-link">Terms of Service</a></div></div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+        </div>
     </footer>
-    <div class="demo-switch-banner"><span>Demo View: <strong>Growth Agency</strong></span><a href="clinic-home.html" class="demo-switch-btn">Switch to Clinic Demo</a></div>
+
+    <!-- Category Filter Script -->
     <script>
-        function handleNewsletterSubmit(e) {
-            e.preventDefault();
-            document.getElementById('newsletter-success').style.display = 'block';
-            document.getElementById('newsletter-email').value = '';
+        function filterCategory(category, button) {
+            // Update active pill state
+            document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Hide/Show cards with clean fade transition
+            const cards = document.querySelectorAll('.blog-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(15px)';
+                    // Trigger reflow to animate
+                    card.offsetHeight;
+                    card.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
+
 </body>
+
 </html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Our Doctors — Vance Cosmetic Dentistry</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+    <script src="assets/js/store.js" defer></script>
+    <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        /* Premium Layout Styling (No Carousels) */
+
+        /* Doctors Grid */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .doctor-profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .doctor-profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-primary);
+            opacity: 0.7;
+            transition: all var(--transition-normal);
+        }
+
+        .doctor-profile-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .doctor-profile-card:hover::before {
+            height: 6px;
+            opacity: 1;
+        }
+
+        .doctor-img-box {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .doctor-photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .doctor-profile-card:hover .doctor-photo-img {
+            transform: scale(1.06);
+        }
+
+        .doc-pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .doc-pill {
+            background: rgba(var(--color-primary-rgb), 0.08);
+            border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .doctor-profile-card:hover .doc-pill {
+            background: rgba(var(--color-primary-rgb), 0.14);
+            border-color: var(--color-primary);
+        }
+
+        .doctor-name-heading {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .doctors-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* 1. Academic & Clinical Credentials Grid */
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .credential-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem 1.5rem;
+            text-align: center;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .credential-block:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .credential-logo {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        /* 2. Patient Consultation Prep steps flow */
+        .prep-steps-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.25rem;
+            margin-top: 4rem;
+        }
+
+        .prep-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem 2.25rem;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .prep-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-glow-accent);
+        }
+
+        .prep-badge {
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            transform: translateY(-50%);
+            background: var(--color-accent);
+            color: #060913;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 10px rgba(var(--color-accent-rgb), 0.25);
+            transition: transform var(--transition-normal);
+        }
+
+        .prep-card:hover .prep-badge {
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Responsive adjustments for new sections */
+        @media (max-width: 992px) {
+            .credentials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .prep-steps-flow {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .credentials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="clinic-theme">
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
+            </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav>
+                <ul class="nav-menu">
+
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link active">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link ">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="theme-rtl-controls"></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Subpage Hero -->
+    <section class="subpage-hero">
+        <div class="container">
+            <span class="section-tag">Clinical Experts</span>
+            <h1 class="section-title">Our Cosmetic Specialists</h1>
+            <p class="section-desc">Award-winning dentists combining artistic vision with top medical credentials.</p>
+        </div>
+    </section>
+
+    <!-- Detailed Doctors Profiles -->
+    <section class="section">
+        <div class="container">
+            <div class="doctors-grid reveal">
+                <!-- Dr. Evelyn Vance -->
+                <div class="doctor-profile-card">
+                    <div>
+                        <div class="doctor-img-box">
+                            <img src="https://images.openai.com/static-rsc-4/WNVYgGe_nomPUM1ZhB3UHU_uh8GKEUHeSmU4pHaRvX1dsKiIsZC0XU9CKszpWJ443sQjw4WjZWbG8aQMCZiJQIFZSb9xUtCCMSC5VR5TEXVndvQu5V6irBmSsZg8Zx1JNl66xkGoZd9_ON1gUzFKehW7GAZ4yU2VPIEXfu8UuJJlRSRgXcjWw9rmWwJnrALU?purpose=fullsize"
+                                alt="Dr. Evelyn Vance" class="doctor-photo-img">
+                        </div>
+                        <span class="section-tag" style="text-align: left; margin-bottom: 0.5rem;">Founder & Chief
+                            Surgeon</span>
+                        <h3 class="doctor-name-heading">Dr. Evelyn Vance, DDS</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">A pioneer in
+                            clinical smile aesthetics with 18+ years of experience. Specializes in custom hand-finished
+                            veneers and complex reconstructions.</p>
+
+                        <div class="doc-pill-list">
+                            <span class="doc-pill">🎓 Northwestern Dental</span>
+                            <span class="doc-pill">🏆 AACD Fellow</span>
+                            <span class="doc-pill">💼 18+ Yrs Exp</span>
+                            <span class="doc-pill">⭐ 4.9 (600+ Reviews)</span>
+                        </div>
+                    </div>
+                    <a href="booking.html" class="btn btn-primary"
+                        style="margin-top: 2rem; width: 100%; text-align: center;">Book Consultation</a>
+                </div>
+
+                <!-- Dr. Marcus Sterling -->
+                <div class="doctor-profile-card">
+                    <div>
+                        <div class="doctor-img-box">
+                            <img src="https://images.openai.com/static-rsc-4/CzBbaELAQLBDkhiUPgiHidKp15_Haw9kMegzW7LzOxp0yrLBsN7spTq7E1X6kB80ccVOm75Qzck3GS3a3Kw1BrAlCKmCuq5mDF-Ef9D795N0eQVlnj5xG_cMwqesKiKklqPb1JhACx8PWbjYRQTHMDK44x_KoP0HGSRZ3WAsSseNhPu8tTE4vMbc5L13WN9q?purpose=fullsize"
+                                alt="Dr. Marcus Sterling" class="doctor-photo-img">
+                        </div>
+                        <span class="section-tag" style="text-align: left; margin-bottom: 0.5rem;">Prosthodontics
+                            Specialist</span>
+                        <h3 class="doctor-name-heading">Dr. Marcus Sterling, DDS</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Leads the titanium
+                            implant reconstruction team. Specializes in computer-guided placement and tissue integration
+                            structures.</p>
+
+                        <div class="doc-pill-list">
+                            <span class="doc-pill">🎓 Boston University</span>
+                            <span class="doc-pill">🏆 ACP Board Member</span>
+                            <span class="doc-pill">💼 12+ Yrs Exp</span>
+                            <span class="doc-pill">⭐ 4.8 (350+ Reviews)</span>
+                        </div>
+                    </div>
+                    <a href="booking.html" class="btn btn-primary"
+                        style="margin-top: 2rem; width: 100%; text-align: center;">Book Consultation</a>
+                </div>
+
+                <!-- Dr. Sarah Chen -->
+                <div class="doctor-profile-card">
+                    <div>
+                        <div class="doctor-img-box">
+                            <img src="https://images.openai.com/static-rsc-4/ORG3q31gf04vUPvSyedDCGhgnxVyZx-ihVjdm8axvKq1P_ZnHVU_b8b7nOErlmm4AlkXJ0sJDLL_E1m89u0Z67rUb_Ifr8fVFxTGSsP12eERiBuqAkbBwIs9hr_9TsnabLCrkaUOnW6NSr4PTJO4CuOvXy6bTuuYwCo047kUgClvgQY-VthIAiHQhLpIKsPP?purpose=fullsize"
+                                alt="Dr. Sarah Chen" class="doctor-photo-img">
+                        </div>
+                        <span class="section-tag" style="text-align: left; margin-bottom: 0.5rem;">Orthodontic
+                            Specialist</span>
+                        <h3 class="doctor-name-heading">Dr. Sarah Chen, DDS</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Expert in clear
+                            orthodontic alignment. Designs tailored Invisalign aligner steps to correct overcrowding and
+                            occlusion lines.</p>
+
+                        <div class="doc-pill-list">
+                            <span class="doc-pill">🎓 UC San Francisco</span>
+                            <span class="doc-pill">🏆 AAO Aligner Lead</span>
+                            <span class="doc-pill">💼 9+ Yrs Exp</span>
+                            <span class="doc-pill">⭐ 4.9 (280+ Reviews)</span>
+                        </div>
+                    </div>
+                    <a href="booking.html" class="btn btn-primary"
+                        style="margin-top: 2rem; width: 100%; text-align: center;">Book Consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Clinical Credentials Grid -->
+    <section class="section"
+        style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 5rem 0 4rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Accreditation Board</span>
+                <h2 class="section-title">Clinical Affiliations & Boards</h2>
+                <p class="section-desc">Our specialists are board certified and active fellows in leading international
+                    cosmetic and reconstructive dental dentistry organizations.</p>
+            </div>
+
+            <div class="credentials-grid reveal">
+                <!-- Credential 1 -->
+                <div class="credential-block">
+                    <div class="credential-logo">AACD</div>
+                    <h3
+                        style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                        AACD Accredited</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Recognized for
+                        clinical excellence in cosmetic porcelain veneer placement and smile line restoration.</p>
+                </div>
+
+                <!-- Credential 2 -->
+                <div class="credential-block">
+                    <div class="credential-logo">ADA</div>
+                    <h3
+                        style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                        ADA Member</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Upholding the highest
+                        standards of safety, biological dental care, and clinical ethics in Chicago.</p>
+                </div>
+
+                <!-- Credential 3 -->
+                <div class="credential-block">
+                    <div class="credential-logo">ACP</div>
+                    <h3
+                        style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                        ACP Certified</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Board certified
+                        prosthodontic specialists in dental implant crowns, bridges, and full arch structures.</p>
+                </div>
+
+                <!-- Credential 4 -->
+                <div class="credential-block">
+                    <div class="credential-logo">AAO</div>
+                    <h3
+                        style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; font-family: var(--font-heading);">
+                        AAO Registered</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Recognized
+                        specialists in Invisalign clear orthodontics aligners and smart tooth trajectory pathways.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Patient Consultation Preparation Steps -->
+    <section class="section"
+        style="background-color: var(--bg-primary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 5.5rem 0 5.5rem;">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag" style="color:var(--color-accent);">Smile Design Consult</span>
+                <h2 class="section-title">Consultation Preparation</h2>
+                <p class="section-desc">Follow these preparation steps to ensure a comprehensive, detailed blueprint
+                    review during your initial visit.</p>
+            </div>
+
+            <div class="prep-steps-flow reveal">
+                <!-- Step 1 -->
+                <div class="prep-card">
+                    <span class="prep-badge">Step 01</span>
+                    <h3
+                        style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; font-family: var(--font-heading);">
+                        Submit Dental History</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Upload past clinical
+                        records, diagnostic X-rays, or treatment history securely to your Patient Portal before arrival.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="prep-card">
+                    <span class="prep-badge">Step 02</span>
+                    <h3
+                        style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; font-family: var(--font-heading);">
+                        Detail Aesthetic Goals</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Note down your
+                        specific whiteness goals, contour desires, or crowding concerns to help Dr. Vance map your smile
+                        blueprint.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="prep-card">
+                    <span class="prep-badge">Step 03</span>
+                    <h3
+                        style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; font-family: var(--font-heading);">
+                        Review 3D Scans</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Our clinical
+                        specialists construct a virtual 3D rendering of your dental arches during the visit. Review
+                        alignment phases instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
+                </a>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Smile Treatments</h3>
+                <ul class="footer-links">
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Patient Portal</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Clinic Layouts</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>

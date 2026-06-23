@@ -1,170 +1,686 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" dir="ltr">
+<html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact & Book a Consultation — DentScale Dental Marketing</title>
+    <title>Contact Us — Vance Cosmetic Dentistry</title>
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
+    <style>
+        /* Custom Contact Page Styles */
+        .contact-hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at top, rgba(var(--color-primary-rgb), 0.08) 0%, transparent 60%);
+        }
+
+        .contact-hero .section-tag {
+            background: rgba(var(--color-primary-rgb), 0.15);
+            color: var(--color-primary);
+            padding: 0.35rem 1.25rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(var(--color-primary-rgb), 0.25);
+        }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-hero p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Info Cards Grid */
+        .contact-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all var(--transition-medium);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(var(--color-primary-rgb), 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(var(--color-primary-rgb), 0.05);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            background: rgba(var(--color-primary-rgb), 0.15);
+            border: 1px solid rgba(var(--color-primary-rgb), 0.25);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.25rem;
+            color: var(--color-primary);
+            transition: all var(--transition-fast);
+        }
+
+        .contact-info-card:hover .card-icon {
+            background: var(--color-primary);
+            color: #060913;
+            box-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.4);
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .card-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-fast);
+        }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Map and Form Grid */
+        .main-contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+            align-items: stretch;
+        }
+
+        .map-wrapper {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow-lg);
+            height: 100%;
+            min-height: 450px;
+            position: relative;
+            transition: border-color var(--transition-medium);
+        }
+
+        .map-wrapper:hover {
+            border-color: rgba(var(--color-primary-rgb), 0.25);
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(1) invert(0.9) contrast(1.2);
+            transition: filter var(--transition-medium);
+        }
+
+        [data-theme="light"] .map-iframe {
+            filter: grayscale(0.2) contrast(1.05);
+        }
+
+        /* Form styling */
+        .premium-form-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-medium);
+        }
+
+        .premium-form-card:hover {
+            border-color: rgba(var(--color-primary-rgb), 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-header {
+            margin-bottom: 2rem;
+        }
+
+        .form-header h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .premium-input {
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+
+        .premium-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.15);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-bottom: 3rem;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all var(--transition-fast);
+        }
+
+        .faq-item:hover {
+            border-color: rgba(var(--color-primary-rgb), 0.15);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-header {
+            padding: 1.25rem 1.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            user-select: none;
+        }
+
+        .faq-toggle-icon {
+            font-size: 1.25rem;
+            transition: transform var(--transition-fast);
+            color: var(--color-primary);
+        }
+
+        .faq-item.active .faq-toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 1.75rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-content {
+            padding: 0 1.75rem 1.5rem;
+            max-height: 200px;
+        }
+
+        /* Light Theme Adjustments */
+        [data-theme="light"] .contact-info-card {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="light"] .contact-info-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        [data-theme="light"] .premium-form-card {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        [data-theme="light"] .premium-input {
+            background: rgba(0, 0, 0, 0.015);
+            border-color: rgba(0, 0, 0, 0.08);
+            color: #060913;
+        }
+
+        [data-theme="light"] .premium-input:focus {
+            background: #ffffff;
+        }
+
+        [data-theme="light"] .faq-item {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="light"] .faq-item:hover {
+            background: rgba(0, 0, 0, 0.005);
+        }
+
+        /* Responsive Layout styles */
+        @media (max-width: 992px) {
+            .contact-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .main-contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .map-wrapper {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .premium-form-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
 </head>
-<body>
+
+<body class="clinic-theme">
+
+    <!-- Header Navigation -->
     <header class="header">
         <div class="container nav-wrapper">
-            <a href="index.html" class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>Dent<span>Scale</span></a>
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Cosmetic</span>
+            </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
+
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
                     <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li><a href="pricing.html" class="nav-link">Pricing & ROI</a></li>
-                    <li><a href="case-studies.html" class="nav-link">Case Studies</a></li>
-                    <li><a href="blog.html" class="nav-link">Resources</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link ">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a href="contact.html" class="nav-link active">Contact</a></li>
                     <li class="theme-rtl-controls"></li>
-                    <li><a href="login.html" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.875rem;">Client Portal</a></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="background-color:var(--bg-secondary);padding:4rem 0;">
-        <div class="container text-center">
-            <span class="section-tag">Get in Touch</span>
-            <h1 class="section-title">Start Your Growth Consultation</h1>
-            <p class="section-desc">Book a 30-minute strategy call. We'll analyse your current patient acquisition numbers and show you the exact growth plan.</p>
+    <!-- Subpage Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <span class="section-tag">Send a Signal</span>
+            <h1>Contact Our Clinic</h1>
+            <p>Get in touch with our dental staff in Chicago for queries about procedures, insurance, or scheduling.</p>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container grid-2" style="gap:4rem;align-items:flex-start;">
-            <!-- Contact Form -->
-            <div>
-                <h2 style="font-size:1.5rem;margin-bottom:0.5rem;">Send a Message</h2>
-                <p style="color:var(--text-secondary);margin-bottom:2rem;">We respond within 4 business hours, Monday–Friday.</p>
-                <form id="contact-form" style="display:flex;flex-direction:column;gap:1.5rem;" novalidate onsubmit="handleContactSubmit(event)">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-                        <div class="form-group">
-                            <label>First Name *</label>
-                            <input type="text" id="c-fname" required placeholder="Dr. Sarah">
-                            <span class="field-error" style="color:var(--color-danger);font-size:0.8rem;display:none;">Required</span>
-                        </div>
-                        <div class="form-group">
-                            <label>Last Name *</label>
-                            <input type="text" id="c-lname" required placeholder="Jenkins">
-                            <span class="field-error" style="color:var(--color-danger);font-size:0.8rem;display:none;">Required</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Email Address *</label>
-                        <input type="email" id="c-email" required placeholder="sarah@yourpractice.com">
-                        <span class="field-error" style="color:var(--color-danger);font-size:0.8rem;display:none;">Valid email required</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="c-phone" placeholder="+1 (555) 000-0000">
-                    </div>
-                    <div class="form-group">
-                        <label>Practice Name *</label>
-                        <input type="text" id="c-practice" required placeholder="Smile Studio Chicago">
-                        <span class="field-error" style="color:var(--color-danger);font-size:0.8rem;display:none;">Required</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Primary Marketing Challenge</label>
-                        <select id="c-challenge">
-                            <option value="">Select your challenge...</option>
-                            <option>Not enough new patient leads</option>
-                            <option>Too many low-value appointments</option>
-                            <option>No visibility on Google for local searches</option>
-                            <option>Poor ROI on current ad spend</option>
-                            <option>Need to fill a new treatment chair</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea id="c-message" rows="4" placeholder="Tell us about your practice goals and current situation..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
-                    <div id="contact-success" style="display:none;background:rgba(var(--color-primary-rgb),0.1);border:1px solid var(--color-primary);padding:1rem;border-radius:var(--radius-md);color:var(--color-primary);font-weight:600;text-align:center;">✓ Message received! We'll respond within 4 hours.</div>
-                </form>
+    <!-- Main Contact Section -->
+    <section class="section" style="padding-top: 2rem;">
+        <div class="container">
+
+            <!-- Contact Cards Grid -->
+            <div class="contact-cards-grid">
+                <!-- Location Card -->
+                <div class="contact-info-card">
+                    <div class="card-icon">📍</div>
+                    <h3 class="card-title">Office Location</h3>
+                    <p class="card-desc" style="margin-bottom: 1rem;">444 N Michigan Ave,<br>Chicago, IL 60611</p>
+                    <a href="https://maps.google.com/?q=444+N+Michigan+Ave,+Chicago,+IL+60611" target="_blank"
+                        class="card-link">Get Directions &rarr;</a>
+                </div>
+
+                <!-- Contact Card -->
+                <div class="contact-info-card">
+                    <div class="card-icon">📞</div>
+                    <h3 class="card-title">Direct Connection</h3>
+                    <p class="card-desc" style="margin-bottom: 0.5rem;">Telephone: <strong>(312) 555-8000</strong></p>
+                    <p class="card-desc" style="margin-bottom: 1rem;">Support: <a href="mailto:office@vancecosmetic.com"
+                            class="card-link">office@vancecosmetic.com</a></p>
+                    <a href="tel:3125558000" class="btn btn-primary"
+                        style="padding: 0.4rem 1rem; font-size: 0.8rem; width: auto;">Call Office</a>
+                </div>
+
+                <!-- Hours Card -->
+                <div class="contact-info-card">
+                    <div class="card-icon">🕐</div>
+                    <h3 class="card-title">Opening Hours</h3>
+                    <p class="card-desc">Monday – Friday: 8:00 AM – 6:00 PM</p>
+                    <p class="card-desc" style="margin-bottom: 1rem;">Saturday: 8:00 AM – 3:00 PM</p>
+                    <span class="section-tag"
+                        style="font-size:0.75rem; border-color:transparent; background:rgba(239,68,68,0.1); color:#ef4444; margin-bottom: 0; padding: 0.2rem 0.75rem;">Closed
+                        Sundays</span>
+                </div>
             </div>
 
-            <!-- Contact Info + FAQ Sidebar -->
-            <div style="display:flex;flex-direction:column;gap:2rem;">
-                <div class="card" style="padding:2rem;">
-                    <h3 style="margin-bottom:1.5rem;">Direct Contact</h3>
-                    <div style="display:flex;flex-direction:column;gap:1.25rem;">
-                        <div style="display:flex;gap:1rem;align-items:center;">
-                            <div style="width:42px;height:42px;background:rgba(var(--color-primary-rgb),0.1);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--color-primary);">📞</div>
-                            <div><div style="font-weight:600;">Phone</div><div style="color:var(--text-secondary);">+1 (312) 555-0192</div></div>
+            <!-- Map & Form Section Grid -->
+            <div class="main-contact-grid">
+
+                <!-- Left Column: Google Map -->
+                <div class="map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.076839088612!2d-87.62512682339598!3d41.8901239712404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2caa870425f1%3A0xe54d9241b312a02b!2s444%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060611!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                        class="map-iframe" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <!-- Right Column: Premium Form -->
+                <div class="premium-form-card">
+                    <div class="form-header">
+                        <h2>Send a Message</h2>
+                        <p>Have questions about cosmetic dental work? Complete the form below to transmit your details
+                            directly to our Chicago staff.</p>
+                    </div>
+                    <form onsubmit="handleContactSubmit(event)">
+                        <div class="form-input-group">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contact-name"
+                                        style="font-size: 0.85rem; font-weight:700; margin-bottom:0.4rem; display:block;">Your
+                                        Full Name</label>
+                                    <input type="text" id="contact-name" class="premium-input" placeholder="John Doe"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone"
+                                        style="font-size: 0.85rem; font-weight:700; margin-bottom:0.4rem; display:block;">Phone
+                                        Number</label>
+                                    <input type="tel" id="contact-phone" class="premium-input"
+                                        placeholder="+1 (555) 000-0000" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email"
+                                    style="font-size: 0.85rem; font-weight:700; margin-bottom:0.4rem; display:block;">Email
+                                    Address</label>
+                                <input type="email" id="contact-email" class="premium-input"
+                                    placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message"
+                                    style="font-size: 0.85rem; font-weight:700; margin-bottom:0.4rem; display:block;">Your
+                                    Message</label>
+                                <textarea id="contact-message" class="premium-input"
+                                    placeholder="Ask about treatments, scheduling, or pricing..." rows="5" required
+                                    style="resize:none;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width:100%; padding: 1.1rem; font-size: 1rem; font-weight: 700; border-radius: var(--radius-md);">Transmit
+                                Message &rarr;</button>
+                            <div id="contact-success"
+                                style="display:none; background: rgba(16,185,129,0.15); color: var(--color-success); border:1px solid var(--color-success); padding: 0.85rem; border-radius: var(--radius-md); text-align:center; font-size:0.9rem; font-weight:600; margin-top: 1rem;">
+                                Your message has been sent successfully. We will follow up shortly!</div>
                         </div>
-                        <div style="display:flex;gap:1rem;align-items:center;">
-                            <div style="width:42px;height:42px;background:rgba(var(--color-primary-rgb),0.1);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--color-primary);">✉️</div>
-                            <div><div style="font-weight:600;">Email</div><div style="color:var(--text-secondary);">hello@dentscale.io</div></div>
-                        </div>
-                        <div style="display:flex;gap:1rem;align-items:center;">
-                            <div style="width:42px;height:42px;background:rgba(var(--color-primary-rgb),0.1);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--color-primary);">📍</div>
-                            <div><div style="font-weight:600;">Office</div><div style="color:var(--text-secondary);">222 W Adams St, Chicago, IL 60606</div></div>
-                        </div>
-                        <div style="display:flex;gap:1rem;align-items:center;">
-                            <div style="width:42px;height:42px;background:rgba(var(--color-primary-rgb),0.1);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--color-primary);">🕐</div>
-                            <div><div style="font-weight:600;">Hours</div><div style="color:var(--text-secondary);">Mon–Fri 9AM–6PM CST</div></div>
-                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+                <span class="section-tag"
+                    style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); padding: 0.35rem 1rem; border-radius: var(--radius-full); border: 1px solid rgba(var(--color-primary-rgb), 0.25);">Clear
+                    Guidance</span>
+                <h2 style="font-size: 2.25rem; font-weight: 800; margin-top: 1rem; margin-bottom: 0.75rem;">Common
+                    Clinic Inquiries</h2>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">Review the answers below to find immediate
+                    clarification on consultation processes, scheduling details, and practice protocols.</p>
+            </div>
+
+            <div class="faq-container">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>Do you accept dental insurance protocols?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-content">
+                        <p>Yes, we accept major dental PPO insurance plans. Our administrative team will handle all
+                            coordination claims and pre-authorization approvals to maximize your procedural coverage
+                            details.</p>
                     </div>
                 </div>
 
-                <div class="card" style="padding:2rem;">
-                    <h3 style="margin-bottom:1.5rem;">Frequently Asked Questions</h3>
-                    <div style="display:flex;flex-direction:column;gap:1.25rem;">
-                        <details style="border-bottom:1px solid var(--border-color);padding-bottom:1.25rem;">
-                            <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;">Do you require long-term contracts? <span>+</span></summary>
-                            <p style="color:var(--text-secondary);margin-top:0.75rem;font-size:0.875rem;">No. We operate on 30-day rolling agreements. We earn your retention through results, not lock-ins.</p>
-                        </details>
-                        <details style="border-bottom:1px solid var(--border-color);padding-bottom:1.25rem;">
-                            <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;">How quickly can I expect leads? <span>+</span></summary>
-                            <p style="color:var(--text-secondary);margin-top:0.75rem;font-size:0.875rem;">PPC campaigns typically generate first leads within 48–72 hours of launch. SEO results take 60–90 days to gain momentum.</p>
-                        </details>
-                        <details style="border-bottom:1px solid var(--border-color);padding-bottom:1.25rem;">
-                            <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;">Do you work exclusively with dental clinics? <span>+</span></summary>
-                            <p style="color:var(--text-secondary);margin-top:0.75rem;font-size:0.875rem;">Yes. 100% dental-only. This focus allows us to accumulate deep industry data on what converts best for cosmetic dentists specifically.</p>
-                        </details>
-                        <details>
-                            <summary style="cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;">What does the client dashboard show? <span>+</span></summary>
-                            <p style="color:var(--text-secondary);margin-top:0.75rem;font-size:0.875rem;">Live lead count, campaign spend, CPL trends, creative approval board, invoice management, and a direct agency chat channel.</p>
-                        </details>
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>How long does a Smile Makeover consultation take?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-content">
+                        <p>An initial smile design consultation takes approximately 60 minutes. This includes 3D mapping
+                            scans, intraoral photographic logs, and personal alignment planning with our specialist
+                            team.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>Are custom veneer mockups available before surgery?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-content">
+                        <p>Absolutely. We construct virtual 3D mockups and trial shells that fit over your teeth. This
+                            allows you to evaluate shape, length, and shade aesthetics prior to initiating any permanent
+                            adjustments.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-header" onclick="toggleFaq(this)">
+                        <span>What is your cancellation policy?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-content">
+                        <p>We require at least 24 hours notice for calendar slot rescheduling. This allows us to
+                            reallocate advanced surgical equipment and staff resources to other waiting list patient
+                            schedules.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-grid">
-            <div class="footer-column"><a href="index.html" class="logo" style="margin-bottom:1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>Dent<span>Scale</span></a><p>Data-driven dental marketing for cosmetic dentistry clinics worldwide.</p></div>
-            <div class="footer-column"><h3>Growth Solutions</h3><ul class="footer-links"><li><a href="services.html" class="footer-link">Dental SEO Solutions</a></li><li><a href="services.html" class="footer-link">Paid Ads Management</a></li></ul></div>
-            <div class="footer-column"><h3>Our Platform</h3><ul class="footer-links"><li><a href="login.html" class="footer-link">Client Portal</a></li><li><a href="booking.html" class="footer-link">Schedule Consultation</a></li></ul></div>
-            <div class="footer-column"><h3>Clinic Demo</h3><ul class="footer-links"><li><a href="clinic-home.html" class="footer-link">Clinic Live Demo</a></li><li><a href="clinic-gallery.html" class="footer-link">Before/After Slider</a></li></ul></div>
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
+                </a>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Smile Treatments</h3>
+                <ul class="footer-links">
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Patient Portal</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Clinic Layouts</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="container footer-bottom"><p>&copy; 2026 DentScale Performance Agency. All rights reserved.</p></div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+        </div>
     </footer>
-    <div class="demo-switch-banner"><span>Demo View: <strong>Growth Agency</strong></span><a href="clinic-home.html" class="demo-switch-btn">Switch to Clinic Demo</a></div>
+
     <script>
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            let valid = true;
-            ['c-fname','c-lname','c-email','c-practice'].forEach(id => {
-                const el = document.getElementById(id);
-                const err = el.nextElementSibling;
-                if (!el.value.trim() || (id === 'c-email' && !/\S+@\S+\.\S+/.test(el.value))) {
-                    err.style.display = 'block'; valid = false;
-                } else { err.style.display = 'none'; }
+        function toggleFaq(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Close other items
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('active');
             });
-            if (valid) {
-                document.getElementById('contact-success').style.display = 'block';
-                e.target.reset();
+
+            if (!isActive) {
+                item.classList.add('active');
             }
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const phone = document.getElementById('contact-phone').value;
+            const msg = document.getElementById('contact-message').value;
+            const success = document.getElementById('contact-success');
+
+            if (window.DentalStore) {
+                // Mock lead addition on contact signal
+                window.DentalStore.addLead({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    treatment: 'Veneers',
+                    source: 'Contact Form'
+                });
+            }
+
+            success.style.display = 'block';
+            event.target.reset();
+            setTimeout(() => { success.style.display = 'none'; }, 4000);
         }
     </script>
 </body>
+
 </html>

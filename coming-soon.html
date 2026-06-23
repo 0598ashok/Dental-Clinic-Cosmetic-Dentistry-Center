@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Previews (Coming Soon) — Vance Cosmetic Dentistry</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/clinic.css">
+    <script src="assets/js/store.js" defer></script>
+    <script src="assets/js/theme-rtl.js" defer></script>
+</head>
+<body class="clinic-theme" style="display:flex; flex-direction:column; min-height:100vh;">
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                Vance <span>Cosmetic</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Coming Soon Content -->
+    <main style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 1.5rem; background: radial-gradient(circle at 50% 50%, rgba(var(--color-primary-rgb), 0.08), transparent 70%);">
+        <div class="glow-bg glow-primary" style="top:25%;"></div>
+        <div class="glow-bg glow-accent" style="bottom:25%;"></div>
+        <div style="max-width:600px; z-index:1;">
+            <span class="section-tag">Interstellar Innovation</span>
+            <h1 style="font-size:2.75rem; font-weight:800; margin-bottom:1rem; font-family:var(--font-heading); line-height:1.25;">Virtual Reality Smile Previews</h1>
+            <p style="color:var(--text-secondary); margin-bottom:2.5rem; font-size:1.05rem;">We are architecting a state-of-the-art virtual simulator. In late 2026, patients will be able to inspect their custom 3D porcelain veneer mockups inside immersive virtual headsets, matching tooth alignments to facial angles instantly before clinical prep.</p>
+            
+            <form class="card" style="padding:1.5rem; display:flex; gap:0.75rem; max-width:480px; margin:0 auto; align-items:center; flex-wrap:wrap;" onsubmit="handleSoonSubscribe(event)">
+                <input type="email" id="sub-email" placeholder="your@email.com" required style="flex:1; min-width:200px; padding:0.75rem 1rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:rgba(var(--bg-secondary-rgb),0.8); color:var(--text-primary);">
+                <button type="submit" class="btn btn-primary" style="padding:0.75rem 1.5rem;">Join Citizen Vault</button>
+            </form>
+            <div id="sub-success" style="display:none; color:var(--color-success); font-weight:600; margin-top:1rem; font-size:0.9rem;">Successfully registered for VR launch transmissions!</div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="padding: 2rem 0;">
+        <div class="container footer-bottom" style="border:none; padding:0;">
+            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleSoonSubscribe(event) {
+            event.preventDefault();
+            const success = document.getElementById('sub-success');
+            success.style.display = 'block';
+            event.target.reset();
+            setTimeout(() => { success.style.display = 'none'; }, 3000);
+        }
+    </script>
+</body>
+</html>
