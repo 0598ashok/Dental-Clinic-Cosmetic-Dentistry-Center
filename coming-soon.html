@@ -1,59 +1,204 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VR Previews (Coming Soon) — Vance Cosmetic Dentistry</title>
+    <title>Coming Soon — Vance Cosmetic Dentistry</title>
+    <meta name="description" content="Immersive VR Smile Previews coming soon to Vance Cosmetic Dentistry.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/clinic.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
-</head>
-<body class="clinic-theme" style="display:flex; flex-direction:column; min-height:100vh;">
+    <style>
+        body.soon-simple-body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-primary);
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+        }
 
-    <!-- Header Navigation -->
-    <header class="header">
-        <div class="container nav-wrapper">
-            <a href="index.html" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-                Vance <span>Cosmetic</span>
+        .soon-simple-card {
+            max-width: 500px;
+            width: 100%;
+            margin: 1.5rem;
+            padding: 3rem 2.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            box-sizing: border-box;
+            backdrop-filter: blur(8px);
+            transition: all var(--transition-normal);
+        }
+
+        .soon-simple-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(var(--color-primary-rgb), 0.1);
+            border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+            color: var(--color-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .soon-simple-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .soon-simple-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .soon-simple-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .soon-simple-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            transition: border-color var(--transition-fast);
+        }
+
+        .soon-simple-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .soon-simple-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--color-primary);
+            color: #060913;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .soon-simple-btn:hover {
+            background: var(--color-primary-hover);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .soon-simple-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .soon-simple-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .soon-simple-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive spacing adjustments */
+        @media (max-width: 480px) {
+            .soon-simple-card {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .soon-simple-title {
+                font-size: 1.65rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="soon-simple-body">
+
+    <div class="soon-simple-card">
+        
+        <!-- Icon -->
+        <div class="soon-simple-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                <line x1="12" y1="22.08" x2="12" y2="12" />
+            </svg>
+        </div>
+
+        <!-- Info -->
+        <h1 class="soon-simple-title">Immersive VR Previews</h1>
+        <p class="soon-simple-desc">
+            We are designing an advanced Virtual Reality smile simulator. Soon, patients can inspect customized 3D veneers and restorative previews in full VR before treatment starts.
+        </p>
+
+        <!-- Minimal Form -->
+        <form class="soon-simple-form" onsubmit="handleSubscribe(event)">
+            <input type="email" class="soon-simple-input" placeholder="Enter your email address" required>
+            <button type="submit" class="soon-simple-btn">Notify Me On Launch</button>
+        </form>
+
+        <div id="simple-sub-success" style="display:none; color:var(--color-success); font-weight:600; font-size:0.85rem; margin-top:0.5rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15); border-radius: var(--radius-sm);">
+            Successfully subscribed!
+        </div>
+
+        <!-- Link Home -->
+        <div class="soon-simple-footer">
+            <a href="index.html" class="soon-simple-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Return to Homepage
             </a>
         </div>
-    </header>
 
-    <!-- Coming Soon Content -->
-    <main style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:6rem 1.5rem; background: radial-gradient(circle at 50% 50%, rgba(var(--color-primary-rgb), 0.08), transparent 70%);">
-        <div class="glow-bg glow-primary" style="top:25%;"></div>
-        <div class="glow-bg glow-accent" style="bottom:25%;"></div>
-        <div style="max-width:600px; z-index:1;">
-            <span class="section-tag">Interstellar Innovation</span>
-            <h1 style="font-size:2.75rem; font-weight:800; margin-bottom:1rem; font-family:var(--font-heading); line-height:1.25;">Virtual Reality Smile Previews</h1>
-            <p style="color:var(--text-secondary); margin-bottom:2.5rem; font-size:1.05rem;">We are architecting a state-of-the-art virtual simulator. In late 2026, patients will be able to inspect their custom 3D porcelain veneer mockups inside immersive virtual headsets, matching tooth alignments to facial angles instantly before clinical prep.</p>
-            
-            <form class="card" style="padding:1.5rem; display:flex; gap:0.75rem; max-width:480px; margin:0 auto; align-items:center; flex-wrap:wrap;" onsubmit="handleSoonSubscribe(event)">
-                <input type="email" id="sub-email" placeholder="your@email.com" required style="flex:1; min-width:200px; padding:0.75rem 1rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:rgba(var(--bg-secondary-rgb),0.8); color:var(--text-primary);">
-                <button type="submit" class="btn btn-primary" style="padding:0.75rem 1.5rem;">Join Citizen Vault</button>
-            </form>
-            <div id="sub-success" style="display:none; color:var(--color-success); font-weight:600; margin-top:1rem; font-size:0.9rem;">Successfully registered for VR launch transmissions!</div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer" style="padding: 2rem 0;">
-        <div class="container footer-bottom" style="border:none; padding:0;">
-            <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        function handleSoonSubscribe(event) {
+        function handleSubscribe(event) {
             event.preventDefault();
-            const success = document.getElementById('sub-success');
+            const success = document.getElementById('simple-sub-success');
             success.style.display = 'block';
             event.target.reset();
-            setTimeout(() => { success.style.display = 'none'; }, 3000);
+            setTimeout(() => { success.style.display = 'none'; }, 4000);
         }
     </script>
 </body>
+
 </html>
+

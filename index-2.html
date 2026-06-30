@@ -7,6 +7,7 @@
     <title>Vance Cosmetic Dentistry — Split Smile Transform Design</title>
     <meta name="description"
         content="Chicago's premier cosmetic dentistry center. Expert porcelain veneers, dental implants, Invisalign aligners, and dental makeovers with Dr. Evelyn Vance, DDS.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/clinic.css">
@@ -27,9 +28,15 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: var(--bg-primary);
+            background-image: linear-gradient(to bottom, rgba(6, 9, 19, 0.65), rgba(6, 9, 19, 0.85)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
             overflow: hidden;
             padding: 90px 20px 40px;
+        }
+
+        [data-theme="light"] .glass-hero {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.75)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=80');
         }
 
         .glass-hero-content {
@@ -193,7 +200,7 @@
         /* 4. Sticky Scroll Process */
         .process-wall {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 4rem;
             padding: 6rem 0;
             position: relative;
@@ -201,8 +208,6 @@
 
         .process-text {
             flex: 1;
-            position: sticky;
-            top: 120px;
         }
 
         .process-visuals {
@@ -452,6 +457,14 @@
                 font-size: 0.9rem;
             }
 
+            .giant-stats {
+                flex-direction: column;
+                gap: 2.5rem;
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
             .process-wall {
                 flex-direction: column;
                 padding: 4rem 1.5rem;
@@ -464,14 +477,6 @@
                 text-align: left;
             }
 
-            .giant-stats {
-                flex-direction: column;
-                gap: 2.5rem;
-                padding: 4rem 0;
-            }
-        }
-
-        @media (max-width: 768px) {
             .list-menu-item {
                 padding: 1.25rem 0.5rem;
             }
@@ -485,7 +490,28 @@
             }
 
             .booking-portal-card {
-                padding: 2rem 1.5rem;
+                padding: 2rem 15px;
+            }
+        }
+
+        @media screen and (min-width:0px) and (max-width:767px) {
+            .list-menu-section {
+                padding: 6rem 15px;
+            }
+
+            .hero_btn {
+                padding: 15px 10px !important;
+                font-weight: 500 !important;
+                font-size: 15px !important;
+            }
+
+            .home2-forminput {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            .btn-primary {
+                font-weight: 500 !important;
             }
         }
     </style>
@@ -534,13 +560,19 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="dashboard.html" class="dropdown-link-portal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
                                     Patient Portal
                                 </a>
                             </li>
                             <li>
                                 <a href="admin.html" class="dropdown-link-portal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
                                     Admin Console
                                 </a>
                             </li>
@@ -564,7 +596,7 @@
             <p
                 style="font-size: 1.25rem; max-width: 600px; margin: 1.5rem auto 2.5rem; font-weight: 300; color: var(--text-secondary);">
                 A study in facial harmony, computer-guided implantology, and natural veneer aesthetics.</p>
-            <a href="#booking" class="btn btn-primary"
+            <a href="#booking" class="btn btn-primary hero_btn"
                 style="padding: 1rem 3rem; border-radius: var(--radius-sm); text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Explore
                 Vance Makeovers</a>
         </div>
@@ -775,7 +807,7 @@
                     <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Select your
                         preferred smile transformation pathway and secure your custom diagnostic appointment slot.</p>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;" class="home2-forminput">
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                             <label for="book-treatment"
                                 style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Treatment

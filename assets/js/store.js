@@ -255,11 +255,38 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('open');
         });
         
-        // Close menu on link click
+        // Close menu on link click (except for dropdown parent links on mobile)
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
+                if (window.innerWidth <= 1200 && link.parentElement.classList.contains('nav-item-dropdown')) {
+                    return;
+                }
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('open');
+                // Close any open dropdowns when menu closes
+                document.querySelectorAll('.nav-item-dropdown').forEach(item => {
+                    item.classList.remove('open');
+                });
+            });
+        });
+
+        // Toggle dropdowns on mobile click
+        const dropdownToggles = navMenu.querySelectorAll('.nav-item-dropdown > a');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                if (window.innerWidth <= 1200) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const parent = toggle.parentElement;
+                    const isOpen = parent.classList.contains('open');
+                    
+                    // Close other dropdowns
+                    navMenu.querySelectorAll('.nav-item-dropdown').forEach(item => {
+                        if (item !== parent) item.classList.remove('open');
+                    });
+                    
+                    parent.classList.toggle('open');
+                }
             });
         });
     }
@@ -276,3 +303,48 @@ function scrollCarousel(id, direction) {
         }
     }
 }
+
+// Auto Scroll to Top on page navigation / load
+(function() {
+    function scrollToTopInstant() {
+        if (!window.location.hash) {
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+    }
+    
+    // Run immediately
+    scrollToTopInstant();
+    
+    // Run on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', scrollToTopInstant);
+    
+    // Run on load with a tiny timeout to ensure browser scroll-restoration is overridden
+    window.addEventListener('load', () => {
+        setTimeout(scrollToTopInstant, 10);
+    });
+    
+    // Run on pageshow (handles BF Cache navigation)
+    window.addEventListener('pageshow', (event) => {
+        scrollToTopInstant();
+    });
+
+    // Intercept internal page/hash clicks to smoothly scroll to top
+    document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (anchor) {
+            const href = anchor.getAttribute('href');
+            const pageName = window.location.pathname.split('/').pop() || 'index.html';
+            
+            // Match hrefs like "#", "", "index.html", "index.html#", etc.
+            if (href === '#' || href === '' || href === pageName || href === `${pageName}#`) {
+                // Ignore tab links (which have their own tab-switching scroll handling) or RTL switches
+                if (!anchor.classList.contains('db-menu-link') && 
+                    !anchor.closest('.theme-rtl-controls') && 
+                    !anchor.hasAttribute('onclick')) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        }
+    });
+})();

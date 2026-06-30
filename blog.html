@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor's Log — Vance Cosmetic Dentistry</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link class="stylesheet" href="assets/css/variables.css" rel="stylesheet">
     <link class="stylesheet" href="assets/css/main.css" rel="stylesheet">
     <link class="stylesheet" href="assets/css/clinic.css" rel="stylesheet">
@@ -501,7 +502,9 @@
         }
 
         [data-theme="light"] .filter-pill.active {
-            color: #ffffff;
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
         }
 
         [data-theme="light"] .blog-card {
@@ -568,6 +571,117 @@
 
             .newsletter-form {
                 flex-direction: column;
+            }
+        }
+
+        /* Mobile Viewport Spacing & Sizing Overrides */
+        @media (max-width: 576px) {
+            .blog-hero {
+                padding: 3rem 0 2rem !important;
+            }
+
+            .blog-hero h1 {
+                font-size: 2rem !important;
+            }
+
+            .blog-hero p {
+                font-size: 0.95rem !important;
+            }
+
+            .featured-post-container {
+                margin-bottom: 2rem !important;
+            }
+
+            .featured-content {
+                padding: 1.5rem !important;
+            }
+
+            .featured-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .featured-desc {
+                font-size: 0.9rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .featured-img-wrap {
+                min-height: 200px !important;
+            }
+
+            .filter-section {
+                margin-bottom: 2rem !important;
+                padding-bottom: 1rem !important;
+            }
+
+            .filter-pill {
+                padding: 0.4rem 1.25rem !important;
+                font-size: 0.8rem !important;
+            }
+
+            .blog-grid {
+                gap: 1.5rem !important;
+                margin-bottom: 3rem !important;
+            }
+
+            .blog-card-body {
+                padding: 1.25rem !important;
+            }
+
+            .blog-card-title {
+                font-size: 1.15rem !important;
+            }
+
+            .blog-card-desc {
+                font-size: 0.85rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .advisory-section {
+                padding: 3rem 0 !important;
+                margin-bottom: 3rem !important;
+            }
+
+            .advisor-card {
+                padding: 1.75rem 1.25rem !important;
+            }
+
+            .advisor-avatar-lg {
+                width: 75px !important;
+                height: 75px !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .advisor-name {
+                font-size: 1.05rem !important;
+            }
+
+            .advisor-bio {
+                font-size: 0.8rem !important;
+            }
+
+            .newsletter-block {
+                padding: 2rem 1.25rem !important;
+            }
+
+            .newsletter-title {
+                font-size: 1.5rem !important;
+            }
+
+            .newsletter-desc {
+                font-size: 0.85rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .newsletter-input {
+                padding: 0.75rem 1rem !important;
+                font-size: 0.9rem !important;
+            }
+
+            .newsletter-btn {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 0.9rem !important;
             }
         }
     </style>

@@ -1,0 +1,1481 @@
+/* ==========================================================================
+   ASTRO-CLINICAL ADMIN STYLESHEET
+   ========================================================================== */
+
+/* 1. Admin Grid & Layout overrides */
+.admin-grid-2col {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .admin-grid-2col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 2. Recent activity timeline log */
+.activity-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+}
+
+.activity-item {
+    display: flex;
+    gap: 0.85rem;
+    position: relative;
+}
+
+.activity-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 17px;
+    top: 36px;
+    bottom: -20px;
+    width: 2px;
+    background: var(--border-color);
+}
+
+.activity-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-primary);
+}
+
+.activity-icon.alert {
+    background: rgba(var(--color-accent-rgb), 0.08);
+    border-color: rgba(var(--color-accent-rgb), 0.2);
+    color: var(--color-accent);
+}
+
+.activity-icon.success {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: var(--color-success);
+}
+
+.activity-details {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.activity-text {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    margin: 0 0 0.15rem 0;
+}
+
+.activity-text strong {
+    font-weight: 700;
+}
+
+.activity-time {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* 3. Quick Action Shortcut Panel */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.85rem;
+}
+
+.quick-action-btn {
+    background: rgba(var(--bg-secondary-rgb), 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem 0.75rem;
+    text-align: center;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.quick-action-btn:hover {
+    border-color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb), 0.06);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.quick-action-btn svg {
+    color: var(--color-primary);
+    transition: transform var(--transition-fast);
+}
+
+.quick-action-btn:hover svg {
+    transform: scale(1.1);
+}
+
+/* 4. Interactive Search & Filter Rows */
+.admin-controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.admin-search-wrapper {
+    position: relative;
+    max-width: 320px;
+    width: 100%;
+}
+
+.admin-search-wrapper input {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2.25rem;
+    background: rgba(var(--bg-primary-rgb), 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+}
+
+.admin-search-wrapper input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.admin-search-wrapper svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.filter-chips-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    padding: 0.4rem 1rem;
+    background: rgba(var(--bg-secondary-rgb), 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #060913;
+}
+
+/* 5. Specialist Staff Roster Cards */
+.roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .roster-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.roster-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    position: relative;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow: visible;
+}
+
+.roster-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.roster-status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+}
+
+.roster-status-badge.active {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: var(--color-success);
+}
+
+.roster-status-badge.out {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--color-danger);
+}
+
+.roster-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+    min-width: 0;
+}
+
+.roster-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(var(--color-primary-rgb), 0.15);
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.roster-details {
+    min-width: 0;
+}
+
+.roster-details h4 {
+    margin: 0 0 0.15rem 0;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* leave room for the absolute badge (80px) */
+    max-width: calc(100% - 90px);
+}
+
+.roster-details span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 90px);
+}
+
+.roster-stats {
+    background: rgba(var(--bg-secondary-rgb), 0.3);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.roster-stat-item {
+    text-align: center;
+    flex: 1;
+    min-width: 60px;
+}
+
+.roster-stat-label {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+}
+
+.roster-stat-val {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.roster-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.roster-actions select {
+    flex: 1;
+    min-width: 120px;
+    background: rgba(var(--bg-primary-rgb), 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.5rem;
+    box-sizing: border-box;
+}
+
+.roster-actions select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* 6. Premium Invoice Creator Form */
+.invoice-creator-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.invoice-creator-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .invoice-creator-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+.invoice-creator-form label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+.invoice-creator-form input,
+.invoice-creator-form select,
+.invoice-creator-form textarea {
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    background: rgba(var(--bg-primary-rgb), 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-family: var(--font-primary);
+}
+
+.invoice-creator-form input:focus,
+.invoice-creator-form select:focus,
+.invoice-creator-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.invoice-creator-form button {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* Custom Scrollbar for dynamic tables */
+.db-table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.db-table-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.db-table-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 3px;
+}
+
+.db-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.4);
+}
+
+/* 7. Redesigned Approvals Queue - Card Grid Layout */
+.approvals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .approvals-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.approval-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    position: relative;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: visible;
+    /* was hidden — caused content clipping */
+    min-width: 0;
+    /* prevents flex overflow */
+    box-sizing: border-box;
+    word-break: break-word;
+}
+
+.approval-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-accent);
+    transition: background 0.3s ease;
+}
+
+.approval-card.approved::before {
+    background: var(--color-success);
+}
+
+.approval-card.declined::before {
+    background: var(--color-danger);
+}
+
+.approval-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.approval-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    /* badge wraps below on tiny screens */
+}
+
+.approval-patient-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    /* prevents avatar + text from overflowing */
+    flex: 1;
+}
+
+.approval-patient-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+}
+
+.approval-patient-meta {
+    min-width: 0;
+    /* prevent text from blowing out flex container */
+}
+
+.approval-patient-meta h4 {
+    margin: 0 0 0.15rem 0;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.approval-patient-meta span {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.approval-badge-state {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+}
+
+.approval-badge-state.pending {
+    background: rgba(var(--color-accent-rgb), 0.08);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+    color: var(--color-accent);
+}
+
+.approval-badge-state.approved {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: var(--color-success);
+}
+
+.approval-badge-state.declined {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--color-danger);
+}
+
+.approval-card-body {
+    margin-bottom: 1rem;
+}
+
+.approval-treatment-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.approval-treatment-tag {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.approval-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    background: rgba(var(--bg-secondary-rgb), 0.3);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+}
+
+.approval-detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    /* allows value to wrap below label on small screens */
+}
+
+.approval-detail-item>span {
+    flex-shrink: 0;
+}
+
+.approval-detail-item strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+    word-break: break-word;
+    min-width: 0;
+}
+
+.approval-record-attachment {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-top: 0.75rem;
+    font-weight: 600;
+}
+
+.approval-record-attachment:hover {
+    text-decoration: underline;
+}
+
+.approval-card-footer {
+    display: flex;
+    gap: 0.65rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    flex-wrap: wrap;
+    /* buttons stack on very small screens */
+}
+
+.approval-btn-approve {
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    background: var(--color-primary);
+    color: #060913;
+    border: none;
+    font-weight: 800;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.78rem;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.approval-btn-approve:hover {
+    background: var(--color-primary-hover);
+    box-shadow: var(--shadow-glow);
+}
+
+.approval-btn-decline {
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    background: transparent;
+    color: var(--color-danger);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    font-weight: 700;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.78rem;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.approval-btn-decline:hover {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: var(--color-danger);
+}
+
+/* ---- Approvals Queue: Responsive admin controls row ---- */
+@media (max-width: 768px) {
+    .admin-controls-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.85rem !important;
+    }
+
+    .admin-controls-row>div:last-child {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.65rem !important;
+    }
+
+    .admin-search-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .admin-search-wrapper input {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .filter-chips-list {
+        flex-wrap: wrap;
+    }
+
+    .approval-card {
+        padding: 1rem;
+    }
+
+    .approval-patient-meta h4 {
+        max-width: 140px;
+        font-size: 0.9rem;
+    }
+
+    .approval-card-footer {
+        gap: 0.5rem;
+    }
+}
+
+/* 8. Redesigned Patient Directory - Card Grid Layout */
+.patient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .patient-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.patient-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    position: relative;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: visible;
+    /* was hidden — clips content */
+    min-width: 0;
+    box-sizing: border-box;
+    word-break: break-word;
+}
+
+.patient-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.patient-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.patient-card-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.patient-card-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.15) 0%, rgba(var(--color-primary-rgb), 0.02) 100%);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+}
+
+.patient-card-meta {
+    min-width: 0;
+}
+
+.patient-card-meta h4 {
+    margin: 0 0 0.15rem 0;
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+}
+
+.patient-card-meta span {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.patient-card-body {
+    margin-bottom: 1.25rem;
+}
+
+.patient-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(var(--bg-secondary-rgb), 0.35);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.patient-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.patient-info-item svg {
+    color: var(--color-primary);
+    opacity: 0.85;
+}
+
+.patient-tags-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.patient-tag-treatment {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.patient-tag-source {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    background: rgba(var(--color-accent-rgb), 0.08);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+    border-radius: var(--radius-sm);
+    color: var(--color-accent);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.patient-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: auto;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.patient-portal-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-success);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.patient-portal-status span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-success);
+    box-shadow: 0 0 6px var(--color-success);
+}
+
+.patient-card-action {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.patient-card-action:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb), 0.04);
+}
+
+/* 9. Redesigned Billing & Invoices Section */
+
+/* KPI Strip */
+.billing-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .billing-kpi-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .billing-kpi-strip {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.billing-kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all var(--transition-normal);
+}
+
+.billing-kpi-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.billing-kpi-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.billing-kpi-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.billing-kpi-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.billing-kpi-value {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* Main 2-col grid */
+.billing-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .billing-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Shared Panel Styles */
+.billing-ledger-panel,
+.billing-creator-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.billing-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.billing-panel-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.15rem 0;
+}
+
+.billing-panel-subtitle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Ledger Filter Buttons */
+.billing-ledger-filter {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.billing-filter-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    padding: 0.25rem 0.8rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.billing-filter-btn:hover,
+.billing-filter-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #060913;
+}
+
+/* Invoice List */
+.billing-invoice-list {
+    padding: 0.75rem 0;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.billing-invoice-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.billing-invoice-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.billing-invoice-list::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 4px;
+}
+
+.billing-invoice-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    border-bottom: 1px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.06);
+    transition: background var(--transition-fast);
+    gap: 1rem;
+}
+
+.billing-invoice-row:last-child {
+    border-bottom: none;
+}
+
+.billing-invoice-row:hover {
+    background: rgba(var(--color-primary-rgb), 0.03);
+}
+
+.billing-invoice-row-left {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+}
+
+.billing-invoice-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.billing-invoice-dot.dot-paid {
+    background: var(--color-success);
+    box-shadow: 0 0 5px var(--color-success);
+}
+
+.billing-invoice-dot.dot-pending {
+    background: var(--color-danger);
+    box-shadow: 0 0 5px var(--color-danger);
+}
+
+.billing-invoice-info {
+    min-width: 0;
+}
+
+.billing-invoice-id {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    margin-bottom: 0.15rem;
+}
+
+.billing-invoice-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+}
+
+.billing-invoice-row-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.billing-invoice-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+}
+
+.billing-due-date {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.billing-invoice-amount {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.billing-status-pill {
+    font-size: 0.62rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 0.18rem 0.55rem;
+    border-radius: var(--radius-full);
+}
+
+.billing-status-pill.pill-paid {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--color-success);
+}
+
+.billing-status-pill.pill-pending {
+    background: rgba(239, 68, 68, 0.07);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--color-danger);
+}
+
+/* Creator Panel */
+.billing-creator-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md);
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Creator Form */
+.billing-creator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.billing-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.billing-form-full {
+    /* spans full width naturally in column layout */
+}
+
+.billing-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.billing-creator-form label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.billing-creator-form label svg {
+    color: var(--color-primary);
+    opacity: 0.8;
+}
+
+.billing-creator-form input,
+.billing-creator-form select {
+    width: 100%;
+    padding: 0.55rem 0.85rem;
+    background: rgba(var(--bg-primary-rgb), 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-family: var(--font-primary);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.billing-creator-form input:focus,
+.billing-creator-form select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.12);
+}
+
+/* Live Preview Box */
+.billing-invoice-preview {
+    background: rgba(var(--bg-secondary-rgb), 0.4);
+    border: 1px dashed rgba(var(--color-primary-rgb), 0.25);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.billing-preview-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.billing-preview-row strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    max-width: 60%;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Submit Button */
+.billing-submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-primary);
+    color: #060913;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    letter-spacing: 0.01em;
+}
+
+
+.billing-submit-btn:hover {
+    background: var(--color-primary-hover);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS — Patient, Billing, Roster
+   ============================================================ */
+
+/* ---- Billing Invoice Row: stack left/right on very small screens ---- */
+@media (max-width: 520px) {
+    .billing-invoice-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .billing-invoice-row-right {
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        align-items: end !important;
+        margin-top: 20px;
+    }
+
+    .billing-invoice-desc {
+        max-width: 100%;
+        white-space: normal;
+        word-break: break-word;
+    }
+}
+
+/* ---- Billing Form Row: single column on small screens ---- */
+@media (max-width: 480px) {
+    .billing-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .billing-kpi-card {
+        padding: 0.85rem 1rem;
+        gap: 0.65rem;
+    }
+
+    .billing-kpi-value {
+        font-size: 1rem;
+    }
+
+    .billing-panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.65rem;
+        padding: 1rem;
+    }
+
+    .billing-ledger-filter {
+        flex-wrap: wrap;
+    }
+
+    .billing-creator-form {
+        padding: 1rem;
+    }
+}
+
+/* ---- Patient Directory Mobile ---- */
+@media (max-width: 768px) {
+    .patient-card {
+        padding: 1rem;
+    }
+
+    .patient-card-meta h4 {
+        max-width: 130px;
+        font-size: 0.9rem;
+    }
+
+    .patient-card-footer {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .patient-card-meta h4 {
+        max-width: 100px;
+        font-size: 0.85rem;
+    }
+
+    .patient-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.65rem;
+    }
+
+    .patient-card-action {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ---- Specialist Roster Mobile ---- */
+@media (max-width: 768px) {
+    .roster-card {
+        padding: 1rem;
+    }
+
+    .roster-details h4 {
+        max-width: calc(100% - 75px);
+        font-size: 0.9rem;
+    }
+
+    .roster-details span {
+        max-width: calc(100% - 75px);
+        font-size: 0.72rem;
+    }
+
+    .roster-stats {
+        padding: 0.6rem 0.75rem;
+        gap: 0.35rem;
+    }
+
+    .roster-stat-val {
+        font-size: 0.9rem;
+    }
+
+    .roster-stat-label {
+        font-size: 0.6rem;
+    }
+
+    .roster-actions {
+        flex-direction: column;
+    }
+
+    .roster-actions select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .roster-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .roster-status-badge {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.4rem;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+}

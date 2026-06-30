@@ -5,7 +5,10 @@
     display: flex;
     min-height: 100vh;
     background-color: var(--bg-secondary);
+    overflow-x: hidden;
+    /* Prevent any horizontal scroll on the whole dashboard */
 }
+
 
 /* Sidebar Navigation */
 .db-sidebar {
@@ -17,15 +20,31 @@
     padding: 1.5rem;
     position: fixed;
     height: 100vh;
-    z-index: 100;
+    z-index: 200;
     transition: transform var(--transition-normal), background-color var(--transition-normal);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    overflow-y: auto;
 }
 
 [dir="rtl"] .db-sidebar {
     border-right: none;
     border-left: 1px solid var(--border-color);
+}
+
+/* Sidebar overlay backdrop for mobile */
+.db-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 9, 19, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 199;
+}
+
+.db-sidebar.open~.db-sidebar-overlay,
+.db-sidebar-overlay.visible {
+    display: block;
 }
 
 .db-sidebar-brand {
@@ -36,6 +55,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-shrink: 0;
 }
 
 .db-sidebar-brand span {
@@ -81,9 +101,11 @@
 .db-main {
     flex: 1;
     margin-left: 260px;
-    padding: 2.5rem;
+    padding: 1.5rem 2.5rem 2.5rem;
     min-height: 100vh;
     transition: margin var(--transition-normal);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 [dir="rtl"] .db-main {
@@ -96,9 +118,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 1.5rem;
+    /* Align vertically with sidebar brand — matches 1.5rem top padding + brand font-size area */
+    min-height: 3.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .db-header-title h1 {
@@ -137,7 +163,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 @media (max-width: 1200px) {
@@ -146,9 +172,17 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
     .metrics-grid {
         grid-template-columns: 1fr;
+        gap: 0.875rem;
     }
 }
 
@@ -456,6 +490,10 @@
     gap: 0.75rem;
 }
 
+.chat-input-area .btn {
+    width: auto !important;
+}
+
 .chat-input {
     flex: 1;
     background-color: rgba(var(--bg-secondary-rgb), 0.8);
@@ -470,68 +508,538 @@
     border-color: var(--color-primary);
 }
 
-/* Sidebar Toggle for Mobile Devices */
-.sidebar-toggle-btn {
+/* ============================================
+   MOBILE TOP NAVBAR — Hidden on desktop
+   ============================================ */
+.db-mobile-topbar {
     display: none;
+    /* shown only on mobile via media query */
     position: fixed;
-    bottom: 25px;
-    left: 25px;
-    z-index: 1001;
-    width: 50px;
-    height: 50px;
-    border-radius: var(--radius-full);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 58px;
+    z-index: 400;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    gap: 1rem;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Hamburger Button */
+.db-mobile-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: var(--radius-md);
+    padding: 0 8px;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.db-mobile-hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
     background-color: var(--color-primary);
-    color: #060913;
+    border-radius: 2px;
+    transition: all var(--transition-fast);
+    transform-origin: center;
+}
+
+.db-mobile-hamburger:hover {
+    background: rgba(var(--color-primary-rgb), 0.15);
+    border-color: var(--color-primary);
+}
+
+/* Animated X when sidebar is open */
+.db-mobile-hamburger.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.db-mobile-hamburger.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.db-mobile-hamburger.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Brand Logo */
+.db-mobile-brand {
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.db-mobile-brand span {
+    color: var(--color-primary);
+}
+
+/* Mobile Avatar Pill */
+.db-mobile-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-full);
+    background: rgba(var(--color-primary-rgb), 0.15);
+    color: var(--color-primary);
+    border: 2px solid rgba(var(--color-primary-rgb), 0.3);
+    display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-lg);
-    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.7rem;
+    flex-shrink: 0;
 }
 
-[dir="rtl"] .sidebar-toggle-btn {
-    left: auto;
-    right: 25px;
-}
 
-/* Responsive Dashboard Layouts */
-@media (max-width: 768px) {
+/* ========================================
+   RESPONSIVE DASHBOARD — ALL BREAKPOINTS
+   ======================================== */
+
+/* ---- Tablet / Small Desktop (≤1024px) ---- */
+@media (max-width: 1024px) {
     .db-sidebar {
-        transform: translateX(-100%);
-        width: 250px;
+        width: 220px;
+    }
+
+    .db-main {
+        margin-left: 220px;
+        padding: 1.5rem 1.75rem 2rem;
+    }
+
+    [dir="rtl"] .db-main {
+        margin-left: 0;
+        margin-right: 220px;
+    }
+}
+
+/* ---- Mobile (≤768px) — Sidebar slides off-screen, topbar appears ---- */
+@media (max-width: 768px) {
+
+    /* Show mobile top navbar */
+    .db-mobile-topbar {
+        display: flex;
+    }
+
+    /* Sidebar: fixed, full-height drawer */
+    .db-sidebar {
+        top: 0;
+        left: 0;
+        width: 280px;
+        transform: translateX(-110%);
+        z-index: 500;
+        box-shadow: 6px 0 40px rgba(0, 0, 0, 0.55);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding-top: 1.5rem;
     }
 
     [dir="rtl"] .db-sidebar {
-        transform: translateX(100%);
+        left: auto;
+        right: 0;
+        transform: translateX(110%);
+        box-shadow: -6px 0 40px rgba(0, 0, 0, 0.55);
     }
 
     .db-sidebar.open {
         transform: translateX(0);
     }
 
+    /* Overlay backdrop visible when sidebar is open */
+    .db-sidebar-overlay.visible {
+        display: block;
+    }
+
+    /* Main content: push down below topbar, no sidebar margin */
     .db-main {
         margin-left: 0;
-        padding: 1.5rem;
+        margin-right: 0;
+        padding: 1.25rem 1rem 2rem;
+        padding-top: calc(58px + 1.25rem);
+        /* topbar height + gap */
     }
 
     [dir="rtl"] .db-main {
         margin-right: 0;
     }
 
-    .sidebar-toggle-btn {
-        display: flex;
-    }
-
+    /* Dashboard header: stack vertically */
     .db-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        min-height: unset;
+        padding-bottom: 1rem;
+    }
+
+    .db-header-title h1 {
+        font-size: 1.35rem;
+    }
+
+    .db-header-title p {
+        font-size: 0.82rem;
     }
 
     .db-profile {
         width: 100%;
         justify-content: space-between;
     }
+
+    /* Metric cards: 2-column grid */
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.875rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Agenda list padding shrink */
+    .agenda-list {
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+
+    /* Agenda: always stack vertically on mobile */
+    .agenda-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+
+    .agenda-date-pill {
+        width: 54px;
+        height: 54px;
+    }
+
+    .agenda-status-actions {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px dashed var(--border-color);
+        padding-top: 0.75rem;
+    }
+
+    .agenda-meta {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    /* Agenda actions — keep buttons together, no overflow */
+    .agenda-actions-wrapper {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: nowrap;
+    }
+
+    .db-table-action-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+
+    .db-table-action-btn.cancel {
+        margin-left: 0;
+    }
+
+    /* Specialist team cards: stack */
+    .specialist-team-card {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.75rem;
+    }
+
+    .specialist-team-card>div:last-child {
+        width: 100%;
+        justify-content: space-between !important;
+        border-top: 1px dashed var(--border-color);
+        padding-top: 0.75rem;
+    }
+
+    /* Plan tab: stepper scrollable */
+    .horizontal-stepper-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.75rem;
+    }
+
+    /* Billing table: horizontal scroll */
+    .db-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Billing cards: single column */
+    .billing-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Table header: wrap on mobile */
+    .table-header {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+    }
+
+    /* Grid-2 sections become 1-column */
+    .grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+
+    /* Chat layout: vertical split toggling */
+    .chat-layout {
+        height: 580px;
+        flex-direction: column;
+        min-height: unset;
+    }
+
+    /* Contacts Sidebar Toggle Behaviour */
+    .chat-layout:not(.mobile-show-chat) .chat-sidebar {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-right: none;
+    }
+
+    .chat-layout:not(.mobile-show-chat) .chat-main {
+        display: none;
+    }
+
+    /* Chat Main Panel Toggle Behaviour */
+    .chat-layout.mobile-show-chat .chat-sidebar {
+        display: none;
+    }
+
+    .chat-layout.mobile-show-chat .chat-main {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Contacts List scrollable vertically on mobile */
+    .chat-contacts-list {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1;
+    }
+
+    .contact-item {
+        flex-shrink: 0;
+        width: 100%;
+        min-width: 0;
+        border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);
+        border-right: none;
+        border-left: 3px solid transparent;
+        border-top: none;
+    }
+
+    .contact-item.active {
+        border-left-color: var(--color-primary);
+        border-top-color: transparent;
+    }
+
+    /* Mobile Back Button */
+    .chat-main-header .chat-back-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: rgba(var(--color-primary-rgb), 0.08);
+        border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+        border-radius: var(--radius-md);
+        font-size: 1.1rem;
+        color: var(--color-primary);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        flex-shrink: 0;
+    }
+
+    .chat-main-header .chat-back-btn:hover {
+        background: var(--color-primary);
+        color: #060913;
+        box-shadow: var(--shadow-glow);
+    }
+
+    /* Quick replies responsive scrolling chips list */
+    .chat-quick-replies {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 0.6rem 1rem !important;
+        gap: 0.5rem !important;
+        background: rgba(var(--bg-secondary-rgb), 0.25);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .chat-quick-replies::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .chat-quick-replies::-webkit-scrollbar-thumb {
+        background-color: rgba(var(--color-primary-rgb), 0.2);
+        border-radius: 2px;
+    }
+
+    .quick-reply-chip {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    /* Bubble improvements and chat feed padding */
+    .chat-layout .chat-messages {
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+
+    .chat-layout .chat-bubble {
+        max-width: 80%;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Active Chat Header height compact */
+    .chat-main-header {
+        padding: 0.75rem 1rem;
+    }
+
+    /* Timeline card footer */
+    .timeline-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Modal padding on mobile */
+    .modal-content {
+        padding: 1.25rem;
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+
+    /* Overview sections */
+    #overview-care-team,
+    #overview-clinical-tips {
+        margin: 0 !important;
+    }
 }
+
+/* ---- Small Mobile (≤480px) — ultra compact ---- */
+@media (max-width: 480px) {
+
+    .db-main {
+        padding: 1rem 0.875rem 2rem;
+        padding-top: calc(58px + 1rem);
+    }
+
+    .db-header-title h1 {
+        font-size: 1.15rem;
+    }
+
+    /* Metric cards: single column */
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    /* Horizontal stepper: hidden (too cramped) */
+    .horizontal-stepper-container {
+        display: none;
+    }
+
+    /* Billing: hide less critical columns */
+    #tab-billing .col-breakdown {
+        display: none;
+    }
+
+    /* Billing card padding */
+    .billing-cards-grid .billing-metric-card {
+        padding: 1.1rem !important;
+    }
+
+    /* Chat compact on small mobile */
+    .chat-layout {
+        height: 520px;
+    }
+
+    .chat-main-header {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .chat-header-action-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    .chat-btn-text {
+        display: none;
+    }
+
+    .chat-layout .chat-input-area button[type="submit"] {
+        padding: 0 1rem !important;
+        justify-content: center;
+    }
+
+    /* DB table text scaling */
+    #tab-billing .db-table th,
+    #tab-billing .db-table td {
+        font-size: 0.78rem;
+        padding: 0.65rem 0.75rem;
+    }
+
+    /* Mobile brand size */
+    .db-mobile-brand {
+        font-size: 1rem;
+    }
+}
+
+/* ---- Very Small (≤380px) ---- */
+@media (max-width: 380px) {
+    .db-mobile-topbar {
+        padding: 0 0.75rem;
+    }
+
+    .db-mobile-brand {
+        font-size: 0.9rem;
+    }
+
+    .metrics-grid {
+        gap: 0.625rem;
+    }
+
+    .agenda-item {
+        padding: 0.875rem;
+    }
+
+    .db-main {
+        padding: 0.875rem 0.75rem 2rem;
+        padding-top: calc(58px + 0.875rem);
+    }
+}
+
 
 /* Modal overlays */
 .modal-overlay {
@@ -814,6 +1322,7 @@
     font-size: 0.75rem;
     color: var(--color-primary);
     font-weight: 700;
+
 }
 
 .status-pulse-dot {
@@ -1198,23 +1707,9 @@ body.clinic-theme {
     letter-spacing: 0.02em;
 }
 
-/* Responsive spacing */
-@media (max-width: 600px) {
-    .agenda-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
+/* Responsive spacing — handled inside main @media blocks below, NOT here */
+/* (600px block removed — conflicts with 768px block in the responsive section) */
 
-    .agenda-status-actions {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        border-top: 1px dashed var(--border-color);
-        padding-top: 0.75rem;
-    }
-}
 
 /* Agenda attachment hover transitions */
 .agenda-attachment-link:hover {
@@ -1319,8 +1814,13 @@ body.clinic-theme {
     color: var(--text-secondary);
     text-align: center;
     white-space: nowrap;
+    /* desktop: keep single line */
     transition: color var(--transition-fast);
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
 
 .horizontal-step-node-wrapper.active .horizontal-step-label {
     color: var(--color-accent-hover);
@@ -1590,10 +2090,11 @@ body.clinic-theme {
     color: #ffffff;
 }
 
-/* Responsive Steppers */
 @media (max-width: 768px) {
     .horizontal-step-label {
         font-size: 0.65rem;
+        white-space: normal;
+        word-break: break-word;
     }
 
     .horizontal-step-circle {
@@ -1604,13 +2105,6 @@ body.clinic-theme {
 
     .horizontal-stepper-track {
         top: 18px;
-    }
-}
-
-@media (max-width: 600px) {
-    .horizontal-stepper-container {
-        display: none;
-        /* Hide horizontal tracker on small devices to avoid layout cramp */
     }
 
     .timeline-card-footer {
@@ -1624,6 +2118,14 @@ body.clinic-theme {
         justify-content: space-between;
     }
 }
+
+@media (max-width: 480px) {
+    .horizontal-stepper-container {
+        display: none;
+        /* Hidden on very small screens — too cramped */
+    }
+}
+
 
 /* --- PREMIUM CHAT SPLIT-PANEL STYLES --- */
 
@@ -1984,57 +2486,18 @@ body.clinic-theme {
     background-color: rgba(var(--color-primary-rgb), 0.4);
 }
 
-/* Responsive constraints */
-@media (max-width: 850px) {
+/* Chat responsive — main breakpoints are handled in the global responsive section above */
+/* Tablet only: narrow sidebar */
+@media (max-width: 1024px) and (min-width: 769px) {
     .chat-layout {
         height: 580px;
     }
 
     .chat-sidebar {
-        width: 250px;
+        width: 240px;
     }
 }
 
-@media (max-width: 650px) {
-    .chat-layout {
-        flex-direction: column;
-        height: 680px;
-    }
-
-    .chat-sidebar {
-        width: 100%;
-        height: 200px;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .chat-contacts-list {
-        display: flex;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 0.5rem 0;
-    }
-
-    .contact-item {
-        flex-shrink: 0;
-        width: 220px;
-        border-bottom: none;
-        border-right: 1px solid rgba(var(--color-primary-rgb), 0.08);
-        border-left: none;
-        border-top: 3px solid transparent;
-        padding: 0.5rem 1rem;
-    }
-
-    .contact-item.active {
-        border-left-color: transparent;
-        border-top-color: var(--color-primary);
-    }
-
-    .chat-quick-replies {
-        display: none;
-        /* Hide replies on extra-small mobile interfaces */
-    }
-}
 
 /* --- PREMIUM CLINICAL BILLING STYLES --- */
 
@@ -2075,6 +2538,37 @@ body.clinic-theme {
 }
 
 /* 2. Redesigned Statements Table & Rows */
+.db-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    background: rgba(var(--bg-secondary-rgb), 0.15);
+}
+
+.db-table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.db-table-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.db-table-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 3px;
+}
+
+.db-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.4);
+}
+
+#tab-billing .db-table {
+    min-width: 850px;
+}
+
 #tab-billing .db-table th {
     font-family: var(--font-heading);
     font-size: 0.8rem;
@@ -2084,16 +2578,96 @@ body.clinic-theme {
     color: var(--text-primary);
     border-bottom: 2px solid var(--border-color);
     padding: 1rem 1.25rem;
+    vertical-align: middle;
 }
 
 #tab-billing .db-table td {
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--border-color);
     transition: all var(--transition-fast);
+    vertical-align: middle;
 }
 
 #tab-billing .db-table tr:hover td {
     background-color: rgba(var(--color-primary-rgb), 0.02);
+}
+
+#tab-billing .col-id {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    width: 13%;
+    min-width: 110px;
+}
+
+#tab-billing .bill-id-text {
+    display: block;
+}
+
+#tab-billing .ada-code-text {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-family: var(--font-primary);
+    font-weight: 600;
+    margin-top: 0.15rem;
+}
+
+#tab-billing .col-desc {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    text-align: left;
+    width: 27%;
+    min-width: 200px;
+}
+
+#tab-billing .col-due {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    width: 12%;
+    min-width: 100px;
+}
+
+#tab-billing .col-breakdown {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    width: 20%;
+    min-width: 160px;
+}
+
+#tab-billing .breakdown-row {
+    display: block;
+}
+
+#tab-billing .val-success {
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+#tab-billing .val-primary {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+#tab-billing .col-status {
+    width: 12%;
+    min-width: 100px;
+}
+
+#tab-billing .col-copay {
+    font-weight: 800;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    width: 11%;
+    min-width: 95px;
+}
+
+#tab-billing .col-actions {
+    width: 15%;
+    min-width: 160px;
+    text-align: right;
 }
 
 /* Receipt PDF Action link */
@@ -2144,5 +2718,155 @@ body.clinic-theme {
     #tab-billing .db-table th,
     #tab-billing .db-table td {
         padding: 0.75rem 1rem;
+    }
+}
+
+/* Sidebar Profile & Controls (Desktop & Mobile) */
+.db-sidebar-profile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .db-sidebar-profile {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding-top: 1.5rem;
+        margin-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .db-profile-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .db-profile-info strong {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .db-profile-info span.patient-id {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-top: 0.15rem;
+    }
+
+    /* Hide profile/controls from header/main-body on mobile screens */
+    .db-header .db-profile {
+        display: none !important;
+    }
+
+    /* Hide mobile topbar avatar and show balanced spacer instead */
+    .db-mobile-topbar .db-mobile-avatar {
+        display: none !important;
+    }
+
+    .db-mobile-topbar .db-mobile-avatar-spacer {
+        display: block !important;
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+    }
+
+    /* Consistent card padding on mobile screens */
+    .card,
+    .metric-card,
+    .timeline-card {
+        padding: 30px 10px !important;
+    }
+
+    /* Alignment adjustments for inner elements of cards on mobile */
+    .card .table-header {
+        padding: 1rem 0 !important;
+    }
+
+    .card .agenda-list {
+        padding: 1rem 0 !important;
+    }
+}
+
+.db-mobile-avatar-spacer {
+    display: none;
+}
+
+/* Custom inline SVG icon styling to replace emojis */
+.inline-icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.1em;
+    height: 1.1em;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    margin-right: 0.35rem;
+    position: relative;
+    top: -1px;
+    flex-shrink: 0;
+}
+
+[dir="rtl"] .inline-icon {
+    margin-right: 0;
+    margin-left: 0.35rem;
+}
+
+@media screen and (max-width:992px) {
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .approval-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.25rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .billing-invoice-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 0.1rem;
+    }
+
+    .billing-invoice-row-left {
+        display: flex;
+        align-items: start !important;
+        gap: 0.85rem;
+        min-width: 0;
+        flex-direction: column;
+    }
+
+    .roster-profile {
+        display: flex;
+        align-items: start !important;
+        gap: 0.85rem;
+        margin-bottom: 1.25rem;
+        min-width: 0;
+        flex-direction: column;
+    }
+
+    .roster-details h4 {
+        white-space: normal !important;
+        width: 300px !important;
+    }
+
+    .roster-details span {
+        white-space: normal !important;
+        width: 300px !important;
     }
 }

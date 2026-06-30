@@ -26,8 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
                 </button>
                 <button id="rtl-toggle" class="control-btn" aria-label="Toggle RTL">
-                    <span class="rtl-text">RTL</span>
-                    <span class="ltr-text">LTR</span>
+                    <svg class="rtl-text" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="21" y1="6" x2="3" y2="6"></line>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                        <line x1="21" y1="18" x2="6" y2="18"></line>
+                    </svg>
+                    <svg class="ltr-text" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="15" y2="12"></line>
+                        <line x1="3" y1="18" x2="18" y2="18"></line>
+                    </svg>
                 </button>
             `;
 
@@ -46,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const next = current === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('dentscale_theme', next);
-        
+
         // Dispatch theme changed event for charts to redraw
         window.dispatchEvent(new CustomEvent('themechanged', { detail: next }));
     }
@@ -56,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const next = current === 'rtl' ? 'ltr' : 'rtl';
         document.documentElement.setAttribute('dir', next);
         localStorage.setItem('dentscale_dir', next);
-        
+
         // Dispatch dir changed event
         window.dispatchEvent(new CustomEvent('dirchanged', { detail: next }));
     }

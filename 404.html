@@ -1,44 +1,201 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tooth Not Found (404) — Vance Cosmetic Dentistry</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Return to Vance Cosmetic Dentistry's homepage.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/clinic.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
 </head>
+
 <body class="clinic-theme" style="display:flex; flex-direction:column; min-height:100vh;">
 
     <!-- Header Navigation -->
     <header class="header">
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
                 Vance <span>Cosmetic</span>
             </a>
+
+            <button class="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Home</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Home (Default)</a></li>
+                            <li><a href="index-2.html" class="dropdown-link">Home (Split Hero)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="treatments.html" class="nav-link">Treatments</a></li>
+                    <li><a href="doctors.html" class="nav-link">Doctors</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link">Portals</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="dashboard.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    Patient Portal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin.html" class="dropdown-link-portal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                    Admin Console
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="theme-rtl-controls"></li>
+                    <li><a href="login.html" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log in</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
     <!-- Error Body -->
     <main style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:4rem 1.5rem; background: radial-gradient(circle at 50% 50%, rgba(var(--color-primary-rgb), 0.08), transparent 70%);">
         <div class="glow-bg glow-primary" style="top:30%;"></div>
-        <div style="max-width:500px; z-index:1;">
-            <div style="font-size:6rem; margin-bottom:1.5rem; filter: drop-shadow(var(--shadow-glow));">🦷💨</div>
-            <h1 style="font-size:2.5rem; font-weight:800; margin-bottom:1rem; font-family:var(--font-heading);">Enamel Gap (404)</h1>
-            <p style="color:var(--text-secondary); margin-bottom:2.5rem; font-size:1.05rem;">The clinical page coordinate you are searching for does not exist in our dental database. It might have been extracted or relocated.</p>
-            <a href="index.html" class="btn btn-primary">Return to Healthy Smile Home</a>
+        <div style="max-width:520px; z-index:1;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:1.75rem; filter: drop-shadow(0 0 20px rgba(var(--color-primary-rgb), 0.35));">
+                <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 4c-1.5 0-2.5 1-2.5 3.5 0 2.5 1.5 4 2.5 5.5.5.8.8 1.8.9 2.5h8.2c.1-.7.4-1.7.9-2.5 1-1.5 2.5-3 2.5-5.5C19.5 5 18.5 4 17 4c-1.5 0-3 1-5 1s-3.5-1-5-1Z" />
+                    <path d="M12 15.5v5.5" />
+                    <path d="M9.5 17h5" />
+                    <path d="M10 19h4" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="opacity:0.65;">
+                    <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2" />
+                    <path d="M9.6 4.6A2 2 0 1 1 11 8H2" />
+                    <path d="M12.6 19.4A2 2 0 1 0 14 16H2" />
+                </svg>
+            </div>
+            <h1 style="font-size:2.75rem; font-weight:800; margin-bottom:1rem; font-family:var(--font-heading);">Enamel Gap <span style="color:var(--color-primary);">(404)</span></h1>
+            <p style="color:var(--text-secondary); margin-bottom:2.5rem; font-size:1.05rem; line-height:1.65;">The clinical page coordinate you are searching for does not exist in our dental database. It might have been extracted or relocated.</p>
+            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                <a href="index.html" class="btn btn-primary">Return to Healthy Smile Home</a>
+                <a href="contact.html" class="btn btn-secondary">Contact Our Clinic</a>
+            </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer" style="padding: 2rem 0;">
-        <div class="container footer-bottom" style="border:none; padding:0;">
+    <!-- Footer (matches index.html) -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 1.5rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                    Vance <span>Cosmetic</span>
+                </a>
+                <p>Chicago's leading cosmetic and reconstructive dentistry. Crafting beautiful smiles through advanced
+                    computer-guided aesthetics.</p>
+                <ul
+                    style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); list-style: none; display: flex; flex-direction: column; gap: 0.75rem; padding: 0;">
+                    <li style="display: flex; align-items: center; gap: 0.6rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                            style="color: var(--color-primary); flex-shrink: 0;">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        <span>444 N Michigan Ave, Chicago IL</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 0.6rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                            style="color: var(--color-primary); flex-shrink: 0;">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                        <span>(312) 555-8000</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 0.6rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                            style="color: var(--color-primary); flex-shrink: 0;">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        <span>Mon–Sat 8AM–6PM</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Smile Treatments</h3>
+                <ul class="footer-links">
+                    <li><a href="treatments.html" class="footer-link">Porcelain Veneers</a></li>
+                    <li><a href="treatments.html" class="footer-link">Dental Implants</a></li>
+                    <li><a href="treatments.html" class="footer-link">Invisalign Aligners</a></li>
+                    <li><a href="treatments.html" class="footer-link">Teeth Whitening</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Patient Portal</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Portal Account Access</a></li>
+                    <li><a href="dashboard.html" class="footer-link">My Treatment Plan</a></li>
+                    <li><a href="admin.html" class="footer-link">Clinic Admin Panel</a></li>
+                    <li><a href="booking.html" class="footer-link">Schedule Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Clinic Layouts</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">Standard Layout</a></li>
+                    <li><a href="index-2.html" class="footer-link">Split Screen Layout</a></li>
+                    <li><a href="coming-soon.html" class="footer-link">Smile VR Previews</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
             <p>&copy; 2026 Vance Cosmetic Dentistry Center. All rights reserved.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; justify-content: center;">
+                <a href="404.html" class="footer-link">Privacy Protocol</a>
+                <a href="404.html" class="footer-link">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
 </body>
+
 </html>

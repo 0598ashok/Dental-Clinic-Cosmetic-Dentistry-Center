@@ -86,6 +86,7 @@ textarea {
 .section {
     padding: 6rem 0;
     position: relative;
+    overflow: hidden;
 }
 
 .text-center {
@@ -332,6 +333,7 @@ textarea {
     cursor: pointer;
     background: none;
     border: none;
+    margin-left: auto;
 }
 
 .hamburger span {
@@ -365,10 +367,36 @@ textarea {
     z-index: 1000;
 }
 
-.nav-item-dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+.nav-item-dropdown>.nav-link {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.nav-item-dropdown>.nav-link::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--transition-fast) ease;
+    margin-bottom: 2px;
+}
+
+@media (min-width: 1201px) {
+    .nav-item-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-item-dropdown:hover>.nav-link::before {
+        transform: rotate(225deg);
+        margin-bottom: -1px;
+    }
 }
 
 .dropdown-link {
@@ -386,7 +414,7 @@ textarea {
 }
 
 /* Responsive Navigation */
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
     .hamburger {
         display: flex;
     }
@@ -399,12 +427,13 @@ textarea {
         height: calc(100vh - 80px);
         background-color: var(--bg-primary);
         flex-direction: column;
-        align-items: center;
-        padding: 3rem 0;
-        gap: 2rem;
+        align-items: flex-start;
+        padding: 3rem 2.5rem;
+        gap: 1rem;
         transition: left var(--transition-normal);
         border-top: 1px solid var(--border-color);
         z-index: 999;
+        overflow-y: auto;
     }
 
     .nav-menu.open {
@@ -412,6 +441,7 @@ textarea {
     }
 
     .dropdown-menu {
+        display: none;
         position: static;
         transform: none;
         opacity: 1;
@@ -420,11 +450,19 @@ textarea {
         border: none;
         background-color: transparent;
         padding-left: 1.5rem;
-        text-align: center;
+        text-align: left;
     }
 
-    .nav-item-dropdown:hover .dropdown-menu {
-        transform: none;
+    .nav-item-dropdown.open .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .nav-item-dropdown.open>.nav-link::before {
+        transform: rotate(225deg);
+        margin-bottom: -1px;
     }
 }
 
@@ -620,7 +658,7 @@ textarea {
 }
 
 .faq-item.active .faq-answer {
-    max-height: 200px;
+    max-height: max-content;
     padding: 1rem 1.5rem 1.5rem;
     border-top: 1px solid var(--border-color);
 }
@@ -868,8 +906,106 @@ textarea {
 }
 
 /* Mobile Alignment Support */
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
     .dropdown-link-portal {
-        justify-content: center;
+        justify-content: flex-start;
+    }
+}
+
+/* Changes */
+@media screen and (min-width:0px) and (max-width:767px) {
+    .hero-title {
+        font-size: 30px !important;
+        margin-top: 15px;
+    }
+
+    .hero-desc {
+        font-size: 16px !important;
+        /* text-align: justify; */
+    }
+
+    .hero {
+        text-align: center;
+    }
+
+    .hero-btns a {
+        width: stretch;
+    }
+
+    .home1-hero-card {
+
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .stat-num {
+        font-size: 30px !important;
+    }
+
+    .section-title {
+        font-size: 30px;
+    }
+
+    .home-our-clinical-philosophy-cards {
+        padding: 30px 15px !important;
+    }
+
+    h2 {
+        font-size: 30px !important;
+    }
+
+    .transformation-card {
+        padding: 30px 15px !important;
+    }
+
+    .home-hightech-facilities {
+        flex-direction: column;
+    }
+
+    .tech-card {
+        padding: 30px 15px !important;
+    }
+
+    .home-carousel .card {
+        padding: 30px 15px !important;
+    }
+
+    .faq-question {
+        padding: 20px 10px;
+        font-size: 15px;
+    }
+
+    .btn-primary {
+        width: stretch;
+    }
+
+    .about-threetechpillers-cards {
+        padding: 30px 15px !important;
+    }
+
+    .doctor-details-box {
+        padding: 30px 15px !important;
+    }
+
+    .timeline-card {
+        padding: 30px 15px !important;
+    }
+
+    .timeline-year {
+        font-size: 25px;
+    }
+
+    .bento-card.wide {
+        padding: 30px 15px;
+    }
+
+    .collage-card {
+        padding: 30px 15px;
+    }
+}
+
+@media (max-width:1024px) {
+    .process-wall {
+        padding: 3rem 25px;
     }
 }

@@ -1,53 +1,132 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel — Vance Cosmetic Dentistry</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link rel="stylesheet" href="assets/css/clinic.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
 </head>
+
 <body class="clinic-theme">
 
     <div class="db-wrapper">
-        <!-- Sidebar Toggle for Mobile -->
-        <button class="sidebar-toggle-btn" aria-label="Toggle Sidebar" onclick="toggleSidebar()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </button>
+        <!-- Mobile Top Navbar (visible only on mobile) -->
+        <header class="db-mobile-topbar" id="db-mobile-topbar">
+            <button class="db-mobile-hamburger" aria-label="Toggle Sidebar" onclick="toggleSidebar()"
+                id="sidebar-toggle-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html" class="db-mobile-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Vance <span>Admin</span>
+            </a>
+            <div class="db-mobile-avatar">AD</div>
+            <div class="db-mobile-avatar-spacer"></div>
+        </header>
+
+        <!-- Sidebar Overlay Backdrop (mobile) -->
+        <div class="db-sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
         <!-- Sidebar Navigation -->
         <aside class="db-sidebar" id="sidebar">
             <a href="index.html" class="db-sidebar-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
                 Vance <span>Cosmetic</span>
             </a>
-            
+
             <ul class="db-menu">
                 <li><a href="#" class="db-menu-link active" onclick="switchAdminTab(event, 'admin-overview')">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
-                    Overview
-                </a></li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+                            <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+                            <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+                        </svg>
+                        Overview
+                    </a></li>
                 <li><a href="#" class="db-menu-link" onclick="switchAdminTab(event, 'admin-appointments')">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                    Appointments Approvals
-                </a></li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Approvals Queue
+                    </a></li>
                 <li><a href="#" class="db-menu-link" onclick="switchAdminTab(event, 'admin-patients')">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    Patient Management
-                </a></li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Patient Directory
+                    </a></li>
+                <li><a href="#" class="db-menu-link" onclick="switchAdminTab(event, 'admin-billing')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        Billing & Invoices
+                    </a></li>
+                <li><a href="#" class="db-menu-link" onclick="switchAdminTab(event, 'admin-roster')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        Specialist Roster
+                    </a></li>
                 <li><a href="index.html" class="db-menu-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    Return Home
-                </a></li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        Return Home
+                    </a></li>
                 <li class="db-logout"><a href="login.html" class="db-menu-link" style="color:var(--color-danger);">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                    Logout
-                </a></li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Logout
+                    </a></li>
             </ul>
+
+            <!-- Sidebar Admin Profile (visible on mobile inside sidebar) -->
+            <div class="db-sidebar-profile">
+                <div class="db-profile-header">
+                    <div class="db-avatar">AD</div>
+                    <div class="db-profile-info">
+                        <strong>Admin Console</strong>
+                        <span class="patient-id">Vance Cosmetic Dentistry</span>
+                    </div>
+                </div>
+                <div class="theme-rtl-controls"></div>
+            </div>
         </aside>
 
         <!-- Main Dashboard Body -->
@@ -55,179 +134,612 @@
             <div class="db-content-container">
                 <!-- Top Dashboard Header -->
                 <header class="db-header">
-                <div class="db-header-title">
-                    <h1>Clinic Admin Console</h1>
-                    <p>Manage appointments scheduled, billing requests, and patient tracking</p>
-                </div>
-                <div class="db-profile">
-                    <div class="theme-rtl-controls"></div>
-                    <div class="db-avatar" style="background-color: var(--color-accent); color: #060913;">AD</div>
-                    <div>
-                        <strong style="display:block; font-size: 0.9rem;">Clinic Administrator</strong>
-                        <span style="font-size: 0.75rem; color: var(--text-secondary);">Role: Senior Manager</span>
+                    <div class="db-header-title">
+                        <h1 id="admin-page-title">Clinic Admin Console</h1>
+                        <p id="admin-page-subtitle">Manage appointments scheduled, billing requests, and patient
+                            tracking</p>
                     </div>
-                </div>
-            </header>
-
-            <!-- Dashboard Content Containers -->
-            
-            <!-- Tab 1: Overview -->
-            <div id="admin-overview" class="db-tab-content">
-                <!-- Metrics Bar -->
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-card-header">
-                            <span>Active Patients</span>
-                            <span>👥</span>
-                        </div>
-                        <div class="metric-value">1,424</div>
-                        <span class="metric-change up">&uarr; 4.2% this month</span>
-                    </div>
-                    
-                    <div class="metric-card">
-                        <div class="metric-card-header">
-                            <span>Pending Approvals</span>
-                            <span>📋</span>
-                        </div>
-                        <div class="metric-value" id="metric-pending-approvals">2</div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">Awaiting administrator review</span>
-                    </div>
-
-                    <div class="metric-card">
-                        <div class="metric-card-header">
-                            <span>Scheduled Today</span>
-                            <span>📅</span>
-                        </div>
-                        <div class="metric-value">8</div>
-                        <span style="font-size: 0.75rem; color: var(--color-primary); font-weight:700;">First Appt: 09:00 AM</span>
-                    </div>
-
-                    <div class="metric-card">
-                        <div class="metric-card-header">
-                            <span>Monthly Billings</span>
-                            <span>💰</span>
-                        </div>
-                        <div class="metric-value">$38,200</div>
-                        <span class="metric-change up">&uarr; 11.5% vs. May</span>
-                    </div>
-                </div>
-
-                <!-- Custom SVG Revenue Growth Graph -->
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3 class="chart-title">Revenue & New Patients Acquisition (First Half 2026)</h3>
-                        <div style="display:flex; gap:1.5rem; font-size:0.8rem; font-weight:700;">
-                            <span style="display:flex; align-items:center; gap:0.25rem;"><span style="display:block; width:12px; height:3px; background:var(--color-primary);"></span> Revenue ($k)</span>
-                            <span style="display:flex; align-items:center; gap:0.25rem;"><span style="display:block; width:12px; height:3px; background:var(--color-accent);"></span> New Registrations</span>
+                    <div class="db-profile">
+                        <div class="theme-rtl-controls"></div>
+                        <div class="db-avatar" style="background-color: var(--color-accent); color: #060913;">AD</div>
+                        <div>
+                            <strong style="display:block; font-size: 0.9rem;">Clinic Administrator</strong>
+                            <span style="font-size: 0.75rem; color: var(--text-secondary);">Role: Senior Manager</span>
                         </div>
                     </div>
-                    
-                    <svg class="chart-svg" viewBox="0 0 1000 240" preserveAspectRatio="none">
-                        <defs>
-                            <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.3" />
-                                <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Grid Lines -->
-                        <line x1="50" y1="40" x2="950" y2="40" class="chart-grid-line" />
-                        <line x1="50" y1="100" x2="950" y2="100" class="chart-grid-line" />
-                        <line x1="50" y1="160" x2="950" y2="160" class="chart-grid-line" />
-                        <line x1="50" y1="220" x2="950" y2="220" stroke="var(--border-color)" stroke-width="2" />
-                        
-                        <!-- Axis Labels -->
-                        <text x="960" y="45" class="chart-axis-text">$40k</text>
-                        <text x="960" y="105" class="chart-axis-text">$25k</text>
-                        <text x="960" y="165" class="chart-axis-text">$10k</text>
-                        
-                        <!-- X Axis Month Labels -->
-                        <text x="100" y="235" class="chart-axis-text" text-anchor="middle">JAN</text>
-                        <text x="260" y="235" class="chart-axis-text" text-anchor="middle">FEB</text>
-                        <text x="420" y="235" class="chart-axis-text" text-anchor="middle">MAR</text>
-                        <text x="580" y="235" class="chart-axis-text" text-anchor="middle">APR</text>
-                        <text x="740" y="235" class="chart-axis-text" text-anchor="middle">MAY</text>
-                        <text x="900" y="235" class="chart-axis-text" text-anchor="middle">JUN</text>
+                </header>
 
-                        <!-- Area under the curve -->
-                        <path d="M 100 220 L 100 180 L 260 160 L 420 120 L 580 130 L 740 80 L 900 60 L 900 220 Z" class="chart-area" />
+                <!-- Dashboard Content Containers -->
 
-                        <!-- Primary Line (Revenue) -->
-                        <path d="M 100 180 L 260 160 L 420 120 L 580 130 L 740 80 L 900 60" class="chart-line" />
-                        
-                        <!-- Secondary Line (Registrations) -->
-                        <path d="M 100 200 L 260 190 L 420 170 L 580 180 L 740 140 L 900 120" class="chart-line-secondary" />
+                <!-- Tab 1: Overview -->
+                <div id="admin-overview" class="db-tab-content">
+                    <!-- Metrics Bar -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-card-header">
+                                <span>Active Patients</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-value">1,424</div>
+                            <span class="metric-change up">&uarr; 4.2% this month</span>
+                        </div>
 
-                        <!-- Dots on Nodes -->
-                        <circle cx="900" cy="60" r="5" fill="var(--color-primary)" />
-                        <circle cx="900" cy="120" r="5" fill="var(--color-accent)" />
-                    </svg>
+                        <div class="metric-card">
+                            <div class="metric-card-header">
+                                <span>Pending Approvals</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="metric-value" id="metric-pending-approvals">0</div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Awaiting administrator
+                                review</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-card-header">
+                                <span>Scheduled Today</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="var(--color-success)" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </div>
+                            <div class="metric-value">8</div>
+                            <span style="font-size: 0.75rem; color: var(--color-primary); font-weight:700;">First Appt:
+                                09:00 AM</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-card-header">
+                                <span>Monthly Billings</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-value" id="metric-monthly-revenue">$38,200</div>
+                            <span class="metric-change up" id="metric-monthly-change">&uarr; 11.5% vs. May</span>
+                        </div>
+                    </div>
+
+                    <!-- Layout: SVG Revenue graph (Left) & Activity timeline (Right) -->
+                    <div class="admin-grid-2col">
+                        <!-- Revenue Growth Graph -->
+                        <div class="chart-container" style="margin: 0;">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Revenue & New Patients Acquisition (First Half 2026)</h3>
+                                <div style="display:flex; gap:1.5rem; font-size:0.8rem; font-weight:700;">
+                                    <span style="display:flex; align-items:center; gap:0.25rem;"><span
+                                            style="display:block; width:12px; height:3px; background:var(--color-primary);"></span>
+                                        Revenue ($k)</span>
+                                    <span style="display:flex; align-items:center; gap:0.25rem;"><span
+                                            style="display:block; width:12px; height:3px; background:var(--color-accent);"></span>
+                                        New Patients</span>
+                                </div>
+                            </div>
+
+                            <svg class="chart-svg" viewBox="0 0 1000 240" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.3" />
+                                        <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <line x1="50" y1="40" x2="950" y2="40" class="chart-grid-line" />
+                                <line x1="50" y1="100" x2="950" y2="100" class="chart-grid-line" />
+                                <line x1="50" y1="160" x2="950" y2="160" class="chart-grid-line" />
+                                <line x1="50" y1="220" x2="950" y2="220" stroke="var(--border-color)"
+                                    stroke-width="2" />
+
+                                <text x="960" y="45" class="chart-axis-text">$40k</text>
+                                <text x="960" y="105" class="chart-axis-text">$25k</text>
+                                <text x="960" y="165" class="chart-axis-text">$10k</text>
+
+                                <text x="100" y="235" class="chart-axis-text" text-anchor="middle">JAN</text>
+                                <text x="260" y="235" class="chart-axis-text" text-anchor="middle">FEB</text>
+                                <text x="420" y="235" class="chart-axis-text" text-anchor="middle">MAR</text>
+                                <text x="580" y="235" class="chart-axis-text" text-anchor="middle">APR</text>
+                                <text x="740" y="235" class="chart-axis-text" text-anchor="middle">MAY</text>
+                                <text x="900" y="235" class="chart-axis-text" text-anchor="middle">JUN</text>
+
+                                <path
+                                    d="M 100 220 L 100 180 L 260 160 L 420 120 L 580 130 L 740 80 L 900 60 L 900 220 Z"
+                                    class="chart-area" />
+                                <path d="M 100 180 L 260 160 L 420 120 L 580 130 L 740 80 L 900 60"
+                                    class="chart-line" />
+                                <path d="M 100 200 L 260 190 L 420 170 L 580 180 L 740 140 L 900 120"
+                                    class="chart-line-secondary" />
+
+                                <circle cx="900" cy="60" r="5" fill="var(--color-primary)" />
+                                <circle cx="900" cy="120" r="5" fill="var(--color-accent)" />
+                            </svg>
+                        </div>
+
+                        <!-- Live activity feed -->
+                        <div class="card" style="margin: 0; padding: 1.5rem; display: flex; flex-direction: column;">
+                            <h3
+                                style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem;">
+                                Live Activity Feed</h3>
+                            <div class="activity-feed">
+                                <div class="activity-item">
+                                    <div class="activity-icon success">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-text">Invoice co-pay balance authorized for <strong>Jane
+                                                Doe</strong></p>
+                                        <span class="activity-time">10 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-text">New patient lead <strong>Sarah Jenkins</strong>
+                                            registered via Website</p>
+                                        <span class="activity-time">45 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon alert">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="activity-details">
+                                        <p class="activity-text">Appointment request submitted by <strong>David
+                                                Ross</strong></p>
+                                        <span class="activity-time">2 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Control Shortcuts -->
+                    <div class="card" style="margin-top: 1.5rem; padding: 1.5rem;">
+                        <h3
+                            style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem;">
+                            Quick Administrative Tools</h3>
+                        <div class="quick-actions-grid">
+                            <button onclick="alert('PDF statement overview report generated and sent to downloads.')"
+                                class="quick-action-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Export Statements
+                            </button>
+                            <button onclick="alert('Patient notification broadcasts are synchronized. Channels open.')"
+                                class="quick-action-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
+                                Broadcast SMS
+                            </button>
+                            <button onclick="alert('HIPAA and PCI access logs audit verified: All green.')"
+                                class="quick-action-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                                Security Audit
+                            </button>
+                            <button
+                                onclick="alert('System Diagnostics: Database synced (100%), Telehealth Server Online (Ping: 14ms)')"
+                                class="quick-action-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                                System Health
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Tab 2: Appointment approvals queue -->
-            <div id="admin-appointments" class="db-tab-content" style="display:none;">
-                <div class="table-container">
-                    <div class="table-header">
-                        <h3 class="table-title">Scheduled Sessions Approvals Queue</h3>
-                    </div>
-                    <div class="db-table-wrapper">
-                        <table class="db-table">
-                            <thead>
-                                <tr>
-                                    <th>Patient</th>
-                                    <th>Treatment Request</th>
-                                    <th>Specialist Choice</th>
-                                    <th>Date Proposed</th>
-                                    <th>Time Requested</th>
-                                    <th>Approval Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-admin-appointments-body">
-                                <!-- Dynamic records with Accept/Reject actions -->
-                            </tbody>
-                        </table>
+                <!-- Tab 2: Appointment Approvals Queue -->
+                <div id="admin-appointments" class="db-tab-content" style="display:none;">
+                    <div class="table-container card" style="margin: 0; padding: 1.5rem;">
+                        <div class="admin-controls-row">
+                            <div>
+                                <h3 class="table-title" style="margin-bottom: 0.25rem;">Approvals Queue</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">Approve or reject
+                                    booking requests submitted by portal patients.</p>
+                            </div>
+
+                            <!-- Search & filters -->
+                            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                <div class="admin-search-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    <input type="text" id="appointment-search" placeholder="Search approvals..."
+                                        onkeyup="filterAppointments()">
+                                </div>
+                                <div class="filter-chips-list">
+                                    <span class="filter-chip active" id="chip-appts-all"
+                                        onclick="setApptFilter('All')">All</span>
+                                    <span class="filter-chip" id="chip-appts-pending"
+                                        onclick="setApptFilter('Pending')">Pending</span>
+                                    <span class="filter-chip" id="chip-appts-approved"
+                                        onclick="setApptFilter('Scheduled')">Scheduled</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="approvals-grid" id="table-admin-appointments-body">
+                            <!-- Dynamic request cards populated in Javascript -->
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tab 3: Patient List -->
-            <div id="admin-patients" class="db-tab-content" style="display:none;">
-                <div class="table-container">
-                    <div class="table-header">
-                        <h3 class="table-title">Active Patients Directory</h3>
-                    </div>
-                    <div class="db-table-wrapper">
-                        <table class="db-table">
-                            <thead>
-                                <tr>
-                                    <th>Registration Date</th>
-                                    <th>Patient Name</th>
-                                    <th>Phone Channel</th>
-                                    <th>Email Address</th>
-                                    <th>Latest Service</th>
-                                    <th>Acquisition Source</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-admin-patients-body">
-                                <!-- Dynamic patient listing -->
-                            </tbody>
-                        </table>
+                <!-- Tab 3: Patient Directory -->
+                <div id="admin-patients" class="db-tab-content" style="display:none;">
+                    <div class="table-container card" style="margin: 0; padding: 1.5rem;">
+                        <div class="admin-controls-row">
+                            <div>
+                                <h3 class="table-title" style="margin-bottom: 0.25rem;">Active Patient Directory</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0;">Comprehensive
+                                    record of active leads, registrations, and portal users.</p>
+                            </div>
+
+                            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                <div class="admin-search-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    <input type="text" id="patient-search" placeholder="Search patients..."
+                                        onkeyup="filterPatients()">
+                                </div>
+                                <div class="filter-chips-list">
+                                    <span class="filter-chip active" id="chip-patients-all"
+                                        onclick="setPatientFilter('All')">All Leads</span>
+                                    <span class="filter-chip" id="chip-patients-seo"
+                                        onclick="setPatientFilter('SEO Search')">SEO</span>
+                                    <span class="filter-chip" id="chip-patients-referral"
+                                        onclick="setPatientFilter('Referral')">Referrals</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="patient-grid" id="table-admin-patients-body">
+                            <!-- Dynamic patient cards populated in Javascript -->
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Tab 4: Billing & Invoices Hub -->
+                <div id="admin-billing" class="db-tab-content" style="display:none;">
+
+                    <!-- Financial KPI Strip -->
+                    <div class="billing-kpi-strip" id="billing-kpi-strip">
+                        <div class="billing-kpi-card">
+                            <div class="billing-kpi-icon"
+                                style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                            <div class="billing-kpi-info">
+                                <span class="billing-kpi-label">Total Billed</span>
+                                <span class="billing-kpi-value" id="kpi-total-billed">$0</span>
+                            </div>
+                        </div>
+                        <div class="billing-kpi-card">
+                            <div class="billing-kpi-icon"
+                                style="background: rgba(16, 185, 129, 0.1); color: var(--color-success);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="billing-kpi-info">
+                                <span class="billing-kpi-label">Settled</span>
+                                <span class="billing-kpi-value" id="kpi-settled"
+                                    style="color: var(--color-success);">$0</span>
+                            </div>
+                        </div>
+                        <div class="billing-kpi-card">
+                            <div class="billing-kpi-icon"
+                                style="background: rgba(239, 68, 68, 0.08); color: var(--color-danger);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <div class="billing-kpi-info">
+                                <span class="billing-kpi-label">Pending</span>
+                                <span class="billing-kpi-value" id="kpi-pending"
+                                    style="color: var(--color-danger);">$0</span>
+                            </div>
+                        </div>
+                        <div class="billing-kpi-card">
+                            <div class="billing-kpi-icon"
+                                style="background: rgba(var(--color-accent-rgb), 0.1); color: var(--color-accent);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                </svg>
+                            </div>
+                            <div class="billing-kpi-info">
+                                <span class="billing-kpi-label">Total Invoices</span>
+                                <span class="billing-kpi-value" id="kpi-total-invoices">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main 2-col layout: Ledger + Creator -->
+                    <div class="billing-main-grid">
+
+                        <!-- Left: Invoice Ledger -->
+                        <div class="billing-ledger-panel">
+                            <div class="billing-panel-header">
+                                <div>
+                                    <h3 class="billing-panel-title">Active Statements Ledger</h3>
+                                    <p class="billing-panel-subtitle">Detailed history of bills, co-pay settlements, and
+                                        payouts.</p>
+                                </div>
+                                <div class="billing-ledger-filter">
+                                    <button class="billing-filter-btn active" id="ledger-filter-all"
+                                        onclick="setLedgerFilter('all')">All</button>
+                                    <button class="billing-filter-btn" id="ledger-filter-paid"
+                                        onclick="setLedgerFilter('paid')">Settled</button>
+                                    <button class="billing-filter-btn" id="ledger-filter-pending"
+                                        onclick="setLedgerFilter('pending')">Pending</button>
+                                </div>
+                            </div>
+                            <div class="billing-invoice-list" id="table-admin-billing-body">
+                                <!-- Dynamic invoice rows -->
+                            </div>
+                        </div>
+
+                        <!-- Right: Invoice Creator -->
+                        <div class="billing-creator-panel">
+                            <div class="billing-panel-header">
+                                <div>
+                                    <h3 class="billing-panel-title">Generate New Invoice</h3>
+                                    <p class="billing-panel-subtitle">Compile procedural bills and insert directly into
+                                        patient account.</p>
+                                </div>
+                                <div class="billing-creator-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <form class="billing-creator-form" onsubmit="handleCreateInvoice(event)">
+                                <div class="billing-form-group">
+                                    <label for="inv-patient">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        Patient
+                                    </label>
+                                    <select id="inv-patient" required><!-- Populated dynamically --></select>
+                                </div>
+
+                                <div class="billing-form-group">
+                                    <label for="inv-specialist">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                        </svg>
+                                        Specialist
+                                    </label>
+                                    <select id="inv-specialist" required>
+                                        <option value="Dr. Evelyn Vance">Dr. Evelyn Vance</option>
+                                        <option value="Dr. Marcus Sterling">Dr. Marcus Sterling</option>
+                                        <option value="Dr. Sarah Jenkins">Dr. Sarah Jenkins</option>
+                                    </select>
+                                </div>
+
+                                <div class="billing-form-group">
+                                    <label for="inv-code">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="16 18 22 12 16 6"></polyline>
+                                            <polyline points="8 6 2 12 8 18"></polyline>
+                                        </svg>
+                                        ADA Code
+                                    </label>
+                                    <select id="inv-code" required>
+                                        <option value="ADA D9900 - Veneers">ADA D9900 — Veneers</option>
+                                        <option value="ADA D6010 - Implants">ADA D6010 — Implants</option>
+                                        <option value="ADA D9972 - Whitening">ADA D9972 — Whitening</option>
+                                        <option value="ADA D0150 - Exam">ADA D0150 — Examination</option>
+                                    </select>
+                                </div>
+
+                                <div class="billing-form-group billing-form-full">
+                                    <label for="inv-desc">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                        Procedure Description
+                                    </label>
+                                    <input type="text" id="inv-desc" placeholder="e.g. Tooth Restoration Prep" required>
+                                </div>
+
+                                <div class="billing-form-row">
+                                    <div class="billing-form-group">
+                                        <label for="inv-cost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                            </svg>
+                                            Base Cost ($)
+                                        </label>
+                                        <input type="number" id="inv-cost" min="50" max="15000" value="1200" required>
+                                    </div>
+                                    <div class="billing-form-group">
+                                        <label for="inv-due">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                            </svg>
+                                            Due Date
+                                        </label>
+                                        <input type="date" id="inv-due" required>
+                                    </div>
+                                </div>
+
+                                <!-- Invoice Preview Box -->
+                                <div class="billing-invoice-preview" id="invoice-preview">
+                                    <div class="billing-preview-row">
+                                        <span>Patient:</span><strong id="preview-patient">—</strong>
+                                    </div>
+                                    <div class="billing-preview-row">
+                                        <span>Procedure:</span><strong id="preview-desc">—</strong>
+                                    </div>
+                                    <div class="billing-preview-row"
+                                        style="border-top: 1px dashed var(--border-color); padding-top: 0.5rem; margin-top: 0.25rem;">
+                                        <span>Total Amount:</span>
+                                        <strong id="preview-cost"
+                                            style="color: var(--color-primary); font-size: 1.05rem;">$0</strong>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="billing-submit-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    Issue Statement Invoice
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 5: Specialist Roster -->
+                <div id="admin-roster" class="db-tab-content" style="display:none;">
+                    <div class="card" style="margin: 0; padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <h3
+                            style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem;">
+                            Clinical Specialists & Assignments</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; margin-bottom: 1.5rem;">
+                            Monitor roster loads and assign operatory rooms to doctors in real-time.</p>
+
+                        <div class="roster-grid" id="roster-grid-container">
+                            <!-- Dynamic specialist cards -->
+                        </div>
+                    </div>
+                </div>
 
             </div> <!-- .db-content-container -->
         </main>
     </div>
 
     <script>
+        // Tab Titles mapping
+        const tabTitles = {
+            'admin-overview': { title: 'Clinic Admin Console', subtitle: 'Manage appointments scheduled, billing requests, and patient tracking' },
+            'admin-appointments': { title: 'Appointments Approvals System', subtitle: 'Review, approve, or cancel booking requests from clinic portal users' },
+            'admin-patients': { title: 'Patient Profile Registry', subtitle: 'Track user details, registrations sources, and clinical milestone services' },
+            'admin-billing': { title: 'Billing & Financial Ledger', subtitle: 'Monitor invoices payouts, co-pay balances, and issue statements' },
+            'admin-roster': { title: 'Specialist Staff Roster', subtitle: 'Manage clinical staff operatory rooms and toggle availability status' }
+        };
+
+        // Roster memory states (saved in localStorage)
+        const DEFAULT_ROSTER = [
+            { id: 'doc-1', name: 'Dr. Evelyn Vance', specialty: 'Cosmetic Dentist Specialist', initials: 'EV', load: '12 Patients', room: 'Operatory 1', status: 'Active' },
+            { id: 'doc-2', name: 'Dr. Marcus Sterling', specialty: 'Orthodontics & Implants', initials: 'MS', load: '8 Patients', room: 'Operatory 2', status: 'Active' },
+            { id: 'doc-3', name: 'Dr. Sarah Jenkins', specialty: 'General Dentistry', initials: 'SJ', load: '9 Patients', room: 'Operatory 3', status: 'Active' },
+            { id: 'doc-4', name: 'Dr. Arthur Dent', specialty: 'Pediatric Specialist', initials: 'AD', load: '0 Patients', room: 'None', status: 'Away' }
+        ];
+
+        let activeApptFilter = 'All';
+        let activePatientFilter = 'All';
+
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const hamburger = document.getElementById('sidebar-toggle-btn');
+            const isOpen = sidebar.classList.toggle('open');
+            overlay.classList.toggle('visible', isOpen);
+            if (hamburger) hamburger.classList.toggle('is-open', isOpen);
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const hamburger = document.getElementById('sidebar-toggle-btn');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('visible');
+            if (hamburger) hamburger.classList.remove('is-open');
         }
 
         function switchAdminTab(event, tabId) {
             event.preventDefault();
-            
+
             // Toggle sidebar active class
             document.querySelectorAll('.db-menu-link').forEach(link => {
                 link.classList.remove('active');
@@ -239,82 +751,517 @@
                 tab.style.display = 'none';
             });
             document.getElementById(tabId).style.display = 'block';
-            
+
+            // Update title
+            const headers = tabTitles[tabId];
+            if (headers) {
+                document.getElementById('admin-page-title').textContent = headers.title;
+                document.getElementById('admin-page-subtitle').textContent = headers.subtitle;
+            }
+
             // Close mobile sidebar
-            document.getElementById('sidebar').classList.remove('open');
-        }
+            closeSidebar();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadAdminData();
-        });
+            // Auto scroll to top of the page on tab switch
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        function loadAdminData() {
-            if (!window.DentalStore) return;
-            const store = window.DentalStore;
-
-            // 1. Appointments Approvals queue
-            const appts = store.getAppointments();
-            const apptBody = document.getElementById('table-admin-appointments-body');
-            apptBody.innerHTML = '';
-            
-            let pendingCount = 0;
-
-            appts.forEach(apt => {
-                if (apt.status === 'Scheduled') {
-                    pendingCount++;
-                    const row = document.createElement('tr');
-                    
-                    row.innerHTML = `
-                        <td style="font-weight:600;">${apt.patientName}</td>
-                        <td>${apt.treatment}</td>
-                        <td>${apt.doctorName}</td>
-                        <td>${apt.date}</td>
-                        <td>${apt.time}</td>
-                        <td>
-                            <button onclick="approveAppt('${apt.id}')" style="background:var(--color-primary); border:none; color:#060913; padding:0.35rem 0.75rem; border-radius:var(--radius-sm); cursor:pointer; font-weight:700; font-size:0.75rem;">Approve</button>
-                            <button onclick="rejectAppt('${apt.id}')" style="background:none; border:1px solid var(--color-danger); color:var(--color-danger); padding:0.35rem 0.75rem; border-radius:var(--radius-sm); cursor:pointer; font-weight:700; font-size:0.75rem; margin-left:0.5rem;">Decline</button>
-                        </td>
-                    `;
-                    apptBody.appendChild(row);
-                }
-            });
-
-            document.getElementById('metric-pending-approvals').textContent = pendingCount.toString();
-
-            // 2. Active patients list (drawn from store leads)
-            const leads = store.getLeads();
-            const patientBody = document.getElementById('table-admin-patients-body');
-            patientBody.innerHTML = '';
-
-            leads.forEach(lead => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${lead.date}</td>
-                    <td style="font-weight:600;">${lead.name}</td>
-                    <td>${lead.phone}</td>
-                    <td>${lead.email}</td>
-                    <td><span class="status-badge new">${lead.treatment}</span></td>
-                    <td style="font-weight:600; color:var(--color-primary);">${lead.source}</td>
-                `;
-                patientBody.appendChild(row);
-            });
-        }
-
-        // Approve Appointment
-        function approveAppt(id) {
-            if (confirm("Confirm slot approval for this patient appointment?")) {
-                window.DentalStore.updateAppointmentStatus(id, 'Completed'); // Moving to completed acts as approved
-                loadAdminData();
+            // Trigger load functions
+            if (tabId === 'admin-overview') {
+                loadOverviewMetrics();
+            } else if (tabId === 'admin-appointments') {
+                loadAppointments();
+            } else if (tabId === 'admin-patients') {
+                loadPatients();
+            } else if (tabId === 'admin-billing') {
+                loadBillingHub();
+            } else if (tabId === 'admin-roster') {
+                loadRoster();
             }
         }
 
-        // Decline/Reject Appointment
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set default date to today for the invoice creator
+            const dateInput = document.getElementById('inv-due');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.value = today;
+            }
+
+            loadOverviewMetrics();
+        });
+
+        // Overview tab metrics loader
+        function loadOverviewMetrics() {
+            if (!window.DentalStore) return;
+            const store = window.DentalStore;
+
+            // Calculate pending approvals count
+            const appts = store.getAppointments();
+            const pendingCount = appts.filter(a => a.status === 'Scheduled').length; // Scheduled acts as pending in this layout context
+            document.getElementById('metric-pending-approvals').textContent = pendingCount.toString();
+
+            // Calculate monthly billings sum
+            const bills = store.getInvoices();
+            let billsTotal = 0;
+            bills.forEach(b => {
+                billsTotal += b.amount;
+            });
+            document.getElementById('metric-monthly-revenue').textContent = `$${billsTotal.toLocaleString()}`;
+            document.getElementById('metric-monthly-change').innerHTML = `&uarr; ${Math.round((billsTotal / 34000) * 10 - 100)}% vs. base target`;
+        }
+
+        // Section 2: Appointments Approvals Queue
+        function setApptFilter(filterVal) {
+            activeApptFilter = filterVal;
+            document.querySelectorAll('#admin-appointments .filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            if (filterVal === 'All') {
+                document.getElementById('chip-appts-all').classList.add('active');
+            } else if (filterVal === 'Pending') {
+                document.getElementById('chip-appts-pending').classList.add('active');
+            } else {
+                document.getElementById('chip-appts-approved').classList.add('active');
+            }
+            loadAppointments();
+        }
+
+        function filterAppointments() {
+            loadAppointments();
+        }
+
+        function loadAppointments() {
+            if (!window.DentalStore) return;
+            const store = window.DentalStore;
+            const appts = store.getAppointments();
+            const searchVal = document.getElementById('appointment-search').value.toLowerCase();
+            const apptBody = document.getElementById('table-admin-appointments-body');
+
+            apptBody.innerHTML = '';
+            let count = 0;
+
+            appts.forEach(apt => {
+                // Apply filters
+                const matchesSearch = apt.patientName.toLowerCase().includes(searchVal) || apt.treatment.toLowerCase().includes(searchVal) || apt.doctorName.toLowerCase().includes(searchVal);
+
+                let matchesStatus = true;
+                if (activeApptFilter === 'Pending') {
+                    matchesStatus = (apt.status !== 'Completed' && apt.status !== 'Cancelled');
+                } else if (activeApptFilter === 'Scheduled') {
+                    matchesStatus = (apt.status === 'Completed');
+                }
+
+                if (matchesSearch && matchesStatus) {
+                    count++;
+
+                    let badgeClass = 'pending';
+                    let statusLabel = 'Awaiting Review';
+                    if (apt.status === 'Completed') {
+                        badgeClass = 'paid';
+                        statusLabel = 'Approved';
+                    } else if (apt.status === 'Cancelled') {
+                        badgeClass = 'cancelled';
+                        statusLabel = 'Declined';
+                    }
+
+                    let actionButtons = '';
+                    if (apt.status !== 'Completed' && apt.status !== 'Cancelled') {
+                        actionButtons = `
+                            <button onclick="approveAppt('${apt.id}')" class="approval-btn-approve">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Approve Slot
+                            </button>
+                            <button onclick="rejectAppt('${apt.id}')" class="approval-btn-decline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                Decline
+                            </button>
+                        `;
+                    } else {
+                        actionButtons = `<span style="font-size: 0.75rem; color: var(--text-muted); font-weight:600; text-align: center; width: 100%;">Decision Compiled</span>`;
+                    }
+
+                    const initials = apt.patientName.split(' ').map(n => n[0]).join('');
+                    let recordHTML = '';
+                    if (apt.records) {
+                        recordHTML = `
+                            <a href="#" onclick="mockDownload('${apt.records}')" class="approval-record-attachment">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="inline-icon" style="margin:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                Attached: ${apt.records}
+                            </a>
+                        `;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = `approval-card ${badgeClass === 'paid' ? 'approved' : (badgeClass === 'cancelled' ? 'declined' : '')}`;
+                    card.innerHTML = `
+                        <div>
+                            <div class="approval-card-header">
+                                <div class="approval-patient-info">
+                                    <div class="approval-patient-avatar">${initials}</div>
+                                    <div class="approval-patient-meta">
+                                        <h4>${apt.patientName}</h4>
+                                        <span>Patient Portal Request</span>
+                                    </div>
+                                </div>
+                                <span class="approval-badge-state ${badgeClass === 'paid' ? 'approved' : (badgeClass === 'cancelled' ? 'declined' : 'pending')}">${statusLabel}</span>
+                            </div>
+
+                            <div class="approval-card-body">
+                                <div class="approval-treatment-title">
+                                    ${apt.treatment}
+                                    <span class="approval-treatment-tag">Treatment Request</span>
+                                </div>
+
+                                <div class="approval-details-list">
+                                    <div class="approval-detail-item">
+                                        <span>Target Specialist:</span>
+                                        <strong>${apt.doctorName}</strong>
+                                    </div>
+                                    <div class="approval-detail-item">
+                                        <span>Suggested Date:</span>
+                                        <strong>${apt.date}</strong>
+                                    </div>
+                                    <div class="approval-detail-item">
+                                        <span>Suggested Time:</span>
+                                        <strong>${apt.time}</strong>
+                                    </div>
+                                </div>
+                                ${recordHTML}
+                            </div>
+                        </div>
+
+                        <div class="approval-card-footer">
+                            ${actionButtons}
+                        </div>
+                    `;
+                    apptBody.appendChild(card);
+                }
+            });
+
+            if (count === 0) {
+                apptBody.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--text-muted); font-weight:600; grid-column: 1 / -1; width:100%;">No matching booking requests found in queue.</div>`;
+            }
+        }
+
+        function approveAppt(id) {
+            if (confirm("Confirm slot approval for this patient appointment?")) {
+                window.DentalStore.updateAppointmentStatus(id, 'Completed');
+                loadAppointments();
+                loadOverviewMetrics();
+            }
+        }
+
         function rejectAppt(id) {
             if (confirm("Decline this appointment scheduling request?")) {
                 window.DentalStore.updateAppointmentStatus(id, 'Cancelled');
-                loadAdminData();
+                loadAppointments();
+                loadOverviewMetrics();
+            }
+        }
+
+        // Section 3: Patient Directory
+        function setPatientFilter(filterVal) {
+            activePatientFilter = filterVal;
+            document.querySelectorAll('#admin-patients .filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            if (filterVal === 'All') {
+                document.getElementById('chip-patients-all').classList.add('active');
+            } else if (filterVal === 'SEO Search') {
+                document.getElementById('chip-patients-seo').classList.add('active');
+            } else {
+                document.getElementById('chip-patients-referral').classList.add('active');
+            }
+            loadPatients();
+        }
+
+        function filterPatients() {
+            loadPatients();
+        }
+
+        function loadPatients() {
+            if (!window.DentalStore) return;
+            const store = window.DentalStore;
+            const leads = store.getLeads();
+            const searchVal = document.getElementById('patient-search').value.toLowerCase();
+            const patientBody = document.getElementById('table-admin-patients-body');
+
+            patientBody.innerHTML = '';
+            let count = 0;
+
+            leads.forEach(lead => {
+                const matchesSearch = lead.name.toLowerCase().includes(searchVal) || lead.email.toLowerCase().includes(searchVal) || lead.phone.includes(searchVal) || lead.treatment.toLowerCase().includes(searchVal);
+
+                let matchesSource = true;
+                if (activePatientFilter !== 'All') {
+                    matchesSource = (lead.source === activePatientFilter);
+                }
+
+                if (matchesSearch && matchesSource) {
+                    count++;
+                    const initials = lead.name.split(' ').map(n => n[0]).join('');
+
+                    const card = document.createElement('div');
+                    card.className = 'patient-card';
+                    card.innerHTML = `
+                        <div>
+                            <div class="patient-card-header">
+                                <div class="patient-card-profile">
+                                    <div class="patient-card-avatar">${initials}</div>
+                                    <div class="patient-card-meta">
+                                        <h4>${lead.name}</h4>
+                                        <span>Joined: ${lead.date}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="patient-card-body">
+                                <div class="patient-info-list">
+                                    <div class="patient-info-item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="inline-icon" style="margin: 0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                        ${lead.phone}
+                                    </div>
+                                    <div class="patient-info-item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="inline-icon" style="margin: 0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                        ${lead.email}
+                                    </div>
+                                </div>
+
+                                <div class="patient-tags-row">
+                                    <span class="patient-tag-treatment">${lead.treatment}</span>
+                                    <span class="patient-tag-source">${lead.source}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="patient-card-footer">
+                            <span class="patient-portal-status">
+                                <span></span> Portal Verified
+                            </span>
+                            <button onclick="alert('Secure message channel initiated to ${lead.name}.')" class="patient-card-action">
+                                Contact
+                            </button>
+                        </div>
+                        
+                    `;
+                    patientBody.appendChild(card);
+                }
+            });
+
+            if (count === 0) {
+                patientBody.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--text-muted); font-weight:600; grid-column: 1 / -1; width:100%;">No matching patient records found.</div>`;
+            }
+        }
+
+        // Section 4: Billing Hub & Invoice Creator
+        let activeLedgerFilter = 'all';
+
+        function setLedgerFilter(filterVal) {
+            activeLedgerFilter = filterVal;
+            document.querySelectorAll('.billing-filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`ledger-filter-${filterVal}`).classList.add('active');
+            renderBillingLedger();
+        }
+
+        function renderBillingLedger() {
+            if (!window.DentalStore) return;
+            const invoices = window.DentalStore.getInvoices();
+            const billingBody = document.getElementById('table-admin-billing-body');
+            billingBody.innerHTML = '';
+
+            const filtered = invoices.filter(inv => {
+                if (activeLedgerFilter === 'all') return true;
+                return inv.status === activeLedgerFilter;
+            });
+
+            if (filtered.length === 0) {
+                billingBody.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--text-muted); font-weight:600;">No invoices match this filter.</div>`;
+                return;
+            }
+
+            filtered.forEach(inv => {
+                const isPaid = inv.status === 'paid';
+                const row = document.createElement('div');
+                row.className = `billing-invoice-row ${isPaid ? 'settled' : 'pending'}`;
+                row.innerHTML = `
+                    <div class="billing-invoice-row-left">
+                        <div class="billing-invoice-dot ${isPaid ? 'dot-paid' : 'dot-pending'}"></div>
+                        <div class="billing-invoice-info">
+                            <div class="billing-invoice-id">${inv.id}</div>
+                            <div class="billing-invoice-desc">${inv.description}</div>
+                        </div>
+                    </div>
+                    <div class="billing-invoice-row-right">
+                        <div class="billing-invoice-meta">
+                            <span class="billing-due-date">Due: ${inv.due}</span>
+                            <span class="billing-invoice-amount">$${inv.amount.toLocaleString()}</span>
+                        </div>
+                        <span class="billing-status-pill ${isPaid ? 'pill-paid' : 'pill-pending'}">${isPaid ? 'Settled' : 'Pending'}</span>
+                    </div>
+                `;
+                billingBody.appendChild(row);
+            });
+        }
+
+        function loadBillingHub() {
+            if (!window.DentalStore) return;
+            const store = window.DentalStore;
+
+            // 1. Populate patient select dropdown
+            const leads = store.getLeads();
+            const selectEl = document.getElementById('inv-patient');
+            selectEl.innerHTML = '';
+            leads.forEach(lead => {
+                const opt = document.createElement('option');
+                opt.value = lead.name;
+                opt.textContent = `${lead.name} (${lead.treatment})`;
+                selectEl.appendChild(opt);
+            });
+
+            // 2. Compute KPI metrics
+            const invoices = store.getInvoices();
+            let totalBilled = 0, settledAmt = 0, pendingAmt = 0;
+            invoices.forEach(inv => {
+                totalBilled += inv.amount;
+                if (inv.status === 'paid') settledAmt += inv.amount;
+                else pendingAmt += inv.amount;
+            });
+            document.getElementById('kpi-total-billed').textContent = `$${totalBilled.toLocaleString()}`;
+            document.getElementById('kpi-settled').textContent = `$${settledAmt.toLocaleString()}`;
+            document.getElementById('kpi-pending').textContent = `$${pendingAmt.toLocaleString()}`;
+            document.getElementById('kpi-total-invoices').textContent = invoices.length;
+
+            // 3. Render ledger
+            renderBillingLedger();
+
+            // 4. Wire live preview
+            const updatePreview = () => {
+                const patient = document.getElementById('inv-patient').value || '—';
+                const desc = document.getElementById('inv-desc').value || '—';
+                const cost = parseInt(document.getElementById('inv-cost').value) || 0;
+                document.getElementById('preview-patient').textContent = patient;
+                document.getElementById('preview-desc').textContent = desc;
+                document.getElementById('preview-cost').textContent = `$${cost.toLocaleString()}`;
+            };
+            document.getElementById('inv-patient').addEventListener('change', updatePreview);
+            document.getElementById('inv-desc').addEventListener('input', updatePreview);
+            document.getElementById('inv-cost').addEventListener('input', updatePreview);
+            updatePreview();
+        }
+
+        function handleCreateInvoice(e) {
+            e.preventDefault();
+            if (!window.DentalStore) return;
+
+            const name = document.getElementById('inv-patient').value;
+            const doctor = document.getElementById('inv-specialist').value;
+            const desc = document.getElementById('inv-desc').value;
+            const cost = parseInt(document.getElementById('inv-cost').value);
+            const due = document.getElementById('inv-due').value;
+
+            const invoiceObj = {
+                description: `${desc} — Dr. ${doctor.split(' ').slice(1).join(' ')}`,
+                amount: cost,
+                due: due,
+                status: 'pending'
+            };
+
+            window.DentalStore.addInvoice(invoiceObj);
+            alert(`Success! Invoice created and allocated to ${name}.`);
+
+            // Reset form
+            document.getElementById('inv-desc').value = '';
+
+            loadBillingHub();
+            loadOverviewMetrics();
+        }
+
+        // Section 5: Specialist Roster
+        function getRosterData() {
+            const data = localStorage.getItem('dentscale_roster');
+            if (!data) {
+                localStorage.setItem('dentscale_roster', JSON.stringify(DEFAULT_ROSTER));
+                return DEFAULT_ROSTER;
+            }
+            return JSON.parse(data);
+        }
+
+        function saveRosterData(roster) {
+            localStorage.setItem('dentscale_roster', JSON.stringify(roster));
+        }
+
+        function loadRoster() {
+            const roster = getRosterData();
+            const gridContainer = document.getElementById('roster-grid-container');
+            gridContainer.innerHTML = '';
+
+            roster.forEach(doc => {
+                const card = document.createElement('div');
+                card.className = 'roster-card';
+
+                const badgeClass = doc.status === 'Active' ? 'active' : 'out';
+
+                card.innerHTML = `
+                    <span class="roster-status-badge ${badgeClass}">${doc.status}</span>
+                    <div>
+                        <div class="roster-profile">
+                            <div class="roster-avatar">${doc.initials}</div>
+                            <div class="roster-details">
+                                <h4>${doc.name}</h4>
+                                <span>${doc.specialty}</span>
+                            </div>
+                        </div>
+
+                        <div class="roster-stats">
+                            <div class="roster-stat-item">
+                                <span class="roster-stat-label">Daily Load</span>
+                                <span class="roster-stat-val">${doc.load}</span>
+                            </div>
+                            <div class="roster-stat-item">
+                                <span class="roster-stat-label">Operatory</span>
+                                <span class="roster-stat-val" id="val-room-${doc.id}">${doc.room}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roster-actions">
+                        <select onchange="updateRosterRoom('${doc.id}', this.value)">
+                            <option value="Operatory 1" ${doc.room === 'Operatory 1' ? 'selected' : ''}>Room 1 (Operatory 1)</option>
+                            <option value="Operatory 2" ${doc.room === 'Operatory 2' ? 'selected' : ''}>Room 2 (Operatory 2)</option>
+                            <option value="Operatory 3" ${doc.room === 'Operatory 3' ? 'selected' : ''}>Room 3 (Operatory 3)</option>
+                            <option value="Hygiene Bay" ${doc.room === 'Hygiene Bay' ? 'selected' : ''}>Hygiene Bay</option>
+                            <option value="None" ${doc.room === 'None' ? 'selected' : ''}>None / Offline</option>
+                        </select>
+                        <button onclick="toggleDoctorStatus('${doc.id}')" class="btn" style="padding: 0.35rem 0.6rem; font-size: 0.75rem; font-weight: 700; border-radius: var(--radius-sm); border: 1px solid var(--border-color); color: var(--text-secondary); background: transparent;">
+                            Toggle Status
+                        </button>
+                    </div>
+                `;
+                gridContainer.appendChild(card);
+            });
+        }
+
+        function updateRosterRoom(docId, newRoom) {
+            const roster = getRosterData();
+            const index = roster.findIndex(d => d.id === docId);
+            if (index !== -1) {
+                roster[index].room = newRoom;
+                saveRosterData(roster);
+                document.getElementById(`val-room-${docId}`).textContent = newRoom;
+            }
+        }
+
+        function toggleDoctorStatus(docId) {
+            const roster = getRosterData();
+            const index = roster.findIndex(d => d.id === docId);
+            if (index !== -1) {
+                roster[index].status = roster[index].status === 'Active' ? 'Away' : 'Active';
+                roster[index].load = roster[index].status === 'Active' ? '8 Patients' : '0 Patients';
+                saveRosterData(roster);
+                loadRoster();
             }
         }
     </script>
 </body>
+
 </html>

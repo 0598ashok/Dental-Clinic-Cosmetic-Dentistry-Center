@@ -1,112 +1,346 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Access — Vance Cosmetic Dentistry</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/clinic.css">
     <script src="assets/js/store.js" defer></script>
     <script src="assets/js/theme-rtl.js" defer></script>
     <style>
-        body { display:flex; min-height:100vh; align-items:stretch; padding-top:0; background-color: var(--bg-primary); }
-        .login-left { flex:1; display:flex; flex-direction:column; justify-content:center; padding:4rem 5vw; background:var(--bg-primary); }
-        .login-right { width:45%; background:linear-gradient(135deg, var(--bg-secondary) 0%, rgba(var(--color-primary-rgb), 0.12) 50%, rgba(var(--color-accent-rgb), 0.08) 100%); display:flex; flex-direction:column; justify-content:center; align-items:center; padding:4rem; position:relative; overflow:hidden; border-left: 1px solid var(--border-color); }
-        .login-right::before { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:radial-gradient(circle, rgba(var(--color-primary-rgb),0.25), transparent 70%); border-radius:50%; }
-        .login-right::after { content:''; position:absolute; bottom:-80px; left:-80px; width:300px; height:300px; background:radial-gradient(circle, rgba(245,158,11,0.15), transparent 70%); border-radius:50%; }
-        .login-form { max-width:400px; width:100%; }
-        .tab-row { display:flex; border:1px solid var(--border-color); border-radius:var(--radius-md); overflow:hidden; margin-bottom:2rem; background: rgba(var(--bg-secondary-rgb), 0.5); }
-        .tab-btn { flex:1; padding:0.75rem; font-weight:600; cursor:pointer; text-align:center; transition:all 0.2s; background:transparent; color:var(--text-secondary); border: none; }
-        .tab-btn.active { background:var(--color-primary); color:#060913; }
-        [data-theme="light"] .tab-btn.active { color:#ffffff; }
-        @media(max-width:992px){ .login-right{display:none;} body{display:block;} .login-left{min-height:100vh;padding:2rem;display:flex;} }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-primary);
+            overflow: hidden;
+            font-family: var(--font-primary);
+        }
+
+        .login-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .login-left {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .login-right {
+            flex: 1;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(var(--color-primary-rgb), 0.12) 50%, rgba(var(--color-accent-rgb), 0.08) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .login-right::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.25), transparent 70%);
+            border-radius: 50%;
+        }
+
+        .login-right::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15), transparent 70%);
+            border-radius: 50%;
+        }
+
+        .login-form-wrapper {
+            max-width: 380px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .social-btn-row {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            background: rgba(var(--bg-secondary-rgb), 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            color: var(--text-primary);
+        }
+
+        .social-btn:hover {
+            background: rgba(var(--color-primary-rgb), 0.1);
+            border-color: var(--color-primary);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .divider:not(:empty)::before {
+            margin-right: .75em;
+        }
+
+        .divider:not(:empty)::after {
+            margin-left: .75em;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: rgba(var(--bg-secondary-rgb), 0.8);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        @media(max-width:992px) {
+            .login-right {
+                display: none;
+            }
+
+            .login-left {
+                flex: 1;
+                width: 100vw;
+                height: 100vh;
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div class="login-left">
-        <div class="login-form">
-            <div style="margin-bottom:2.5rem;">
-                <a href="index.html" class="logo" style="display:inline-flex;margin-bottom:2rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-                    Vance <span>Cosmetic</span>
-                </a>
-                <h1 style="font-size:1.75rem;margin-bottom:0.5rem;font-family:var(--font-heading);">Sign In to Portal</h1>
-                <p style="color:var(--text-secondary);font-size:0.95rem;">Access your treatment steps, files, and scheduling</p>
-            </div>
-
-            <div class="tab-row">
-                <button class="tab-btn active" id="tab-patient" onclick="switchTab('patient')">Patient Portal</button>
-                <button class="tab-btn" id="tab-admin" onclick="switchTab('admin')">Clinic Admin</button>
-            </div>
-
-            <form style="display:flex;flex-direction:column;gap:1.5rem;" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" id="login-email" value="jane.doe@example.com" placeholder="your@email.com" required style="padding:0.875rem 1rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:rgba(var(--bg-secondary-rgb), 0.8);color:var(--text-primary);">
+    <div class="theme-rtl-controls"
+        style="position: fixed; top: 1.5rem; right: 1.5rem; z-index: 1000; display: flex; gap: 0.5rem;"></div>
+    <div class="login-container">
+        <div class="login-left">
+            <div class="login-form-wrapper">
+                <div style="text-align: center;">
+                    <a href="index.html" class="logo" style="display:inline-flex; margin-bottom: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                            <line x1="9" y1="9" x2="9.01" y2="9" />
+                            <line x1="15" y1="9" x2="15.01" y2="9" />
+                        </svg>
+                        Vance <span>Cosmetic</span>
+                    </a>
+                    <h1
+                        style="font-size:1.5rem; margin-bottom:0.25rem; font-family:var(--font-heading); font-weight:800;">
+                        Welcome Back</h1>
+                    <p style="color:var(--text-secondary); font-size:0.85rem;">Access your clinical portal profile
+                        dashboard</p>
                 </div>
-                <div class="form-group">
-                    <label style="display:flex;justify-content:space-between;"><span>Password</span><a href="#" style="color:var(--color-primary);font-size:0.875rem;">Forgot password?</a></label>
-                    <input type="password" id="login-pass" value="demo1234" placeholder="••••••••" required style="padding:0.875rem 1rem;border:1px solid var(--border-color);border-radius:var(--radius-md);background:rgba(var(--bg-secondary-rgb), 0.8);color:var(--text-primary);">
-                </div>
-                <div style="display:flex;align-items:center;gap:0.75rem;">
-                    <input type="checkbox" id="remember" style="width:16px;height:16px;accent-color:var(--color-primary);">
-                    <label for="remember" style="font-size:0.875rem;color:var(--text-secondary);cursor:pointer;">Keep me signed in on this device</label>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%; padding:1rem; font-size:1rem;">Sign In to Portal &rarr;</button>
-                <div id="login-err" style="display:none;background:rgba(239,68,68,0.1);border:1px solid var(--color-danger);border-radius:var(--radius-md);padding:0.75rem;color:var(--color-danger);font-size:0.875rem;text-align:center;">Incorrect credentials. Please verify selections.</div>
-            </form>
 
-            <div style="margin-top:2rem;padding:1.25rem;background:rgba(var(--bg-secondary-rgb), 0.5);border-radius:var(--radius-md);border:1px solid var(--border-color);font-size:0.85rem;line-height:1.6;">
-                <strong style="color: var(--color-accent);">🔑 Authorized Demo Credentials:</strong><br>
-                <span style="display:block;margin-top:0.25rem;"><strong>Patient:</strong> jane.doe@example.com / demo1234</span>
-                <span><strong>Admin:</strong> admin@vancedental.com / admin2026</span>
+                <div class="social-btn-row">
+                    <button class="social-btn" aria-label="Sign in with Google"
+                        onclick="alert('Google Sign-In simulation')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="#4285F4"
+                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                            <path fill="#34A853"
+                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C4 20.53 7.7 23 12 23z" />
+                            <path fill="#FBBC05"
+                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                            <path fill="#EA4335"
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 4 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                        </svg>
+                    </button>
+                    <button class="social-btn" aria-label="Sign in with Facebook"
+                        onclick="alert('Facebook Sign-In simulation')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                            fill="#1877F2" stroke="none">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </button>
+                    <button class="social-btn" aria-label="Sign in with Apple"
+                        onclick="alert('Apple Sign-In simulation')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                            fill="currentColor" stroke="none">
+                            <path
+                                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.2.67-2.92 1.49-.62.71-1.16 1.85-1.01 2.96 1.12.09 2.27-.58 2.94-1.39z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="divider">or use clinical email</div>
+
+                <form style="display:flex; flex-direction:column; gap:1rem;" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" class="form-input" value="jane.doe@example.com"
+                            placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label for="login-pass">Password</label>
+                            <a href="#"
+                                style="color:var(--color-primary); font-size:0.75rem; font-weight:600;">Forgot?</a>
+                        </div>
+                        <input type="password" id="login-pass" class="form-input" value="demo1234"
+                            placeholder="••••••••" required>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-top: 0.25rem;">
+                        <input type="checkbox" id="remember"
+                            style="width:14px; height:14px; accent-color:var(--color-primary);">
+                        <label for="remember"
+                            style="font-size:0.75rem; color:var(--text-secondary); cursor:pointer;">Keep me signed
+                            in</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                        style="width:100%; padding:0.75rem; font-size:0.9rem; margin-top:0.25rem;">Sign In to Portal
+                        &rarr;</button>
+                    <div id="login-err"
+                        style="display:none; background:rgba(239,68,68,0.1); border:1px solid var(--color-danger); border-radius:var(--radius-md); padding:0.5rem; color:var(--color-danger); font-size:0.8rem; text-align:center;">
+                        Incorrect credentials. Please try again.</div>
+                </form>
+
+                <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-top: 0.5rem;">New
+                    patient? <a href="register.html" style="color:var(--color-primary); font-weight:700;">Create
+                        account</a></p>
             </div>
-
-            <p style="margin-top:2rem;text-align:center;font-size:0.875rem;color:var(--text-muted);">New patient? <a href="booking.html" style="color:var(--color-primary);font-weight:600;">Book a consultation</a></p>
         </div>
-    </div>
 
-    <div class="login-right">
-        <div style="position:relative;z-index:1;text-align:center;color:var(--text-primary);max-width:380px;">
-            <div style="font-size:4rem;margin-bottom:1.5rem;">🦷</div>
-            <h2 style="font-size:1.75rem;margin-bottom:1rem;font-family:var(--font-heading);">Your Smile Plan, Live</h2>
-            <p style="color:var(--text-secondary);margin-bottom:2.5rem;line-height:1.7;font-size:0.95rem;">Access procedural stages, clinical records, interactive billing lists, and contact messaging inside your patient profile dashboard.</p>
-            <div style="display:flex;flex-direction:column;gap:1rem;">
-                <div style="background:rgba(var(--bg-secondary-rgb), 0.4);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:1rem;text-align:left;display:flex;gap:1rem;align-items:center;backdrop-filter:blur(8px);">
-                    <span style="font-size:1.5rem;">📅</span>
-                    <div><div style="font-weight:600;font-size:0.9rem;">Appointment Control</div><div style="font-size:0.8rem;color:var(--text-secondary);">Cancel or reschedule sessions</div></div>
+        <div class="login-right">
+            <div
+                style="position:relative; z-index:1; text-align:center; color:var(--text-primary); max-width:340px; display:flex; flex-direction:column; gap:1.25rem;">
+                <div
+                    style="height: 3rem; display: flex; align-items: center; justify-content: center; margin-bottom:0.25rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        style="color: var(--color-primary);">
+                        <path
+                            d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z" />
+                    </svg>
                 </div>
-                <div style="background:rgba(var(--bg-secondary-rgb), 0.4);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:1rem;text-align:left;display:flex;gap:1rem;align-items:center;backdrop-filter:blur(8px);">
-                    <span style="font-size:1.5rem;">📊</span>
-                    <div><div style="font-weight:600;font-size:0.9rem;">Interactive Treatment Tracker</div><div style="font-size:0.8rem;color:var(--text-secondary);">Follow alignment/whitening progress</div></div>
-                </div>
-                <div style="background:rgba(var(--bg-secondary-rgb), 0.4);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:1rem;text-align:left;display:flex;gap:1rem;align-items:center;backdrop-filter:blur(8px);">
-                    <span style="font-size:1.5rem;">💬</span>
-                    <div><div style="font-weight:600;font-size:0.9rem;">Specialist Chat Signal</div><div style="font-size:0.8rem;color:var(--text-secondary);">Message Dr. Vance instantly</div></div>
+                <h2 style="font-size:1.5rem; font-family:var(--font-heading); font-weight:800; line-height:1.2;">Your
+                    Smile Plan, Live</h2>
+                <p style="color:var(--text-secondary); line-height:1.6; font-size:0.85rem; margin-bottom:0.5rem;">Access
+                    procedural stages, clinical records, interactive billing lists, and contact messaging inside your
+                    patient profile dashboard.</p>
+                <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                    <div
+                        style="background:rgba(var(--bg-secondary-rgb), 0.4); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem 1rem; text-align:left; display:flex; gap:0.75rem; align-items:center; backdrop-filter:blur(8px);">
+                        <span
+                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" style="color: var(--color-primary);">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </span>
+                        <div>
+                            <div style="font-weight:700; font-size:0.85rem;">Appointment Control</div>
+                            <div style="font-size:0.75rem; color:var(--text-secondary);">Cancel or reschedule sessions
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        style="background:rgba(var(--bg-secondary-rgb), 0.4); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem 1rem; text-align:left; display:flex; gap:0.75rem; align-items:center; backdrop-filter:blur(8px);">
+                        <span
+                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" style="color: var(--color-primary);">
+                                <line x1="18" y1="20" x2="18" y2="10" />
+                                <line x1="12" y1="20" x2="12" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="14" />
+                            </svg>
+                        </span>
+                        <div>
+                            <div style="font-weight:700; font-size:0.85rem;">Treatment Tracker</div>
+                            <div style="font-size:0.75rem; color:var(--text-secondary);">Follow alignment/whitening
+                                progress</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let currentTab = 'patient';
-        function switchTab(t) {
-            currentTab = t;
-            document.getElementById('tab-patient').classList.toggle('active', t==='patient');
-            document.getElementById('tab-admin').classList.toggle('active', t==='admin');
-            document.getElementById('login-email').value = t==='patient' ? 'jane.doe@example.com' : 'admin@vancedental.com';
-            document.getElementById('login-pass').value = t==='patient' ? 'demo1234' : 'admin2026';
-        }
         function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-pass').value;
             const err = document.getElementById('login-err');
-            
-            if (currentTab === 'patient' && email === 'jane.doe@example.com' && pass === 'demo1234') {
+
+            if (email === 'jane.doe@example.com' && pass === 'demo1234') {
                 window.location.href = 'dashboard.html';
-            } else if (currentTab === 'admin' && email === 'admin@vancedental.com' && pass === 'admin2026') {
+            } else if (email === 'admin@vancedental.com' && pass === 'admin2026') {
                 window.location.href = 'admin.html';
             } else {
                 err.style.display = 'block';
@@ -114,4 +348,5 @@
         }
     </script>
 </body>
+
 </html>
